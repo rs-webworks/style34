@@ -1,0 +1,24 @@
+{
+  "name": "style34",
+  "version": "1.0.0",
+  "main": "public/",
+  "repository": "https://github.com/rs-webworks/style34",
+  "author": "Raito Akehanareru <raito.akehanareru@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "babel-loader": "^7.1.4",
+    "bootstrap-sass": "^3.3.7",
+    "file-loader": "^1.1.11",
+    "jquery": "^3.3.1",
+    "sass": "^1.4.0",
+    "url-loader": "^1.0.1"
+  },
+  "devDependencies": {
+    "@symfony/webpack-encore": "^0.20.1",
+    "mini-css-extract-plugin": "^0.4.0",
+    "node-sass": "^4.9.0",
+    "sass-loader": "^7.0.1",
+    "webpack-cli": "^2.1.4",
+    "webpack-notifier": "^1.6.0"
+  }
+}
