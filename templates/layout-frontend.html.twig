@@ -1,16 +1,58 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}STYLE34{% endblock %}</title>
-        {% block stylesheets %}
-            <link rel="stylesheet" href="{{ asset('build/app.css') }}">
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}
-            <script src="{{ asset('build/app.js') }}"></script>
-        {% endblock %}
-    </body>
-</html>
+<html lang="cs-CZ">
+<head>
+	{# META Tags #}
+	{# --------------------------------------------------------------------------------------------------------------------------------------------------------- #}
+	<meta charset="utf-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+	<meta name="description" content=""/>
+	{# --------------------------------------------------------------------------------------------------------------------------------------------------------- #}
+	{# // META Tags #}
+
+	<title>{% block title %}Home{% endblock %} - STYLE34</title>
+	<link rel="canonical" href="{{ url(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) }}"/>
+	<link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
+	<link rel="icon" sizes="192x192" href="{{ asset('bigicon.png') }}"/>
+	<link rel="manifest" href="{{ asset('manifest.json') }}"/>
+
+	{# Fonts #}
+	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700,900&amp;subset=latin-ext" rel="stylesheet">
+
+	{# CSS Loading #}
+	{# --------------------------------------------------------------------------------------------------------------------------------------------------------- #}
+	{% block stylesheets %}
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+		<link rel="stylesheet" href="{{ asset('css/app.css') }}">
+	{% endblock %}
+	{# --------------------------------------------------------------------------------------------------------------------------------------------------------- #}
+	{# // CSS Loading #}
+</head>
+
+<body>
+
+<header>
+	<div class="container">
+		<img src="{{ asset('images/header.png') }}" alt="" class="bg-img">
+
+		<a id="logo" href="{{ url('frontend_home') }}">
+			<div id="top">STYL<span class="highlight">E34</span></div>
+			<div id="bottom">BMW <span class="highlight">E34</span> Enthusiasts</div>
+		</a>
+	</div>
+</header>
+
+{% include "partials/navigation-top-frontend.html.twig" %}
+
+{% block body %}{% endblock %}
+
+<footer class="container">
+	<p>&copy; Company 2017-2018</p>
+</footer>
+
+{% block javascripts %}
+	<script src="{{ asset('libraries/jquery/dist/jquery.slim.js') }}"></script>
+	<script src="{{ asset('libraries/bootstrap/dist/js/bootstrap.js') }}"></script>
+	<script src="{{ asset('js/app.js') }}"></script>
+{% endblock %}
+</body>

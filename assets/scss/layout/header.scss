@@ -1,0 +1,47 @@
+
+header {
+	background-color: #1C002D;
+	height: 220px;
+	width: 100%;
+
+	.container {
+		position: relative;
+		height: 100%;
+
+		.bg-img {
+			color: $colorPrimary;
+			opacity: 1;
+			height: 200px;
+		}
+
+		#logo {
+			&:hover{
+				text-decoration: none;
+			}
+
+			position: absolute;
+			top: 50px;
+			right: 0;
+			color: $colorWhite;
+			text-align: right;
+			text-transform: uppercase;
+
+
+			.highlight {
+				font-weight: 900;
+			}
+
+			#top {
+				font-size: 8rem;
+				font-weight: 300;
+				line-height: 6.5rem;
+			}
+
+			#bottom {
+				font-weight: 300;
+				line-height: 2rem;
+				font-size: 2rem;
+			}
+		}
+	}
+}

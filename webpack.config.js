@@ -22,11 +22,12 @@ Encore
 	// show OS notifications when builds finish/fail
 	.enableBuildNotifications()
 
-	// create hashed filenames (e.g. app.abc123.css)
-	// .enableVersioning()
+// create hashed filenames (e.g. app.abc123.css)
+// .enableVersioning()
 
-	// allow sass/scss files to be processed
-	.enableSassLoader();
+// allow sass/scss files to be processed
+// .enableSassLoader();
 
 // export the final configuration
-module.exports = Encore.getWebpackConfig();
+encoreConfig = Encore.getWebpackConfig();
+module.exports = [encoreConfig];
