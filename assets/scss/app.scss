@@ -1,0 +1,14 @@
+$colorPrimary: #1C002D;
+$colorSecondary: lighten($colorPrimary, 20%);
+$colorWhite: #fff;
+
+$fa-font-path: 'libraries/font-awesome/fonts';
+
+@import '../../public/libraries/bootstrap/scss/bootstrap';
+//@import '../../public/libraries/font-awesome/scss/font-awesome';
+@import 'frontend';
+
+
+html, body{
+	font-family: 'Roboto', sans-serif;
+}
