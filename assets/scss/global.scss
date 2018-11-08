@@ -1,0 +1,22 @@
+html, body {
+	font-family: 'Roboto', sans-serif;
+}
+
+h2 {
+	font-size: 3.5rem;
+	margin-top: 30px;
+	color: $colorPrimary;
+	line-height: 2.8rem;
+
+	small {
+		line-height: 3rem;
+
+		&:after {
+			content: '\A';
+			white-space: pre;
+		}
+	}
+
+	text-transform: uppercase;
+	font-weight: 900;
+}
