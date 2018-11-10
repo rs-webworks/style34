@@ -17,6 +17,8 @@ class Kernel extends BaseKernel
 {
     use MicroKernelTrait;
 
+	const SITE_NAME = "STYLE34";
+	const MEMBERSHIP_PRICE = "299";
     const CONFIG_EXTS = '.{php,xml,yaml,yml}';
 
 	/**

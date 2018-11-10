@@ -4,11 +4,22 @@ $colorPrimary: #1C002D;
 $colorSecondary: lighten($colorPrimary, 20%);
 $colorWhite: #fff;
 
+$theme-colors: (
+		"primary": $colorPrimary,
+);
+
+// Sizes
+//----------------------------------------------------------------------------------------------------------------------
+$gutter: 30px;
+
 // Imports
 //----------------------------------------------------------------------------------------------------------------------
 @import '../../public/libraries/bootstrap/scss/bootstrap';
 @import 'frontend';
 @import 'global';
+
+// Profile
+@import 'Profile/Registration/membership';
 
 // Others
 //----------------------------------------------------------------------------------------------------------------------

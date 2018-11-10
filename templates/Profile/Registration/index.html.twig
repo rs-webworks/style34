@@ -1,0 +1,60 @@
+{% extends 'layout-frontend.html.twig' %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+
+<div class="container">
+
+	<h2>Registrace</h2>
+	<hr>
+	<nav aria-label="breadcrumb">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item">
+				<a href="{{ url('home-index') }}">{{ constant('App\\Kernel::SITE_NAME') }}</a></li>
+			<li class="breadcrumb-item"><a href="{{ url('profile-list') }}">Profily</a></li>
+			<li class="breadcrumb-item active" aria-current="page">Registrace</li>
+		</ol>
+	</nav>
+
+	<div class="row">
+		<div class="col-md-5">
+			<h3>Registrační poplatek</h3>
+			<p>
+				Registrace do klubu <strong>{{ constant('App\\Kernel::SITE_NAME') }}</strong> jsou zpoplatněny
+				jednorázovým vstupním poplatkem. Co členstvím v klubu získáte? Kompletní seznam výhod si můžete
+				prohlédnout přímo na stránce detailů <strong>výhod členství.</strong>
+			</p>
+
+
+			<a href="{{ url('profile-registration-membership') }}" class="btn btn-primary">
+				<i class="fa fa-fw fa-trophy"></i> Výhody členství </a>
+			<div class="btn btn-light">
+				Cena registrace: <strong>{{ constant('App\\Kernel::MEMBERSHIP_PRICE') }} Kč </strong>
+			</div>
+		</div>
+
+		<div class="col-md-7">
+			<h3>Formulář</h3>
+
+			<form>
+				<div class="form-group">
+					<label for="nickname">Přezdívka</label>
+					<input type="text" class="form-control" id="nickname" aria-describedby="nickname-help" placeholder="Tvoje přezdívka">
+					<small id="nickname-help" class="form-text text-muted">Tvoje přezdívka musí být unikátní.</small>
+				</div>
+				<div class="form-group">
+					<label for="exampleInputPassword1">Password</label>
+					<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+				</div>
+				<div class="form-check">
+					<input type="checkbox" class="form-check-input" id="exampleCheck1">
+					<label class="form-check-label" for="exampleCheck1">Check me out</label>
+				</div>
+				<button type="submit" class="btn btn-primary">Submit</button>
+			</form>
+		</div>
+	</div>
+
+
+	{% endblock %}

@@ -1,0 +1,30 @@
+{% set showHeader = true %}
+{% extends 'layout-frontend.html.twig' %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+
+	<div class="container">
+
+		<h2>Dashboard</h2>
+
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="#">{{ constant('App\\Kernel::SITE_NAME') }}</a></li>
+				<li class="breadcrumb-item active" aria-current="page">Home</li>
+			</ol>
+		</nav>
+
+		<ul>
+			<li>profily nové</li>
+			<li>nové fotky</li>
+			<li>forum posty</li>
+			<li>kalendář akcí</li>
+			<li>market novinky</li>
+			<li>nejprodávanější shop</li>
+		</ul>
+	</div>
+
+
+{% endblock %}
