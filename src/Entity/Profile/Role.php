@@ -2,8 +2,8 @@
 
 namespace Style34\Entity\Profile;
 
-use AppBundle\Entity\Identifier;
 use Doctrine\ORM\Mapping as ORM;
+use Style34\Entity\Identifier;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 

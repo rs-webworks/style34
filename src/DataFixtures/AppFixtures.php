@@ -2,7 +2,6 @@
 
 namespace Style34\DataFixtures;
 
-use Style34\Entity\Profile\Profile;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 
