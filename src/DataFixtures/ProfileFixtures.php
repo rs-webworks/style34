@@ -2,7 +2,6 @@
 
 namespace Style34\DataFixtures;
 
-use Style34\Entity\Profile\Profile;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -28,13 +27,5 @@ class ProfileFixtures extends Fixture {
      */
     public function load(ObjectManager $manager) {
 
-        $profile = new Profile();
-        $profile->setUsername('admin');
-        $profile->setEmail('admin@style34.net');
-        $profile->setCreatedAt(new \DateTime());
-        $profile->setPassword($this->passwordEncoder->encodePassword($profile, 'rootpass'));
-
-        $manager->persist($profile);
-        $manager->flush();
     }
 }
