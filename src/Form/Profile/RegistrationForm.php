@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Form\Profile;
+namespace Style34\Form\Profile;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
  * Class RegistrationForm
- * @package App\Form
+ * @package Style34\Form
  */
 class RegistrationForm extends AbstractType {
 

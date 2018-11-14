@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace Style34;
 
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\Config\Loader\LoaderInterface;
@@ -11,7 +11,7 @@ use Symfony\Component\Routing\RouteCollectionBuilder;
 
 /**
  * Class Kernel
- * @package App
+ * @package Style34
  */
 class Kernel extends BaseKernel
 {
