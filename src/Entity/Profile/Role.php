@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entity\Profile;
+namespace Style34\Entity\Profile;
 
 use AppBundle\Entity\Identifier;
 use Doctrine\ORM\Mapping as ORM;
@@ -9,31 +9,75 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Class Role
- * @package App\Entity\Profile
- * @ORM\Entity
+ * @package Style34\Entity\Profile
+ * @ORM\Entity(repositoryClass="Style34\Repository\Profile\RoleRepository")
  * @UniqueEntity("name")
  */
 class Role {
 
-	use Identifier;
+    use Identifier;
 
-	/**
-	 * @var string $name
-	 * @ORM\Column(type="string")
-	 * @Assert\NotBlank(message="Název nesmí být prázdný", unique=true)
-	 */
-	protected $name;
+    /**
+     * @var string $name
+     * @ORM\Column(type="string", unique=true)
+     * @Assert\NotBlank(message="Název nesmí být prázdný")
+     */
+    protected $name;
 
-	/**
-	 * @var Profile[]
-	 */
-	protected $profiles;
+    /**
+     * @var Profile[]
+     * @ORM\OneToMany(targetEntity="Style34\Entity\Profile\Profile", mappedBy="role")
+     */
+    protected $profiles;
 
-	/**
-	 * @var string $color
-	 * @ORM\Column(type="string")
-	 * @Assert\NotBlank(message="Barva musí být vyplněna")
-	 */
-	protected $color;
+    /**
+     * @var string $color
+     * @ORM\Column(type="string")
+     * @Assert\NotBlank(message="Barva musí být vyplněna")
+     */
+    protected $color;
+
+    /**
+     * @return string
+     */
+    public function getName(): string {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     */
+    public function setName(string $name): void {
+        $this->name = $name;
+    }
+
+    /**
+     * @return Profile[]
+     */
+    public function getProfiles(): array {
+        return $this->profiles;
+    }
+
+    /**
+     * @param Profile[] $profiles
+     */
+    public function setProfiles(array $profiles): void {
+        $this->profiles = $profiles;
+    }
+
+    /**
+     * @return string
+     */
+    public function getColor(): string {
+        return $this->color;
+    }
+
+    /**
+     * @param string $color
+     */
+    public function setColor(string $color): void {
+        $this->color = $color;
+    }
+
 
 }

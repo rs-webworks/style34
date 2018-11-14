@@ -1,12 +1,12 @@
 <?php
-namespace App\Controller;
+namespace Style34\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Class HomeController
- * @package App\Controller
+ * @package Style34\Controller
  */
 class HomeController extends AbstractController {
 

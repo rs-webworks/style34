@@ -11,7 +11,7 @@
 	<nav aria-label="breadcrumb">
 		<ol class="breadcrumb">
 			<li class="breadcrumb-item">
-				<a href="{{ url('home-index') }}">{{ constant('App\\Kernel::SITE_NAME') }}</a></li>
+				<a href="{{ url('home-index') }}">{{ constant('Style34\\Kernel::SITE_NAME') }}</a></li>
 			<li class="breadcrumb-item"><a href="{{ url('profile-list') }}">Profily</a></li>
 			<li class="breadcrumb-item active" aria-current="page">Registrace</li>
 		</ol>
@@ -21,7 +21,7 @@
 		<div class="col-md-5">
 			<h3>Registrační poplatek</h3>
 			<p>
-				Registrace do klubu <strong>{{ constant('App\\Kernel::SITE_NAME') }}</strong> jsou zpoplatněny
+				Registrace do klubu <strong>{{ constant('Style34\\Kernel::SITE_NAME') }}</strong> jsou zpoplatněny
 				jednorázovým vstupním poplatkem. Co členstvím v klubu získáte? Kompletní seznam výhod si můžete
 				prohlédnout přímo na stránce detailů <strong>výhod členství.</strong>
 			</p>
@@ -30,7 +30,7 @@
 			<a href="{{ url('profile-registration-membership') }}" class="btn btn-primary">
 				<i class="fa fa-fw fa-trophy"></i> Výhody členství </a>
 			<div class="btn btn-light">
-				Cena registrace: <strong>{{ constant('App\\Kernel::MEMBERSHIP_PRICE') }} Kč </strong>
+				Cena registrace: <strong>{{ constant('Style34\\Kernel::MEMBERSHIP_PRICE') }} Kč </strong>
 			</div>
 		</div>
 
@@ -55,6 +55,7 @@
 			</form>
 		</div>
 	</div>
+</div>
 
 
 	{% endblock %}

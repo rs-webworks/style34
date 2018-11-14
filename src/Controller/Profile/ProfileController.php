@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Controller\Profile;
+namespace Style34\Controller\Profile;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Class ProfileController
- * @package App\Controller\Profile
+ * @package Style34\Controller\Profile
  */
 class ProfileController extends AbstractController {
 
