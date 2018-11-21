@@ -4,6 +4,7 @@ namespace Style34\Entity\Profile;
 
 use Doctrine\ORM\Mapping as ORM;
 use Style34\Entity\Identifier;
+use Style34\Entity\State\State;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -63,6 +64,12 @@ class Profile implements UserInterface {
     protected $createdAt;
 
     /**
+     * @var \DateTime $activatedAt
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    protected $activatedAt;
+
+    /**
      * @var \DateTime $deletedAt
      * @ORM\Column(type="datetime", nullable=true)
      */
@@ -74,6 +81,27 @@ class Profile implements UserInterface {
      * @Assert\NotNull(message="Profil musí mít roli")
      */
     protected $role;
+
+    /**
+     * @var State $state
+     * @ORM\ManyToOne(targetEntity="Style34\Entity\State\State", inversedBy="profiles")
+     * @Assert\NotNull(message="Vyber zemi původu")
+     */
+    protected $state;
+
+    /**
+     * @var string $city
+     * @ORM\Column(nullable=true, type="string")
+     */
+    protected $city;
+
+    /**
+     * @var \DateTime $birthdate
+     * @ORM\Column(nullable=true, type="datetime")
+     */
+    protected $birthdate;
+
+
 
     /**
      * @return string
@@ -146,9 +174,21 @@ class Profile implements UserInterface {
     }
 
     /**
+     * For Symfony security
+     *
+     * @return array
+     */
+    public function getRoles(): array {
+
+        $roles[] = $role->getName();
+
+        return array_unique($roles);
+    }
+
+    /**
      * @return Role
      */
-    public function getRole(): Role {
+    public function getRole(): Role{
         return $this->role;
     }
 
@@ -162,23 +202,15 @@ class Profile implements UserInterface {
     /**
      *
      */
-    public function getRoles(): void {
-        // TODO: Implement getRoles() method.
-    }
-
-    /**
-     * @return null|string
-     */
-    public function getSalt(): ?string {
-        // TODO: Implement getSalt() method.
-        return NULL;
-    }
-
-    /**
-     *
-     */
     public function eraseCredentials(): void {
         // TODO: Implement eraseCredentials() method.
+    }
+
+    /**
+     * @return null|string|void
+     */
+    public function getSalt() {
+        // TODO: Implement getSalt() method.
     }
 
 }

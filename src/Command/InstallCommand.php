@@ -5,6 +5,7 @@ namespace Style34\Command;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Style34\Entity\Profile\Profile;
+use Style34\Entity\Profile\Role;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;
@@ -14,10 +15,10 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
- * Class InstallBaseCommand
+ * Class InstallCommand
  * @package Style34\Command
  */
-class InstallBaseCommand extends Command {
+class InstallCommand extends Command {
 
     /** @var SymfonyStyle $io */
     protected $io;
@@ -46,7 +47,7 @@ class InstallBaseCommand extends Command {
      *
      */
     protected function configure() {
-        $this->setName('app:install-base')
+        $this->setName('app:install')
             ->setDescription('Install the basic database stuff (Roles, Permissions, Users...')
             ->setHelp('This will run some persists to DB and create basic stuff. !IMPORTANT! Run fixtures
             only AFTER this installation!');
@@ -130,9 +131,28 @@ class InstallBaseCommand extends Command {
     /**
      *
      */
-    protected function createRoles(){
-        $this->io->progressStart(1);
-        $this->io->progressAdvance(1);
+    protected function createRoles() {
+
+        $roles = array(
+            [Role::ADMIN, '#CB2910'],
+            [Role::MODERATOR, '#00B639'],
+            [Role::MEMBER, '#1D1D1D'],
+            [Role::INACTIVE, '#626262'],
+            [Role::BANNED, '#A2A2A2']
+        );
+
+        $this->io->progressStart(count($roles));
+
+        foreach ($roles as $role) {
+            $r = new Role();
+            $r->setName($role[0]);
+            $r->setColor($role[1]);
+
+            $this->em->persist($r);
+            $this->io->progressAdvance(1);
+        }
+
+        $this->em->flush();
         $this->io->progressFinish();
     }
 
@@ -141,14 +161,16 @@ class InstallBaseCommand extends Command {
      */
     protected function registerUsers() {
 
+        $roleRp = $this->em->getRepository(Role::class);
+
         /** @var array $users Username, mail, password */
         $users = array(
-            array('admin', 'admin@style34.net', 'rootpass'),
-            array('RandomGuy', 'randomguy@style34.net', 'randomguy'),
-            array('Test', 'test@style34.net', 'test'),
-            array('Tester', 'tester@style34.net', 'test'),
-            array('Banned', 'banned@style34.net', 'test'),
-            array('NotAmember', 'nam@style34.net', 'test'),
+            ['admin', 'admin@style34.net', 'rootpass', $roleRp->findOneBy(array('name' => Role::ADMIN))],
+            ['RandomGuy', 'randomguy@style34.net', 'randomguy', $roleRp->findOneBy(array('name' => Role::MEMBER))],
+            ['Test', 'test@style34.net', 'test', $roleRp->findOneBy(array('name' => Role::MEMBER))],
+            ['Tester', 'tester@style34.net', 'test', $roleRp->findOneBy(array('name' => Role::MEMBER))],
+            ['Banned', 'banned@style34.net', 'test', $roleRp->findOneBy(array('name' => Role::BANNED))],
+            ['NotAmember', 'nam@style34.net', 'test', $roleRp->findOneBy(array('name' => Role::INACTIVE))],
         );
 
         $this->io->progressStart(count($users));
@@ -159,14 +181,13 @@ class InstallBaseCommand extends Command {
             $profile->setEmail($user[1]);
             $profile->setCreatedAt(new \DateTime());
             $profile->setPassword($this->passwordEncoder->encodePassword($profile, $user[2]));
+            $profile->setRole($user[3]);
 
             $this->em->persist($profile);
-            $this->em->flush();
-
             $this->io->progressAdvance(1);
         }
 
+        $this->em->flush();
         $this->io->progressFinish();
-
     }
 }
