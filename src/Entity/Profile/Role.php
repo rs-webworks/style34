@@ -15,6 +15,12 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  */
 class Role {
 
+    const ADMIN = 'ROLE_ADMIN';
+    const MODERATOR = 'ROLE_MODERATOR';
+    const MEMBER = 'ROLE_MEMBER';
+    const INACTIVE = 'ROLE_INACTIVE';
+    const BANNED = 'ROLE_BANNED';
+
     use Identifier;
 
     /**
@@ -26,7 +32,7 @@ class Role {
 
     /**
      * @var Profile[]
-     * @ORM\OneToMany(targetEntity="Style34\Entity\Profile\Profile", mappedBy="role")
+     * @ORM\OneToMany(targetEntity="Style34\Entity\Profile\Profile", mappedBy="roles")
      */
     protected $profiles;
 
