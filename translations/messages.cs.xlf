@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:2.0" version="2.0" srcLang="en" trgLang="cs">
+  <file id="messages.cs">
+    <unit id="47ienTP" name="Username">
+      <segment>
+        <source>Username</source>
+        <target>Přezdívka</target>
+      </segment>
+    </unit>
+    <unit id="lpzL089" name="Email">
+      <segment>
+        <source>Email</source>
+        <target>Email</target>
+      </segment>
+    </unit>
+    <unit id="588_9PF" name="Password">
+      <segment>
+        <source>Password</source>
+        <target>Heslo</target>
+      </segment>
+    </unit>
+    <unit id="Hkmh4Tp" name="Repeat Password">
+      <segment>
+        <source>Repeat Password</source>
+        <target>Heslo znovu</target>
+      </segment>
+    </unit>
+    <unit id="o7UMR2c" name="State">
+      <segment>
+        <source>State</source>
+        <target>Země</target>
+      </segment>
+    </unit>
+    <unit id=".DP3Mkb" name="City">
+      <segment>
+        <source>City</source>
+        <target>Město</target>
+      </segment>
+    </unit>
+  </file>
+</xliff>

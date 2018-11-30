@@ -4,6 +4,7 @@
 namespace Style34\Command;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use Style34\Entity\Address\State;
 use Style34\Entity\Profile\Profile;
 use Style34\Entity\Profile\Role;
 use Symfony\Component\Console\Command\Command;
@@ -15,10 +16,12 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
- * Class InstallCommand
+ * Class InstallCommand.
+ * Install only app-required data, not testing fixtures! For dev/test data use fixtures in DataFixtures.
  * @package Style34\Command
  */
-class InstallCommand extends Command {
+class InstallCommand extends Command
+{
 
     /** @var SymfonyStyle $io */
     protected $io;
@@ -37,7 +40,8 @@ class InstallCommand extends Command {
      * @param ObjectManager $em
      * @param UserPasswordEncoderInterface $passwordEncoder
      */
-    public function __construct(ObjectManager $em, UserPasswordEncoderInterface $passwordEncoder) {
+    public function __construct(ObjectManager $em, UserPasswordEncoderInterface $passwordEncoder)
+    {
         $this->em = $em;
         $this->passwordEncoder = $passwordEncoder;
         parent::__construct();
@@ -46,7 +50,8 @@ class InstallCommand extends Command {
     /**
      *
      */
-    protected function configure() {
+    protected function configure()
+    {
         $this->setName('app:install')
             ->setDescription('Install the basic database stuff (Roles, Permissions, Users...')
             ->setHelp('This will run some persists to DB and create basic stuff. !IMPORTANT! Run fixtures
@@ -59,7 +64,8 @@ class InstallCommand extends Command {
      * @return int|null|void
      * @throws \Exception
      */
-    protected function execute(InputInterface $input, OutputInterface $output) {
+    protected function execute(InputInterface $input, OutputInterface $output)
+    {
         $this->output = $output;
         $this->io = $io = new SymfonyStyle($input, $output);
 
@@ -84,7 +90,8 @@ class InstallCommand extends Command {
 
             $io->success('Installation complete!');
         } catch (\Exception $ex) {
-            $io->error('Installation failed, maybe it was run twice?');
+            $io->newLine();
+            $io->newLine();
             $io->error($ex->getMessage());
         }
 
@@ -93,7 +100,8 @@ class InstallCommand extends Command {
     /**
      * @throws \Exception
      */
-    protected function createDatabase() {
+    protected function createDatabase()
+    {
         $this->io->progressStart(1);
 
         $command = $this->getApplication()->find('doctrine:database:create');
@@ -109,7 +117,8 @@ class InstallCommand extends Command {
     /**
      * @throws \Exception
      */
-    protected function runMigrations() {
+    protected function runMigrations()
+    {
         $this->io->progressStart(1);
 
         $command = $this->getApplication()->find('doctrine:migrations:migrate');
@@ -131,8 +140,8 @@ class InstallCommand extends Command {
     /**
      *
      */
-    protected function createRoles() {
-
+    protected function createRoles()
+    {
         $roles = array(
             [Role::ADMIN, '#CB2910'],
             [Role::MODERATOR, '#00B639'],
@@ -144,9 +153,11 @@ class InstallCommand extends Command {
         $this->io->progressStart(count($roles));
 
         foreach ($roles as $role) {
+            list($name, $color) = $role;
+
             $r = new Role();
-            $r->setName($role[0]);
-            $r->setColor($role[1]);
+            $r->setName($name);
+            $r->setColor($color);
 
             $this->em->persist($r);
             $this->io->progressAdvance(1);
@@ -157,31 +168,29 @@ class InstallCommand extends Command {
     }
 
     /**
-     *
+     * @throws \Exception
      */
-    protected function registerUsers() {
+    protected function registerUsers()
+    {
 
         $roleRp = $this->em->getRepository(Role::class);
 
         /** @var array $users Username, mail, password */
         $users = array(
-            ['admin', 'admin@style34.net', 'rootpass', $roleRp->findOneBy(array('name' => Role::ADMIN))],
-            ['RandomGuy', 'randomguy@style34.net', 'randomguy', $roleRp->findOneBy(array('name' => Role::MEMBER))],
-            ['Test', 'test@style34.net', 'test', $roleRp->findOneBy(array('name' => Role::MEMBER))],
-            ['Tester', 'tester@style34.net', 'test', $roleRp->findOneBy(array('name' => Role::MEMBER))],
-            ['Banned', 'banned@style34.net', 'test', $roleRp->findOneBy(array('name' => Role::BANNED))],
-            ['NotAmember', 'nam@style34.net', 'test', $roleRp->findOneBy(array('name' => Role::INACTIVE))],
+            ['admin', 'admin@style34.net', 'rootpass', $roleRp->findOneBy(array('name' => Role::ADMIN))]
         );
 
         $this->io->progressStart(count($users));
 
         foreach ($users as $user) {
+            list($username, $email, $password, $role) = $user;
+
             $profile = new Profile();
-            $profile->setUsername($user[0]);
-            $profile->setEmail($user[1]);
+            $profile->setUsername($username);
+            $profile->setEmail($email);
             $profile->setCreatedAt(new \DateTime());
-            $profile->setPassword($this->passwordEncoder->encodePassword($profile, $user[2]));
-            $profile->setRole($user[3]);
+            $profile->setPassword($this->passwordEncoder->encodePassword($profile, $password));
+            $profile->setRole($role);
 
             $this->em->persist($profile);
             $this->io->progressAdvance(1);
