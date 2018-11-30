@@ -3,11 +3,11 @@
 namespace Style34\Entity\Profile;
 
 use Doctrine\ORM\Mapping as ORM;
+use Style34\Entity\Address\State;
 use Style34\Entity\Identifier;
-use Style34\Entity\State\State;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Class Profile
@@ -16,13 +16,13 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @UniqueEntity("username")
  * @UniqueEntity("email")
  */
-class Profile implements UserInterface {
+class Profile implements UserInterface
+{
 
 
     use Identifier;
 
     /**
-     * @var string $username
      * @ORM\Column(type="string", unique=true)
      * @Assert\NotBlank(message="Přezdívka je povinná")
      * @Assert\Regex(
@@ -34,7 +34,6 @@ class Profile implements UserInterface {
 
 
     /**
-     * @var string $email
      * @ORM\Column(type="string", unique=true)
      * @Assert\Email(message="Zadej email v platném formátu: nekdo@nekde.abc")
      * @Assert\NotBlank(message="Email je povinný")
@@ -42,13 +41,11 @@ class Profile implements UserInterface {
     protected $email;
 
     /**
-     * @var string $password
      * @ORM\Column(type="string")
      */
     protected $password;
 
     /**
-     * @var string $plainPassword
      * @Assert\NotBlank(message="Heslo nesmí být prázdné")
      * @Assert\Length(min=6, max=4096,
      *     minMessage="Heslo musí mít minimálně {{ limit }} znaků",
@@ -83,14 +80,12 @@ class Profile implements UserInterface {
     protected $role;
 
     /**
-     * @var State $state
-     * @ORM\ManyToOne(targetEntity="Style34\Entity\State\State", inversedBy="profiles")
+     * @ORM\Column(type="string", nullable=true)
      * @Assert\NotNull(message="Vyber zemi původu")
      */
     protected $state;
 
     /**
-     * @var string $city
      * @ORM\Column(nullable=true, type="string")
      */
     protected $city;
@@ -102,85 +97,111 @@ class Profile implements UserInterface {
     protected $birthdate;
 
 
-
     /**
      * @return string
      */
-    public function getUsername(): string {
+    public function getUsername(): ?string
+    {
         return $this->username;
     }
 
     /**
      * @param string $username
      */
-    public function setUsername(string $username): void {
+    public function setUsername(string $username): void
+    {
         $this->username = $username;
     }
 
     /**
      * @return string
      */
-    public function getEmail(): string {
+    public function getEmail(): ?string
+    {
         return $this->email;
     }
 
     /**
      * @param string $email
      */
-    public function setEmail(string $email): void {
+    public function setEmail(string $email): void
+    {
         $this->email = $email;
     }
 
     /**
      * @return string
      */
-    public function getPassword(): string {
+    public function getPassword(): ?string
+    {
         return $this->password;
     }
 
     /**
      * @param string $password
      */
-    public function setPassword(string $password): void {
+    public function setPassword(string $password): void
+    {
         $this->password = $password;
     }
 
     /**
+     * @return string
+     */
+    public function getPlainPassword(): ?string
+    {
+        return $this->plainPassword;
+    }
+
+    /**
+     * @param string $plainPassword
+     */
+    public function setPlainPassword(string $plainPassword): void
+    {
+        $this->plainPassword = $plainPassword;
+    }
+
+
+
+    /**
      * @return \DateTime
      */
-    public function getCreatedAt(): \DateTime {
+    public function getCreatedAt(): \DateTime
+    {
         return $this->createdAt;
     }
 
     /**
      * @param \DateTime $createdAt
      */
-    public function setCreatedAt(\DateTime $createdAt): void {
+    public function setCreatedAt(\DateTime $createdAt): void
+    {
         $this->createdAt = $createdAt;
     }
 
     /**
      * @return \DateTime
      */
-    public function getDeletedAt(): \DateTime {
+    public function getDeletedAt(): \DateTime
+    {
         return $this->deletedAt;
     }
 
     /**
      * @param \DateTime $deletedAt
      */
-    public function setDeletedAt(\DateTime $deletedAt): void {
+    public function setDeletedAt(\DateTime $deletedAt): void
+    {
         $this->deletedAt = $deletedAt;
     }
 
     /**
      * For Symfony security
-     *
      * @return array
      */
-    public function getRoles(): array {
-
-        $roles[] = $role->getName();
+    public function getRoles(): ?array
+    {
+        $roles[] = $this->role->getName();
 
         return array_unique($roles);
     }
@@ -188,28 +209,67 @@ class Profile implements UserInterface {
     /**
      * @return Role
      */
-    public function getRole(): Role{
+    public function getRole(): ?Role
+    {
         return $this->role;
     }
 
     /**
      * @param Role $role
      */
-    public function setRole(Role $role): void {
+    public function setRole(Role $role): void
+    {
         $this->role = $role;
     }
 
     /**
+     * @return string
+     */
+    public function getState(): ?string
+    {
+        return $this->state;
+    }
+
+    /**
+     * @param string $state
+     */
+    public function setState(string $state): void
+    {
+        $this->state = $state;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCity()
+    {
+        return $this->city;
+    }
+
+    /**
+     * @param mixed $city
+     */
+    public function setCity($city): void
+    {
+        $this->city = $city;
+    }
+
+
+
+
+    /**
      *
      */
-    public function eraseCredentials(): void {
+    public function eraseCredentials(): void
+    {
         // TODO: Implement eraseCredentials() method.
     }
 
     /**
      * @return null|string|void
      */
-    public function getSalt() {
+    public function getSalt()
+    {
         // TODO: Implement getSalt() method.
     }
 

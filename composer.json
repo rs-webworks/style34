@@ -6,6 +6,7 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "doctrine/doctrine-fixtures-bundle": "^3.0",
+        "php-translation/symfony-bundle": "^0.8.1",
         "sensio/framework-extra-bundle": "^5.1",
         "squizlabs/php_codesniffer": "3.3.2",
         "stof/doctrine-extensions-bundle": "^1.3",

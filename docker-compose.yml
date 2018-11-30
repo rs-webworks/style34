@@ -13,11 +13,13 @@ services:
       image: postgres:9.6-alpine
       container_name: style34-postgres
       working_dir: /application
+      ports:
+        - "5455:5432"
       volumes:
         - .:/application
       environment:
-        - POSTGRES_USER=root
-        - POSTGRES_PASSWORD=root
+        - POSTGRES_USER=docker
+        - POSTGRES_PASSWORD=docker
         - POSTGRES_DB=style34
 
     webserver:
