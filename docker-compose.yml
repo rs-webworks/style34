@@ -3,15 +3,15 @@ services:
 
     memcached:
       image: memcached:alpine
-      container_name: style34-memcached
+      container_name: memcached
 
     redis:
       image: redis:alpine
-      container_name: style34-redis
+      container_name: redis
 
     postgres:
       image: postgres:9.6-alpine
-      container_name: style34-postgres
+      container_name: postgres
       working_dir: /application
       ports:
         - "5455:5432"
@@ -22,9 +22,23 @@ services:
         - POSTGRES_PASSWORD=docker
         - POSTGRES_DB=style34
 
+    pgadmin:
+      image: dpage/pgadmin4
+      container_name: pgadmin
+      environment:
+        PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-admin@style34.net}
+        PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-root}
+      volumes:
+        - pgadmin:/root/.pgadmin
+      ports:
+        - "${PGADMIN_PORT:-5050}:80"
+      networks:
+        - postgres
+      restart: unless-stopped
+
     webserver:
       image: nginx:alpine
-      container_name: style34-webserver
+      container_name: webserver
       working_dir: /application
       volumes:
           - .:/application
@@ -34,9 +48,16 @@ services:
 
     php-fpm:
       build: phpdocker/php-fpm
-      container_name: style34-php-fpm
+      container_name: php-fpm
       working_dir: /application
       volumes:
         - .:/application
         - ./phpdocker/php-fpm/php-ini-overrides.ini:/etc/php/7.2/fpm/conf.d/99-overrides.ini
 
+networks:
+  postgres:
+    driver: bridge
+
+volumes:
+  postgres:
+  pgadmin:
