@@ -20,18 +20,6 @@ use Symfony\Component\Translation\TranslatorInterface;
 class RegistrationForm extends AbstractType
 {
 
-    /** @var TranslatorInterface */
-    protected $translator;
-
-    /**
-     * RegistrationForm constructor.
-     * @param TranslatorInterface $translator
-     */
-    public function __construct(TranslatorInterface $translator)
-    {
-        $this->translator = $translator;
-    }
-
 
     /**
      * @param FormBuilderInterface $builder
@@ -40,20 +28,35 @@ class RegistrationForm extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('username', TextType::class, array(
-            "label" => $this->translator->trans('Username')
+            "label" => 'username',
+            "translation_domain" => 'profile'
         ));
-        $builder->add('email', EmailType::class);
+        $builder->add('email', EmailType::class, array(
+            "label" => 'email',
+            "translation_domain" => 'profile'
+        ));
         $builder->add('plainPassword', RepeatedType::class, array(
             'type' => PasswordType::class,
-            'first_options' => array('label' => 'Password'),
-            'second_options' => array('label' => 'Repeat Password'),
+            'first_options' => array(
+                "label" => 'password',
+                "translation_domain" => 'profile'
+            ),
+            'second_options' => array(
+                "label" => 'password-again',
+                "translation_domain" => 'profile'
+            )
         ));
 
         $builder->add('state', CountryType::class, array(
             'preferred_choices' => array('CZ', 'SK'),
+            "label" => 'state',
+            "translation_domain" => 'profile'
         ));
 
-        $builder->add('city', TextType::class);
+        $builder->add('city', TextType::class, array(
+            "label" => 'city',
+            "translation_domain" => 'profile'
+        ));
     }
 
     public function configureOptions(OptionsResolver $resolver)

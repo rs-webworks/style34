@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:2.0" version="2.0" srcLang="en" trgLang="cs">
+  <file id="profile.cs">
+    <unit id="FveKfWM" name="username">
+      <notes>
+        <note category="file-source" priority="1">src/Form/Profile/RegistrationForm.php:43</note>
+      </notes>
+      <segment>
+        <source>username</source>
+        <target>Přezdívka</target>
+      </segment>
+    </unit>
+    <unit id="giREF.l" name="email">
+      <notes>
+        <note category="file-source" priority="1">src/Form/Profile/RegistrationForm.php:46</note>
+      </notes>
+      <segment>
+        <source>email</source>
+        <target>Email</target>
+      </segment>
+    </unit>
+    <unit id="XohImNo" name="password">
+      <notes>
+        <note category="file-source" priority="1">src/Form/Profile/RegistrationForm.php:51</note>
+      </notes>
+      <segment>
+        <source>password</source>
+        <target>Heslo</target>
+      </segment>
+    </unit>
+    <unit id="hC3iYbO" name="password-again">
+      <notes>
+        <note category="file-source" priority="1">src/Form/Profile/RegistrationForm.php:54</note>
+      </notes>
+      <segment>
+        <source>password-again</source>
+        <target>Heslo znovu</target>
+      </segment>
+    </unit>
+    <unit id="S6aXNcp" name="state">
+      <notes>
+        <note category="file-source" priority="1">src/Form/Profile/RegistrationForm.php:60</note>
+      </notes>
+      <segment>
+        <source>state</source>
+        <target>Země</target>
+      </segment>
+    </unit>
+    <unit id="EaYsI0E" name="city">
+      <notes>
+        <note category="file-source" priority="1">src/Form/Profile/RegistrationForm.php:64</note>
+      </notes>
+      <segment>
+        <source>city</source>
+        <target>Město</target>
+      </segment>
+    </unit>
+    <unit id="h3gPpd5" name="register">
+      <notes>
+        <note category="file-source" priority="1">templates/Profile/Registration/index.html.twig:47</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>register</source>
+        <target>Registrovat</target>
+      </segment>
+    </unit>
+    <unit id="qBJPsnB" name="registration-success">
+      <notes>
+        <note category="file-source" priority="1">src/Controller/Profile/RegistrationController.php:43</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>registration-success</source>
+        <target>Registrace byla úspěšná!</target>
+      </segment>
+    </unit>
+    <unit id="p1M6uFU" name="registration-fee">
+      <segment>
+        <source>registration-fee</source>
+        <target>Registrační poplatek</target>
+      </segment>
+    </unit>
+    <unit id="PLD10DA" name="membership-traits">
+      <segment>
+        <source>membership-traits</source>
+        <target>Výhody členství</target>
+      </segment>
+    </unit>
+    <unit id="N69Lg4Q" name="membership-price">
+      <segment>
+        <source>membership-price</source>
+        <target>Cena registrace</target>
+      </segment>
+    </unit>
+  </file>
+</xliff>

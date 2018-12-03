@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:2.0" version="2.0" srcLang="en" trgLang="en">
+  <file id="validators.en">
+    <unit id="_vR8dBH" name="profile.username-required">
+      <notes>
+        <note category="file-source" priority="1">src/Entity/Profile/Profile.php:0</note>
+      </notes>
+      <segment>
+        <source>profile.username-required</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="g_LaU.T" name="profile.username-invalid">
+      <notes>
+        <note category="file-source" priority="1">src/Entity/Profile/Profile.php:0</note>
+      </notes>
+      <segment>
+        <source>profile.username-invalid</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="cSy6rPU" name="profile.email-invalid">
+      <notes>
+        <note category="file-source" priority="1">src/Entity/Profile/Profile.php:0</note>
+      </notes>
+      <segment>
+        <source>profile.email-invalid</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="6fCJAzB" name="profile.email-required">
+      <notes>
+        <note category="file-source" priority="1">src/Entity/Profile/Profile.php:0</note>
+      </notes>
+      <segment>
+        <source>profile.email-required</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="Qa24BYX" name="profile.password-required">
+      <notes>
+        <note category="file-source" priority="1">src/Entity/Profile/Profile.php:0</note>
+      </notes>
+      <segment>
+        <source>profile.password-required</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="v.wlXyw" name="profile.password-max.length">
+      <notes>
+        <note category="file-source" priority="1">src/Entity/Profile/Profile.php:0</note>
+      </notes>
+      <segment>
+        <source>profile.password-max.length</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="GcUuMpE" name="profile.password-min-length">
+      <notes>
+        <note category="file-source" priority="1">src/Entity/Profile/Profile.php:0</note>
+      </notes>
+      <segment>
+        <source>profile.password-min-length</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="btCJao7" name="profile.role-required">
+      <notes>
+        <note category="file-source" priority="1">src/Entity/Profile/Profile.php:0</note>
+      </notes>
+      <segment>
+        <source>profile.role-required</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="T9vXiNk" name="profile.state-required">
+      <notes>
+        <note category="file-source" priority="1">src/Entity/Profile/Profile.php:0</note>
+      </notes>
+      <segment>
+        <source>profile.state-required</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="cLU_EGF" name="profile.role.name-required">
+      <notes>
+        <note category="file-source" priority="1">src/Entity/Profile/Role.php:0</note>
+      </notes>
+      <segment>
+        <source>profile.role.name-required</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="bttfsN0" name="profile.role.color-required">
+      <notes>
+        <note category="file-source" priority="1">src/Entity/Profile/Role.php:0</note>
+      </notes>
+      <segment>
+        <source>profile.role.color-required</source>
+        <target></target>
+      </segment>
+    </unit>
+  </file>
+</xliff>

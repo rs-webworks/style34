@@ -12,25 +12,25 @@
 			<ol class="breadcrumb">
 				<li class="breadcrumb-item">
 					<a href="{{ url('home-index') }}">{{ constant('Style34\\Kernel::SITE_NAME') }}</a></li>
-				<li class="breadcrumb-item"><a href="{{ url('profile-list') }}">Profily</a></li>
-				<li class="breadcrumb-item active" aria-current="page">Registrace</li>
+				<li class="breadcrumb-item">
+					<a href="{{ url('profile-list') }}">{% trans from 'global' %}profiles{% endtrans %}</a></li>
+				<li class="breadcrumb-item active" aria-current="page">{% trans from 'global' %}registration{% endtrans %}</li>
 			</ol>
 		</nav>
 
 		<div class="row">
 			<div class="col-md-5">
-				<h3>Registrační poplatek</h3>
+				<h3>{% trans from 'profile' %}registration-fee{% endtrans %}</h3>
 				<p>
-					Registrace do klubu <strong>{{ constant('Style34\\Kernel::SITE_NAME') }}</strong> jsou zpoplatněny
-					jednorázovým vstupním poplatkem. Co členstvím v klubu získáte? Kompletní seznam výhod si můžete
-					prohlédnout přímo na stránce detailů <strong>výhod členství.</strong>
+					{% trans with {'%appname%': constant('Style34\\Kernel::SITE_NAME')} from 'global' %}registration-fee-desc{% endtrans %}
 				</p>
 
 
 				<a href="{{ url('profile-registration-membership') }}" class="btn btn-primary">
-					<i class="fa fa-fw fa-trophy"></i> Výhody členství </a>
+					<i class="fa fa-fw fa-trophy"></i> {% trans from 'profile' %}membership-traits{% endtrans %}</a>
 				<div class="btn btn-light">
-					Cena registrace: <strong>{{ constant('Style34\\Kernel::MEMBERSHIP_PRICE') }} Kč </strong>
+					{% trans from 'profile' %}membership-price{% endtrans %}:
+					<strong>{{ constant('Style34\\Kernel::MEMBERSHIP_PRICE') }} Kč </strong>
 				</div>
 			</div>
 
@@ -44,7 +44,10 @@
 				{{ form_row(form.plainPassword.second) }}
 				{{ form_rest(form) }}
 
-				<button type="submit" class="btn btn-success">Registrovat se</button>
+				<button type="submit" class="btn btn-success">
+					<i class="fa fa-fw fa-check"></i>
+					{% trans from 'profile' %}register{% endtrans %}
+				</button>
 				{{ form_end(form) }}
 
 				{#<form>#}

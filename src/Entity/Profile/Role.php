@@ -26,7 +26,7 @@ class Role {
     /**
      * @var string $name
      * @ORM\Column(type="string", unique=true)
-     * @Assert\NotBlank(message="Název nesmí být prázdný")
+     * @Assert\NotBlank(message="profile.role.name-required")
      */
     protected $name;
 
@@ -39,7 +39,7 @@ class Role {
     /**
      * @var string $color
      * @ORM\Column(type="string")
-     * @Assert\NotBlank(message="Barva musí být vyplněna")
+     * @Assert\NotBlank(message="profile.role.color-required")
      */
     protected $color;
 

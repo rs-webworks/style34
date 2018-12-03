@@ -31,10 +31,11 @@ services:
       volumes:
         - pgadmin:/root/.pgadmin
       ports:
-        - "${PGADMIN_PORT:-5050}:80"
-      networks:
-        - postgres
+        - "5050:80"
       restart: unless-stopped
+      depends_on:
+        - "postgres"
+
 
     webserver:
       image: nginx:alpine
@@ -54,9 +55,6 @@ services:
         - .:/application
         - ./phpdocker/php-fpm/php-ini-overrides.ini:/etc/php/7.2/fpm/conf.d/99-overrides.ini
 
-networks:
-  postgres:
-    driver: bridge
 
 volumes:
   postgres:
