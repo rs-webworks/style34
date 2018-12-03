@@ -1,14 +1,20 @@
 version: "3.1"
 services:
 
+    # Memcached
+    # ------------------------------------------------------------------------------------------------------------------
     memcached:
       image: memcached:alpine
       container_name: memcached
 
+    # Redis
+    # ------------------------------------------------------------------------------------------------------------------
     redis:
       image: redis:alpine
       container_name: redis
 
+    # Postgres
+    # ------------------------------------------------------------------------------------------------------------------
     postgres:
       image: postgres:9.6-alpine
       container_name: postgres
@@ -22,6 +28,8 @@ services:
         - POSTGRES_PASSWORD=docker
         - POSTGRES_DB=style34
 
+    # pgAdmin
+    # ------------------------------------------------------------------------------------------------------------------
     pgadmin:
       image: dpage/pgadmin4
       container_name: pgadmin
@@ -36,7 +44,8 @@ services:
       depends_on:
         - "postgres"
 
-
+    # nginx web server
+    # ------------------------------------------------------------------------------------------------------------------
     webserver:
       image: nginx:alpine
       container_name: webserver
@@ -47,6 +56,8 @@ services:
       ports:
        - "8989:80"
 
+    # PHP-FPM
+    # ------------------------------------------------------------------------------------------------------------------
     php-fpm:
       build: phpdocker/php-fpm
       container_name: php-fpm
@@ -54,8 +65,3 @@ services:
       volumes:
         - .:/application
         - ./phpdocker/php-fpm/php-ini-overrides.ini:/etc/php/7.2/fpm/conf.d/99-overrides.ini
-
-
-volumes:
-  postgres:
-  pgadmin:
