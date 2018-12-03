@@ -1,6 +1,37 @@
 language: php
+php:
+  - 7.0
+  - 7.1
+  - 7.2
+
 services:
   - postgresql
+
 before_script:
   - psql -c 'create database travis_ci_test;' -U postgres
+  - composer install --prefer-source --no-interaction --dev
+
+script:
+  - mkdir -p build/logs
+  - php vendor/phpunit/phpunit/phpunit --coverage-clover build/logs/clover.xml
+  - ./bin/phpunit
+  # this checks that the source code follows the Symfony Code Syntax rules
+  - '[[ "$TRAVIS_PHP_VERSION" == "nightly" ]] || ./vendor/bin/php-cs-fixer fix --diff --dry-run -v'
+  # this checks that the YAML config files contain no syntax errors
+  - ./bin/console lint:yaml config
+  # this checks that the Twig template files contain no syntax errors
+  - ./bin/console lint:twig templates
+  # this checks that the XLIFF translations contain no syntax errors
+  - ./bin/console lint:xliff translations
+  # this checks that the application doesn't use dependencies with known security vulnerabilities
+  - ./bin/console security:check
+  # this checks that Doctrine's mapping configurations are valid
+  - ./bin/console doctrine:schema:validate --skip-sync -vvv --no-interaction
+
+after_script:
+  - php vendor/bin/coveralls -v
+
+
+install:
   - composer install
+  - ./bin/phpunit install
