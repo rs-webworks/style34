@@ -3,8 +3,8 @@
 
 namespace Style34\Repository\Profile;
 
-use Style34\Entity\Profile\Profile;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Style34\Entity\Profile\Profile;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
 

@@ -4,7 +4,10 @@ namespace Style34\Entity\Profile;
 
 use Doctrine\ORM\Mapping as ORM;
 use Style34\Entity\Address\State;
+use Style34\Entity\CreatedAt;
+use Style34\Entity\DeletedAt;
 use Style34\Entity\Identifier;
+use Style34\Entity\Token\Token;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -21,6 +24,8 @@ class Profile implements UserInterface
 
 
     use Identifier;
+    use CreatedAt;
+    use DeletedAt;
 
     /**
      * @ORM\Column(type="string", unique=true)
@@ -55,27 +60,14 @@ class Profile implements UserInterface
     protected $plainPassword;
 
     /**
-     * @var \DateTime $createdAt
-     * @ORM\Column(type="datetime")
-     */
-    protected $createdAt;
-
-    /**
      * @var \DateTime $activatedAt
      * @ORM\Column(type="datetime", nullable=true)
      */
     protected $activatedAt;
 
     /**
-     * @var \DateTime $deletedAt
-     * @ORM\Column(type="datetime", nullable=true)
-     */
-    protected $deletedAt;
-
-    /**
      * @var Role $role
      * @ORM\ManyToOne(targetEntity="Style34\Entity\Profile\Role", inversedBy="profiles")
-     * @Assert\NotNull(message="profile.role-required")
      */
     protected $role;
 
@@ -95,6 +87,12 @@ class Profile implements UserInterface
      * @ORM\Column(nullable=true, type="datetime")
      */
     protected $birthdate;
+
+    /**
+     * @var Token[] $tokens
+     * @ORM\OneToMany(targetEntity="Style34\Entity\Token\Token", mappedBy="profile")
+     */
+    protected $tokens;
 
 
     /**
@@ -161,39 +159,38 @@ class Profile implements UserInterface
         $this->plainPassword = $plainPassword;
     }
 
+    /**
+     * @return \DateTime
+     */
+    public function getActivatedAt(): \DateTime
+    {
+        return $this->activatedAt;
+    }
 
+    /**
+     * @param \DateTime $activatedAt
+     */
+    public function setActivatedAt(\DateTime $activatedAt): void
+    {
+        $this->activatedAt = $activatedAt;
+    }
 
     /**
      * @return \DateTime
      */
-    public function getCreatedAt(): \DateTime
+    public function getBirthdate(): \DateTime
     {
-        return $this->createdAt;
+        return $this->birthdate;
     }
 
     /**
-     * @param \DateTime $createdAt
+     * @param \DateTime $birthdate
      */
-    public function setCreatedAt(\DateTime $createdAt): void
+    public function setBirthdate(\DateTime $birthdate): void
     {
-        $this->createdAt = $createdAt;
+        $this->birthdate = $birthdate;
     }
 
-    /**
-     * @return \DateTime
-     */
-    public function getDeletedAt(): \DateTime
-    {
-        return $this->deletedAt;
-    }
-
-    /**
-     * @param \DateTime $deletedAt
-     */
-    public function setDeletedAt(\DateTime $deletedAt): void
-    {
-        $this->deletedAt = $deletedAt;
-    }
 
     /**
      * For Symfony security
@@ -254,7 +251,21 @@ class Profile implements UserInterface
         $this->city = $city;
     }
 
+    /**
+     * @return Token[]
+     */
+    public function getTokens(): array
+    {
+        return $this->tokens;
+    }
 
+    /**
+     * @param Token[] $tokens
+     */
+    public function setTokens(array $tokens): void
+    {
+        $this->tokens = $tokens;
+    }
 
 
     /**

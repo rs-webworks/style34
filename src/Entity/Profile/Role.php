@@ -32,7 +32,7 @@ class Role {
 
     /**
      * @var Profile[]
-     * @ORM\OneToMany(targetEntity="Style34\Entity\Profile\Profile", mappedBy="roles")
+     * @ORM\OneToMany(targetEntity="Style34\Entity\Profile\Profile", mappedBy="role")
      */
     protected $profiles;
 

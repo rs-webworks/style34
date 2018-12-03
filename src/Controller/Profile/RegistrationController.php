@@ -26,6 +26,7 @@ class RegistrationController extends AbstractController
      * @param EntityManagerInterface $em
      * @param TranslatorInterface $translator
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
      */
     public function index(
         Request $request,
@@ -50,12 +51,11 @@ class RegistrationController extends AbstractController
             $profile->setPassword($password);
 
             // Save entity
+            $profile->setCreatedAt(new \DateTime());
             $em->persist($profile);
             $em->flush();
 
             $this->addFlash('success', $translator->trans('registration-success', [], 'profile'));
-
-            return $this->redirectToRoute('profile-registration-membership');
         }
 
         return $this->render(

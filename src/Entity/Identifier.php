@@ -18,20 +18,20 @@ trait Identifier
      */
     private $id;
 
-	/**
-	 * @return int
-	 */
+    /**
+     * @return int
+     */
     final public function getId(): int
     {
         return $this->id;
     }
 
-	/**
-	 *
-	 */
+    /**
+     *
+     */
     public function __clone()
     {
-        $this->id = NULL;
+        $this->id = null;
     }
 
 }

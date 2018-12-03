@@ -7,6 +7,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Style34\Entity\Address\State;
 use Style34\Entity\Profile\Profile;
 use Style34\Entity\Profile\Role;
+use Style34\Entity\Token\TokenType;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;
@@ -87,6 +88,10 @@ class InstallCommand extends Command
             // Create users
             $io->section('Creating users...');
             $this->registerUsers();
+
+            // Create token types
+            $io->section('Creating token types...');
+            $this->createTokenTypes();
 
             $io->success('Installation complete!');
         } catch (\Exception $ex) {
@@ -193,6 +198,30 @@ class InstallCommand extends Command
             $profile->setRole($role);
 
             $this->em->persist($profile);
+            $this->io->progressAdvance(1);
+        }
+
+        $this->em->flush();
+        $this->io->progressFinish();
+    }
+
+    /**
+     *
+     */
+    protected function createTokenTypes(){
+        $types = array(
+            [TokenType::REGISTRATION['ACTIVATION']],
+        );
+
+        $this->io->progressStart(count($types));
+
+        foreach ($types as $type) {
+            list($name) = $type;
+
+            $tt = new TokenType();
+            $tt->setName($name);
+
+            $this->em->persist($tt);
             $this->io->progressAdvance(1);
         }
 

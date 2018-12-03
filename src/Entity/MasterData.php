@@ -4,7 +4,10 @@ namespace Style34\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-
+/**
+ * Trait MasterData
+ * @package Style34\Entity
+ */
 trait MasterData
 {
 
@@ -19,14 +22,16 @@ trait MasterData
     /**
      * @return string
      */
-    public function getName(): string {
+    public function getName(): string
+    {
         return $this->name;
     }
 
     /**
      * @param string $name
      */
-    public function setName(string $name): void {
+    public function setName(string $name): void
+    {
         $this->name = $name;
     }
 
