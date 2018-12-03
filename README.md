@@ -1,6 +1,6 @@
 # style34
 
-###Instalation
+### Instalation
 1. Set all required settings to .env file.
 2. Run `docker-compose up -d`
 3. Run composer via `docker exec composer install`
