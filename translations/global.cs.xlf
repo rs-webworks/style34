@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:2.0" version="2.0" srcLang="en" trgLang="cs">
+  <file id="global.cs">
+    <unit id="h1Dnr0R" name="registration-fee-desc">
+      <segment>
+        <source>registration-fee-desc</source>
+        <target><![CDATA[Registrace do klubu <strong>%appname%</strong> jsou zpoplatněny
+					jednorázovým vstupním poplatkem. Co členstvím v klubu získáte? Kompletní seznam výhod si můžete
+					prohlédnout přímo na stránce detailů <strong>výhod členství.</strong>]]></target>
+      </segment>
+    </unit>
+    <unit id="KcnDDgY" name="registration">
+      <segment>
+        <source>registration</source>
+        <target>Registrace</target>
+      </segment>
+    </unit>
+    <unit id="1S.TN.A" name="profiles">
+      <segment>
+        <source>profiles</source>
+        <target>Profily</target>
+      </segment>
+    </unit>
+  </file>
+</xliff>

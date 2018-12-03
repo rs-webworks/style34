@@ -24,10 +24,10 @@ class Profile implements UserInterface
 
     /**
      * @ORM\Column(type="string", unique=true)
-     * @Assert\NotBlank(message="Přezdívka je povinná")
+     * @Assert\NotBlank(message="profile.username-required")
      * @Assert\Regex(
      *     pattern="/^[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*$/",
-     *     message="Přezdívka smí obsahovat pouze znaky a-z, 0-9 a -_"
+     *     message="profile.username-invalid"
      * )
      */
     protected $username;
@@ -35,8 +35,8 @@ class Profile implements UserInterface
 
     /**
      * @ORM\Column(type="string", unique=true)
-     * @Assert\Email(message="Zadej email v platném formátu: nekdo@nekde.abc")
-     * @Assert\NotBlank(message="Email je povinný")
+     * @Assert\Email(message="profile.email-invalid")
+     * @Assert\NotBlank(message="profile.email-required")
      */
     protected $email;
 
@@ -46,10 +46,10 @@ class Profile implements UserInterface
     protected $password;
 
     /**
-     * @Assert\NotBlank(message="Heslo nesmí být prázdné")
+     * @Assert\NotBlank(message="profile.password-required")
      * @Assert\Length(min=6, max=4096,
-     *     minMessage="Heslo musí mít minimálně {{ limit }} znaků",
-     *     maxMessage="Heslo musí mít maximálně {{ limit }} znaků"
+     *     minMessage="profile.password-min-length",
+     *     maxMessage="profile.password-max.length"
      * )
      */
     protected $plainPassword;
@@ -75,13 +75,13 @@ class Profile implements UserInterface
     /**
      * @var Role $role
      * @ORM\ManyToOne(targetEntity="Style34\Entity\Profile\Role", inversedBy="profiles")
-     * @Assert\NotNull(message="Profil musí mít roli")
+     * @Assert\NotNull(message="profile.role-required")
      */
     protected $role;
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Assert\NotNull(message="Vyber zemi původu")
+     * @Assert\NotNull(message="profile.state-required")
      */
     protected $state;
 
