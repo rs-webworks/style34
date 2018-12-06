@@ -9,6 +9,7 @@
 
 Optional:
 - Add to your `/etc/hosts` domain. Anything pointing to 127.0.0.1 will be accessible on :8989 port.
+- Run tests with `./bin/phpunit`
 
 For assets compilation:
 ./node_modules/.bin/encore dev --watch
