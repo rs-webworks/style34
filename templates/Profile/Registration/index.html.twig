@@ -36,6 +36,9 @@
 
 			<div class="col-md-7">
 				<h3>Formulář</h3>
+				{% for flashMessage in app.session.flashbag.get('error') %}
+					<div class="alert alert-danger">{{ flashMessage }}</div>
+				{% endfor %}
 
 				{{ form_start(form) }}
 				{{ form_row(form.username) }}

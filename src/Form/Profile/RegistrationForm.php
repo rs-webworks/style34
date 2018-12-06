@@ -39,6 +39,7 @@ class RegistrationForm extends AbstractType
         ));
         $builder->add('plainPassword', RepeatedType::class, array(
             'type' => PasswordType::class,
+            'invalid_message' => 'password-mismatch',
             'first_options' => array(
                 "label" => 'password',
                 "translation_domain" => 'profile'

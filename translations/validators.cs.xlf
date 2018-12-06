@@ -7,7 +7,7 @@
       </notes>
       <segment>
         <source>profile.username-required</source>
-        <target></target>
+        <target>Přezdívka musí být vyplněna</target>
       </segment>
     </unit>
     <unit id="g_LaU.T" name="profile.username-invalid">
@@ -16,7 +16,7 @@
       </notes>
       <segment>
         <source>profile.username-invalid</source>
-        <target></target>
+        <target>Přezdívka mohou být pouze písmena, číslice, podtržíka a pomlčky</target>
       </segment>
     </unit>
     <unit id="cSy6rPU" name="profile.email-invalid">
@@ -25,7 +25,7 @@
       </notes>
       <segment>
         <source>profile.email-invalid</source>
-        <target></target>
+        <target>Email není ve správném formátu</target>
       </segment>
     </unit>
     <unit id="6fCJAzB" name="profile.email-required">
@@ -34,7 +34,7 @@
       </notes>
       <segment>
         <source>profile.email-required</source>
-        <target></target>
+        <target>Email je povinný</target>
       </segment>
     </unit>
     <unit id="Qa24BYX" name="profile.password-required">
@@ -43,7 +43,7 @@
       </notes>
       <segment>
         <source>profile.password-required</source>
-        <target></target>
+        <target>Heslo je povinné</target>
       </segment>
     </unit>
     <unit id="v.wlXyw" name="profile.password-max.length">
@@ -66,11 +66,11 @@
     </unit>
     <unit id="btCJao7" name="profile.role-required">
       <notes>
-        <note category="file-source" priority="1">src/Entity/Profile/Profile.php:0</note>
+        <note category="state" priority="1">obsolete</note>
       </notes>
       <segment>
         <source>profile.role-required</source>
-        <target></target>
+        <target>Roli je nutno vybrat</target>
       </segment>
     </unit>
     <unit id="T9vXiNk" name="profile.state-required">
@@ -79,7 +79,7 @@
       </notes>
       <segment>
         <source>profile.state-required</source>
-        <target></target>
+        <target>Země je povinná</target>
       </segment>
     </unit>
     <unit id="cLU_EGF" name="profile.role.name-required">
@@ -88,7 +88,7 @@
       </notes>
       <segment>
         <source>profile.role.name-required</source>
-        <target></target>
+        <target>Název je povinný</target>
       </segment>
     </unit>
     <unit id="bttfsN0" name="profile.role.color-required">
@@ -97,7 +97,51 @@
       </notes>
       <segment>
         <source>profile.role.color-required</source>
-        <target></target>
+        <target>Barva je povinná</target>
+      </segment>
+    </unit>
+    <unit id="vbhkPxD" name="profile.username-max-length">
+      <notes>
+        <note category="file-source" priority="1">src/Entity/Profile/Profile.php:0</note>
+      </notes>
+      <segment>
+        <source>profile.username-max-length</source>
+        <target>Přezdívka může být maximálně {{ limit }} znaků dlouhá</target>
+      </segment>
+    </unit>
+    <unit id="4HbsR0O" name="profile.username-min-length">
+      <notes>
+        <note category="file-source" priority="1">src/Entity/Profile/Profile.php:0</note>
+      </notes>
+      <segment>
+        <source>profile.username-min-length</source>
+        <target>Přezdívka můsí mít alespoň {{ limit }} znaků</target>
+      </segment>
+    </unit>
+    <unit id="NOauvLq" name="profile.username-taken">
+      <notes>
+        <note category="file-source" priority="1">src/Entity/Profile/Profile.php:0</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>profile.username-taken</source>
+        <target>Tato přezdívka je už zabraná</target>
+      </segment>
+    </unit>
+    <unit id="XSa.kSY" name="profile.email-taken">
+      <notes>
+        <note category="file-source" priority="1">src/Entity/Profile/Profile.php:0</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>profile.email-taken</source>
+        <target>Tento email je již registrovaný</target>
+      </segment>
+    </unit>
+    <unit id="J7.Rgz1" name="password-mismatch">
+      <segment>
+        <source>password-mismatch</source>
+        <target>Zadaná hesla se neshodují</target>
       </segment>
     </unit>
   </file>

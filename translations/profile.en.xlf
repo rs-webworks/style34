@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xliff xmlns="urn:oasis:names:tc:xliff:document:2.0" version="2.0" srcLang="en" trgLang="en">
+<xliff xmlns="urn:oasis:names:tc:xliff:document:2.0" version="2.0" srcLang="cs" trgLang="en">
   <file id="profile.en">
     <unit id="FveKfWM" name="username">
       <notes>
-        <note category="file-source" priority="1">src/Form/Profile/RegistrationForm.php:43</note>
+        <note category="state" priority="1">obsolete</note>
       </notes>
       <segment>
         <source>username</source>
@@ -12,7 +12,7 @@
     </unit>
     <unit id="lpzL089" name="Email">
       <notes>
-        <note category="file-source" priority="1">src/Form/Profile/RegistrationForm.php:46</note>
+        <note category="state" priority="1">obsolete</note>
       </notes>
       <segment>
         <source>Email</source>
@@ -21,7 +21,7 @@
     </unit>
     <unit id="XohImNo" name="password">
       <notes>
-        <note category="file-source" priority="1">src/Form/Profile/RegistrationForm.php:51</note>
+        <note category="state" priority="1">obsolete</note>
       </notes>
       <segment>
         <source>password</source>
@@ -30,7 +30,7 @@
     </unit>
     <unit id="hC3iYbO" name="password-again">
       <notes>
-        <note category="file-source" priority="1">src/Form/Profile/RegistrationForm.php:54</note>
+        <note category="state" priority="1">obsolete</note>
       </notes>
       <segment>
         <source>password-again</source>
@@ -39,7 +39,7 @@
     </unit>
     <unit id="S6aXNcp" name="state">
       <notes>
-        <note category="file-source" priority="1">src/Form/Profile/RegistrationForm.php:60</note>
+        <note category="state" priority="1">obsolete</note>
       </notes>
       <segment>
         <source>state</source>
@@ -48,7 +48,7 @@
     </unit>
     <unit id="EaYsI0E" name="city">
       <notes>
-        <note category="file-source" priority="1">src/Form/Profile/RegistrationForm.php:64</note>
+        <note category="state" priority="1">obsolete</note>
       </notes>
       <segment>
         <source>city</source>
@@ -57,8 +57,7 @@
     </unit>
     <unit id="h3gPpd5" name="register">
       <notes>
-        <note category="file-source" priority="1">templates/Profile/Registration/index.html.twig:47</note>
-        <note category="state" priority="1">new</note>
+        <note category="file-source" priority="1">templates/Profile/Registration/index.html.twig:52</note>
       </notes>
       <segment>
         <source>register</source>
@@ -67,11 +66,46 @@
     </unit>
     <unit id="qBJPsnB" name="registration-success">
       <notes>
-        <note category="file-source" priority="1">src/Controller/Profile/RegistrationController.php:43</note>
-        <note category="state" priority="1">new</note>
+        <note category="file-source" priority="1">src/Controller/Profile/RegistrationController.php:41</note>
       </notes>
       <segment>
         <source>registration-success</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="p1M6uFU" name="registration-fee">
+      <notes>
+        <note category="file-source" priority="1">templates/Profile/Registration/index.html.twig:23</note>
+      </notes>
+      <segment>
+        <source>registration-fee</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="PLD10DA" name="membership-traits">
+      <notes>
+        <note category="file-source" priority="1">templates/Profile/Registration/index.html.twig:30</note>
+      </notes>
+      <segment>
+        <source>membership-traits</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="N69Lg4Q" name="membership-price">
+      <notes>
+        <note category="file-source" priority="1">templates/Profile/Registration/index.html.twig:32</note>
+      </notes>
+      <segment>
+        <source>membership-price</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="EzOj_bG" name="registration-failed">
+      <notes>
+        <note category="file-source" priority="1">src/Controller/Profile/RegistrationController.php:43</note>
+      </notes>
+      <segment>
+        <source>registration-failed</source>
         <target></target>
       </segment>
     </unit>
