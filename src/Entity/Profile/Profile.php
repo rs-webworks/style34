@@ -16,8 +16,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Class Profile
  * @package Style34\Entity\Profile
  * @ORM\Entity(repositoryClass="Style34\Repository\Profile\ProfileRepository")
- * @UniqueEntity("username")
- * @UniqueEntity("email")
+ * @UniqueEntity("username", message="profile.username-taken")
+ * @UniqueEntity("email", message="profile.email-taken")
  */
 class Profile implements UserInterface
 {
@@ -30,6 +30,10 @@ class Profile implements UserInterface
     /**
      * @ORM\Column(type="string", unique=true)
      * @Assert\NotBlank(message="profile.username-required")
+     * @Assert\Length(min=3, max=20,
+     *      minMessage="profile.username-min-length",
+     *      maxMessage="profile.username-max-length",
+     * )
      * @Assert\Regex(
      *     pattern="/^[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*$/",
      *     message="profile.username-invalid"

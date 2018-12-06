@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:2.0" version="2.0" srcLang="cs" trgLang="en">
+  <file id="global.en">
+    <unit id="1S.TN.A" name="profiles">
+      <notes>
+        <note category="file-source" priority="1">templates/Profile/Registration/index.html.twig:16</note>
+      </notes>
+      <segment>
+        <source>profiles</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="KcnDDgY" name="registration">
+      <notes>
+        <note category="file-source" priority="1">templates/Profile/Registration/index.html.twig:17</note>
+      </notes>
+      <segment>
+        <source>registration</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="h1Dnr0R" name="registration-fee-desc">
+      <notes>
+        <note category="file-source" priority="1">templates/Profile/Registration/index.html.twig:25</note>
+      </notes>
+      <segment>
+        <source>registration-fee-desc</source>
+        <target></target>
+      </segment>
+    </unit>
+  </file>
+</xliff>
