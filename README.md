@@ -1,4 +1,6 @@
 # style34
+Community portal for BMW E34 enthusiast. Currently in development. The aim is to provide hub for car owners to quickly 
+organize tehir cars, parts, sales, car history, events and other stuff.
 
 ### Instalation
 1. Set all required settings to .env file.
@@ -12,4 +14,4 @@ Optional:
 - Run tests with `./bin/phpunit`
 
 For assets compilation:
-./node_modules/.bin/encore dev --watch
+`./node_modules/.bin/encore dev --watch`
