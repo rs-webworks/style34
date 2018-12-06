@@ -2,10 +2,10 @@
 
 namespace Style34\Tests\Service;
 
-use PHPUnit\Framework\TestCase;
 use Style34\Service\TokenService;
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class TokenServiceTest extends TestCase
+class TokenServiceTest extends WebTestCase
 {
     /** @var TokenService $tokenService */
     protected $tokenService;
@@ -15,13 +15,24 @@ class TokenServiceTest extends TestCase
      */
     public function setUp()
     {
-        $this->tokenService = new TokenService();
+        self::bootKernel();
+
+        // returns the real and unchanged service container
+        $container = self::$kernel->getContainer();
+
+        // gets the special container that allows fetching private services
+        $container = self::$container;
+
+        $this->tokenService = $container->get(TokenService::class);
+        // ...
     }
 
     /**
-     *
+     * @throws \Exception
      */
     public function testGenerateActivationToken()
     {
+
+        $this->assertNotEmpty($this->tokenService->generateActivationToken());
     }
 }
