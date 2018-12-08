@@ -13,8 +13,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class TokenType
 {
-    const REGISTRATION = array(
-        'ACTIVATION' => 'registration.activation'
+    const PROFILE = array(
+        'ACTIVATION' => 'profile.activation'
     );
 
     use MasterData;

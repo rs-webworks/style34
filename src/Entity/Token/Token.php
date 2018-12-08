@@ -6,10 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Style34\Entity\CreatedAt;
 use Style34\Entity\ExpiresAt;
 use Style34\Entity\Identifier;
-use Style34\Entity\MasterData;
 use Style34\Entity\Profile\Profile;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class Token
@@ -18,6 +15,12 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Token
 {
+    const EXPIRY_MINUTE = 60;
+    const EXPIRY_HOUR = self::EXPIRY_MINUTE * 60;
+    const EXPIRY_DAY = self::EXPIRY_HOUR * 24;
+    const EXPIRY_WEEK = self::EXPIRY_DAY * 7;
+    const EXPIRY_MONTH = self::EXPIRY_DAY * 30;
+
     use Identifier;
     use CreatedAt;
     use ExpiresAt;
@@ -35,7 +38,7 @@ class Token
     protected $type;
 
     /**
-     * @var Profile $profile;
+     * @var Profile $profile ;
      * @ORM\ManyToOne(targetEntity="Style34\Entity\Profile\Profile", inversedBy="tokens")
      */
     protected $profile;
@@ -87,6 +90,5 @@ class Token
     {
         $this->profile = $profile;
     }
-
 
 }

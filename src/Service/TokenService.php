@@ -37,6 +37,18 @@ class TokenService extends AbstractService
     public function isValid(Token $token)
     {
         $now = new \DateTime();
+
         return $token->getExpiresAt() <= $now;
+    }
+
+    /**
+     * @param \DateTime $start
+     * @param int $expiryInSeconds
+     * @return \DateTime
+     * @throws \Exception
+     */
+    public function createExpirationDateTime(\DateTime $start, int $expiryInSeconds)
+    {
+        return $start->add(new \DateInterval('PT'. $expiryInSeconds .'S'));
     }
 }
