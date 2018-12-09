@@ -94,7 +94,7 @@ class Profile implements UserInterface
 
     /**
      * @var Token[] $tokens
-     * @ORM\OneToMany(targetEntity="Style34\Entity\Token\Token", mappedBy="profile")
+     * @ORM\OneToMany(targetEntity="Style34\Entity\Token\Token", mappedBy="profile", cascade={"remove"})
      */
     protected $tokens;
 

@@ -7,14 +7,11 @@ use Psr\Log\LoggerInterface;
 use Style34\Entity\Profile\Profile;
 use Style34\Entity\Token\Token;
 use Style34\Form\Profile\RegistrationForm;
-use Style34\Service\MailService;
 use Style34\Service\ProfileService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Session\Flash\FlashBag;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Translation\Extractor\Visitor\Php\Symfony\FlashMessage;
 
 /**
  * Class RegistrationController
@@ -38,12 +35,13 @@ class RegistrationController extends AbstractController
      * @Route("/profile/registration", name="profile-registration")
      * @param Request $request
      * @param ProfileService $profileService
-     * @param MailService $mailService
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      * @throws \Throwable
      */
-    public function index(Request $request, ProfileService $profileService, MailService $mailService)
+    public function index(Request $request, ProfileService $profileService)
     {
+        $profileService->purgeExpiredRegistrations();
+
         $profile = new Profile();
         $form = $this->createForm(RegistrationForm::class, $profile);
 

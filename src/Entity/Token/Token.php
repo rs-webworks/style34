@@ -11,7 +11,7 @@ use Style34\Entity\Profile\Profile;
 /**
  * Class Token
  * @package Style34\Entity\Token
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="Style34\Repository\Token\TokenRepository")
  */
 class Token
 {

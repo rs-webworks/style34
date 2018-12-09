@@ -2,8 +2,6 @@
 
 namespace Style34\Service;
 
-use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\EntityManagerInterface;
 use Style34\Entity\Profile\Profile;
 use Style34\Entity\Profile\Role;
 use Style34\Entity\Token\Token;
@@ -13,8 +11,10 @@ use Style34\Exception\Profile\ProfileException;
 use Style34\Exception\Token\ExpiredTokenException;
 use Style34\Exception\Token\InvalidTokenException;
 use Style34\Kernel;
+use Style34\Service\Traits\EntityManagerTrait;
+use Style34\Service\Traits\LoggerTrait;
+use Style34\Service\Traits\TranslatorTrait;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * Class ProfileService
@@ -22,9 +22,9 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 class ProfileService extends AbstractService
 {
-
-    /** @var EntityManager $em */
-    protected $em;
+    use LoggerTrait;
+    use EntityManagerTrait;
+    use TranslatorTrait;
 
     /** @var UserPasswordEncoderInterface $passwordEncoder */
     protected $passwordEncoder;
@@ -32,23 +32,22 @@ class ProfileService extends AbstractService
     /** @var TokenService $tokenService */
     protected $tokenService;
 
-    /** @var TranslatorInterface $translator */
-    protected $translator;
-
     /** @var MailService $mailService */
     protected $mailService;
 
+    /**
+     * ProfileService constructor.
+     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @param TokenService $tokenService
+     * @param MailService $mailService
+     */
     public function __construct(
-        EntityManagerInterface $em,
         UserPasswordEncoderInterface $passwordEncoder,
         TokenService $tokenService,
-        TranslatorInterface $translator,
         MailService $mailService
     ) {
-        $this->em = $em;
         $this->passwordEncoder = $passwordEncoder;
         $this->tokenService = $tokenService;
-        $this->translator = $translator;
         $this->mailService = $mailService;
     }
 
@@ -128,5 +127,30 @@ class ProfileService extends AbstractService
 
         throw new ActivationException($this->translator->trans('contact-support',
             ['contactmail' => Kernel::CONTACT_MAIL], 'global'));
+    }
+
+    /**
+     *
+     */
+    public function purgeExpiredRegistrations()
+    {
+        try {
+            $tokenType = $this->em->getRepository(TokenType::class)->findOneBy(array(
+                'name' => TokenType::PROFILE['ACTIVATION']
+            ));
+
+            $expiredTokens = $this->em->getRepository(Token::class)->findExpiredTokens($tokenType);
+            dump($expiredTokens);
+
+            /** @var Token $token */
+            foreach ($expiredTokens as $token) {
+                $profile = $token->getProfile();
+                $this->em->remove($profile);
+            }
+
+            $this->em->flush();
+        } catch (\Exception $ex) {
+            $this->logger->error('profile.expired-registration-purge-failed', [$ex]);
+        }
     }
 }
