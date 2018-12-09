@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xliff xmlns="urn:oasis:names:tc:xliff:document:2.0" version="2.0" srcLang="en" trgLang="cs">
+<xliff xmlns="urn:oasis:names:tc:xliff:document:2.0" version="2.0" srcLang="cs" trgLang="cs">
   <file id="profile.cs">
     <unit id="FveKfWM" name="username">
       <notes>
@@ -66,7 +66,7 @@
     </unit>
     <unit id="qBJPsnB" name="registration-success">
       <notes>
-        <note category="file-source" priority="1">src/Controller/Profile/RegistrationController.php:41</note>
+        <note category="file-source" priority="1">src/Controller/Profile/RegistrationController.php:55</note>
       </notes>
       <segment>
         <source>registration-success</source>
@@ -102,11 +102,74 @@
     </unit>
     <unit id="EzOj_bG" name="registration-failed">
       <notes>
-        <note category="file-source" priority="1">src/Controller/Profile/RegistrationController.php:43</note>
+        <note category="file-source" priority="1">src/Controller/Profile/RegistrationController.php:59</note>
       </notes>
       <segment>
         <source>registration-failed</source>
         <target>Nastala chyba při registraci</target>
+      </segment>
+    </unit>
+    <unit id="6111zBr" name="email-activation-title">
+      <notes>
+        <note category="file-source" priority="1">src/Service/MailService.php:51</note>
+      </notes>
+      <segment>
+        <source>email-activation-title</source>
+        <target>Aktivace účtu - ověření emailové adresy</target>
+      </segment>
+    </unit>
+    <unit id="yZow68x" name="activation-needed">
+      <notes>
+        <note category="file-source" priority="1">templates/Profile/Registration/success.html.twig:9</note>
+      </notes>
+      <segment>
+        <source>activation-needed</source>
+        <target>Aktivace</target>
+      </segment>
+    </unit>
+    <unit id="z6.OT8r" name="activation-result">
+      <notes>
+        <note category="file-source" priority="1">templates/Profile/Registration/activation.html.twig:9</note>
+      </notes>
+      <segment>
+        <source>activation-result</source>
+        <target>Aktivace profilu</target>
+      </segment>
+    </unit>
+    <unit id="e1gwb0M" name="activation-invalid-token">
+      <notes>
+        <note category="file-source" priority="1">src/Service/ProfileService.php:111</note>
+      </notes>
+      <segment>
+        <source>activation-invalid-token</source>
+        <target>Aktivační token je neplatný</target>
+      </segment>
+    </unit>
+    <unit id="b4j4kxk" name="activation-failed">
+      <notes>
+        <note category="file-source" priority="1">src/Controller/Profile/RegistrationController.php:91</note>
+      </notes>
+      <segment>
+        <source>activation-failed</source>
+        <target>Aktivace byla bohužel neúspěšná</target>
+      </segment>
+    </unit>
+    <unit id="dViU8kE" name="activation-success">
+      <notes>
+        <note category="file-source" priority="1">src/Controller/Profile/RegistrationController.php:87</note>
+      </notes>
+      <segment>
+        <source>activation-success</source>
+        <target>Aktivace proběhla úspěšně</target>
+      </segment>
+    </unit>
+    <unit id="57GlP5." name="activation-expired-token">
+      <notes>
+        <note category="file-source" priority="1">src/Service/ProfileService.php:106</note>
+      </notes>
+      <segment>
+        <source>activation-expired-token</source>
+        <target>Tokenu vypršela platnost</target>
       </segment>
     </unit>
   </file>

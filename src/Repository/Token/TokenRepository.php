@@ -21,5 +21,4 @@ class TokenRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Token::class);
     }
-
 }

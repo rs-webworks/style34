@@ -19,6 +19,7 @@ class Role {
     const MODERATOR = 'ROLE_MODERATOR';
     const MEMBER = 'ROLE_MEMBER';
     const INACTIVE = 'ROLE_INACTIVE';
+    const VERIFIED = 'ROLE_VERIFIED';
     const BANNED = 'ROLE_BANNED';
 
     use Identifier;

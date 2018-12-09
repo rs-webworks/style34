@@ -46,6 +46,16 @@
 
 {% include "partials/navigation-top-frontend.html.twig" %}
 
+<div class="container" id="flash-messages">
+{% for label, messages in app.flashes %}
+	{% for message in messages %}
+		<div class="alert alert-{{ label }}">
+			{{ message }}
+		</div>
+	{% endfor %}
+{% endfor %}
+</div>
+
 {% block body %}{% endblock %}
 
 <footer class="container">

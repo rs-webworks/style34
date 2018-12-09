@@ -18,6 +18,8 @@ class Kernel extends BaseKernel
     use MicroKernelTrait;
 
     const SITE_NAME = "STYLE34";
+    const CONTACT_MAIL = "admin@style34.net";
+    const INFO_MAIL = "info@style34.net";
     const MEMBERSHIP_PRICE = "299";
     const CONFIG_EXTS = '.{php,xml,yaml,yml}';
 
