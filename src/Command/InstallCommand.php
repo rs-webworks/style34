@@ -152,6 +152,7 @@ class InstallCommand extends Command
             [Role::MODERATOR, '#00B639'],
             [Role::MEMBER, '#1D1D1D'],
             [Role::INACTIVE, '#626262'],
+            [Role::VERIFIED, '#626262'],
             [Role::BANNED, '#A2A2A2']
         );
 
@@ -182,7 +183,11 @@ class InstallCommand extends Command
 
         /** @var array $users Username, mail, password */
         $users = array(
-            ['admin', 'admin@style34.net', 'rootpass', $roleRp->findOneBy(array('name' => Role::ADMIN))]
+            ['admin', 'admin@style34.net', 'rootpass', $roleRp->findOneBy(array('name' => Role::ADMIN))],
+            ['spravce', 'spravce@style34.net', '', $roleRp->findOneBy(array('name' => Role::BANNED))],
+            ['moderator', 'moderator@style34.net', '', $roleRp->findOneBy(array('name' => Role::BANNED))],
+            ['mod', 'mod@style34.net', '', $roleRp->findOneBy(array('name' => Role::BANNED))],
+            ['administrator', 'administrator@style34.net', '', $roleRp->findOneBy(array('name' => Role::BANNED))]
         );
 
         $this->io->progressStart(count($users));
@@ -208,9 +213,10 @@ class InstallCommand extends Command
     /**
      *
      */
-    protected function createTokenTypes(){
+    protected function createTokenTypes()
+    {
         $types = array(
-            [TokenType::REGISTRATION['ACTIVATION']],
+            [TokenType::PROFILE['ACTIVATION']],
         );
 
         $this->io->progressStart(count($types));

@@ -121,7 +121,6 @@
     <unit id="NOauvLq" name="profile.username-taken">
       <notes>
         <note category="file-source" priority="1">src/Entity/Profile/Profile.php:0</note>
-        <note category="state" priority="1">new</note>
       </notes>
       <segment>
         <source>profile.username-taken</source>
@@ -131,7 +130,6 @@
     <unit id="XSa.kSY" name="profile.email-taken">
       <notes>
         <note category="file-source" priority="1">src/Entity/Profile/Profile.php:0</note>
-        <note category="state" priority="1">new</note>
       </notes>
       <segment>
         <source>profile.email-taken</source>

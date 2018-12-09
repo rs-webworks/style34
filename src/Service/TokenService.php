@@ -34,11 +34,19 @@ class TokenService extends AbstractService
      * @return bool
      * @throws \Exception
      */
-    public function isValid(Token $token)
+    public function isExpired(Token $token)
     {
         $now = new \DateTime();
 
-        return $token->getExpiresAt() <= $now;
+        return $token->getExpiresAt() < $now;
+    }
+
+    /**
+     * @param Token $token
+     * @return bool
+     */
+    public function isValid(Token $token){
+        return !$token->isInvalid();
     }
 
     /**

@@ -34,8 +34,8 @@ services:
       image: dpage/pgadmin4
       container_name: pgadmin
       environment:
-        PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-admin@style34.net}
-        PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-root}
+        PGADMIN_DEFAULT_EMAIL: admin@style34.net
+        PGADMIN_DEFAULT_PASSWORD: root
       volumes:
         - pgadmin:/root/.pgadmin
       ports:
@@ -56,12 +56,21 @@ services:
       ports:
        - "8989:80"
 
+    mailcatcher:
+      image: yappabe/mailcatcher
+      container_name: mailcatcher
+      ports:
+        - 1025:1025
+        - 1080:1080
+
     # PHP-FPM
     # ------------------------------------------------------------------------------------------------------------------
     php-fpm:
       build: phpdocker/php-fpm
       container_name: php-fpm
       working_dir: /application
+      links:
+        - mailcatcher
       volumes:
         - .:/application
         - ./phpdocker/php-fpm/php-ini-overrides.ini:/etc/php/7.2/fpm/conf.d/99-overrides.ini

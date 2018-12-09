@@ -44,6 +44,12 @@ class Token
     protected $profile;
 
     /**
+     * @var bool
+     * @ORM\Column(type="boolean")
+     */
+    protected $invalid = false;
+
+    /**
      * @return string
      */
     public function getHash(): string
@@ -90,5 +96,23 @@ class Token
     {
         $this->profile = $profile;
     }
+
+    /**
+     * @return bool
+     */
+    public function isInvalid(): bool
+    {
+        return $this->invalid;
+    }
+
+    /**
+     * @param bool $invalid
+     */
+    public function setInvalid(bool $invalid): void
+    {
+        $this->invalid = $invalid;
+    }
+
+
 
 }

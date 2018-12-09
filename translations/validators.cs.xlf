@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xliff xmlns="urn:oasis:names:tc:xliff:document:2.0" version="2.0" srcLang="en" trgLang="cs">
+<xliff xmlns="urn:oasis:names:tc:xliff:document:2.0" version="2.0" srcLang="cs" trgLang="cs">
   <file id="validators.cs">
     <unit id="_vR8dBH" name="profile.username-required">
       <notes>
@@ -121,7 +121,6 @@
     <unit id="NOauvLq" name="profile.username-taken">
       <notes>
         <note category="file-source" priority="1">src/Entity/Profile/Profile.php:0</note>
-        <note category="state" priority="1">new</note>
       </notes>
       <segment>
         <source>profile.username-taken</source>
@@ -131,7 +130,6 @@
     <unit id="XSa.kSY" name="profile.email-taken">
       <notes>
         <note category="file-source" priority="1">src/Entity/Profile/Profile.php:0</note>
-        <note category="state" priority="1">new</note>
       </notes>
       <segment>
         <source>profile.email-taken</source>
@@ -139,6 +137,9 @@
       </segment>
     </unit>
     <unit id="J7.Rgz1" name="password-mismatch">
+      <notes>
+        <note category="state" priority="1">obsolete</note>
+      </notes>
       <segment>
         <source>password-mismatch</source>
         <target>Zadaná hesla se neshodují</target>

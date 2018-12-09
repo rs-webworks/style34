@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:2.0" version="2.0" srcLang="cs" trgLang="en">
+  <file id="email.en">
+    <unit id="d2wyez_" name="profile-activation-preheader">
+      <notes>
+        <note category="file-source" priority="1">templates/emails/profile-activation.html.twig:4</note>
+      </notes>
+      <segment>
+        <source>profile-activation-preheader</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="yBlC9yd" name="profile-activation-heading">
+      <notes>
+        <note category="file-source" priority="1">templates/emails/profile-activation.html.twig:9</note>
+      </notes>
+      <segment>
+        <source>profile-activation-heading</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="_iA4f.k" name="profile-activation-button">
+      <notes>
+        <note category="file-source" priority="1">templates/emails/profile-activation.html.twig:18</note>
+      </notes>
+      <segment>
+        <source>profile-activation-button</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="AwGETM2" name="footer">
+      <notes>
+        <note category="file-source" priority="1">templates/emails/layout/email-layout.html.twig:359</note>
+      </notes>
+      <segment>
+        <source>footer</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="otYMw2_" name="unsuscribe-desc">
+      <notes>
+        <note category="file-source" priority="1">templates/emails/layout/email-layout.html.twig:360</note>
+      </notes>
+      <segment>
+        <source>unsuscribe-desc</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="gz5x90A" name="unsuscribe">
+      <notes>
+        <note category="file-source" priority="1">templates/emails/layout/email-layout.html.twig:360</note>
+      </notes>
+      <segment>
+        <source>unsuscribe</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="qQjt7Mu" name="profile-activation-title">
+      <notes>
+        <note category="file-source" priority="1">templates/emails/profile-activation.html.twig:8</note>
+      </notes>
+      <segment>
+        <source>profile-activation-title</source>
+        <target></target>
+      </segment>
+    </unit>
+  </file>
+</xliff>
