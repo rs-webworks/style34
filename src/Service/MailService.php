@@ -5,6 +5,7 @@ namespace Style34\Service;
 use Style34\Entity\Profile\Profile;
 use Style34\Entity\Token\Token;
 use Style34\Kernel;
+use Style34\Service\Traits\TranslatorTrait;
 use Swift_Message;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -17,11 +18,10 @@ use Twig\Environment;
 class MailService extends AbstractService
 {
 
+    use TranslatorTrait;
+
     /** @var \Swift_Mailer $mailer */
     protected $mailer;
-
-    /** @var TranslatorInterface $translator */
-    protected $translator;
 
     /** @var Response $renderer */
     protected $renderer;

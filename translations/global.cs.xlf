@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xliff xmlns="urn:oasis:names:tc:xliff:document:2.0" version="2.0" srcLang="cs" trgLang="cs">
+<xliff xmlns="urn:oasis:names:tc:xliff:document:2.0" version="2.0" srcLang="en" trgLang="cs">
   <file id="global.cs">
     <unit id="h1Dnr0R" name="registration-fee-desc">
       <notes>
@@ -59,6 +59,30 @@
       <segment>
         <source>contact-support</source>
         <target>Prosím kontaktuj nás skrze mail contactmail</target>
+      </segment>
+    </unit>
+    <unit id="TrQaKp3" name="forum">
+      <segment>
+        <source>forum</source>
+        <target>Forum</target>
+      </segment>
+    </unit>
+    <unit id="zjh9Xgo" name="gallery">
+      <segment>
+        <source>gallery</source>
+        <target>Galerie</target>
+      </segment>
+    </unit>
+    <unit id="5NaT0k5" name="market">
+      <segment>
+        <source>market</source>
+        <target>Market</target>
+      </segment>
+    </unit>
+    <unit id="jZAB0yx" name="shop">
+      <segment>
+        <source>shop</source>
+        <target>Shop</target>
       </segment>
     </unit>
   </file>

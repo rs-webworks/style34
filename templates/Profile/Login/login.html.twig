@@ -1,0 +1,31 @@
+{% extends 'layout-frontend.html.twig' %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+
+	<div class="container">
+
+		<h2>{% trans from 'profile'%}login{% endtrans %}</h2>
+		<hr>
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item">
+					<a href="{{ url('home-index') }}">{{ constant('Style34\\Kernel::SITE_NAME') }}</a>
+				</li>
+				<li class="breadcrumb-item">
+					<a href="{{ url('profile-list') }}">{% trans from 'global' %}profiles{% endtrans %}</a>
+				</li>
+				<li class="breadcrumb-item active" aria-current="page">
+					{% trans from 'global' %}login{% endtrans %}
+				</li>
+			</ol>
+		</nav>
+
+		<div class="row">
+			<p></p>
+		</div>
+	</div>
+
+
+{% endblock %}
