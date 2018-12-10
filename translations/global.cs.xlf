@@ -91,5 +91,11 @@
         <target>Přihlášení</target>
       </segment>
     </unit>
+    <unit id="ACcM9j_" name="logout">
+      <segment>
+        <source>logout</source>
+        <target>Odhlásit se</target>
+      </segment>
+    </unit>
   </file>
 </xliff>

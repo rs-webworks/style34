@@ -5,7 +5,6 @@ namespace Style34\Entity\Profile;
 use Doctrine\ORM\Mapping as ORM;
 use Style34\Entity\CreatedAt;
 use Style34\Entity\DeletedAt;
-use Style34\Entity\Identifier;
 use Style34\Entity\Token\Token;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -20,18 +19,16 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Profile implements UserInterface
 {
-    use Identifier;
     use CreatedAt;
     use DeletedAt;
 
-//
-//    /**
-//     * @ORM\Id
-//     * @ORM\Column(type="integer", nullable=false)
-//     * @ORM\GeneratedValue(strategy="IDENTITY")
-//     * @var integer
-//     */
-//    protected $id;
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer", nullable=false)
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @var integer
+     */
+    protected $id;
 
     /**
      * @ORM\Column(type="string", unique=true)
