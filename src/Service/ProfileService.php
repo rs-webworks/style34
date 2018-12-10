@@ -53,12 +53,12 @@ class ProfileService extends AbstractService
 
     /**
      * @param Profile $profile
+     * @param string $lastIp
      * @return bool|mixed
-     * @throws \Throwable
      */
-    public function registerNewProfile(Profile $profile)
+    public function registerNewProfile(Profile $profile, string $lastIp = '127.0.0.1')
     {
-        return $this->em->transactional(function () use ($profile) {
+        return $this->em->transactional(function () use ($profile, $lastIp) {
             // Get default profile role
             $role = $this->em->getRepository(Role::class)->findOneBy(array('name' => Role::INACTIVE));
             $profile->setRole($role);
@@ -69,6 +69,8 @@ class ProfileService extends AbstractService
 
             // Save entity
             $profile->setCreatedAt(new \DateTime());
+            $profile->setLastIp($lastIp);
+            $profile->setRegisteredAs(serialize(array($profile->getUsername(), $profile->getEmail())));
             $this->em->persist($profile);
 
             // Create token
@@ -115,6 +117,7 @@ class ProfileService extends AbstractService
 
         if ($profile->getRole()->getName() == Role::INACTIVE) {
             $profile->setRole($this->em->getRepository(Role::class)->findOneBy(array('name' => Role::VERIFIED)));
+            $profile->setActivatedAt(new \DateTime);
             $token->setInvalid(true);
 
             $this->em->persist($profile);

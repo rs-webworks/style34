@@ -85,5 +85,11 @@
         <target>Shop</target>
       </segment>
     </unit>
+    <unit id="QoghNQ6" name="login">
+      <segment>
+        <source>login</source>
+        <target>Přihlášení</target>
+      </segment>
+    </unit>
   </file>
 </xliff>

@@ -59,14 +59,35 @@
 			{#-- My profile #}
 			{#----------------------------------------------------------------------------------------------------#}
 			{% if app.user %}
+				<ul class="nav navbar-nav flex-row justify-content-between ml-auto">
+					<li class="nav-item order-2 order-md-1">
+						<a href="#" class="nav-link" title="settings"><i class="fa fa-cog fa-fw fa-lg"></i></a>
+					</li>
+					<li class="dropdown order-1">
+						<button type="button" id="login-ddropdown" data-toggle="dropdown" class="btn dropdown-toggle">
+							<i class="fa fa-fw fa-user"></i> <span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu dropdown-menu-right mt-2">
+							<li class="px-3 py-2">
+								<a href="{{ url('profile-logout') }}" class="btn btn-default">{% trans from 'global'%}logout{% endtrans %}</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
 			{% else %}
-				<ul class="navbar-nav">
-					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							<i class="fas fa-sign-in-alt"></i>&nbsp;Přihlášení </a>
-						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-							{{ include('partials/inline-login-form.html.twig') }}
-						</div>
+				<ul class="nav navbar-nav flex-row justify-content-between ml-auto">
+					<li class="nav-item order-2 order-md-1">
+						<a href="#" class="nav-link" title="settings"><i class="fa fa-cog fa-fw fa-lg"></i></a>
+					</li>
+					<li class="dropdown order-1">
+						<button type="button" id="login-ddropdown" data-toggle="dropdown" class="btn dropdown-toggle">
+							<i class="fa fa-fw fa-user"></i> <span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu dropdown-menu-right mt-2">
+							<li class="px-3 py-2">
+								{{ include('partials/login-form.html.twig') }}
+							</li>
+						</ul>
 					</li>
 				</ul>
 			{% endif %}

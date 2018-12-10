@@ -48,7 +48,8 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             try {
-                $profileService->registerNewProfile($profile);
+                $thisIp = $request->getClientIp();
+                $profileService->registerNewProfile($profile, $thisIp);
 
                 $this->addFlash('success', $this->translator->trans('registration-success', [], 'profile'));
 

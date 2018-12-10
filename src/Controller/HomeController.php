@@ -26,10 +26,6 @@ class HomeController extends AbstractController {
      */
 	public function dev(EntityManagerInterface $em){
 
-	    $tokenType = $em->getRepository(TokenType::class)->findOneBy(array('name' => TokenType::PROFILE['ACTIVATION']));
-	    $tokens = $em->getRepository(Token::class)->findExpiredTokens($tokenType);
-
-	    dump($tokens);
 
 
         return $this->render('dev.html.twig');

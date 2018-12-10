@@ -8613,9 +8613,12 @@ nav#navigation-top {
 nav#navigation-top ul.navbar-nav.mr-auto > li {
   margin-right: 20px;
 }
+nav#navigation-top form#login {
+  width: 280px;
+}
 
 ol.breadcrumb {
-  padding: 20px 0;
+  padding: 10px 0;
   background-color: #fff;
 }
 
@@ -8628,7 +8631,7 @@ html, body {
 }
 
 h2 {
-  font-size: 3.5rem;
+  font-size: 2.4rem;
   margin-top: 30px;
   color: #1C002D;
   line-height: 2.8rem;

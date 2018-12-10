@@ -16,7 +16,7 @@ trait Identifier
      * @ORM\GeneratedValue(strategy="IDENTITY")
      * @var integer
      */
-    private $id;
+    protected $id;
 
     /**
      * @return int
@@ -24,6 +24,15 @@ trait Identifier
     final public function getId(): int
     {
         return $this->id;
+    }
+
+    /**
+     * @param int $id
+     */
+    public function setId(int $id): void
+    {
+        $this->id = $id;
+
     }
 
     /**
