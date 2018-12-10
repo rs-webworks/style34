@@ -3,7 +3,6 @@
 namespace Style34\Entity\Profile;
 
 use Doctrine\ORM\Mapping as ORM;
-use Style34\Entity\Address\State;
 use Style34\Entity\CreatedAt;
 use Style34\Entity\DeletedAt;
 use Style34\Entity\Identifier;
@@ -21,11 +20,18 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Profile implements UserInterface
 {
-
-
     use Identifier;
     use CreatedAt;
     use DeletedAt;
+
+//
+//    /**
+//     * @ORM\Id
+//     * @ORM\Column(type="integer", nullable=false)
+//     * @ORM\GeneratedValue(strategy="IDENTITY")
+//     * @var integer
+//     */
+//    protected $id;
 
     /**
      * @ORM\Column(type="string", unique=true)
@@ -97,6 +103,38 @@ class Profile implements UserInterface
      * @ORM\OneToMany(targetEntity="Style34\Entity\Token\Token", mappedBy="profile", cascade={"remove"})
      */
     protected $tokens;
+
+    /**
+     * @var string $lastIp
+     * @ORM\Column(type="string", nullable=false)
+     * @Assert\Ip(message="profile.ip-expected")
+     */
+    protected $lastIp;
+
+    /**
+     * @var string $registeredAs
+     * @ORM\Column(type="string", nullable=false)
+     */
+    protected $registeredAs;
+
+
+
+    /**
+     * @return int
+     */
+    final public function getId(): int
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int $id
+     */
+    public function setId(int $id): void
+    {
+        $this->id = $id;
+
+    }
 
 
     /**
@@ -270,6 +308,42 @@ class Profile implements UserInterface
     {
         $this->tokens = $tokens;
     }
+
+    /**
+     * @return string
+     */
+    public function getLastIp(): string
+    {
+        return $this->lastIp;
+    }
+
+    /**
+     * @param string $lastIp
+     */
+    public function setLastIp(string $lastIp): void
+    {
+        $this->lastIp = $lastIp;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRegisteredAs(): string
+    {
+        return $this->registeredAs;
+    }
+
+    /**
+     * @param string $registeredAs
+     */
+    public function setRegisteredAs(string $registeredAs): void
+    {
+        $this->registeredAs = $registeredAs;
+    }
+
+
+
+
 
 
     /**

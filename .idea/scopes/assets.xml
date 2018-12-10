@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="assets" pattern="file[style34]:assets//*" />
+</component>
