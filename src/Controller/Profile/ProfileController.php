@@ -18,4 +18,11 @@ class ProfileController extends AbstractController {
 
 		return $this->render("Profile/list.html.twig");
 	}
+
+    /**
+     * @Route("/profile/logout", name="profile-logout")
+     */
+    public function logout()
+    {
+    }
 }

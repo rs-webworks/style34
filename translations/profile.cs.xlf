@@ -172,5 +172,35 @@
         <target>Tokenu vypršela platnost</target>
       </segment>
     </unit>
+    <unit id="dDUCHcb" name="login-auth">
+      <segment>
+        <source>login-auth</source>
+        <target>Přezdívka nebo Email</target>
+      </segment>
+    </unit>
+    <unit id="FrDDyWq" name="login-password">
+      <segment>
+        <source>login-password</source>
+        <target>Heslo</target>
+      </segment>
+    </unit>
+    <unit id="0mRwX4u" name="login-sign-in">
+      <segment>
+        <source>login-sign-in</source>
+        <target>Přihlásit se</target>
+      </segment>
+    </unit>
+    <unit id="vno28j3" name="login-forgot-pass">
+      <segment>
+        <source>login-forgot-pass</source>
+        <target>Zapomněl jsi heslo?</target>
+      </segment>
+    </unit>
+    <unit id="Reep.Jw" name="login-remember-me">
+      <segment>
+        <source>login-remember-me</source>
+        <target>Zůstat přihlášen</target>
+      </segment>
+    </unit>
   </file>
 </xliff>

@@ -201,6 +201,8 @@ class InstallCommand extends Command
             $profile->setCreatedAt(new \DateTime());
             $profile->setPassword($this->passwordEncoder->encodePassword($profile, $password));
             $profile->setRole($role);
+            $profile->setLastIp('127.0.0.1');
+            $profile->setRegisteredAs(serialize(array($profile->getUsername(), $profile->getEmail())));
 
             $this->em->persist($profile);
             $this->io->progressAdvance(1);

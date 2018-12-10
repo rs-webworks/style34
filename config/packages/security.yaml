@@ -18,3 +18,17 @@ security:
             security: false
         main:
             anonymous: ~
+            form_login:
+              login_path: profile-login
+              check_path: profile-login
+              username_parameter: _auth
+              csrf_token_generator: security.csrf.token_manager
+#              default_target_path: after_login_route_name
+
+            logout:
+              path:   profile-logout
+
+            remember_me:
+              secret:   '%kernel.secret%'
+              lifetime: 604800 # 1 week in seconds
+              path:     /

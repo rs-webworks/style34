@@ -6,9 +6,13 @@ nav#navigation-top{
 	ul.navbar-nav.mr-auto>li{
 		margin-right: 20px;
 	}
+
+	form#login{
+		width: 280px;
+	}
 }
 
 ol.breadcrumb{
-	padding: 20px 0;
+	padding: 10px 0;
 	background-color: $colorWhite;
 }
