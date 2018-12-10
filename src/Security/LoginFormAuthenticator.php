@@ -4,7 +4,7 @@ namespace Style34\Security;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Style34\Entity\Profile\Profile;
-use Style34\Exception\Profile\LoginException;
+use Style34\Exception\Security\LoginException;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;

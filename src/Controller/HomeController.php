@@ -2,6 +2,7 @@
 namespace Style34\Controller;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Style34\Entity\Profile\Profile;
 use Style34\Entity\Token\Token;
 use Style34\Entity\Token\TokenType;
 use Style34\Service\TokenService;
@@ -25,7 +26,8 @@ class HomeController extends AbstractController {
      * @Route("/dev", name="dev")
      */
 	public function dev(EntityManagerInterface $em){
-
+        $user = $em->getRepository(Profile::class)->loadUserByUsername('admin');
+        dump($user);
 
 
         return $this->render('dev.html.twig');
