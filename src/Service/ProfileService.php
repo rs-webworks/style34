@@ -60,8 +60,7 @@ class ProfileService extends AbstractService
     {
         return $this->em->transactional(function () use ($profile, $lastIp) {
             // Get default profile role
-            $role = $this->em->getRepository(Role::class)->findOneBy(array('name' => Role::INACTIVE));
-            $profile->setRole($role);
+            $profile->addRole(Role::INACTIVE);
 
             // Encode password
             $password = $this->passwordEncoder->encodePassword($profile, $profile->getPlainPassword());
@@ -115,8 +114,9 @@ class ProfileService extends AbstractService
             }
         }
 
-        if ($profile->getRole()->getName() == Role::INACTIVE) {
-            $profile->setRole($this->em->getRepository(Role::class)->findOneBy(array('name' => Role::VERIFIED)));
+        if ($profile->hasRole(Role::INACTIVE)) {
+            $profile->addRole(Role::VERIFIED);
+            $profile->removeRole(Role::INACTIVE);
             $profile->setActivatedAt(new \DateTime);
             $token->setInvalid(true);
 

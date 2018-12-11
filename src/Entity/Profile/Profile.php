@@ -2,6 +2,7 @@
 
 namespace Style34\Entity\Profile;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Style34\Entity\CreatedAt;
 use Style34\Entity\DeletedAt;
@@ -73,10 +74,10 @@ class Profile implements UserInterface
     protected $activatedAt;
 
     /**
-     * @var Role $role
-     * @ORM\ManyToOne(targetEntity="Style34\Entity\Profile\Role", inversedBy="profiles")
+     * @var array
+     * @ORM\Column(type="json")
      */
-    protected $role;
+    protected $roles = [];
 
     /**
      * @ORM\Column(type="string", nullable=true)
@@ -115,6 +116,27 @@ class Profile implements UserInterface
     protected $registeredAs;
 
 
+    // Methods
+    // -----------------------------------------------------------------------------------------------------------------
+
+    /**
+     * Profile constructor.
+     */
+    public function __construct()
+    {
+        $this->addRole(Role::USER);
+    }
+
+    /**
+     *
+     */
+    public function eraseCredentials(): void
+    {
+        // TODO: Implement eraseCredentials() method.
+    }
+
+    // ID
+    // -----------------------------------------------------------------------------------------------------------------
 
     /**
      * @return int
@@ -134,6 +156,9 @@ class Profile implements UserInterface
     }
 
 
+    // Username
+    // -----------------------------------------------------------------------------------------------------------------
+
     /**
      * @return string
      */
@@ -150,6 +175,10 @@ class Profile implements UserInterface
         $this->username = $username;
     }
 
+
+    // Email
+    // -----------------------------------------------------------------------------------------------------------------
+
     /**
      * @return string
      */
@@ -165,6 +194,10 @@ class Profile implements UserInterface
     {
         $this->email = $email;
     }
+
+
+    // Password
+    // -----------------------------------------------------------------------------------------------------------------
 
     /**
      * @return string
@@ -199,6 +232,18 @@ class Profile implements UserInterface
     }
 
     /**
+     * @return null|string|void
+     */
+    public function getSalt()
+    {
+        // TODO: Implement getSalt() method.
+    }
+
+
+    // Activated At
+    // -----------------------------------------------------------------------------------------------------------------
+
+    /**
      * @return \DateTime
      */
     public function getActivatedAt(): \DateTime
@@ -213,6 +258,10 @@ class Profile implements UserInterface
     {
         $this->activatedAt = $activatedAt;
     }
+
+
+    // Birthdate
+    // -----------------------------------------------------------------------------------------------------------------
 
     /**
      * @return \DateTime
@@ -231,32 +280,47 @@ class Profile implements UserInterface
     }
 
 
+    // Roles
+    // -----------------------------------------------------------------------------------------------------------------
+
     /**
-     * For Symfony security
      * @return array
      */
-    public function getRoles(): ?array
+    public function getRoles(): array
     {
-        $roles[] = $this->role->getName();
-
-        return array_unique($roles);
+        return $this->roles;
     }
 
     /**
-     * @return Role
+     * @param string $role
      */
-    public function getRole(): ?Role
+    public function addRole(string $role): void
     {
-        return $this->role;
+        if (!isset($this->roles[$role])) {
+            $this->roles[] = $role;
+        }
     }
 
     /**
-     * @param Role $role
+     * @param string $role
+     * @return bool
      */
-    public function setRole(Role $role): void
+    public function hasRole(string $role): bool
     {
-        $this->role = $role;
+        return isset($this->roles[$role]);
     }
+
+    /**
+     * @param string $role
+     */
+    public function removeRole(string $role): void
+    {
+        unset($this->roles[$role]);
+    }
+
+
+    // State
+    // -----------------------------------------------------------------------------------------------------------------
 
     /**
      * @return string
@@ -274,6 +338,10 @@ class Profile implements UserInterface
         $this->state = $state;
     }
 
+
+    // City
+    // -----------------------------------------------------------------------------------------------------------------
+
     /**
      * @return mixed
      */
@@ -289,6 +357,10 @@ class Profile implements UserInterface
     {
         $this->city = $city;
     }
+
+
+    // Tokens
+    // -----------------------------------------------------------------------------------------------------------------
 
     /**
      * @return Token[]
@@ -306,6 +378,10 @@ class Profile implements UserInterface
         $this->tokens = $tokens;
     }
 
+
+    // Last Ip
+    // -----------------------------------------------------------------------------------------------------------------
+
     /**
      * @return string
      */
@@ -321,6 +397,10 @@ class Profile implements UserInterface
     {
         $this->lastIp = $lastIp;
     }
+
+
+    // Registered as
+    // -----------------------------------------------------------------------------------------------------------------
 
     /**
      * @return string
@@ -338,25 +418,5 @@ class Profile implements UserInterface
         $this->registeredAs = $registeredAs;
     }
 
-
-
-
-
-
-    /**
-     *
-     */
-    public function eraseCredentials(): void
-    {
-        // TODO: Implement eraseCredentials() method.
-    }
-
-    /**
-     * @return null|string|void
-     */
-    public function getSalt()
-    {
-        // TODO: Implement getSalt() method.
-    }
 
 }

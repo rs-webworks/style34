@@ -11,6 +11,7 @@ use Style34\Entity\Token\TokenType;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
@@ -56,7 +57,12 @@ class InstallCommand extends Command
         $this->setName('app:install')
             ->setDescription('Install the basic database stuff (Roles, Permissions, Users...')
             ->setHelp('This will run some persists to DB and create basic stuff. !IMPORTANT! Run fixtures
-            only AFTER this installation!');
+            only AFTER this installation!')
+            ->addOption(
+                'drop',
+                'd',
+                InputOption::VALUE_NONE,
+                'Reinstall option, this will drop schema instead of creating database. You will lost any DB data.');
     }
 
     /**
@@ -73,9 +79,14 @@ class InstallCommand extends Command
         try {
             $io->title('Starting the app installation');
 
-            // Create database
-            $io->section('Create database...');
-            $this->createDatabase();
+            // Prepare database
+            if ($input->getOption('drop')) {
+                $io->section('Clearing database...');
+                $this->dropSchema();
+            } else {
+                $io->section('Creating database...');
+                $this->createDatabase();
+            }
 
             // Run migrations
             $io->section('Running migrations...');
@@ -98,8 +109,30 @@ class InstallCommand extends Command
             $io->newLine();
             $io->newLine();
             $io->error($ex->getMessage());
+            $io->text('Maybe you are trying to do reinstall? Then use:');
+            $io->newLine();
+            $io->text('    <info>app:install --drop</info> to clear database (you will loose all data)');
         }
 
+    }
+
+    /**
+     * @throws \Exception
+     */
+    protected function dropSchema()
+    {
+        $this->io->progressStart(1);
+
+        $command = $this->getApplication()->find('doctrine:schema:drop');
+
+        $arguments = new ArrayInput(array(
+            '--full-database' => true,
+            '--force' => true)
+        );
+        $command->run($arguments, new NullOutput());
+
+        $this->io->progressAdvance(1);
+        $this->io->progressFinish();
     }
 
     /**
@@ -152,6 +185,7 @@ class InstallCommand extends Command
             [Role::MODERATOR, '#00B639'],
             [Role::MEMBER, '#1D1D1D'],
             [Role::INACTIVE, '#626262'],
+            [Role::USER, '#888888'],
             [Role::VERIFIED, '#626262'],
             [Role::BANNED, '#A2A2A2']
         );
@@ -183,11 +217,11 @@ class InstallCommand extends Command
 
         /** @var array $users Username, mail, password */
         $users = array(
-            ['admin', 'admin@style34.net', 'rootpass', $roleRp->findOneBy(array('name' => Role::ADMIN))],
-            ['spravce', 'spravce@style34.net', '', $roleRp->findOneBy(array('name' => Role::BANNED))],
-            ['moderator', 'moderator@style34.net', '', $roleRp->findOneBy(array('name' => Role::BANNED))],
-            ['mod', 'mod@style34.net', '', $roleRp->findOneBy(array('name' => Role::BANNED))],
-            ['administrator', 'administrator@style34.net', '', $roleRp->findOneBy(array('name' => Role::BANNED))]
+            ['admin', 'admin@style34.net', 'rootpass', Role::ADMIN],
+            ['spravce', 'spravce@style34.net', '', Role::BANNED],
+            ['moderator', 'moderator@style34.net', '', Role::BANNED],
+            ['mod', 'mod@style34.net', '', Role::BANNED],
+            ['administrator', 'administrator@style34.net', '', Role::BANNED]
         );
 
         $this->io->progressStart(count($users));
@@ -200,7 +234,7 @@ class InstallCommand extends Command
             $profile->setEmail($email);
             $profile->setCreatedAt(new \DateTime());
             $profile->setPassword($this->passwordEncoder->encodePassword($profile, $password));
-            $profile->setRole($role);
+            $profile->addRole($role);
             $profile->setLastIp('127.0.0.1');
             $profile->setRegisteredAs(serialize(array($profile->getUsername(), $profile->getEmail())));
 

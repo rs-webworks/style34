@@ -19,6 +19,7 @@ class Role {
     const MODERATOR = 'ROLE_MODERATOR';
     const MEMBER = 'ROLE_MEMBER';
     const INACTIVE = 'ROLE_INACTIVE';
+    const USER = 'ROLE_USER';
     const VERIFIED = 'ROLE_VERIFIED';
     const BANNED = 'ROLE_BANNED';
 
@@ -30,12 +31,6 @@ class Role {
      * @Assert\NotBlank(message="profile.role.name-required")
      */
     protected $name;
-
-    /**
-     * @var Profile[]
-     * @ORM\OneToMany(targetEntity="Style34\Entity\Profile\Profile", mappedBy="role")
-     */
-    protected $profiles;
 
     /**
      * @var string $color
@@ -56,20 +51,6 @@ class Role {
      */
     public function setName(string $name): void {
         $this->name = $name;
-    }
-
-    /**
-     * @return Profile[]
-     */
-    public function getProfiles(): array {
-        return $this->profiles;
-    }
-
-    /**
-     * @param Profile[] $profiles
-     */
-    public function setProfiles(array $profiles): void {
-        $this->profiles = $profiles;
     }
 
     /**
