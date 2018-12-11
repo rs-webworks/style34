@@ -4,7 +4,7 @@ namespace Style34\Security;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Style34\Entity\Profile\Profile;
-use Style34\Exception\Profile\LoginException;
+use Style34\Exception\Security\LoginException;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;
@@ -82,8 +82,8 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     public function getCredentials(Request $request)
     {
         $credentials = [
-            'auth' => $request->request->get('auth'),
-            'password' => $request->request->get('password'),
+            'auth' => $request->request->get('_auth'),
+            'password' => $request->request->get('_password'),
             'csrf_token' => $request->request->get('_csrf_token'),
         ];
         $request->getSession()->set(

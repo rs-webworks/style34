@@ -13,7 +13,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class LoginController extends AbstractController {
 
 	/**
-	 * @Route("/profile/login", name="profile-login")
+	 * @Route("/login", name="profile-login")
 	 */
 	public function login(AuthenticationUtils $authenticationUtils){
         // get the login error if there is one
@@ -26,4 +26,12 @@ class LoginController extends AbstractController {
             'error' => $error
         ]);
 	}
+
+
+    /**
+     * @Route("/logout", name="profile-logout")
+     */
+    public function logout()
+    {
+    }
 }

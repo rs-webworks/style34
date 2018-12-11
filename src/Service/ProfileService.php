@@ -143,7 +143,6 @@ class ProfileService extends AbstractService
             ));
 
             $expiredTokens = $this->em->getRepository(Token::class)->findExpiredTokens($tokenType);
-            dump($expiredTokens);
 
             /** @var Token $token */
             foreach ($expiredTokens as $token) {

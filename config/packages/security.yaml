@@ -1,11 +1,10 @@
 security:
 
     providers:
-      main_db_provider:
-        entity:
-          class: Style34\Entity\Profile\Profile
-          property: email
+      in_memory: { memory: ~ }
 
+      profile-provider:
+        id: Style34\Security\ProfileProvider
 
     encoders:
         Style34\Entity\Profile\Profile:
@@ -17,8 +16,15 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
-            anonymous: ~
+            anonymous: true
+            guard:
+              authenticators:
+                - Style34\Security\LoginFormAuthenticator
+              provider: profile-provider
+
+
             form_login:
+              provider: profile-provider
               login_path: profile-login
               check_path: profile-login
               username_parameter: _auth
