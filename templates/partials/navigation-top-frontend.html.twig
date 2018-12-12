@@ -57,24 +57,40 @@
 			</ul>
 
 			{#-- My profile #}
-			{#----------------------------------------------------------------------------------------------------#}
+			{#----------------------------------------------------------------------------------------------------....#}
 			{% if app.user %}
+
+				{#-- Logged in #}
+				{#----------------------------------------------------------------------------------------------------#}
 				<ul class="nav navbar-nav flex-row justify-content-between ml-auto">
 					<li class="nav-item order-2 order-md-1">
-						<a href="#" class="nav-link" title="settings"><i class="fa fa-cog fa-fw fa-lg"></i></a>
+						<a href="#" class="nav-link" title="{% trans from 'global' %}profile-settings{% endtrans %}"><i class="fa fa-cog fa-fw fa-lg"></i></a>
 					</li>
 					<li class="dropdown order-1">
 						<button type="button" id="login-ddropdown" data-toggle="dropdown" class="btn dropdown-toggle">
 							<i class="fa fa-fw fa-user"></i> <span class="caret"></span>
 						</button>
 						<ul class="dropdown-menu dropdown-menu-right mt-2">
+							<li class="px-3 py-0">
+								<a href="{{ url('profile-logout') }}" class="btn btn-default">
+									<i class="fa fa-fw fa-user"></i> {% trans from 'global' %}my-profile{% endtrans %}
+								</a>
+							</li>
+							<li class="px-3 py-0">
+								<div class="dropdown-divider"></div>
+							</li>
 							<li class="px-3 py-2">
-								<a href="{{ url('profile-logout') }}" class="btn btn-default">{% trans from 'global'%}logout{% endtrans %}</a>
+								<a href="{{ url('profile-logout') }}" class="btn btn-default">
+									<i class="fa fa-fw fa-sign-out-alt"></i> {% trans from 'global' %}logout{% endtrans %}
+								</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 			{% else %}
+
+				{#-- Anonymous #}
+				{#----------------------------------------------------------------------------------------------------#}
 				<ul class="nav navbar-nav flex-row justify-content-between ml-auto">
 					<li class="nav-item order-2 order-md-1">
 						<a href="#" class="nav-link" title="settings"><i class="fa fa-cog fa-fw fa-lg"></i></a>

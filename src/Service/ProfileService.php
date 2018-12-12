@@ -95,12 +95,12 @@ class ProfileService extends AbstractService
     /**
      * @param Profile $profile
      * @param Token|null $token
-     * @return bool
+     * @return void
      * @throws InvalidTokenException
      * @throws ProfileException
      * @throws \Exception
      */
-    public function activateProfile(Profile $profile, Token $token = null): bool
+    public function activateProfile(Profile $profile, Token $token = null): void
     {
         if ($token) {
             if ($this->tokenService->isExpired($token)) {
@@ -124,8 +124,6 @@ class ProfileService extends AbstractService
             $this->em->persist($token);
 
             $this->em->flush();
-
-            return true;
         }
 
         throw new ActivationException($this->translator->trans('contact-support',
