@@ -212,9 +212,6 @@ class InstallCommand extends Command
      */
     protected function registerUsers()
     {
-
-        $roleRp = $this->em->getRepository(Role::class);
-
         /** @var array $users Username, mail, password */
         $users = array(
             ['admin', 'admin@style34.net', 'rootpass', Role::ADMIN],

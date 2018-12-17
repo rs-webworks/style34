@@ -11,9 +11,11 @@ use Style34\Exception\Profile\ProfileException;
 use Style34\Exception\Token\ExpiredTokenException;
 use Style34\Exception\Token\InvalidTokenException;
 use Style34\Kernel;
-use Style34\Service\Traits\EntityManagerTrait;
-use Style34\Service\Traits\LoggerTrait;
-use Style34\Service\Traits\TranslatorTrait;
+use Style34\Repository\Token\TokenRepository;
+use Style34\Repository\Token\TokenTypeRepository;
+use Style34\Traits\EntityManagerTrait;
+use Style34\Traits\LoggerTrait;
+use Style34\Traits\TranslatorTrait;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
@@ -35,72 +37,67 @@ class ProfileService extends AbstractService
     /** @var MailService $mailService */
     protected $mailService;
 
+    /** @var TokenTypeRepository $tokenTypeRepository */
+    private $tokenTypeRepository;
+
+    /** @var TokenRepository $tokenRepository */
+    private $tokenRepository;
+
     /**
      * ProfileService constructor.
      * @param UserPasswordEncoderInterface $passwordEncoder
      * @param TokenService $tokenService
      * @param MailService $mailService
+     * @param TokenTypeRepository $tokenTypeRepository
+     * @param TokenRepository $tokenRepository
      */
     public function __construct(
         UserPasswordEncoderInterface $passwordEncoder,
         TokenService $tokenService,
-        MailService $mailService
+        MailService $mailService,
+        TokenTypeRepository $tokenTypeRepository,
+        TokenRepository $tokenRepository
     ) {
         $this->passwordEncoder = $passwordEncoder;
         $this->tokenService = $tokenService;
         $this->mailService = $mailService;
+        $this->tokenTypeRepository = $tokenTypeRepository;
+        $this->tokenRepository = $tokenRepository;
     }
 
     /**
      * @param Profile $profile
      * @param string $lastIp
-     * @return bool|mixed
+     * @return Profile
+     * @throws \Exception
      */
-    public function registerNewProfile(Profile $profile, string $lastIp = '127.0.0.1')
+    public function prepareNewProfile(Profile $profile, string $lastIp = '127.0.0.1')
     {
-        return $this->em->transactional(function () use ($profile, $lastIp) {
-            // Get default profile role
-            $profile->addRole(Role::INACTIVE);
+        // Get default profile role
+        $profile->addRole(Role::INACTIVE);
 
-            // Encode password
-            $password = $this->passwordEncoder->encodePassword($profile, $profile->getPlainPassword());
-            $profile->setPassword($password);
+        // Encode password
+        $password = $this->passwordEncoder->encodePassword($profile, $profile->getPlainPassword());
+        $profile->setPassword($password);
 
-            // Save entity
-            $profile->setCreatedAt(new \DateTime());
-            $profile->setLastIp($lastIp);
-            $profile->setRegisteredAs(serialize(array($profile->getUsername(), $profile->getEmail())));
-            $this->em->persist($profile);
+        // Set defaults
+        $profile->setCreatedAt(new \DateTime());
+        $profile->setLastIp($lastIp);
+        $profile->setRegisteredAs(serialize(array($profile->getUsername(), $profile->getEmail())));
 
-            // Create token
-            $token = new Token();
-            $token->setHash($this->tokenService->generateActivationToken());
-            $token->setProfile($profile);
-            $createdAt = new \DateTime();
-            $expiresAt = new \DateTime();
-            $token->setCreatedAt($createdAt);
-            $token->setExpiresAt($this->tokenService->createExpirationDateTime($expiresAt, Token::EXPIRY_HOUR * 2));
-            $token->setType($this->em->getRepository(TokenType::class)->findOneBy(array(
-                'name' => TokenType::PROFILE['ACTIVATION']
-            )));
-
-            // Send registration email
-            $this->mailService->sendActivationMail($profile, $token);
-
-            $this->em->persist($token);
-            $this->em->flush();
-        });
+        return $profile;
     }
 
     /**
      * @param Profile $profile
      * @param Token|null $token
-     * @return void
+     * @return Profile|null
+     * @throws ActivationException
+     * @throws ExpiredTokenException
      * @throws InvalidTokenException
-     * @throws ProfileException
      * @throws \Exception
      */
-    public function activateProfile(Profile $profile, Token $token = null): void
+    public function activateProfile(Profile $profile, Token $token = null): ?Profile
     {
         if ($token) {
             if ($this->tokenService->isExpired($token)) {
@@ -118,12 +115,8 @@ class ProfileService extends AbstractService
             $profile->addRole(Role::VERIFIED);
             $profile->removeRole(Role::INACTIVE);
             $profile->setActivatedAt(new \DateTime);
-            $token->setInvalid(true);
 
-            $this->em->persist($profile);
-            $this->em->persist($token);
-
-            $this->em->flush();
+            return $profile;
         }
 
         throw new ActivationException($this->translator->trans('contact-support',
@@ -131,26 +124,31 @@ class ProfileService extends AbstractService
     }
 
     /**
-     *
+     * @return array|null
      */
-    public function purgeExpiredRegistrations()
+    public function getExpiredRegistrations(): ?array
     {
         try {
-            $tokenType = $this->em->getRepository(TokenType::class)->findOneBy(array(
+            $profiles = array();
+
+            /** @var TokenType $tokenType */
+            $tokenType = $this->tokenTypeRepository->findOneBy(array(
                 'name' => TokenType::PROFILE['ACTIVATION']
             ));
 
-            $expiredTokens = $this->em->getRepository(Token::class)->findExpiredTokens($tokenType);
+            $expiredTokens = $this->tokenRepository->findExpiredTokens($tokenType);
 
             /** @var Token $token */
             foreach ($expiredTokens as $token) {
                 $profile = $token->getProfile();
-                $this->em->remove($profile);
+                $profiles[] = $profile;
             }
 
-            $this->em->flush();
+            return $profiles;
         } catch (\Exception $ex) {
             $this->logger->error('profile.expired-registration-purge-failed', [$ex]);
         }
+
+        return null;
     }
 }

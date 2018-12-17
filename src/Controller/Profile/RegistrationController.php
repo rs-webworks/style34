@@ -3,15 +3,19 @@
 namespace Style34\Controller\Profile;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Psr\Log\LoggerInterface;
 use Style34\Entity\Profile\Profile;
-use Style34\Entity\Token\Token;
 use Style34\Form\Profile\RegistrationForm;
+use Style34\Repository\Profile\ProfileRepository;
+use Style34\Repository\Token\TokenRepository;
+use Style34\Service\MailService;
 use Style34\Service\ProfileService;
+use Style34\Service\TokenService;
+use Style34\Traits\EntityManagerTrait;
+use Style34\Traits\LoggerTrait;
+use Style34\Traits\TranslatorTrait;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * Class RegistrationController
@@ -19,38 +23,49 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 class RegistrationController extends AbstractController
 {
-    /** @var TranslatorInterface $translator */
-    protected $translator;
-
-    /** @var LoggerInterface $logger */
-    protected $logger;
-
-    public function __construct(TranslatorInterface $translator, LoggerInterface $logger)
-    {
-        $this->translator = $translator;
-        $this->logger = $logger;
-    }
+    use EntityManagerTrait;
+    use LoggerTrait;
+    use TranslatorTrait;
 
     /**
      * @Route("/profile/registration", name="profile-registration")
      * @param Request $request
      * @param ProfileService $profileService
+     * @param MailService $mailService
+     * @param TokenService $tokenService
+     * @param ProfileRepository $profileRepository
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
-     * @throws \Throwable
      */
-    public function index(Request $request, ProfileService $profileService)
-    {
-        $profileService->purgeExpiredRegistrations();
+    public function index(
+        Request $request,
+        ProfileService $profileService,
+        MailService $mailService,
+        TokenService $tokenService,
+        ProfileRepository $profileRepository
+    ) {
+        // Purge all expired & invalid requests for registration
+        $profileRepository->removeProfiles($profileService->getExpiredRegistrations());
 
+        // Load form data
         $profile = new Profile();
         $form = $this->createForm(RegistrationForm::class, $profile);
-
         $form->handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()) {
             try {
+                // Prepare profile & token
                 $thisIp = $request->getClientIp();
-                $profileService->registerNewProfile($profile, $thisIp);
+                $profile = $profileService->prepareNewProfile($profile, $thisIp);
+                $token = $tokenService->getActivationToken($profile);
 
+                // Send registration email
+                $mailService->sendActivationMail($profile, $token);
+
+                $this->em->persist($profile);
+                $this->em->persist($token);
+                $this->em->flush();
+
+                // Flash & redirect
                 $this->addFlash('success', $this->translator->trans('registration-success', [], 'profile'));
 
                 return $this->redirectToRoute("profile-registration-success");
@@ -68,20 +83,22 @@ class RegistrationController extends AbstractController
 
     /**
      * @Route("/profile/registration/activate/{tokenHash}", name="profile-registration-activate")
-     * @param EntityManagerInterface $em
      * @param ProfileService $profileService
+     * @param TokenRepository $tokenRepository
      * @param $tokenHash
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function activate(EntityManagerInterface $em, ProfileService $profileService, $tokenHash)
+    public function activate(ProfileService $profileService, TokenRepository $tokenRepository, $tokenHash)
     {
         try {
-            $tokenRepository = $em->getRepository(Token::class);
+            $token = $tokenRepository->findOneBy(array('hash' => $tokenHash));
 
-            /** @var Token $token */
-            if ($token = $tokenRepository->findOneBy(array('hash' => $tokenHash))) {
-                $profileService->activateProfile($token->getProfile(), $token);
-            }
+            $profile = $profileService->activateProfile($token->getProfile(), $token);
+            $token->setInvalid(true);
+
+            $this->em->persist($profile);
+            $this->em->persist($token);
+            $this->em->flush();
 
             $this->addFlash('success', $this->translator->trans('activation-success', [], 'profile'));
         } catch (\Exception $ex) {

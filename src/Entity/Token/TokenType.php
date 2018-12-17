@@ -3,13 +3,11 @@ namespace Style34\Entity\Token;
 
 use Doctrine\ORM\Mapping as ORM;
 use Style34\Entity\MasterData;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class TokenType
  * @package Style34\Entity\Token
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Style34\Repository\Token\TokenTypeRepository")
  */
 class TokenType
 {

@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="dev" pattern="file[style34]:assets//*||file[style34]:config//*||file[style34]:phpdocker//*||file[style34]:src//*||file[style34]:templates//*||file[style34]:tests//*" />
+</component>

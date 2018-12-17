@@ -2,7 +2,11 @@
 
 namespace Style34\Service;
 
+use Style34\Entity\Profile\Profile;
 use Style34\Entity\Token\Token;
+use Style34\Entity\Token\TokenType;
+use Style34\Repository\Token\TokenTypeRepository;
+use Style34\Traits\EntityManagerTrait;
 
 /**
  * Class TokenService
@@ -10,14 +14,20 @@ use Style34\Entity\Token\Token;
  */
 class TokenService extends AbstractService
 {
+    use EntityManagerTrait;
 
     /**
-     * @return string
-     * @throws \Exception
+     * @var TokenTypeRepository
      */
-    public function generateActivationToken()
+    private $tokenTypeRepository;
+
+    /**
+     * TokenService constructor.
+     * @param TokenTypeRepository $tokenTypeRepository
+     */
+    public function __construct(TokenTypeRepository $tokenTypeRepository)
     {
-        return $this->generateHash();
+        $this->tokenTypeRepository = $tokenTypeRepository;
     }
 
     /**
@@ -45,7 +55,8 @@ class TokenService extends AbstractService
      * @param Token $token
      * @return bool
      */
-    public function isValid(Token $token){
+    public function isValid(Token $token)
+    {
         return !$token->isInvalid();
     }
 
@@ -57,6 +68,25 @@ class TokenService extends AbstractService
      */
     public function createExpirationDateTime(\DateTime $start, int $expiryInSeconds)
     {
-        return $start->add(new \DateInterval('PT'. $expiryInSeconds .'S'));
+        return $start->add(new \DateInterval('PT' . $expiryInSeconds . 'S'));
+    }
+
+    /**
+     * @param Profile $profile
+     * @return Token
+     * @throws \Exception
+     */
+    public function getActivationToken(Profile $profile)
+    {
+        $token = new Token();
+        $token->setHash($this->generateHash());
+        $token->setProfile($profile);
+        $createdAt = new \DateTime();
+        $expiresAt = new \DateTime();
+        $token->setCreatedAt($createdAt);
+        $token->setExpiresAt($this->createExpirationDateTime($expiresAt, Token::EXPIRY_HOUR * 2));
+        $token->setType($this->tokenTypeRepository->findOneBy(array('name' => TokenType::PROFILE['ACTIVATION'])));
+
+        return $token;
     }
 }

@@ -307,7 +307,7 @@ class Profile implements UserInterface
      */
     public function hasRole(string $role): bool
     {
-        return isset($this->roles[$role]);
+        return in_array($role, $this->roles);
     }
 
     /**
@@ -315,7 +315,7 @@ class Profile implements UserInterface
      */
     public function removeRole(string $role): void
     {
-        unset($this->roles[$role]);
+        unset($this->roles[array_search($role, $this->roles)]);
     }
 
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Style34\Service\Traits;
+namespace Style34\Traits;
 
 use Psr\Log\LoggerInterface;
 

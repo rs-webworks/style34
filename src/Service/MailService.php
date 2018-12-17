@@ -5,7 +5,7 @@ namespace Style34\Service;
 use Style34\Entity\Profile\Profile;
 use Style34\Entity\Token\Token;
 use Style34\Kernel;
-use Style34\Service\Traits\TranslatorTrait;
+use Style34\Traits\TranslatorTrait;
 use Swift_Message;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -32,10 +32,9 @@ class MailService extends AbstractService
      * @param TranslatorInterface $translator
      * @param Response $renderer
      */
-    public function __construct(\Swift_Mailer $mailer, TranslatorInterface $translator, Environment $renderer)
+    public function __construct(\Swift_Mailer $mailer, Environment $renderer)
     {
         $this->mailer = $mailer;
-        $this->translator = $translator;
         $this->renderer = $renderer;
     }
 

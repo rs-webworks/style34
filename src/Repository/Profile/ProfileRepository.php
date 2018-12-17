@@ -5,15 +5,20 @@ namespace Style34\Repository\Profile;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Style34\Entity\Profile\Profile;
+use Style34\Traits\SaveEntityTrait;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
 
 /**
  * Class ProfileRepository
  * @package Style34\Repository\Profile
+ * @method Profile|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Profile|null find($id, $lockMode = null, $lockVersion = null)
  */
 class ProfileRepository extends ServiceEntityRepository implements UserLoaderInterface
 {
+    use SaveEntityTrait;
+
     /**
      * ProfileRepository constructor
      * @param RegistryInterface $registry
@@ -50,5 +55,17 @@ class ProfileRepository extends ServiceEntityRepository implements UserLoaderInt
             ->setParameter('roles', '%"'.$role.'"%');
 
         return $qb->getQuery()->getResult();
+    }
+
+    /**
+     * @param array $profiles
+     */
+    public function removeProfiles(array $profiles): void
+    {
+        foreach($profiles as $profile){
+            $this->_em->remove($profile);
+        }
+
+        $this->_em->flush();
     }
 }

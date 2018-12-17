@@ -2,6 +2,7 @@
   <dictionary name="raito">
     <words>
       <w>birthdate</w>
+      <w>csrf</w>
       <w>exts</w>
     </words>
   </dictionary>

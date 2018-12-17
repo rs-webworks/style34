@@ -5,6 +5,9 @@ namespace Style34\Security;
 use Doctrine\ORM\EntityManagerInterface;
 use Style34\Entity\Profile\Profile;
 use Style34\Exception\Security\LoginException;
+use Style34\Repository\Profile\ProfileRepository;
+use Style34\Traits\EntityManagerTrait;
+use Style34\Traits\TranslatorTrait;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;
@@ -27,9 +30,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 {
     use TargetPathTrait;
-
-    /** @var EntityManagerInterface */
-    private $entityManager;
+    use TranslatorTrait;
+    use EntityManagerTrait;
 
     /** @var RouterInterface */
     private $router;
@@ -40,29 +42,26 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     /** @var UserPasswordEncoderInterface */
     private $passwordEncoder;
 
-    /** @var TranslatorInterface $translator */
-    private $translator;
+    /** @var ProfileRepository $profileRepository */
+    protected $profileRepository;
 
     /**
      * LoginFormAuthenticator constructor.
-     * @param EntityManagerInterface $entityManager
      * @param RouterInterface $router
      * @param CsrfTokenManagerInterface $csrfTokenManager
      * @param UserPasswordEncoderInterface $passwordEncoder
-     * @param TranslatorInterface $translator
+     * @param ProfileRepository $profileRepository
      */
     public function __construct(
-        EntityManagerInterface $entityManager,
         RouterInterface $router,
         CsrfTokenManagerInterface $csrfTokenManager,
         UserPasswordEncoderInterface $passwordEncoder,
-        TranslatorInterface $translator
+        ProfileRepository $profileRepository
     ) {
-        $this->entityManager = $entityManager;
         $this->router = $router;
         $this->csrfTokenManager = $csrfTokenManager;
         $this->passwordEncoder = $passwordEncoder;
-        $this->translator = $translator;
+        $this->profileRepository = $profileRepository;
     }
 
     /**
@@ -77,7 +76,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 
     /**
      * @param Request $request
-     * @return array|mixed
+     * @return array
      */
     public function getCredentials(Request $request)
     {
@@ -108,7 +107,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
             throw new InvalidCsrfTokenException();
         }
 
-        $user = $this->entityManager->getRepository(Profile::class)->loadUserByUsername($credentials['auth']);
+        $user = $this->profileRepository->loadUserByUsername($credentials['auth']);
 
         if (!$user) {
             // fail authentication with a custom error

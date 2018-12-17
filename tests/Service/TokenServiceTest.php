@@ -33,18 +33,24 @@ class TokenServiceTest extends WebTestCase
      * @throws \Exception
      * @covers \Style34\Service\TokenService::generateActivationToken
      */
-    public function testGenerateActivationToken()
+    public function testGetActivationToken()
     {
-        $allTokens = [];
+        $tokenHashes = [];
 
         for ($i = 0; $i <= 10; $i++) {
-            $generatedToken = $this->tokenService->generateActivationToken();
-            $this->assertNotEmpty($generatedToken);
-            $this->assertEquals(40, strlen($generatedToken));
-            $this->assertFalse(array_key_exists($generatedToken, $allTokens));
+            $token = $this->tokenService->getActivationToken(new Profile());
 
-            $allTokens[] = $generatedToken;
+            $ca = $token->getCreatedAt();
+            $ea = $token->getExpiresAt();
+
+            $this->assertEquals('000200', $ca->diff($ea)->format('%y%m%a%h%i%s'));
+            $this->assertEquals(TokenType::PROFILE['ACTIVATION'], $token->getType()->getName());
+            $this->assertEquals(40, strlen($token->getHash()));
+            $this->assertFalse(array_key_exists($token->getHash(), $tokenHashes));
+
+            $tokenHashes[] = $token->getHash();
         }
+
     }
 
     /**

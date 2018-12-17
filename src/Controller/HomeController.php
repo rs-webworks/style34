@@ -1,12 +1,9 @@
 <?php
+
 namespace Style34\Controller;
 
-use Doctrine\ORM\EntityManagerInterface;
-use Style34\Entity\Profile\Profile;
-use Style34\Entity\Profile\Role;
-use Style34\Entity\Token\Token;
 use Style34\Entity\Token\TokenType;
-use Style34\Service\TokenService;
+use Style34\Repository\Token\TokenTypeRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -14,21 +11,26 @@ use Symfony\Component\Routing\Annotation\Route;
  * Class HomeController
  * @package Style34\Controller
  */
-class HomeController extends AbstractController {
+class HomeController extends AbstractController
+{
 
-	/**
-	 * @Route("/", name="home-index")
-	 */
-	public function index(){
-		return $this->render('Home/index.html.twig');
-	}
+    /**
+     * @Route("/", name="home-index")
+     */
+    public function index()
+    {
+        return $this->render('Home/index.html.twig');
+    }
 
     /**
      * @Route("/dev", name="dev")
+     * @param TokenTypeRepository $tokenTypeRepository
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-	public function dev(EntityManagerInterface $em){
-	    dump($this->getUser());
-
+    public function dev(TokenTypeRepository $tokenTypeRepository)
+    {
+        $tt = $tokenTypeRepository->findOneBy(array('name' => TokenType::PROFILE['ACTIVATION']));
+        dump($tt);
         return $this->render('dev.html.twig');
     }
 }

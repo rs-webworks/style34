@@ -11,6 +11,7 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
 /**
  * Class TokenRepository
  * @package Style34\Repository\Profile
+ * @method Token|null findOneBy(array $criteria, array $orderBy = null)
  */
 class TokenRepository extends ServiceEntityRepository
 {
