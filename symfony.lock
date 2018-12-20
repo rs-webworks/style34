@@ -104,6 +104,9 @@
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
     },
+    "martinusso/opencrypt": {
+        "version": "3.1.0"
+    },
     "monolog/monolog": {
         "version": "1.24.0"
     },
@@ -169,6 +172,9 @@
             "version": "4.0",
             "ref": "aaddfdf43cdecd4cf91f992052d76c2cadc04543"
         }
+    },
+    "sonata-project/google-authenticator": {
+        "version": "2.2.0"
     },
     "squizlabs/php_codesniffer": {
         "version": "3.0",

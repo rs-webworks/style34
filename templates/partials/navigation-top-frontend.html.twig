@@ -64,7 +64,8 @@
 				{#----------------------------------------------------------------------------------------------------#}
 				<ul class="nav navbar-nav flex-row justify-content-between ml-auto">
 					<li class="nav-item order-2 order-md-1">
-						<a href="#" class="nav-link" title="{% trans from 'global' %}profile-settings{% endtrans %}"><i class="fa fa-cog fa-fw fa-lg"></i></a>
+						<a href="{{ url('profile-settings') }}" class="nav-link" title="{% trans from 'global' %}profile-settings{% endtrans %}">
+							<i class="fa fa-cog fa-fw fa-lg"></i> </a>
 					</li>
 					<li class="dropdown order-1">
 						<button type="button" id="login-ddropdown" data-toggle="dropdown" class="btn dropdown-toggle">
@@ -92,9 +93,6 @@
 				{#-- Anonymous #}
 				{#----------------------------------------------------------------------------------------------------#}
 				<ul class="nav navbar-nav flex-row justify-content-between ml-auto">
-					<li class="nav-item order-2 order-md-1">
-						<a href="#" class="nav-link" title="settings"><i class="fa fa-cog fa-fw fa-lg"></i></a>
-					</li>
 					<li class="dropdown order-1">
 						<button type="button" id="login-ddropdown" data-toggle="dropdown" class="btn dropdown-toggle">
 							<i class="fa fa-fw fa-user"></i> <span class="caret"></span>

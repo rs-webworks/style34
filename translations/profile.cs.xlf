@@ -202,5 +202,89 @@
         <target>Zůstat přihlášen</target>
       </segment>
     </unit>
+    <unit id="zeD7Dew" name="settings">
+      <segment>
+        <source>settings</source>
+        <target>Nastavení</target>
+      </segment>
+    </unit>
+    <unit id="XS0863q" name="security">
+      <segment>
+        <source>security</source>
+        <target>Zabezpečení</target>
+      </segment>
+    </unit>
+    <unit id="DMbpYop" name="security-desc">
+      <segment>
+        <source>security-desc</source>
+        <target>Nastav si zabezpečení a přístup ke svému účtu</target>
+      </segment>
+    </unit>
+    <unit id="ErXb3q4" name="settings-two-step-auth">
+      <segment>
+        <source>settings-two-step-auth</source>
+        <target>Dvou-fázové ověření telefonem</target>
+      </segment>
+    </unit>
+    <unit id="4jqMFec" name="settings-change-password">
+      <segment>
+        <source>settings-change-password</source>
+        <target>Změna hesla</target>
+      </segment>
+    </unit>
+    <unit id="ziubWKT" name="change-password">
+      <segment>
+        <source>change-password</source>
+        <target>Změnit</target>
+      </segment>
+    </unit>
+    <unit id="imf6FiK" name="settings-delete-profile">
+      <segment>
+        <source>settings-delete-profile</source>
+        <target>Smazání profilu</target>
+      </segment>
+    </unit>
+    <unit id="6MWcHBq" name="delete-profile">
+      <segment>
+        <source>delete-profile</source>
+        <target>Zrušit účet</target>
+      </segment>
+    </unit>
+    <unit id="3W9GX2g" name="newsletter">
+      <segment>
+        <source>newsletter</source>
+        <target>Nastavení zpráv</target>
+      </segment>
+    </unit>
+    <unit id="hSBFe8E" name="newsletter-desc">
+      <segment>
+        <source>newsletter-desc</source>
+        <target>Zde si můžeš upravit svůj emailový odběr</target>
+      </segment>
+    </unit>
+    <unit id="xN3wMsj" name="newsletter-weekly">
+      <segment>
+        <source>newsletter-weekly</source>
+        <target>Týdenní přehled novinek</target>
+      </segment>
+    </unit>
+    <unit id="2KG6zz7" name="newsletter-monthly">
+      <segment>
+        <source>newsletter-monthly</source>
+        <target>Měsíční přehled novinek</target>
+      </segment>
+    </unit>
+    <unit id="JXCvcyd" name="newsletter-overall-desc">
+      <segment>
+        <source>newsletter-overall-desc</source>
+        <target>Pravidelné přehledy o nejzajímavějších událostech, nových srazech, členech, top fotkách a další zajímavosti</target>
+      </segment>
+    </unit>
+    <unit id="7AjSSvv" name="newsletter-yearl">
+      <segment>
+        <source>newsletter-yearl</source>
+        <target>Roční souhrn toho NEJ</target>
+      </segment>
+    </unit>
   </file>
 </xliff>

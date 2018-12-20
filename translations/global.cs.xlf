@@ -97,5 +97,29 @@
         <target>Odhlásit se</target>
       </segment>
     </unit>
+    <unit id="BuGiovx" name="profile-settings">
+      <segment>
+        <source>profile-settings</source>
+        <target>Nastavení</target>
+      </segment>
+    </unit>
+    <unit id="7MFicpE" name="my-profile">
+      <segment>
+        <source>my-profile</source>
+        <target>Můj profil</target>
+      </segment>
+    </unit>
+    <unit id="6XFmtUU" name="enable">
+      <segment>
+        <source>enable</source>
+        <target>Povolit</target>
+      </segment>
+    </unit>
+    <unit id="FX3KkuQ" name="save">
+      <segment>
+        <source>save</source>
+        <target>Uložit změny</target>
+      </segment>
+    </unit>
   </file>
 </xliff>

@@ -116,6 +116,12 @@ class Profile implements UserInterface
     protected $registeredAs;
 
 
+    /**
+     * @var Settings
+     * @ORM\OneToOne(targetEntity="Style34\Entity\Profile\Settings", mappedBy="profile",  cascade={"persist"})
+     */
+    protected $settings;
+
     // Methods
     // -----------------------------------------------------------------------------------------------------------------
 
@@ -416,6 +422,26 @@ class Profile implements UserInterface
     public function setRegisteredAs(string $registeredAs): void
     {
         $this->registeredAs = $registeredAs;
+    }
+
+
+    // Settings
+    // -----------------------------------------------------------------------------------------------------------------
+
+    /**
+     * @return Settings
+     */
+    public function getSettings(): Settings
+    {
+        return $this->settings;
+    }
+
+    /**
+     * @param Settings $settings
+     */
+    public function setSettings(Settings $settings): void
+    {
+        $this->settings = $settings;
     }
 
 

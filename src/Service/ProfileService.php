@@ -4,6 +4,7 @@ namespace Style34\Service;
 
 use Style34\Entity\Profile\Profile;
 use Style34\Entity\Profile\Role;
+use Style34\Entity\Profile\Settings;
 use Style34\Entity\Token\Token;
 use Style34\Entity\Token\TokenType;
 use Style34\Exception\Profile\ActivationException;
@@ -84,6 +85,7 @@ class ProfileService extends AbstractService
         $profile->setCreatedAt(new \DateTime());
         $profile->setLastIp($lastIp);
         $profile->setRegisteredAs(serialize(array($profile->getUsername(), $profile->getEmail())));
+        $profile->setSettings(new Settings());
 
         return $profile;
     }
@@ -150,5 +152,15 @@ class ProfileService extends AbstractService
         }
 
         return null;
+    }
+
+    /**
+     * @param Profile $profile
+     */
+    public function enableTwoStepAuth(Profile $profile){
+        $settings = $profile->getSettings();
+
+        $settings->setTwoStepAuthEnabled(true);
+
     }
 }

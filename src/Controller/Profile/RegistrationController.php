@@ -71,7 +71,7 @@ class RegistrationController extends AbstractController
                 return $this->redirectToRoute("profile-registration-success");
             } catch (\Exception $ex) {
                 $this->addFlash('danger', $this->translator->trans('registration-failed', [], 'profile'));
-                $this->logger->error('profile.registration-failed', array($ex, $profile));
+                $this->logger->error('controller.profile.index: registration failed', array($ex, $profile));
             }
         }
 
@@ -106,7 +106,7 @@ class RegistrationController extends AbstractController
                 'danger',
                 $this->translator->trans('activation-failed', [], 'profile') . ' - ' . $ex->getMessage()
             );
-            $this->logger->error('profile.activation-failed', array($ex, $tokenHash));
+            $this->logger->error('controller.profile.activate: activation failed', array($ex, $tokenHash));
         }
 
         return $this->render('Profile/Registration/activation.html.twig');

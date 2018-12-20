@@ -1,0 +1,37 @@
+{% extends 'layout-frontend.html.twig' %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+
+	<div class="container">
+
+		<h2>{% trans from 'profile'%}settings-two-step-auth{% endtrans %}</h2>
+		<hr>
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item">
+					<a href="{{ url('home-index') }}">{{ constant('Style34\\Kernel::SITE_NAME') }}</a>
+				</li>
+				<li class="breadcrumb-item">
+					<a href="{{ url('profile-list') }}">{% trans from 'global' %}profiles{% endtrans %}</a>
+				</li>
+				<li class="breadcrumb-item">
+					<a href="{{ url('profile-view') }}">{{ app.user.getUsername() }}</a>
+				</li>
+				<li class="breadcrumb-item">
+					<a href="{{ url('profile-settings') }}">{% trans from 'profile' %}settings{% endtrans %}</a>
+				</li>
+				<li class="breadcrumb-item active" aria-current="page">
+					{% trans from 'profile' %}settings-two-step-auth{% endtrans %}
+				</li>
+			</ol>
+		</nav>
+
+		<div class="row">
+			<p>ola</p>
+		</div>
+	</div>
+
+
+{% endblock %}

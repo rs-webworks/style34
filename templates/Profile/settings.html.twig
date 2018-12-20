@@ -1,0 +1,161 @@
+{% extends 'layout-frontend.html.twig' %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+
+	<div class="container">
+
+		<h2>{% trans from 'profile' %}settings{% endtrans %}</h2>
+		<hr>
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item">
+					<a href="{{ url('home-index') }}">{{ constant('Style34\\Kernel::SITE_NAME') }}</a>
+				</li>
+				<li class="breadcrumb-item">
+					<a href="{{ url('profile-list') }}">{% trans from 'global' %}profiles{% endtrans %}</a>
+				</li>
+				<li class="breadcrumb-item">
+					<a href="{{ url('profile-view') }}">{{ app.user.getUsername() }}</a>
+				</li>
+				<li class="breadcrumb-item active" aria-current="page">
+					{% trans from 'profile' %}settings{% endtrans %}
+				</li>
+			</ol>
+		</nav>
+
+		{{ form_start(form) }}
+
+		<div class="row">
+
+
+			{# Security #}
+			{# ------------------------------------------------------------------------------------------ #}
+
+			<div class="col-xs-12 col-md-6">
+				<div class="card">
+					<div class="card-body">
+
+						<h5 class="card-title">
+							<i class="fa fa-fw fa-key"></i>
+							{% trans from 'profile' %}security{% endtrans %}
+						</h5>
+						<h6 class="card-subtitle mb-4 text-muted">
+							{% trans from 'profile' %}security-desc{% endtrans %}
+						</h6>
+
+						<hr>
+
+						{# Two step auth #}
+						{# ------------------------------------------------------------------------------------------ #}
+						<div class="form-group row">
+							<label for="two-step-auth" class="col-sm-6 col-form-label">
+								{% trans from 'profile' %}settings-two-step-auth{% endtrans %}
+							</label>
+							<div class="col-sm-6">
+
+								{% if profile.settings.twoStepAuthEnabled %}
+									<a href="{{ url('profile-settings-enable-two-step-auth') }}" class="btn btn-primary float-right">
+										<i class="fa fa-fw fa-ban"></i> {% trans from 'global' %}disable{% endtrans %}
+									</a>
+								{% else %}
+									<a href="{{ url('profile-settings-enable-two-step-auth') }}" class="btn btn-outline-primary float-right">
+										<i class="fa fa-fw fa-check"></i> {% trans from 'global' %}enable{% endtrans %}
+									</a>
+								{% endif %}
+							</div>
+						</div>
+
+						{# Change password #}
+						{# ------------------------------------------------------------------------------------------ #}
+						<div class="form-group row">
+							<label for="change-password" class="col-sm-6 col-form-label">
+								{% trans from 'profile' %}settings-change-password{% endtrans %}
+							</label>
+							<div class="col-sm-6">
+
+								<a href="{{ url('profile-settings-enable-two-step-auth') }}" class="btn btn-outline-primary float-right">
+									<i class="fa fa-fw fa-edit"></i> {% trans from 'profile' %}change-password{% endtrans %}
+								</a>
+							</div>
+						</div>
+
+						<hr>
+
+						{# Delete profile #}
+						{# ------------------------------------------------------------------------------------------ #}
+						<div class="form-group row">
+							<label for="delete-profile" class="col-sm-6 col-form-label">
+								{% trans from 'profile' %}settings-delete-profile{% endtrans %}
+							</label>
+							<div class="col-sm-6">
+
+								<a href="{{ url('profile-settings-enable-two-step-auth') }}" class="btn btn-outline-danger float-right">
+									<i class="fa fa-fw fa-times"></i> {% trans from 'profile' %}delete-profile{% endtrans %}
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			{# Newsletter #}
+			{# ------------------------------------------------------------------------------------------ #}
+
+			<div class="col-xs-12 col-md-6">
+				<div class="card">
+					<div class="card-body">
+
+						<h5 class="card-title">
+							<i class="fas fa-fw fa-envelope"></i>
+							{% trans from 'profile' %}newsletter{% endtrans %}
+						</h5>
+						<h6 class="card-subtitle mb-4 text-muted">
+							{% trans from 'profile' %}newsletter-desc{% endtrans %}
+						</h6>
+
+						<hr>
+
+						<p class="text-muted small">
+							{% trans from 'profile' %}newsletter-overall-desc{% endtrans %}
+						</p>
+
+						{# first #}
+						{# ------------------------------------------------------------------------------------------ #}
+						<div class="form-check mb-4">
+							<input class="form-check-input" type="checkbox" id="newsletter-weekly" />
+							<label class="form-check-label" for="newsletter-weekly" class="col-sm-12 col-form-label">
+								{% trans from 'profile' %}newsletter-weekly{% endtrans %}
+							</label>
+						</div>
+						<div class="form-check mb-4">
+							<input class="form-check-input" type="checkbox" id="newsletter-monthly" />
+							<label class="form-check-label" for="newsletter-monthly" class="col-sm-12 col-form-label">
+								{% trans from 'profile' %}newsletter-monthly{% endtrans %}
+							</label>
+						</div>
+						<div class="form-check mb-4">
+							<input class="form-check-input" type="checkbox" id="newsletter-yearly" />
+							<label class="form-check-label" for="newsletter-yearly" class="col-sm-12 col-form-label">
+								{% trans from 'profile' %}newsletter-yearl{% endtrans %}
+							</label>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<hr class="mt-5">
+		<button type="submit" class="btn btn-primary float-right">
+			<i class="fa fa-fw fa-save"></i>
+			{% trans from 'global' %}save{% endtrans %}
+		</button>
+
+		{{ form_end(form) }}
+	</div>
+
+
+{% endblock %}

@@ -7,6 +7,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Style34\Entity\Address\State;
 use Style34\Entity\Profile\Profile;
 use Style34\Entity\Profile\Role;
+use Style34\Entity\Profile\Settings;
 use Style34\Entity\Token\TokenType;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\ArrayInput;
@@ -126,8 +127,9 @@ class InstallCommand extends Command
         $command = $this->getApplication()->find('doctrine:schema:drop');
 
         $arguments = new ArrayInput(array(
-            '--full-database' => true,
-            '--force' => true)
+                '--full-database' => true,
+                '--force' => true
+            )
         );
         $command->run($arguments, new NullOutput());
 
@@ -214,26 +216,31 @@ class InstallCommand extends Command
     {
         /** @var array $users Username, mail, password */
         $users = array(
-            ['admin', 'admin@style34.net', 'rootpass', Role::ADMIN],
-            ['spravce', 'spravce@style34.net', '', Role::BANNED],
-            ['moderator', 'moderator@style34.net', '', Role::BANNED],
-            ['mod', 'mod@style34.net', '', Role::BANNED],
-            ['administrator', 'administrator@style34.net', '', Role::BANNED]
+            ['admin', 'admin@style34.net', 'rootpass', [Role::ADMIN, Role::MEMBER, Role::VERIFIED]],
+            ['spravce', 'spravce@style34.net', '', [Role::BANNED]],
+            ['moderator', 'moderator@style34.net', '', [Role::BANNED]],
+            ['mod', 'mod@style34.net', '', [Role::BANNED]],
+            ['administrator', 'administrator@style34.net', '', [Role::BANNED]]
         );
 
         $this->io->progressStart(count($users));
 
         foreach ($users as $user) {
-            list($username, $email, $password, $role) = $user;
+            list($username, $email, $password, $roles) = $user;
 
             $profile = new Profile();
             $profile->setUsername($username);
             $profile->setEmail($email);
             $profile->setCreatedAt(new \DateTime());
             $profile->setPassword($this->passwordEncoder->encodePassword($profile, $password));
-            $profile->addRole($role);
+
+            foreach ($roles as $role) {
+                $profile->addRole($role);
+            }
             $profile->setLastIp('127.0.0.1');
             $profile->setRegisteredAs(serialize(array($profile->getUsername(), $profile->getEmail())));
+
+            $profile->setSettings(new Settings($profile));
 
             $this->em->persist($profile);
             $this->io->progressAdvance(1);
