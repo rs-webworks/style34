@@ -121,5 +121,17 @@
         <target>Uložit změny</target>
       </segment>
     </unit>
+    <unit id="3eyLYwu" name="return-back">
+      <segment>
+        <source>return-back</source>
+        <target>Přejít zpět</target>
+      </segment>
+    </unit>
+    <unit id="6diZLzS" name="disable">
+      <segment>
+        <source>disable</source>
+        <target>Vypnout</target>
+      </segment>
+    </unit>
   </file>
 </xliff>

@@ -286,5 +286,23 @@
         <target>Roční souhrn toho NEJ</target>
       </segment>
     </unit>
+    <unit id="YZdZVQP" name="delete">
+      <segment>
+        <source>delete</source>
+        <target>Smazání profilu</target>
+      </segment>
+    </unit>
+    <unit id="PCtNUoi" name="delete-warning">
+      <segment>
+        <source>delete-warning</source>
+        <target>Pozor! Tato akce má nevratné následky!</target>
+      </segment>
+    </unit>
+    <unit id="0wzDhxy" name="delete-warning-desc">
+      <segment>
+        <source>delete-warning-desc</source>
+        <target>Vytvořením žádosti o smazání profilu bude odstraněno vše, co kdy bylo tímto vytvořeno a také veškerá tvá osobní data uložená na tomto serveru. Pokud jsi zaplatil členský poplatek tak ti nebude vrácen a ani není možné jej použít na jinou registraci! </target>
+      </segment>
+    </unit>
   </file>
 </xliff>

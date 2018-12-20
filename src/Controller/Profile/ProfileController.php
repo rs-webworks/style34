@@ -96,5 +96,13 @@ class ProfileController extends AbstractController
         return $this->render('Profile/two-step-auth.html.twig');
     }
 
+    /**
+     * @Route("/profile/settings/delete-profile", name="profile-delete")
+     */
+    public function delete()
+    {
+        return $this->render('Profile/delete.html.twig');
+    }
+
 
 }
