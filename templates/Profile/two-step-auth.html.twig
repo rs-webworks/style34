@@ -6,7 +6,7 @@
 
 	<div class="container">
 
-		<h2>{% trans from 'profile'%}settings-two-step-auth{% endtrans %}</h2>
+		<h2>{% trans from 'profile' %}settings-two-step-auth{% endtrans %}</h2>
 		<hr>
 		<nav aria-label="breadcrumb">
 			<ol class="breadcrumb">
@@ -29,8 +29,59 @@
 		</nav>
 
 		<div class="row">
-			{% trans from 'profiles' %}profiles-tsa-{% endtrans %}
+			<div class="col col-xs-12 col-md-6">
+				<h3 class="mb-4">{% trans from 'profiles' %}profiles-tsa-title{% endtrans %}</h3>
+				{% trans from 'profiles' %}profiles-tsa-desc{% endtrans %}
+
+				<img src="{{ asset('/images/profile/settings/two-step-auth.png') }}" class="img-fluid" alt="{% trans from 'profile' %}settings-two-step-auth{% endtrans %}"/>
+			</div>
+
+			<div class="col col-xs-12 col-md-6">
+				<h3 class="mb-4">{% trans from 'profiles' %}profiles-tsa-creating-code{% endtrans %}</h3>
+				<ol>
+					<li>{% trans from 'profiles' %}profiles-tsa-step-1{% endtrans %}<br>
+
+						<a href="http://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2" class="btn btn-outline-primary my-4" target="_blank">
+							<i class="fab fa-fw fa-google-play"></i> Google Play </a>
+
+						<a href="https://itunes.apple.com/us/app/google-authenticator/id388497605?mt=8" class="btn btn-outline-primary my-4" target="_blank">
+							<i class="fab fa-fw fa-app-store-ios"></i> Apple store </a>
+					</li>
+					<li>{% trans from 'profiles' %}profiles-tsa-step-2{% endtrans %}
+					</li>
+					<li>{% trans from 'profiles' %}profiles-tsa-step-3{% endtrans %}
+
+						<div class="col col-xs-12 text-center">
+							<div class="card m-4">
+								<div class="card-body">
+									<img src="{{ qrCode }}" alt="{% trans from 'profiles' %}profiles-tsa-qr-code{% endtrans %}" style="max-width: 100%;"/>
+
+									<p class="text-muted m-4">{% trans from 'profiles' %}profiles-tsa-qr-code-desc{% endtrans %}</p>
+								</div>
+							</div>
+						</div>
+					</li>
+
+					<li>{% trans from 'profiles' %}profiles-tsa-step-4{% endtrans %}
+
+						<form method="post" class="form-inline my-4">
+							<div class="form-group mb-2">
+								<label for="activation-code" class="sr-only">{% trans from 'profiles' %}profiles-tsa-generated-code{% endtrans %}</label>
+								<input name="activation-code" type="text" class="form-control" id="activation-code" placeholder="{% trans from 'profiles' %}profiles-tsa-generated-code{% endtrans %}">
+							</div>
+							<button type="submit" class="btn btn-primary mb-2 ml-2">
+								<i class="fa fa-fw fa-check"></i>
+								{% trans from 'global' %}enable{% endtrans %}
+							</button>
+						</form>
+					</li>
+				</ol>
+
+
+			</div>
 		</div>
+
+		{# TODO: Create footer, this is too low #}
 	</div>
 
 

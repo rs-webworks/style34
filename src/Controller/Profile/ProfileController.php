@@ -6,10 +6,13 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Style34\Entity\Profile\Profile;
 use Style34\Form\Profile\SettingsForm;
 use Style34\Repository\Profile\ProfileRepository;
+use Style34\Service\GoogleAuthService;
+use Style34\Service\ProfileService;
 use Style34\Traits\LoggerTrait;
 use Style34\Traits\TranslatorTrait;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -77,7 +80,6 @@ class ProfileController extends AbstractController
     {
         /** @var Profile $profile */
         $profile = $this->getUser();
-        dump($profile);
 
         $form = $this->createForm(SettingsForm::class);
         $form->handleRequest($request);
@@ -90,10 +92,57 @@ class ProfileController extends AbstractController
 
     /**
      * @Route("/profile/settings/enableTwoStepAuth", name="profile-settings-enable-two-step-auth")
+     * @param GoogleAuthService $authService
+     * @param SessionInterface $session
+     * @param Request $request
+     * @param ProfileService $profileService
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function enableTwoStepAuth()
+    public function enableTwoStepAuth(GoogleAuthService $authService, SessionInterface $session, Request $request, ProfileService $profileService)
     {
-        return $this->render('Profile/two-step-auth.html.twig');
+        /** @var Profile $profile */
+        $profile = $this->getUser();
+        $activationCode = $request->get('activation-code');
+
+        // If activation code sent
+        if ($activationCode) {
+            $secret = $session->get('generated-secret');
+
+            // If activation code matches generated secret check
+            if ($activationCode == $authService->checkCode($secret, $activationCode)) {
+                $profileService->enableTwoStepAuth($profile, $secret);
+
+                $this->addFlash('success', $this->translator->trans('two-step-auth-enabled', [], 'profile'));
+                return $this->redirectToRoute('profile-settings');
+            } else {
+                $this->addFlash('danger', $this->translator->trans('two-step-auth-failed', [], 'profile'));
+            }
+        }
+
+        $secret = $authService->generateSecret();
+        $session->set('generated-secret', $secret);
+
+        $qrCode = $authService->generateQr($profile->getEmail(), $secret);
+
+
+        return $this->render('Profile/two-step-auth.html.twig',
+            array('qrCode' => $qrCode)
+        );
+    }
+
+    /**
+     * @Route("/profile/settings/disableTwoStepAuth", name="profile-settings-disable-two-step-auth")
+     * @param ProfileService $profileService
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function disableTwoStepAuth(ProfileService $profileService){
+        $profile = $this->getUser();
+
+        // TODO: Require user to either enter password again or add email token for this, security reasons
+        $profileService->disableTwoStepAuth($profile);
+
+        $this->addFlash('success', $this->translator->trans('two-step-auth-disabled', [], 'profile'));
+        return $this->redirectToRoute('profile-settings');
     }
 
     /**

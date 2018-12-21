@@ -90,7 +90,7 @@ class Settings
      * Always use CryptService to encode
      * @param string $gAuthSecret
      */
-    public function setGAuthSecret(string $gAuthSecret): void
+    public function setGAuthSecret(?string $gAuthSecret): void
     {
         $this->gAuthSecret = $gAuthSecret;
     }

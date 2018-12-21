@@ -66,7 +66,7 @@
     </unit>
     <unit id="qBJPsnB" name="registration-success">
       <notes>
-        <note category="file-source" priority="1">src/Controller/Profile/RegistrationController.php:55</note>
+        <note category="file-source" priority="1">src/Controller/Profile/RegistrationController.php:69</note>
       </notes>
       <segment>
         <source>registration-success</source>
@@ -102,7 +102,7 @@
     </unit>
     <unit id="EzOj_bG" name="registration-failed">
       <notes>
-        <note category="file-source" priority="1">src/Controller/Profile/RegistrationController.php:59</note>
+        <note category="file-source" priority="1">src/Controller/Profile/RegistrationController.php:73</note>
       </notes>
       <segment>
         <source>registration-failed</source>
@@ -111,7 +111,7 @@
     </unit>
     <unit id="6111zBr" name="email-activation-title">
       <notes>
-        <note category="file-source" priority="1">src/Service/MailService.php:51</note>
+        <note category="file-source" priority="1">src/Service/MailService.php:50</note>
       </notes>
       <segment>
         <source>email-activation-title</source>
@@ -147,7 +147,7 @@
     </unit>
     <unit id="b4j4kxk" name="activation-failed">
       <notes>
-        <note category="file-source" priority="1">src/Controller/Profile/RegistrationController.php:91</note>
+        <note category="file-source" priority="1">src/Controller/Profile/RegistrationController.php:107</note>
       </notes>
       <segment>
         <source>activation-failed</source>
@@ -156,7 +156,7 @@
     </unit>
     <unit id="dViU8kE" name="activation-success">
       <notes>
-        <note category="file-source" priority="1">src/Controller/Profile/RegistrationController.php:87</note>
+        <note category="file-source" priority="1">src/Controller/Profile/RegistrationController.php:103</note>
       </notes>
       <segment>
         <source>activation-success</source>
@@ -169,6 +169,274 @@
       </notes>
       <segment>
         <source>activation-expired-token</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="ErXb3q4" name="settings-two-step-auth">
+      <notes>
+        <note category="file-source" priority="1">templates/Profile/two-step-auth.html.twig:9</note>
+        <note category="file-source" priority="1">templates/Profile/two-step-auth.html.twig:26</note>
+        <note category="file-source" priority="1">templates/Profile/two-step-auth.html.twig:36</note>
+        <note category="file-source" priority="1">templates/Profile/settings.html.twig:54</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>settings-two-step-auth</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="zeD7Dew" name="settings">
+      <notes>
+        <note category="file-source" priority="1">templates/Profile/two-step-auth.html.twig:23</note>
+        <note category="file-source" priority="1">templates/Profile/settings.html.twig:9</note>
+        <note category="file-source" priority="1">templates/Profile/settings.html.twig:23</note>
+        <note category="file-source" priority="1">templates/Profile/delete.html.twig:23</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>settings</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="K8tDy8j" name="view">
+      <notes>
+        <note category="file-source" priority="1">templates/Profile/view.html.twig:9</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>view</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="XS0863q" name="security">
+      <notes>
+        <note category="file-source" priority="1">templates/Profile/settings.html.twig:42</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>security</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="DMbpYop" name="security-desc">
+      <notes>
+        <note category="file-source" priority="1">templates/Profile/settings.html.twig:45</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>security-desc</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="4jqMFec" name="settings-change-password">
+      <notes>
+        <note category="file-source" priority="1">templates/Profile/settings.html.twig:74</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>settings-change-password</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="ziubWKT" name="change-password">
+      <notes>
+        <note category="file-source" priority="1">templates/Profile/settings.html.twig:79</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>change-password</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="imf6FiK" name="settings-delete-profile">
+      <notes>
+        <note category="file-source" priority="1">templates/Profile/settings.html.twig:90</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>settings-delete-profile</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="6MWcHBq" name="delete-profile">
+      <notes>
+        <note category="file-source" priority="1">templates/Profile/settings.html.twig:95</note>
+        <note category="file-source" priority="1">templates/Profile/delete.html.twig:54</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>delete-profile</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="3W9GX2g" name="newsletter">
+      <notes>
+        <note category="file-source" priority="1">templates/Profile/settings.html.twig:113</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>newsletter</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="hSBFe8E" name="newsletter-desc">
+      <notes>
+        <note category="file-source" priority="1">templates/Profile/settings.html.twig:116</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>newsletter-desc</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="JXCvcyd" name="newsletter-overall-desc">
+      <notes>
+        <note category="file-source" priority="1">templates/Profile/settings.html.twig:122</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>newsletter-overall-desc</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="xN3wMsj" name="newsletter-weekly">
+      <notes>
+        <note category="file-source" priority="1">templates/Profile/settings.html.twig:130</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>newsletter-weekly</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="2KG6zz7" name="newsletter-monthly">
+      <notes>
+        <note category="file-source" priority="1">templates/Profile/settings.html.twig:136</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>newsletter-monthly</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="7AjSSvv" name="newsletter-yearl">
+      <notes>
+        <note category="file-source" priority="1">templates/Profile/settings.html.twig:142</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>newsletter-yearl</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="YZdZVQP" name="delete">
+      <notes>
+        <note category="file-source" priority="1">templates/Profile/delete.html.twig:9</note>
+        <note category="file-source" priority="1">templates/Profile/delete.html.twig:26</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>delete</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="PCtNUoi" name="delete-warning">
+      <notes>
+        <note category="file-source" priority="1">templates/Profile/delete.html.twig:38</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>delete-warning</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="0wzDhxy" name="delete-warning-desc">
+      <notes>
+        <note category="file-source" priority="1">templates/Profile/delete.html.twig:42</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>delete-warning-desc</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="dDUCHcb" name="login-auth">
+      <notes>
+        <note category="file-source" priority="1">templates/partials/login-form.html.twig:10</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>login-auth</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="FrDDyWq" name="login-password">
+      <notes>
+        <note category="file-source" priority="1">templates/partials/login-form.html.twig:21</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>login-password</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="Reep.Jw" name="login-remember-me">
+      <notes>
+        <note category="file-source" priority="1">templates/partials/login-form.html.twig:30</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>login-remember-me</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="0mRwX4u" name="login-sign-in">
+      <notes>
+        <note category="file-source" priority="1">templates/partials/login-form.html.twig:41</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>login-sign-in</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="vno28j3" name="login-forgot-pass">
+      <notes>
+        <note category="file-source" priority="1">templates/partials/login-form.html.twig:48</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>login-forgot-pass</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="nZcjZox" name="profile-not-found">
+      <notes>
+        <note category="file-source" priority="1">src/Controller/Profile/ProfileController.php:48</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>profile-not-found</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="QnGf_HM" name="two-step-auth-enabled">
+      <notes>
+        <note category="file-source" priority="1">src/Controller/Profile/ProfileController.php:109</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>two-step-auth-enabled</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="fSNFRZg" name="two-step-auth-failed">
+      <notes>
+        <note category="file-source" priority="1">src/Controller/Profile/ProfileController.php:115</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>two-step-auth-failed</source>
         <target></target>
       </segment>
     </unit>

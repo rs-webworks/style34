@@ -1,25 +1,30 @@
 Arguments: 
-  /usr/local/bin/node /opt/yarn-v1.12.3/bin/yarn.js dev-server --host=0.0.0.0
+  /usr/bin/node /usr/share/yarn/bin/yarn.js add --dev @fortawesome/fontawesome-free
 
 PATH: 
-  /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+  /home/raito/bin:/home/raito/.local/bin:/var/www/style34/node_modules/.bin:/home/raito/bin:/home/raito/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
 
 Yarn version: 
   1.12.3
 
 Node version: 
-  10.14.1
+  9.11.2
 
 Platform: 
   linux x64
 
 Trace: 
-  SyntaxError: /application/package.json: Unexpected token } in JSON at position 394
-      at JSON.parse (<anonymous>)
-      at /opt/yarn-v1.12.3/lib/cli.js:1631:59
-      at Generator.next (<anonymous>)
-      at step (/opt/yarn-v1.12.3/lib/cli.js:304:30)
-      at /opt/yarn-v1.12.3/lib/cli.js:315:13
+  Error: https://registry.yarnpkg.com/fontawesome-free: Not found
+      at Request.params.callback [as _callback] (/usr/share/yarn/lib/cli.js:65894:18)
+      at Request.self.callback (/usr/share/yarn/lib/cli.js:129018:22)
+      at Request.emit (events.js:180:13)
+      at Request.<anonymous> (/usr/share/yarn/lib/cli.js:129990:10)
+      at Request.emit (events.js:180:13)
+      at IncomingMessage.<anonymous> (/usr/share/yarn/lib/cli.js:129912:12)
+      at Object.onceWrapper (events.js:272:13)
+      at IncomingMessage.emit (events.js:185:15)
+      at endReadableNT (_stream_readable.js:1106:12)
+      at process._tickCallback (internal/process/next_tick.js:178:19)
 
 npm manifest: 
   {
@@ -30,14 +35,14 @@ npm manifest:
     "author": "Raito Akehanareru <raito.akehanareru@gmail.com>",
     "license": "MIT",
     "dependencies": {
+      "async": "^2.6.1",
       "bootstrap": "^4.1.1",
-      "font-awesome": "^4.7.0",
+      "fontawesome-free": "^5.0.0",
       "jquery": "^3.3.1",
       "popper.js": "^1.14.3"
     },
     "devDependencies": {
-      "node-sass": "^4.10.0",
-  
+      "node-sass": "^4.10.0"
     }
   }
 

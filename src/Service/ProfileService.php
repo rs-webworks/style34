@@ -8,7 +8,6 @@ use Style34\Entity\Profile\Settings;
 use Style34\Entity\Token\Token;
 use Style34\Entity\Token\TokenType;
 use Style34\Exception\Profile\ActivationException;
-use Style34\Exception\Profile\ProfileException;
 use Style34\Exception\Token\ExpiredTokenException;
 use Style34\Exception\Token\InvalidTokenException;
 use Style34\Kernel;
@@ -156,11 +155,30 @@ class ProfileService extends AbstractService
 
     /**
      * @param Profile $profile
+     * @param string $secret
      */
-    public function enableTwoStepAuth(Profile $profile){
+    public function enableTwoStepAuth(Profile $profile, string $secret)
+    {
         $settings = $profile->getSettings();
 
+        $settings->setGAuthSecret($secret);
         $settings->setTwoStepAuthEnabled(true);
 
+        $this->em->persist($settings);
+        $this->em->flush();
+    }
+
+    /**
+     * @param Profile $profile
+     */
+    public function disableTwoStepAuth(Profile $profile)
+    {
+        $settings = $profile->getSettings();
+
+        $settings->setGAuthSecret(null);
+        $settings->setTwoStepAuthEnabled(false);
+
+        $this->em->persist($settings);
+        $this->em->flush();
     }
 }
