@@ -37,7 +37,6 @@ class ProfileServiceTest extends WebTestCase
     /** @var array */
     protected $toDeleteEntities;
 
-
     /**
      *
      */
@@ -91,6 +90,8 @@ class ProfileServiceTest extends WebTestCase
      */
     public function testGetExpiredRegistrations()
     {
+        $profiles = $this->profileRepository->findAll();
+
         $profile = new Profile();
         $username = 'testGetExpiredRegistrations' . rand(1024, 2048);
         $profile->setUsername($username);
@@ -107,9 +108,8 @@ class ProfileServiceTest extends WebTestCase
         $token->setHash('empty');
         $this->profileRepository->save($profile, $token);
 
-        /** @var Profile[] $expired */
         $expired = $this->profileService->getExpiredRegistrations();
-        foreach($expired as $profile){
+        foreach ($expired as $profile) {
             $this->assertEquals($username, $profile->getUsername());
         }
         $this->profileRepository->removeProfiles($expired);

@@ -98,7 +98,7 @@ class Profile implements UserInterface
 
     /**
      * @var Token[] $tokens
-     * @ORM\OneToMany(targetEntity="Style34\Entity\Token\Token", mappedBy="profile", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="Style34\Entity\Token\Token", mappedBy="profile", cascade={"persist"}, orphanRemoval=true)
      */
     protected $tokens;
 
@@ -302,8 +302,8 @@ class Profile implements UserInterface
      */
     public function addRole(string $role): void
     {
-        if (!isset($this->roles[$role])) {
-            $this->roles[] = $role;
+        if (!in_array($role, $this->roles)) {
+            array_push($this->roles, $role);
         }
     }
 

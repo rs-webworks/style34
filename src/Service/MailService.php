@@ -45,7 +45,7 @@ class MailService extends AbstractService
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function sendActivationMail(Profile $profile, Token $token)
+    public function sendActivationMail(Profile $profile, Token $token): void
     {
         $message = (new Swift_Message(Kernel::SITE_NAME . ' - '. $this->translator->trans('email-activation-title', [], 'profile')))
             ->setFrom(Kernel::INFO_MAIL)
@@ -63,6 +63,5 @@ class MailService extends AbstractService
         ;
 
         $this->mailer->send($message);
-
     }
 }

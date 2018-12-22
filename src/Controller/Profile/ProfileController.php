@@ -154,4 +154,13 @@ class ProfileController extends AbstractController
     }
 
 
+
+
+    /**
+     * @Route("/profile/membership", name="profile-membership")
+     */
+    public function membership()
+    {
+        return $this->render("Profile/membership.html.twig");
+    }
 }

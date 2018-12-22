@@ -5,6 +5,7 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: 'cs'
+    google_recaptcha_site_key: '%env(GOOGLE_RECAPTCHA_SITE_KEY)%'
 
 services:
     # default configuration for services in *this* file
@@ -41,6 +42,10 @@ services:
         arguments:
             $googleAuth: "@google.authenticator"
 
+    security.rememberme.token.provider.doctrine:
+        class: Symfony\Bridge\Doctrine\Security\RememberMe\DoctrineTokenProvider
+        arguments: ['@doctrine.dbal.default_connection']
+
 
     # Not shared services
     # ------------------------------------------------------------------------------------------------------------------
@@ -50,45 +55,6 @@ services:
             $passCodeLength: !php/const Style34\Service\GoogleAuthService::CODE_LENGTH
             $secretLength: !php/const Style34\Service\GoogleAuthService::SECRET_LENGTH
 
-
-
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
-
-    gedmo.listener.softdeleteable:
-        class: Gedmo\SoftDeleteable\SoftDeleteableListener
-        tags:
-        - { name: doctrine.event_subscriber, connection: default }
-        calls:
-        - [ setAnnotationReader, [ "@annotation_reader" ] ]
-
-    gedmo.listener.tree:
-        class: Gedmo\Tree\TreeListener
-        tags:
-        - { name: doctrine.event_subscriber, connection: default }
-        calls:
-        - [ setAnnotationReader, [ "@annotation_reader" ] ]
-
-    gedmo.listener.timestampable:
-        class: Gedmo\Timestampable\TimestampableListener
-        tags:
-        - { name: doctrine.event_subscriber, connection: default }
-        calls:
-        - [ setAnnotationReader, [ "@annotation_reader" ] ]
-
-    gedmo.listener.sluggable:
-        class: Gedmo\Sluggable\SluggableListener
-        tags:
-        - { name: doctrine.event_subscriber, connection: default }
-        calls:
-        - [ setAnnotationReader, [ "@annotation_reader" ] ]
-
-    gedmo.listener.sortable:
-        class: Gedmo\Sortable\SortableListener
-        tags:
-        - { name: doctrine.event_subscriber, connection: default }
-        calls:
-        - [ setAnnotationReader, [ "@annotation_reader" ] ]
 
 imports:
     - { resource: 'orm.yaml' }

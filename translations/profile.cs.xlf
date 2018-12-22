@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xliff xmlns="urn:oasis:names:tc:xliff:document:2.0" version="2.0" srcLang="cs" trgLang="cs">
+<xliff xmlns="urn:oasis:names:tc:xliff:document:2.0" version="2.0" srcLang="en" trgLang="cs">
   <file id="profile.cs">
     <unit id="FveKfWM" name="username">
       <notes>
@@ -416,6 +416,30 @@
       <segment>
         <source>two-step-auth-failed</source>
         <target>Nastavení dvou-fázového ověření selhalo, zkus to prosím znovu.</target>
+      </segment>
+    </unit>
+    <unit id="vBeMKAE" name="request-reset-password-button">
+      <segment>
+        <source>request-reset-password-button</source>
+        <target>Zažádat o reset hesla</target>
+      </segment>
+    </unit>
+    <unit id="dtxNyWV" name="request-reset-password-desc">
+      <segment>
+        <source>request-reset-password-desc</source>
+        <target>Zapomněl jsi svoje heslo k účtu? Vyplň zde svůj email a my ti na něj pošleme odkaz pomocí kterého si můžeš heslo změnit na nové. Žádost je platná po dobu 2 hodin, během kterých není možné vytvořit další.</target>
+      </segment>
+    </unit>
+    <unit id="SBAUS3M" name="request-reset-password">
+      <segment>
+        <source>request-reset-password</source>
+        <target>Změna hesla</target>
+      </segment>
+    </unit>
+    <unit id="DQTOAQU" name="request-reset-password-unknown-mail">
+      <segment>
+        <source>request-reset-password-unknown-mail</source>
+        <target>Zadaný email u nás registrován není</target>
       </segment>
     </unit>
   </file>

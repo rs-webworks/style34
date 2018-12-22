@@ -1,15 +1,15 @@
 security:
 
     providers:
-      in_memory: { memory: ~ }
+        in_memory: { memory: ~ }
 
-      profile-provider:
-        id: Style34\Security\ProfileProvider
+        profile-provider:
+            id: Style34\Security\ProfileProvider
 
     encoders:
         Style34\Entity\Profile\Profile:
-          algorithm: bcrypt
-          cost: 12
+            algorithm: bcrypt
+            cost: 12
 
     firewalls:
         dev:
@@ -18,23 +18,24 @@ security:
         main:
             anonymous: true
             guard:
-              authenticators:
-                - Style34\Security\LoginFormAuthenticator
-              provider: profile-provider
+                authenticators:
+                    - Style34\Security\LoginFormAuthenticator
+                provider: profile-provider
 
 
             form_login:
-              provider: profile-provider
-              login_path: profile-login
-              check_path: profile-login
-              username_parameter: _auth
-              csrf_token_generator: security.csrf.token_manager
-#              default_target_path: after_login_route_name
+                provider: profile-provider
+                login_path: profile-login
+                check_path: profile-login
+                username_parameter: _auth
+                csrf_token_generator: security.csrf.token_manager
+                #default_target_path: after_login_route_name
 
             logout:
-              path:   profile-logout
+                path:   profile-logout
 
             remember_me:
-              secret:   '%kernel.secret%'
-              lifetime: 604800 # 1 week in seconds
-              path:     /
+                secret:   '%kernel.secret%'
+                lifetime: 31536000 # 1 year in seconds
+                path:     /
+                token_provider: 'security.rememberme.token.provider.doctrine'

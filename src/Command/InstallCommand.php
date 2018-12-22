@@ -3,12 +3,16 @@
 
 namespace Style34\Command;
 
+use BrowscapPHP\BrowscapUpdater;
 use Doctrine\Common\Persistence\ObjectManager;
+use Psr\SimpleCache\CacheInterface;
 use Style34\Entity\Address\State;
 use Style34\Entity\Profile\Profile;
 use Style34\Entity\Profile\Role;
 use Style34\Entity\Profile\Settings;
 use Style34\Entity\Token\TokenType;
+use Style34\Traits\EntityManagerTrait;
+use Style34\Traits\LoggerTrait;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;
@@ -25,6 +29,9 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
  */
 class InstallCommand extends Command
 {
+    use EntityManagerTrait;
+    use LoggerTrait;
+
 
     /** @var SymfonyStyle $io */
     protected $io;
@@ -32,20 +39,20 @@ class InstallCommand extends Command
     /** @var OutputInterface $output */
     protected $output;
 
-    /** @var ObjectManager $em */
-    protected $em;
+    /** @var CacheInterface $cache */
+    protected $cacheInterface;
 
     /** @var UserPasswordEncoderInterface $passwordEncoder */
     protected $passwordEncoder;
 
     /**
      * InstallBaseCommand constructor
-     * @param ObjectManager $em
+     * @param CacheInterface $cache
      * @param UserPasswordEncoderInterface $passwordEncoder
      */
-    public function __construct(ObjectManager $em, UserPasswordEncoderInterface $passwordEncoder)
+    public function __construct(CacheInterface $cache, UserPasswordEncoderInterface $passwordEncoder)
     {
-        $this->em = $em;
+        $this->cacheInterface = $cache;
         $this->passwordEncoder = $passwordEncoder;
         parent::__construct();
     }
@@ -70,7 +77,7 @@ class InstallCommand extends Command
      * @param InputInterface $input
      * @param OutputInterface $output
      * @return int|null|void
-     * @throws \Exception
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
@@ -104,6 +111,10 @@ class InstallCommand extends Command
             // Create token types
             $io->section('Creating token types...');
             $this->createTokenTypes();
+
+            // Build browsercap cache
+            $io->section('Installing browsercap (this takes long...)');
+            $this->fetchBrowsercap();
 
             $io->success('Installation complete!');
         } catch (\Exception $ex) {
@@ -272,6 +283,23 @@ class InstallCommand extends Command
         }
 
         $this->em->flush();
+        $this->io->progressFinish();
+    }
+
+    /**
+     * @throws \BrowscapPHP\Exception\FileNotFoundException
+     * @throws \BrowscapPHP\Helper\Exception
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    protected function fetchBrowsercap(){
+        $this->io->progressStart(2);
+
+        $browscap_updater = new BrowscapUpdater($this->cacheInterface, $this->logger);
+
+        $this->io->progressAdvance(1);
+
+        $browscap_updater->update(\BrowscapPHP\Helper\IniLoader::PHP_INI_FULL);
+
         $this->io->progressFinish();
     }
 }

@@ -24,4 +24,14 @@ RUN rm -rf /var/cache/apk/*\
     && find / -type f -iname \*.apk-new -delete\
     && rm -rf /var/cache/apk/*
 
-RUN chmod 0777 translations/ -R
+
+# Make translations directory writtable from web
+#RUN chmod 0777 translations/ -R
+
+# Install Yarn
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+RUN apt-get update && apt-get install yarn -y
+
+# Download Browsercap.ini file:
+#RUN php vendor/bin/browscap-php browscap:fetch

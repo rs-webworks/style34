@@ -2,15 +2,17 @@
 
 namespace Style34\Controller;
 
-use Sonata\GoogleAuthenticator\GoogleAuthenticator;
-use Sonata\GoogleAuthenticator\GoogleQrUrl;
+use BrowscapPHP\Browscap;
+use BrowscapPHP\BrowscapUpdater;
+use Psr\Cache\CacheItemPoolInterface;
+use Psr\SimpleCache\CacheInterface;
 use Style34\Entity\Token\TokenType;
 use Style34\Repository\Token\TokenTypeRepository;
-use Style34\Service\CryptService;
-use Style34\Service\GoogleAuthService;
 use Style34\Traits\LoggerTrait;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Dotenv\Dotenv;
+use Symfony\Component\Cache\Adapter\RedisAdapter;
+use Symfony\Component\Cache\Simple\RedisCache;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -33,12 +35,21 @@ class HomeController extends AbstractController
      * @Route("/dev", name="dev")
      * @param TokenTypeRepository $tokenTypeRepository
      * @return \Symfony\Component\HttpFoundation\Response
-     * @throws \Exception
      */
-    public function dev(TokenTypeRepository $tokenTypeRepository, GoogleAuthService $googleAuthService)
+    public function dev(Request $request, CacheInterface $cache)
     {
-        $this->logger->notice('controller.home.dev: hola');
-        return $this->render('dev.html.twig', array('qr' => $qr));
 
+        $browscap_updater = new BrowscapUpdater($cache, $this->logger);
+        $browscap_updater->update(\BrowscapPHP\Helper\IniLoader::PHP_INI_FULL);
+
+        $bc = new Browscap($cache, $this->logger);
+        dump($bc);
+
+
+
+
+        $ua = $request->server->get('HTTP_USER_AGENT');
+        dump($bc->getBrowser($ua));
+        return $this->render('dev.html.twig');
     }
 }

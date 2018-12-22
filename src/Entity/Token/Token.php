@@ -40,6 +40,7 @@ class Token
     /**
      * @var Profile $profile ;
      * @ORM\ManyToOne(targetEntity="Style34\Entity\Profile\Profile", inversedBy="tokens")
+     * @ORM\JoinColumn(name="profile_id", referencedColumnName="id", onDelete="CASCADE")
      */
     protected $profile;
 

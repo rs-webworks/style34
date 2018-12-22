@@ -43,6 +43,9 @@ class ProfileService extends AbstractService
     /** @var TokenRepository $tokenRepository */
     private $tokenRepository;
 
+    /** @var CryptService $cryptService */
+    private $cryptService;
+
     /**
      * ProfileService constructor.
      * @param UserPasswordEncoderInterface $passwordEncoder
@@ -56,13 +59,15 @@ class ProfileService extends AbstractService
         TokenService $tokenService,
         MailService $mailService,
         TokenTypeRepository $tokenTypeRepository,
-        TokenRepository $tokenRepository
+        TokenRepository $tokenRepository,
+        CryptService $cryptService
     ) {
         $this->passwordEncoder = $passwordEncoder;
         $this->tokenService = $tokenService;
         $this->mailService = $mailService;
         $this->tokenTypeRepository = $tokenTypeRepository;
         $this->tokenRepository = $tokenRepository;
+        $this->cryptService = $cryptService;
     }
 
     /**
@@ -125,7 +130,7 @@ class ProfileService extends AbstractService
     }
 
     /**
-     * @return array|null
+     * @return Profile[]|null
      */
     public function getExpiredRegistrations(): ?array
     {
@@ -161,7 +166,7 @@ class ProfileService extends AbstractService
     {
         $settings = $profile->getSettings();
 
-        $settings->setGAuthSecret($secret);
+        $settings->setGAuthSecret($this->cryptService->encrypt($secret));
         $settings->setTwoStepAuthEnabled(true);
 
         $this->em->persist($settings);
