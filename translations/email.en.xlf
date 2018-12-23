@@ -64,5 +64,59 @@
         <target></target>
       </segment>
     </unit>
+    <unit id="D9579qE" name="profile-request-reset-password-preheader">
+      <notes>
+        <note category="file-source" priority="1">templates/emails/profile-request-reset-password.twig:4</note>
+      </notes>
+      <segment>
+        <source>profile-request-reset-password-preheader</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="x4pV46p" name="profile-request-reset-password-title">
+      <notes>
+        <note category="file-source" priority="1">templates/emails/profile-request-reset-password.twig:8</note>
+      </notes>
+      <segment>
+        <source>profile-request-reset-password-title</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="WCwhBxq" name="profile-request-reset-password-heading">
+      <notes>
+        <note category="file-source" priority="1">templates/emails/profile-request-reset-password.twig:9</note>
+      </notes>
+      <segment>
+        <source>profile-request-reset-password-heading</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="KKQdw2n" name="profile-request-reset-password-button">
+      <notes>
+        <note category="file-source" priority="1">templates/emails/profile-request-reset-password.twig:18</note>
+      </notes>
+      <segment>
+        <source>profile-request-reset-password-button</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="l33J0l5" name="profile-activation-bottom">
+      <notes>
+        <note category="state" priority="1">obsolete</note>
+      </notes>
+      <segment>
+        <source>profile-activation-bottom</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="8jsJszU" name="profile-request-reset-password-bottom">
+      <notes>
+        <note category="file-source" priority="1">templates/emails/profile-request-reset-password.twig:27</note>
+      </notes>
+      <segment>
+        <source>profile-request-reset-password-bottom</source>
+        <target></target>
+      </segment>
+    </unit>
   </file>
 </xliff>

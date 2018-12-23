@@ -1,63 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xliff xmlns="urn:oasis:names:tc:xliff:document:2.0" version="2.0" srcLang="en" trgLang="cs">
+<xliff xmlns="urn:oasis:names:tc:xliff:document:2.0" version="2.0" srcLang="cs" trgLang="cs">
   <file id="profile.cs">
-    <unit id="FveKfWM" name="username">
-      <notes>
-        <note category="state" priority="1">obsolete</note>
-      </notes>
-      <segment>
-        <source>username</source>
-        <target>Přezdívka</target>
-      </segment>
-    </unit>
     <unit id="giREF.l" name="email">
       <notes>
-        <note category="state" priority="1">obsolete</note>
+        <note category="file-source" priority="1">templates/Profile/Security/request-reset-password.html.twig:31</note>
       </notes>
       <segment>
         <source>email</source>
         <target>Email</target>
       </segment>
     </unit>
-    <unit id="XohImNo" name="password">
-      <notes>
-        <note category="state" priority="1">obsolete</note>
-      </notes>
-      <segment>
-        <source>password</source>
-        <target>Heslo</target>
-      </segment>
-    </unit>
-    <unit id="hC3iYbO" name="password-again">
-      <notes>
-        <note category="state" priority="1">obsolete</note>
-      </notes>
-      <segment>
-        <source>password-again</source>
-        <target>Heslo znovu</target>
-      </segment>
-    </unit>
-    <unit id="S6aXNcp" name="state">
-      <notes>
-        <note category="state" priority="1">obsolete</note>
-      </notes>
-      <segment>
-        <source>state</source>
-        <target>Země</target>
-      </segment>
-    </unit>
-    <unit id="EaYsI0E" name="city">
-      <notes>
-        <note category="state" priority="1">obsolete</note>
-      </notes>
-      <segment>
-        <source>city</source>
-        <target>Město</target>
-      </segment>
-    </unit>
     <unit id="h3gPpd5" name="register">
       <notes>
-        <note category="file-source" priority="1">templates/Profile/Registration/index.html.twig:52</note>
+        <note category="file-source" priority="1">templates/Profile/Security/registration.html.twig:52</note>
       </notes>
       <segment>
         <source>register</source>
@@ -66,7 +21,7 @@
     </unit>
     <unit id="qBJPsnB" name="registration-success">
       <notes>
-        <note category="file-source" priority="1">src/Controller/Profile/RegistrationController.php:69</note>
+        <note category="file-source" priority="1">src/Controller/Profile/SecurityController.php:99</note>
       </notes>
       <segment>
         <source>registration-success</source>
@@ -75,7 +30,7 @@
     </unit>
     <unit id="p1M6uFU" name="registration-fee">
       <notes>
-        <note category="file-source" priority="1">templates/Profile/Registration/index.html.twig:23</note>
+        <note category="file-source" priority="1">templates/Profile/Security/registration.html.twig:23</note>
       </notes>
       <segment>
         <source>registration-fee</source>
@@ -84,7 +39,7 @@
     </unit>
     <unit id="PLD10DA" name="membership-traits">
       <notes>
-        <note category="file-source" priority="1">templates/Profile/Registration/index.html.twig:30</note>
+        <note category="file-source" priority="1">templates/Profile/Security/registration.html.twig:30</note>
       </notes>
       <segment>
         <source>membership-traits</source>
@@ -93,7 +48,7 @@
     </unit>
     <unit id="N69Lg4Q" name="membership-price">
       <notes>
-        <note category="file-source" priority="1">templates/Profile/Registration/index.html.twig:32</note>
+        <note category="file-source" priority="1">templates/Profile/Security/registration.html.twig:32</note>
       </notes>
       <segment>
         <source>membership-price</source>
@@ -102,7 +57,7 @@
     </unit>
     <unit id="EzOj_bG" name="registration-failed">
       <notes>
-        <note category="file-source" priority="1">src/Controller/Profile/RegistrationController.php:73</note>
+        <note category="file-source" priority="1">src/Controller/Profile/SecurityController.php:103</note>
       </notes>
       <segment>
         <source>registration-failed</source>
@@ -120,7 +75,7 @@
     </unit>
     <unit id="yZow68x" name="activation-needed">
       <notes>
-        <note category="file-source" priority="1">templates/Profile/Registration/success.html.twig:9</note>
+        <note category="file-source" priority="1">templates/Profile/Security/success.html.twig:9</note>
       </notes>
       <segment>
         <source>activation-needed</source>
@@ -129,7 +84,7 @@
     </unit>
     <unit id="z6.OT8r" name="activation-result">
       <notes>
-        <note category="file-source" priority="1">templates/Profile/Registration/activation.html.twig:9</note>
+        <note category="file-source" priority="1">templates/Profile/Security/activation.html.twig:9</note>
       </notes>
       <segment>
         <source>activation-result</source>
@@ -138,7 +93,9 @@
     </unit>
     <unit id="e1gwb0M" name="activation-invalid-token">
       <notes>
-        <note category="file-source" priority="1">src/Service/ProfileService.php:111</note>
+        <note category="file-source" priority="1">src/Service/ProfileService.php:115</note>
+        <note category="file-source" priority="1">src/Service/ProfileService.php:150</note>
+        <note category="file-source" priority="1">src/Controller/Profile/SecurityController.php:128</note>
       </notes>
       <segment>
         <source>activation-invalid-token</source>
@@ -147,7 +104,7 @@
     </unit>
     <unit id="b4j4kxk" name="activation-failed">
       <notes>
-        <note category="file-source" priority="1">src/Controller/Profile/RegistrationController.php:107</note>
+        <note category="file-source" priority="1">src/Controller/Profile/SecurityController.php:142</note>
       </notes>
       <segment>
         <source>activation-failed</source>
@@ -156,7 +113,7 @@
     </unit>
     <unit id="dViU8kE" name="activation-success">
       <notes>
-        <note category="file-source" priority="1">src/Controller/Profile/RegistrationController.php:103</note>
+        <note category="file-source" priority="1">src/Controller/Profile/SecurityController.php:138</note>
       </notes>
       <segment>
         <source>activation-success</source>
@@ -165,7 +122,8 @@
     </unit>
     <unit id="57GlP5." name="activation-expired-token">
       <notes>
-        <note category="file-source" priority="1">src/Service/ProfileService.php:106</note>
+        <note category="file-source" priority="1">src/Service/ProfileService.php:110</note>
+        <note category="file-source" priority="1">src/Service/ProfileService.php:145</note>
       </notes>
       <segment>
         <source>activation-expired-token</source>
@@ -219,9 +177,9 @@
     </unit>
     <unit id="zeD7Dew" name="settings">
       <notes>
-        <note category="file-source" priority="1">templates/Profile/two-step-auth.html.twig:23</note>
         <note category="file-source" priority="1">templates/Profile/settings.html.twig:9</note>
         <note category="file-source" priority="1">templates/Profile/settings.html.twig:23</note>
+        <note category="file-source" priority="1">templates/Profile/two-step-auth.html.twig:23</note>
         <note category="file-source" priority="1">templates/Profile/delete.html.twig:23</note>
       </notes>
       <segment>
@@ -249,10 +207,10 @@
     </unit>
     <unit id="ErXb3q4" name="settings-two-step-auth">
       <notes>
+        <note category="file-source" priority="1">templates/Profile/settings.html.twig:54</note>
         <note category="file-source" priority="1">templates/Profile/two-step-auth.html.twig:9</note>
         <note category="file-source" priority="1">templates/Profile/two-step-auth.html.twig:26</note>
         <note category="file-source" priority="1">templates/Profile/two-step-auth.html.twig:36</note>
-        <note category="file-source" priority="1">templates/Profile/settings.html.twig:54</note>
       </notes>
       <segment>
         <source>settings-two-step-auth</source>
@@ -381,7 +339,6 @@
     <unit id="K8tDy8j" name="view">
       <notes>
         <note category="file-source" priority="1">templates/Profile/view.html.twig:9</note>
-        <note category="state" priority="1">new</note>
       </notes>
       <segment>
         <source>view</source>
@@ -390,8 +347,7 @@
     </unit>
     <unit id="nZcjZox" name="profile-not-found">
       <notes>
-        <note category="file-source" priority="1">src/Controller/Profile/ProfileController.php:48</note>
-        <note category="state" priority="1">new</note>
+        <note category="file-source" priority="1">src/Controller/Profile/ProfileController.php:49</note>
       </notes>
       <segment>
         <source>profile-not-found</source>
@@ -400,8 +356,7 @@
     </unit>
     <unit id="QnGf_HM" name="two-step-auth-enabled">
       <notes>
-        <note category="file-source" priority="1">src/Controller/Profile/ProfileController.php:109</note>
-        <note category="state" priority="1">new</note>
+        <note category="file-source" priority="1">src/Controller/Profile/ProfileController.php:115</note>
       </notes>
       <segment>
         <source>two-step-auth-enabled</source>
@@ -410,8 +365,7 @@
     </unit>
     <unit id="fSNFRZg" name="two-step-auth-failed">
       <notes>
-        <note category="file-source" priority="1">src/Controller/Profile/ProfileController.php:115</note>
-        <note category="state" priority="1">new</note>
+        <note category="file-source" priority="1">src/Controller/Profile/ProfileController.php:118</note>
       </notes>
       <segment>
         <source>two-step-auth-failed</source>
@@ -419,27 +373,279 @@
       </segment>
     </unit>
     <unit id="vBeMKAE" name="request-reset-password-button">
+      <notes>
+        <note category="file-source" priority="1">templates/Profile/Security/request-reset-password.html.twig:36</note>
+      </notes>
       <segment>
         <source>request-reset-password-button</source>
         <target>Zažádat o reset hesla</target>
       </segment>
     </unit>
     <unit id="dtxNyWV" name="request-reset-password-desc">
+      <notes>
+        <note category="file-source" priority="1">templates/Profile/Security/request-reset-password.html.twig:27</note>
+      </notes>
       <segment>
         <source>request-reset-password-desc</source>
         <target>Zapomněl jsi svoje heslo k účtu? Vyplň zde svůj email a my ti na něj pošleme odkaz pomocí kterého si můžeš heslo změnit na nové. Žádost je platná po dobu 2 hodin, během kterých není možné vytvořit další.</target>
       </segment>
     </unit>
     <unit id="SBAUS3M" name="request-reset-password">
+      <notes>
+        <note category="file-source" priority="1">templates/Profile/Security/request-reset-password.html.twig:9</note>
+        <note category="file-source" priority="1">templates/Profile/Security/request-reset-password.html.twig:20</note>
+      </notes>
       <segment>
         <source>request-reset-password</source>
         <target>Změna hesla</target>
       </segment>
     </unit>
     <unit id="DQTOAQU" name="request-reset-password-unknown-mail">
+      <notes>
+        <note category="file-source" priority="1">src/Controller/Profile/SecurityController.php:191</note>
+      </notes>
       <segment>
         <source>request-reset-password-unknown-mail</source>
-        <target>Zadaný email u nás registrován není</target>
+        <target>Zadaný email u nás není registrován</target>
+      </segment>
+    </unit>
+    <unit id="_y8Pmge" name="two-step-auth-disabled">
+      <notes>
+        <note category="file-source" priority="1">src/Controller/Profile/ProfileController.php:144</note>
+      </notes>
+      <segment>
+        <source>two-step-auth-disabled</source>
+        <target>Dvou-fázové ověření bylo vypnuto</target>
+      </segment>
+    </unit>
+    <unit id="n1w7md3" name="profiles-tsa-desc">
+      <notes>
+        <note category="file-source" priority="1">templates/Profile/two-step-auth.html.twig:34</note>
+      </notes>
+      <segment>
+        <source>profiles-tsa-desc</source>
+        <target><![CDATA[<p>Aktivace dvou-fázového ověření telefonem vysoce zvyšuje zabezpečení tvého účtu. Při každém pokusu o
+				   přihlášení na novém zařízení bude nutné zadat vygenerovaný kód z aplikace Google Authenticator.</p>
+
+				<p>V profilu si můžeš spravovat zařízení, na kterých si přihlášený a případně přístup odebrat. I přesto
+				   doporučjeme s přístupem k účtu pracovat obezřetně, několik základních opatření které by jsi měl
+				   určitě znát a dodržovat:</p>
+
+				<ul>
+					<li>Odhlásit se před odchodem od zařízení které je veřejně přístupné nebo k němu mají přístup další
+						osoby
+					</li>
+					<li>Nikomu nesdělovat své heslo. Ani nikomu kdo by se mohl vydávat za správce/moderátora tohoto
+						portálu. Pamatuj, že nikdo z pověřených osob nikdy nemá důvod tě o něj požádat, máme konkrétní
+						nástroje pro správu profilů a nikdy tvé heslo nepotřebujeme k řešení jakékoliv situace.
+					</li>
+					<li>Mít nastavené dostatečně silné heslo. Úplně nejlepší přístup je mít heslo náhodně vygenerované a
+						uložené ve správci hesel (např. Google Chrome Správce hesel, LastPass, Keypass...)
+					</li>
+				</ul>]]></target>
+      </segment>
+    </unit>
+    <unit id="pW8XchZ" name="profiles-tsa-creating-code">
+      <notes>
+        <note category="file-source" priority="1">templates/Profile/two-step-auth.html.twig:40</note>
+      </notes>
+      <segment>
+        <source>profiles-tsa-creating-code</source>
+        <target>Vytvoření kódu a aktivace</target>
+      </segment>
+    </unit>
+    <unit id="dilJ7.g" name="profiles-tsa-step-1">
+      <notes>
+        <note category="file-source" priority="1">templates/Profile/two-step-auth.html.twig:42</note>
+      </notes>
+      <segment>
+        <source>profiles-tsa-step-1</source>
+        <target>Nejprve, pokud jí ještě nemáš, si na svém chytrém mobilním telefonu stáhni aplikace Google Authenticator:</target>
+      </segment>
+    </unit>
+    <unit id="INcIkPH" name="profiles-tsa-step-2">
+      <notes>
+        <note category="file-source" priority="1">templates/Profile/two-step-auth.html.twig:50</note>
+      </notes>
+      <segment>
+        <source>profiles-tsa-step-2</source>
+        <target><![CDATA[Aplikaci spusť, klepni na tlačítko <i class="fa fa-fw fa-plus-circle text-danger"></i> a vyber
+					možnost "<i class="fa fa-fw fa-camera"></i> Skenovat čárový kód"]]></target>
+      </segment>
+    </unit>
+    <unit id="WqSap2d" name="profiles-tsa-step-3">
+      <notes>
+        <note category="file-source" priority="1">templates/Profile/two-step-auth.html.twig:52</note>
+      </notes>
+      <segment>
+        <source>profiles-tsa-step-3</source>
+        <target>Naskenuj si tento QR kód:</target>
+      </segment>
+    </unit>
+    <unit id="mz5Rh78" name="profiles-tsa-qr-code">
+      <notes>
+        <note category="file-source" priority="1">templates/Profile/two-step-auth.html.twig:57</note>
+      </notes>
+      <segment>
+        <source>profiles-tsa-qr-code</source>
+        <target>QR kód authenticatoru</target>
+      </segment>
+    </unit>
+    <unit id="lctSjVz" name="profiles-tsa-qr-code-desc">
+      <notes>
+        <note category="file-source" priority="1">templates/Profile/two-step-auth.html.twig:59</note>
+      </notes>
+      <segment>
+        <source>profiles-tsa-qr-code-desc</source>
+        <target>Tento QR kód je unikátní a vygenerovaný pouze pro tebe. Nepoužívej ho pro zapnutí dvou-fázového ověření na jiném účtu, kódy by byly nefunkční a přihlášení by bylo nemožné!</target>
+      </segment>
+    </unit>
+    <unit id="s4ALgWG" name="profiles-tsa-step-4">
+      <notes>
+        <note category="file-source" priority="1">templates/Profile/two-step-auth.html.twig:65</note>
+      </notes>
+      <segment>
+        <source>profiles-tsa-step-4</source>
+        <target>V aplikaci se ti nyní budou generovat náhodné 6ti-místné kódy. Pro ověření, že je vše v pořádku a aktivaci dvou-fázového ověření opiš prosím kód zde:</target>
+      </segment>
+    </unit>
+    <unit id="VPp5hCH" name="profiles-tsa-generated-code">
+      <notes>
+        <note category="file-source" priority="1">templates/Profile/two-step-auth.html.twig:69</note>
+        <note category="file-source" priority="1">templates/Profile/two-step-auth.html.twig:70</note>
+      </notes>
+      <segment>
+        <source>profiles-tsa-generated-code</source>
+        <target>Vygenerovaný kód</target>
+      </segment>
+    </unit>
+    <unit id="s.WKjtL" name="profiles-tsa-title">
+      <notes>
+        <note category="file-source" priority="1">templates/Profile/two-step-auth.html.twig:33</note>
+      </notes>
+      <segment>
+        <source>profiles-tsa-title</source>
+        <target>Jak to funguje?</target>
+      </segment>
+    </unit>
+    <unit id="7m3gYY5" name="email-request-reset-password-title">
+      <notes>
+        <note category="file-source" priority="1">src/Service/MailService.php:76</note>
+      </notes>
+      <segment>
+        <source>email-request-reset-password-title</source>
+        <target>Žádost o změnu hesla</target>
+      </segment>
+    </unit>
+    <unit id="b_GYALw" name="request-reset-password-already-pending">
+      <notes>
+        <note category="file-source" priority="1">src/Controller/Profile/SecurityController.php:200</note>
+      </notes>
+      <segment>
+        <source>request-reset-password-already-pending</source>
+        <target>Na této emailové adrese již byla žádost vytvořena. Zkontroluj svojí emailovou schránku</target>
+      </segment>
+    </unit>
+    <unit id="bBNCqnd" name="request-reset-password-sent">
+      <notes>
+        <note category="file-source" priority="1">src/Controller/Profile/SecurityController.php:212</note>
+      </notes>
+      <segment>
+        <source>request-reset-password-sent</source>
+        <target>Žádost o změnu hesla byla vytvořena. Během chvilky ti přijde email s odkazem na změnu hesla</target>
+      </segment>
+    </unit>
+    <unit id="NJmt.zi" name="email-registered">
+      <notes>
+        <note category="file-source" priority="1">templates/Profile/Security/request-reset-password.html.twig:32</note>
+      </notes>
+      <segment>
+        <source>email-registered</source>
+        <target>Emailová adresa uvedená v profilu</target>
+      </segment>
+    </unit>
+    <unit id=".fGytvg" name="reset-password">
+      <notes>
+        <note category="file-source" priority="1">templates/Profile/Security/reset-password.html.twig:9</note>
+        <note category="file-source" priority="1">templates/Profile/Security/reset-password.html.twig:20</note>
+      </notes>
+      <segment>
+        <source>reset-password</source>
+        <target>Resetování hesla</target>
+      </segment>
+    </unit>
+    <unit id="cZDd3KP" name="reset-password-desc">
+      <notes>
+        <note category="file-source" priority="1">templates/Profile/Security/reset-password.html.twig:27</note>
+      </notes>
+      <segment>
+        <source>reset-password-desc</source>
+        <target>Pro dokončení resetování hesla si zde nyní nastav svoje nové heslo. Doporučujeme použít správce hesel (např. Chrome Správce hesel, LastPass, Keypass...) pro vygenerování bezpečného hesla. Heslo zadej dvakrát, ověříme tak, že nedošlo například k překlepu.</target>
+      </segment>
+    </unit>
+    <unit id="uLn48jm" name="new-password">
+      <notes>
+        <note category="file-source" priority="1">templates/Profile/Security/reset-password.html.twig:31</note>
+      </notes>
+      <segment>
+        <source>new-password</source>
+        <target>Nové heslo</target>
+      </segment>
+    </unit>
+    <unit id="f9G5G_d" name="new-password-check">
+      <notes>
+        <note category="file-source" priority="1">templates/Profile/Security/reset-password.html.twig:35</note>
+      </notes>
+      <segment>
+        <source>new-password-check</source>
+        <target>Nové heslo znovu, pro kontrolu</target>
+      </segment>
+    </unit>
+    <unit id="E_Q4Wjx" name="reset-password-button">
+      <notes>
+        <note category="file-source" priority="1">templates/Profile/Security/reset-password.html.twig:41</note>
+      </notes>
+      <segment>
+        <source>reset-password-button</source>
+        <target>Nastavit</target>
+      </segment>
+    </unit>
+    <unit id="vRAQKoo" name="reset-password-new-password-mismatch">
+      <notes>
+        <note category="file-source" priority="1">src/Controller/Profile/SecurityController.php:258</note>
+      </notes>
+      <segment>
+        <source>reset-password-new-password-mismatch</source>
+        <target>Kontrolně zadané nové heslo se neshoduje s novým heslem, možná překlep?</target>
+      </segment>
+    </unit>
+    <unit id="HjQChF8" name="reset-password-failed">
+      <notes>
+        <note category="file-source" priority="1">src/Controller/Profile/SecurityController.php:272</note>
+      </notes>
+      <segment>
+        <source>reset-password-failed</source>
+        <target>Nastala chyba při ukládání nového hesla</target>
+      </segment>
+    </unit>
+    <unit id="tdmsrLr" name="reset-password-invalid-token">
+      <notes>
+        <note category="file-source" priority="1">src/Controller/Profile/SecurityController.php:245</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>reset-password-invalid-token</source>
+        <target>Token pro změnu hesla již není platný</target>
+      </segment>
+    </unit>
+    <unit id="aJBmLIx" name="reset-password-success">
+      <notes>
+        <note category="file-source" priority="1">src/Controller/Profile/SecurityController.php:277</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>reset-password-success</source>
+        <target>Změna hesla proběhla úspěšně</target>
       </segment>
     </unit>
   </file>

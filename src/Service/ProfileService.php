@@ -130,6 +130,35 @@ class ProfileService extends AbstractService
     }
 
     /**
+     * @param string $newPassword
+     * @param Profile $profile
+     * @param Token|null $token
+     * @return Profile|null
+     * @throws ExpiredTokenException
+     * @throws InvalidTokenException
+     * @throws \Exception
+     */
+    public function updatePassword(string $newPassword, Profile $profile, Token $token = null): ?Profile
+    {
+        if ($token) {
+            if ($this->tokenService->isExpired($token)) {
+                throw new ExpiredTokenException($this->translator->trans('activation-expired-token',
+                    [], 'profile'));
+            }
+
+            if ($token->isInvalid()) {
+                throw new InvalidTokenException($this->translator->trans('activation-invalid-token',
+                    [], 'profile'));
+            }
+        }
+
+        $password = $this->passwordEncoder->encodePassword($profile, $newPassword);
+        $profile->setPassword($password);
+
+        return $profile;
+    }
+
+    /**
      * @return Profile[]|null
      */
     public function getExpiredRegistrations(): ?array

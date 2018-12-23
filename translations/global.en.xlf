@@ -3,12 +3,14 @@
   <file id="global.en">
     <unit id="1S.TN.A" name="profiles">
       <notes>
-        <note category="file-source" priority="1">templates/Profile/Registration/success.html.twig:17</note>
-        <note category="file-source" priority="1">templates/Profile/Registration/activation.html.twig:17</note>
-        <note category="file-source" priority="1">templates/Profile/Registration/index.html.twig:16</note>
-        <note category="file-source" priority="1">templates/Profile/two-step-auth.html.twig:17</note>
         <note category="file-source" priority="1">templates/Profile/view.html.twig:17</note>
         <note category="file-source" priority="1">templates/Profile/settings.html.twig:17</note>
+        <note category="file-source" priority="1">templates/Profile/Security/success.html.twig:17</note>
+        <note category="file-source" priority="1">templates/Profile/Security/request-reset-password.html.twig:17</note>
+        <note category="file-source" priority="1">templates/Profile/Security/activation.html.twig:17</note>
+        <note category="file-source" priority="1">templates/Profile/Security/registration.html.twig:16</note>
+        <note category="file-source" priority="1">templates/Profile/Security/reset-password.html.twig:17</note>
+        <note category="file-source" priority="1">templates/Profile/two-step-auth.html.twig:17</note>
         <note category="file-source" priority="1">templates/Profile/delete.html.twig:17</note>
         <note category="file-source" priority="1">templates/partials/navigation-top-frontend.html.twig:21</note>
       </notes>
@@ -19,9 +21,9 @@
     </unit>
     <unit id="KcnDDgY" name="registration">
       <notes>
-        <note category="file-source" priority="1">templates/Profile/Registration/success.html.twig:20</note>
-        <note category="file-source" priority="1">templates/Profile/Registration/activation.html.twig:20</note>
-        <note category="file-source" priority="1">templates/Profile/Registration/index.html.twig:17</note>
+        <note category="file-source" priority="1">templates/Profile/Security/success.html.twig:20</note>
+        <note category="file-source" priority="1">templates/Profile/Security/activation.html.twig:20</note>
+        <note category="file-source" priority="1">templates/Profile/Security/registration.html.twig:17</note>
       </notes>
       <segment>
         <source>registration</source>
@@ -30,7 +32,7 @@
     </unit>
     <unit id="h1Dnr0R" name="registration-fee-desc">
       <notes>
-        <note category="file-source" priority="1">templates/Profile/Registration/index.html.twig:25</note>
+        <note category="file-source" priority="1">templates/Profile/Security/registration.html.twig:25</note>
       </notes>
       <segment>
         <source>registration-fee-desc</source>
@@ -39,7 +41,7 @@
     </unit>
     <unit id="ruQIhH0" name="success">
       <notes>
-        <note category="file-source" priority="1">templates/Profile/Registration/success.html.twig:23</note>
+        <note category="file-source" priority="1">templates/Profile/Security/success.html.twig:23</note>
       </notes>
       <segment>
         <source>success</source>
@@ -48,7 +50,7 @@
     </unit>
     <unit id="sVUmycD" name="activation">
       <notes>
-        <note category="file-source" priority="1">templates/Profile/Registration/activation.html.twig:23</note>
+        <note category="file-source" priority="1">templates/Profile/Security/activation.html.twig:23</note>
       </notes>
       <segment>
         <source>activation</source>
@@ -57,7 +59,7 @@
     </unit>
     <unit id="ft0I5O8" name="contact-support">
       <notes>
-        <note category="file-source" priority="1">src/Service/ProfileService.php:124</note>
+        <note category="file-source" priority="1">src/Service/ProfileService.php:128</note>
       </notes>
       <segment>
         <source>contact-support</source>
@@ -66,9 +68,8 @@
     </unit>
     <unit id="6XFmtUU" name="enable">
       <notes>
-        <note category="file-source" priority="1">templates/Profile/two-step-auth.html.twig:74</note>
         <note category="file-source" priority="1">templates/Profile/settings.html.twig:64</note>
-        <note category="state" priority="1">new</note>
+        <note category="file-source" priority="1">templates/Profile/two-step-auth.html.twig:74</note>
       </notes>
       <segment>
         <source>enable</source>
@@ -78,7 +79,6 @@
     <unit id="QoghNQ6" name="login">
       <notes>
         <note category="file-source" priority="1">templates/Profile/Login/login.html.twig:13</note>
-        <note category="state" priority="1">new</note>
       </notes>
       <segment>
         <source>login</source>
@@ -88,7 +88,6 @@
     <unit id="6diZLzS" name="disable">
       <notes>
         <note category="file-source" priority="1">templates/Profile/settings.html.twig:60</note>
-        <note category="state" priority="1">new</note>
       </notes>
       <segment>
         <source>disable</source>
@@ -98,7 +97,6 @@
     <unit id="FX3KkuQ" name="save">
       <notes>
         <note category="file-source" priority="1">templates/Profile/settings.html.twig:154</note>
-        <note category="state" priority="1">new</note>
       </notes>
       <segment>
         <source>save</source>
@@ -108,7 +106,6 @@
     <unit id="3eyLYwu" name="return-back">
       <notes>
         <note category="file-source" priority="1">templates/Profile/delete.html.twig:49</note>
-        <note category="state" priority="1">new</note>
       </notes>
       <segment>
         <source>return-back</source>
@@ -118,7 +115,6 @@
     <unit id="TrQaKp3" name="forum">
       <notes>
         <note category="file-source" priority="1">templates/partials/navigation-top-frontend.html.twig:30</note>
-        <note category="state" priority="1">new</note>
       </notes>
       <segment>
         <source>forum</source>
@@ -128,7 +124,6 @@
     <unit id="zjh9Xgo" name="gallery">
       <notes>
         <note category="file-source" priority="1">templates/partials/navigation-top-frontend.html.twig:38</note>
-        <note category="state" priority="1">new</note>
       </notes>
       <segment>
         <source>gallery</source>
@@ -138,7 +133,6 @@
     <unit id="5NaT0k5" name="market">
       <notes>
         <note category="file-source" priority="1">templates/partials/navigation-top-frontend.html.twig:46</note>
-        <note category="state" priority="1">new</note>
       </notes>
       <segment>
         <source>market</source>
@@ -148,7 +142,6 @@
     <unit id="jZAB0yx" name="shop">
       <notes>
         <note category="file-source" priority="1">templates/partials/navigation-top-frontend.html.twig:54</note>
-        <note category="state" priority="1">new</note>
       </notes>
       <segment>
         <source>shop</source>
@@ -158,7 +151,6 @@
     <unit id="BuGiovx" name="profile-settings">
       <notes>
         <note category="file-source" priority="1">templates/partials/navigation-top-frontend.html.twig:67</note>
-        <note category="state" priority="1">new</note>
       </notes>
       <segment>
         <source>profile-settings</source>
@@ -168,7 +160,6 @@
     <unit id="7MFicpE" name="my-profile">
       <notes>
         <note category="file-source" priority="1">templates/partials/navigation-top-frontend.html.twig:77</note>
-        <note category="state" priority="1">new</note>
       </notes>
       <segment>
         <source>my-profile</source>
@@ -178,7 +169,6 @@
     <unit id="ACcM9j_" name="logout">
       <notes>
         <note category="file-source" priority="1">templates/partials/navigation-top-frontend.html.twig:85</note>
-        <note category="state" priority="1">new</note>
       </notes>
       <segment>
         <source>logout</source>

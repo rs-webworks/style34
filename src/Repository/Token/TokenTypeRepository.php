@@ -22,4 +22,13 @@ class TokenTypeRepository extends ServiceEntityRepository implements ServiceEnti
     {
         parent::__construct($registry, TokenType::class);
     }
+
+    /**
+     * @param string $type
+     * @return TokenType|null
+     */
+    public function findType(string $type): ?TokenType
+    {
+        return $this->findOneBy(array('name' => $type));
+    }
 }

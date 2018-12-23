@@ -12,7 +12,8 @@ use Style34\Entity\MasterData;
 class TokenType
 {
     const PROFILE = array(
-        'ACTIVATION' => 'profile.activation'
+        'ACTIVATION' => 'profile.activation',
+        'REQUEST_RESET_PASSWORD' => 'profile.request-reset-password'
     );
 
     use MasterData;

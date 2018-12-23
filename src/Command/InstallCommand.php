@@ -268,6 +268,7 @@ class InstallCommand extends Command
     {
         $types = array(
             [TokenType::PROFILE['ACTIVATION']],
+            [TokenType::PROFILE['REQUEST_RESET_PASSWORD']],
         );
 
         $this->io->progressStart(count($types));

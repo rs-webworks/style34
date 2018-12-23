@@ -64,4 +64,30 @@ class MailService extends AbstractService
 
         $this->mailer->send($message);
     }
+
+    /**
+     * @param Profile $profile
+     * @param Token $token
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
+    public function sendRequestResetPasswordMail(Profile $profile, Token $token){
+        $message = (new Swift_Message(Kernel::SITE_NAME . ' - '. $this->translator->trans('email-request-reset-password-title', [], 'profile')))
+            ->setFrom(Kernel::INFO_MAIL)
+            ->setTo($profile->getEmail())
+            ->setBody(
+                $this->renderer->render(
+                    'emails/profile-request-reset-password.twig',
+                    array(
+                        'profile' => $profile,
+                        'token' => $token
+                    )
+                ),
+                'text/html'
+            )
+        ;
+
+        $this->mailer->send($message);
+    }
 }
