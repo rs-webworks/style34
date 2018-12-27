@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xliff xmlns="urn:oasis:names:tc:xliff:document:2.0" version="2.0" srcLang="cs" trgLang="cs">
+<xliff xmlns="urn:oasis:names:tc:xliff:document:2.0" version="2.0" srcLang="en" trgLang="cs">
   <file id="profile.cs">
     <unit id="giREF.l" name="email">
       <notes>
@@ -646,6 +646,36 @@
       <segment>
         <source>reset-password-success</source>
         <target>Změna hesla proběhla úspěšně</target>
+      </segment>
+    </unit>
+    <unit id=".pBmoMr" name="two-step-auth">
+      <segment>
+        <source>two-step-auth</source>
+        <target>Dvou-fázové ověření</target>
+      </segment>
+    </unit>
+    <unit id="rkzmjFQ" name="login-code">
+      <segment>
+        <source>login-code</source>
+        <target>Vygenerovaný kód</target>
+      </segment>
+    </unit>
+    <unit id="cavptXD" name="login-no-auth">
+      <segment>
+        <source>login-no-auth</source>
+        <target>Poslat přihlašovací email</target>
+      </segment>
+    </unit>
+    <unit id="otFQWAt" name="login-no-auth-desc">
+      <segment>
+        <source>login-no-auth-desc</source>
+        <target>Nemáš přístup do aplikace Google Authenticator? Můžeš si nechat zaslat přihlašovací odkaz na email.</target>
+      </segment>
+    </unit>
+    <unit id="n_zSYI." name="two-step-auth-desc">
+      <segment>
+        <source>two-step-auth-desc</source>
+        <target>Nyní zadej vygenerovaný kód z aplikace Google Authenticator na tvém telefonu:</target>
       </segment>
     </unit>
   </file>

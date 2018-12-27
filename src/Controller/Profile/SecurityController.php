@@ -61,6 +61,24 @@ class SecurityController extends AbstractController
     }
 
     /**
+     * @Route("/login-authenticator", name="profile-two-step-auth")
+     */
+    public function twoStepAuth(){
+        $error = [];
+
+        return $this->render('Profile/Login/two-step-auth.html.twig', array(
+            'error' => $error
+        ));
+    }
+
+    /**
+     * @Route("/login-request-code", name="profile-request-email-code")
+     */
+    public function requestEmailCode(){
+
+    }
+
+    /**
      * @Route("/profile/registration", name="profile-registration")
      * @param Request $request
      * @param ProfileService $profileService
