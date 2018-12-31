@@ -1,24 +1,24 @@
 <?php
 
-namespace Style34\Controller\Profile;
+namespace eRyseClient\Controller\Profile;
 
 use Scheb\TwoFactorBundle\Model\Google\TwoFactorInterface;
 use Scheb\TwoFactorBundle\Security\TwoFactor\Provider\Google\GoogleAuthenticatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Style34\Entity\Profile\Profile;
-use Style34\Entity\Token\TokenType;
-use Style34\Exception\Profile\ActivationException;
-use Style34\Exception\Security\ResetPasswordException;
-use Style34\Form\Profile\RegistrationForm;
-use Style34\Repository\Profile\ProfileRepository;
-use Style34\Repository\Token\TokenRepository;
-use Style34\Repository\Token\TokenTypeRepository;
-use Style34\Service\MailService;
-use Style34\Service\ProfileService;
-use Style34\Service\TokenService;
-use Style34\Traits\EntityManagerTrait;
-use Style34\Traits\LoggerTrait;
-use Style34\Traits\TranslatorTrait;
+use eRyseClient\Entity\Profile\Profile;
+use eRyseClient\Entity\Token\TokenType;
+use eRyseClient\Exception\Profile\ActivationException;
+use eRyseClient\Exception\Security\ResetPasswordException;
+use eRyseClient\Form\Profile\RegistrationForm;
+use eRyseClient\Repository\Profile\ProfileRepository;
+use eRyseClient\Repository\Token\TokenRepository;
+use eRyseClient\Repository\Token\TokenTypeRepository;
+use eRyseClient\Service\MailService;
+use eRyseClient\Service\ProfileService;
+use eRyseClient\Service\TokenService;
+use eRyseClient\Traits\EntityManagerTrait;
+use eRyseClient\Traits\LoggerTrait;
+use eRyseClient\Traits\TranslatorTrait;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -32,7 +32,7 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
  * Class SecurityController
- * @package Style34\Controller\Profile
+ * @package eRyseClient\Controller\Profile
  */
 class SecurityController extends AbstractController
 {
@@ -69,7 +69,7 @@ class SecurityController extends AbstractController
     /**
      * @Route("/login-authenticator", name="profile-two-step-auth")
      * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\Security\Core\Exception\AccessDeniedException
-     * @IsGranted(Style34\Entity\Profile\Role::ADMIN)
+     * @IsGranted(eRyseClient\Entity\Profile\Role::ADMIN)
      */
     public function twoStepAuth(
     ) {

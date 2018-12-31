@@ -25,5 +25,5 @@ doctrine:
                 is_bundle: false
                 type: annotation
                 dir: '%kernel.project_dir%/src/Entity'
-                prefix: 'Style34\Entity'
-                alias: Style34
+                prefix: 'eRyseClient\Entity'
+                alias: eRyseClient

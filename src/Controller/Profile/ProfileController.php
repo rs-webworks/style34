@@ -1,16 +1,16 @@
 <?php
 
-namespace Style34\Controller\Profile;
+namespace eRyseClient\Controller\Profile;
 
 use Scheb\TwoFactorBundle\Security\TwoFactor\Provider\Google\GoogleAuthenticatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Style34\Entity\Profile\Profile;
-use Style34\Form\Profile\SettingsForm;
-use Style34\Repository\Profile\ProfileRepository;
-use Style34\Service\ProfileService;
-use Style34\Traits\EntityManagerTrait;
-use Style34\Traits\LoggerTrait;
-use Style34\Traits\TranslatorTrait;
+use eRyseClient\Entity\Profile\Profile;
+use eRyseClient\Form\Profile\SettingsForm;
+use eRyseClient\Repository\Profile\ProfileRepository;
+use eRyseClient\Service\ProfileService;
+use eRyseClient\Traits\EntityManagerTrait;
+use eRyseClient\Traits\LoggerTrait;
+use eRyseClient\Traits\TranslatorTrait;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -20,8 +20,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Class ProfileController
- * @package Style34\Controller\Profile
- * @IsGranted(Style34\Entity\Profile\Role::MEMBER)
+ * @package eRyseClient\Controller\Profile
+ * @IsGranted(eRyseClient\Entity\Profile\Role::MEMBER)
  */
 class ProfileController extends AbstractController
 {
@@ -147,7 +147,6 @@ class ProfileController extends AbstractController
      */
     public function disableTwoStepAuth(ProfileService $profileService, UserInterface $profile)
     {
-
         // TODO: Require user to either enter password again or add email token for this, security reasons
         $profileService->disableTwoStepAuth($profile);
 
@@ -172,10 +171,16 @@ class ProfileController extends AbstractController
 
     /**
      * @Route("/profile/settings/logoutEverywhere", name="profile-settings-logout-everywhere")
+     * @param ProfileService $profileService
+     * @param UserInterface|Profile $user
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function logoutEverywhere()
+    public function logoutEverywhere(ProfileService $profileService, UserInterface $user)
     {
+        $profileService->logoutEverywhere($user);
+        $this->addFlash('success', $this->translator->trans('settings-logged-out-everywhere', [], 'profile'));
 
+        return $this->redirectToRoute('profile-settings');
     }
 
     /**

@@ -1,6 +1,6 @@
 <?php
 
-use Style34\Kernel;
+use eRyseClient\Kernel;
 use Symfony\Component\Debug\Debug;
 use Symfony\Component\Dotenv\Dotenv;
 use Symfony\Component\HttpFoundation\Request;

@@ -1,18 +1,18 @@
 <?php
 
 
-namespace Style34\Repository\Token;
+namespace eRyseClient\Repository\Token;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Style34\Entity\Profile\Profile;
-use Style34\Entity\Token\Token;
-use Style34\Entity\Token\TokenType;
-use Style34\Traits\SaveEntityTrait;
+use eRyseClient\Entity\Profile\Profile;
+use eRyseClient\Entity\Token\Token;
+use eRyseClient\Entity\Token\TokenType;
+use eRyseClient\Traits\SaveEntityTrait;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
  * Class TokenRepository
- * @package Style34\Repository\Profile
+ * @package eRyseClient\Repository\Profile
  * @method Token|null findOneBy(array $criteria, array $orderBy = null)
  */
 class TokenRepository extends ServiceEntityRepository

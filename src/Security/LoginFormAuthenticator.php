@@ -1,13 +1,13 @@
 <?php
 
-namespace Style34\Security;
+namespace eRyseClient\Security;
 
-use Style34\Entity\Profile\Profile;
-use Style34\Exception\Security\LoginException;
-use Style34\Exception\Security\TwoStepAuthSetException;
-use Style34\Repository\Profile\ProfileRepository;
-use Style34\Traits\EntityManagerTrait;
-use Style34\Traits\TranslatorTrait;
+use eRyseClient\Entity\Profile\Profile;
+use eRyseClient\Exception\Security\LoginException;
+use eRyseClient\Exception\Security\TwoStepAuthSetException;
+use eRyseClient\Repository\Profile\ProfileRepository;
+use eRyseClient\Traits\EntityManagerTrait;
+use eRyseClient\Traits\TranslatorTrait;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -25,7 +25,7 @@ use Symfony\Component\Security\Http\Util\TargetPathTrait;
 
 /**
  * Class LoginFormAuthenticator
- * @package Style34\Security
+ * @package eRyseClient\Security
  */
 class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 {

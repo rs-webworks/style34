@@ -11,7 +11,7 @@
 		<nav aria-label="breadcrumb">
 			<ol class="breadcrumb">
 				<li class="breadcrumb-item">
-					<a href="{{ url('home-index') }}">{{ constant('Style34\\Kernel::SITE_NAME') }}</a>
+					<a href="{{ url('home-index') }}">{{ constant('eRyseClient\\Kernel::SITE_NAME') }}</a>
 				</li>
 				<li class="breadcrumb-item">
 					<a href="{{ url('profile-list') }}">{% trans from 'global' %}profiles{% endtrans %}</a>
@@ -91,7 +91,7 @@
 							</label>
 							<div class="col-sm-5">
 
-								<a href="{{ url('profile-settings-forget-devices') }}" class="btn btn-outline-primary float-right">
+								<a href="{{ url('profile-settings-logout-everywhere') }}" class="btn btn-outline-primary float-right">
 									<i class="fa fa-fw fa-sign-out-alt"></i> {% trans from 'profile' %}settings-logout-everywhere-button{% endtrans %}
 								</a>
 							</div>

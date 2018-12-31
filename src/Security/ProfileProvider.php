@@ -1,11 +1,11 @@
 <?php
 
-namespace Style34\Security;
+namespace eRyseClient\Security;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Style34\Entity\Profile\Profile;
-use Style34\Repository\Profile\ProfileRepository;
-use Style34\Traits\EntityManagerTrait;
+use eRyseClient\Entity\Profile\Profile;
+use eRyseClient\Repository\Profile\ProfileRepository;
+use eRyseClient\Traits\EntityManagerTrait;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;

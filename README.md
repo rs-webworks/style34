@@ -1,6 +1,6 @@
-# style34
-Community portal for BMW E34 enthusiast. Currently in development. The aim is to provide hub for car owners to quickly 
-organize tehir cars, parts, sales, car history, events and other stuff.
+# eRyse Client 
+Community portal interface application to connect at serve content from eRyse CDS. Currently in development. The aim is to provide hub for car owners to quickly 
+organize their cars, parts, sales, car history, events and other stuff.
 
 ### Instalation
 1. Set all required settings to .env file.

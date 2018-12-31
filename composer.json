@@ -52,12 +52,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Style34\\": "src/"
+            "eRyseClient\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Style34\\Tests\\": "tests/"
+            "eRyseClient\\Tests\\": "tests/"
         }
     },
     "replace": {

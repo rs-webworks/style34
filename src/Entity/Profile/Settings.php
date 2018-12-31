@@ -1,14 +1,14 @@
 <?php
 
-namespace Style34\Entity\Profile;
+namespace eRyseClient\Entity\Profile;
 
 use Doctrine\ORM\Mapping as ORM;
-use Style34\Entity\Identifier;
+use eRyseClient\Entity\Identifier;
 
 /**
  * Class Role
- * @package Style34\Entity\Profile
- * @ORM\Entity(repositoryClass="Style34\Repository\Profile\SettingsRepository")
+ * @package eRyseClient\Entity\Profile
+ * @ORM\Entity(repositoryClass="eRyseClient\Repository\Profile\SettingsRepository")
  */
 class Settings
 {
@@ -17,7 +17,7 @@ class Settings
 
     /**
      * @var Profile
-     * @ORM\OneToOne(targetEntity="Style34\Entity\Profile\Profile", inversedBy="settings")
+     * @ORM\OneToOne(targetEntity="eRyseClient\Entity\Profile\Profile", inversedBy="settings")
      */
     protected $profile;
 

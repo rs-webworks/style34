@@ -1,12 +1,12 @@
 <?php
 
-namespace Style34\Service;
+namespace eRyseClient\Service;
 
 use OpenCrypt\OpenCrypt;
 
 /**
  * Class CryptService
- * @package Style34\Service
+ * @package eRyseClient\Service
  */
 final class CryptService extends AbstractService
 {

@@ -1,15 +1,15 @@
 <?php
 
 
-namespace Style34\Repository\Profile;
+namespace eRyseClient\Repository\Profile;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Style34\Entity\Profile\Role;
+use eRyseClient\Entity\Profile\Role;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
  * Class RoleRepository
- * @package Style34\Repository\Profile
+ * @package eRyseClient\Repository\Profile
  */
 class RoleRepository extends ServiceEntityRepository
 {

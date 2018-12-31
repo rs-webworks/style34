@@ -1,16 +1,16 @@
 <?php
 
-namespace Style34\Entity\Profile;
+namespace eRyseClient\Entity\Profile;
 
 use Doctrine\ORM\Mapping as ORM;
-use Style34\Entity\Identifier;
+use eRyseClient\Entity\Identifier;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class Device
- * @package Style34\Entity\Profile
- * @ORM\Entity(repositoryClass="Style34\Repository\Profile\DeviceRepository")
+ * @package eRyseClient\Entity\Profile
+ * @ORM\Entity(repositoryClass="eRyseClient\Repository\Profile\DeviceRepository")
  * @UniqueEntity("name")
  */
 class Device
@@ -33,7 +33,7 @@ class Device
 
     /**
      * @var Profile $profile
-     * @ORM\ManyToOne(targetEntity="Style34\Entity\Profile\Profile", inversedBy="devices")
+     * @ORM\ManyToOne(targetEntity="eRyseClient\Entity\Profile\Profile", inversedBy="devices")
      */
     protected $profile;
 

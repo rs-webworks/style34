@@ -1,10 +1,10 @@
 <?php
 
-namespace Style34\Exception\Token;
+namespace eRyseClient\Exception\Token;
 
 /**
  * Class InvalidTokenException
- * @package Style34\Exception\Profile
+ * @package eRyseClient\Exception\Profile
  */
 class ExpiredTokenException extends TokenException implements \Throwable
 {

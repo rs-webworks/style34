@@ -1,26 +1,27 @@
 <?php
 
-namespace Style34\Service;
+namespace eRyseClient\Service;
 
-use Style34\Entity\Profile\Profile;
-use Style34\Entity\Profile\Role;
-use Style34\Entity\Profile\Settings;
-use Style34\Entity\Token\Token;
-use Style34\Entity\Token\TokenType;
-use Style34\Exception\Profile\ActivationException;
-use Style34\Exception\Token\ExpiredTokenException;
-use Style34\Exception\Token\InvalidTokenException;
-use Style34\Kernel;
-use Style34\Repository\Token\TokenRepository;
-use Style34\Repository\Token\TokenTypeRepository;
-use Style34\Traits\EntityManagerTrait;
-use Style34\Traits\LoggerTrait;
-use Style34\Traits\TranslatorTrait;
+use eRyseClient\Entity\Profile\Profile;
+use eRyseClient\Entity\Profile\Role;
+use eRyseClient\Entity\Profile\Settings;
+use eRyseClient\Entity\Token\RememberMeToken;
+use eRyseClient\Entity\Token\Token;
+use eRyseClient\Entity\Token\TokenType;
+use eRyseClient\Exception\Profile\ActivationException;
+use eRyseClient\Exception\Token\ExpiredTokenException;
+use eRyseClient\Exception\Token\InvalidTokenException;
+use eRyseClient\Kernel;
+use eRyseClient\Repository\Token\TokenRepository;
+use eRyseClient\Repository\Token\TokenTypeRepository;
+use eRyseClient\Traits\EntityManagerTrait;
+use eRyseClient\Traits\LoggerTrait;
+use eRyseClient\Traits\TranslatorTrait;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
  * Class ProfileService
- * @package Style34\Service
+ * @package eRyseClient\Service
  */
 class ProfileService extends AbstractService
 {
@@ -212,8 +213,10 @@ class ProfileService extends AbstractService
 
         $settings->setGAuthSecret(null);
         $settings->setTwoStepAuthEnabled(false);
+        $profile->setTrustedTokenVersion($profile->getTrustedTokenVersion() + 1);
 
         $this->em->persist($settings);
+        $this->em->persist($profile);
         $this->em->flush();
     }
 
@@ -222,8 +225,30 @@ class ProfileService extends AbstractService
      */
     public function forgetDevices(Profile $profile)
     {
-        $profile->setTrustedTokenVersion($profile->getTrustedTokenVersion()+1);
+        $profile->setTrustedTokenVersion($profile->getTrustedTokenVersion() + 1);
         $this->em->persist($profile);
         $this->em->flush();
     }
+
+    /**
+     * @param Profile $profile
+     * @return bool
+     */
+    public function hasRememberMeToken(Profile $profile)
+    {
+        $token = $this->em->getRepository(RememberMeToken::class)->findOneBy(array(
+            'username' => $profile->getUsername()
+        ));
+
+        return $token ? true : false;
+    }
+
+    /**
+     * @param Profile $profile
+     */
+    public function logoutEverywhere(Profile $profile)
+    {
+        $profile;
+    }
+
 }

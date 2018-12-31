@@ -1,16 +1,16 @@
 <?php
 
-namespace Style34\Entity\Profile;
+namespace eRyseClient\Entity\Profile;
 
 use Doctrine\ORM\Mapping as ORM;
-use Style34\Entity\Identifier;
+use eRyseClient\Entity\Identifier;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Class Role
- * @package Style34\Entity\Profile
- * @ORM\Entity(repositoryClass="Style34\Repository\Profile\RoleRepository")
+ * @package eRyseClient\Entity\Profile
+ * @ORM\Entity(repositoryClass="eRyseClient\Repository\Profile\RoleRepository")
  * @UniqueEntity("name")
  */
 class Role {

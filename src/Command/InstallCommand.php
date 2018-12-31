@@ -1,17 +1,17 @@
 <?php declare(strict_types=1);
 
 
-namespace Style34\Command;
+namespace eRyseClient\Command;
 
 use BrowscapPHP\BrowscapUpdater;
 use Psr\SimpleCache\CacheInterface;
-use Style34\Entity\Address\State;
-use Style34\Entity\Profile\Profile;
-use Style34\Entity\Profile\Role;
-use Style34\Entity\Profile\Settings;
-use Style34\Entity\Token\TokenType;
-use Style34\Traits\EntityManagerTrait;
-use Style34\Traits\LoggerTrait;
+use eRyseClient\Entity\Address\State;
+use eRyseClient\Entity\Profile\Profile;
+use eRyseClient\Entity\Profile\Role;
+use eRyseClient\Entity\Profile\Settings;
+use eRyseClient\Entity\Token\TokenType;
+use eRyseClient\Traits\EntityManagerTrait;
+use eRyseClient\Traits\LoggerTrait;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;
@@ -24,7 +24,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 /**
  * Class InstallCommand.
  * Install only app-required data, not testing fixtures! For dev/test data use fixtures in DataFixtures.
- * @package Style34\Command
+ * @package eRyseClient\Command
  */
 class InstallCommand extends Command
 {
@@ -230,11 +230,11 @@ class InstallCommand extends Command
     {
         /** @var array $users Username, mail, password */
         $users = array(
-            ['admin', 'admin@style34.net', 'rootpass', [Role::ADMIN, Role::MEMBER, Role::VERIFIED]],
-            ['spravce', 'spravce@style34.net', '', [Role::BANNED]],
-            ['moderator', 'moderator@style34.net', '', [Role::BANNED]],
-            ['mod', 'mod@style34.net', '', [Role::BANNED]],
-            ['administrator', 'administrator@style34.net', '', [Role::BANNED]]
+            ['admin', 'admin@eRyseClient.net', 'rootpass', [Role::ADMIN, Role::MEMBER, Role::VERIFIED]],
+            ['spravce', 'spravce@eRyseClient.net', '', [Role::BANNED]],
+            ['moderator', 'moderator@eRyseClient.net', '', [Role::BANNED]],
+            ['mod', 'mod@eRyseClient.net', '', [Role::BANNED]],
+            ['administrator', 'administrator@eRyseClient.net', '', [Role::BANNED]]
         );
 
         $this->io->progressStart(count($users));

@@ -1,12 +1,12 @@
 <?php
 
-namespace Style34\Exception\Token;
+namespace eRyseClient\Exception\Token;
 
-use Style34\Exception\Exception;
+use eRyseClient\Exception\Exception;
 
 /**
  * Class TokenException
- * @package Style34\Exception\Profile
+ * @package eRyseClient\Exception\Profile
  */
 class TokenException extends Exception implements \Throwable
 {

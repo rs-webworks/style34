@@ -1,17 +1,17 @@
 <?php
 
-namespace Style34\Service;
+namespace eRyseClient\Service;
 
-use Style34\Entity\Profile\Profile;
-use Style34\Entity\Token\Token;
-use Style34\Entity\Token\TokenType;
-use Style34\Repository\Token\TokenRepository;
-use Style34\Repository\Token\TokenTypeRepository;
-use Style34\Traits\EntityManagerTrait;
+use eRyseClient\Entity\Profile\Profile;
+use eRyseClient\Entity\Token\Token;
+use eRyseClient\Entity\Token\TokenType;
+use eRyseClient\Repository\Token\TokenRepository;
+use eRyseClient\Repository\Token\TokenTypeRepository;
+use eRyseClient\Traits\EntityManagerTrait;
 
 /**
  * Class TokenService
- * @package Style34\Service
+ * @package eRyseClient\Service
  */
 class TokenService extends AbstractService
 {

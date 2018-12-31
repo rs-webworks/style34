@@ -1,10 +1,10 @@
 <?php
 
-namespace Style34\Service;
+namespace eRyseClient\Service;
 
 /**
  * Class AbstractService
- * @package Style34\Service
+ * @package eRyseClient\Service
  */
 abstract class AbstractService
 {

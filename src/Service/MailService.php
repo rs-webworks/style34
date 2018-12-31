@@ -1,11 +1,11 @@
 <?php
 
-namespace Style34\Service;
+namespace eRyseClient\Service;
 
-use Style34\Entity\Profile\Profile;
-use Style34\Entity\Token\Token;
-use Style34\Kernel;
-use Style34\Traits\TranslatorTrait;
+use eRyseClient\Entity\Profile\Profile;
+use eRyseClient\Entity\Token\Token;
+use eRyseClient\Kernel;
+use eRyseClient\Traits\TranslatorTrait;
 use Swift_Message;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -13,7 +13,7 @@ use Twig\Environment;
 
 /**
  * Class MailService
- * @package Style34\Service
+ * @package eRyseClient\Service
  */
 class MailService extends AbstractService
 {

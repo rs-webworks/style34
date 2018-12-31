@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace Style34\Entity\Token;
+namespace eRyseClient\Entity\Token;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Class RememberMeToken
- * @package Style34\Entity\Token
+ * @package eRyseClient\Entity\Token
  * @ORM\Entity()
  * @ORM\Table(name="rememberme_token")
  */

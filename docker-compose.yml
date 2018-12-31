@@ -34,7 +34,7 @@ services:
       image: dpage/pgadmin4
       container_name: pgadmin
       environment:
-        PGADMIN_DEFAULT_EMAIL: admin@style34.net
+        PGADMIN_DEFAULT_EMAIL: admin@eRyseClient.net
         PGADMIN_DEFAULT_PASSWORD: root
       volumes:
         - pgadmin:/root/.pgadmin

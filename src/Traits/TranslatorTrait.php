@@ -1,12 +1,12 @@
 <?php
 
-namespace Style34\Traits;
+namespace eRyseClient\Traits;
 
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * Trait TranslatorTrait
- * @package Style34\Service\Traits
+ * @package eRyseClient\Service\Traits
  */
 trait TranslatorTrait
 {

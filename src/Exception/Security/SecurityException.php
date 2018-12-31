@@ -1,12 +1,12 @@
 <?php
 
-namespace Style34\Exception\Security;
+namespace eRyseClient\Exception\Security;
 
-use Style34\Exception\Exception;
+use eRyseClient\Exception\Exception;
 
 /**
  * Class SecurityException
- * @package Style34\Exception\Profile
+ * @package eRyseClient\Exception\Profile
  */
 class SecurityException extends Exception implements \Throwable
 {

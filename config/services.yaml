@@ -20,24 +20,24 @@ services:
     # ------------------------------------------------------------------------------------------------------------------
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
-    Style34\:
+    eRyseClient\:
         resource: '../src/*'
         exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
 
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
-    Style34\Controller\:
+    eRyseClient\Controller\:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
 
 
     # Manually defined services
     # ------------------------------------------------------------------------------------------------------------------
-    style34.services.trusted_device_service:
-        class: Style34\Service\TrustedDeviceService
+    eRyseClient.services.trusted_device_service:
+        class: eRyseClient\Service\TrustedDeviceService
 #
-#    style34.services.browscap_service:
-#        class: Style34\Service\BrowscapService
+#    eRyseClient.services.browscap_service:
+#        class: eRyseClient\Service\BrowscapService
 #        arguments: ['@utils.browscap']
 
 
@@ -50,6 +50,12 @@ services:
     # ------------------------------------------------------------------------------------------------------------------
     BrowscapPHP\Browscap:
         public: false
+
+
+    # Event listeners
+    eRyseClient\EventListener\KernelRequestListener:
+        tags:
+            - { name: kernel.event_listener, event: kernel.request }
 
 
 imports:

@@ -1,6 +1,6 @@
 <?php
 
-namespace Style34\Entity;
+namespace eRyseClient\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 

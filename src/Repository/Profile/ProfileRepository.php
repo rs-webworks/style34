@@ -1,17 +1,17 @@
 <?php
 
 
-namespace Style34\Repository\Profile;
+namespace eRyseClient\Repository\Profile;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Style34\Entity\Profile\Profile;
-use Style34\Traits\SaveEntityTrait;
+use eRyseClient\Entity\Profile\Profile;
+use eRyseClient\Traits\SaveEntityTrait;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
 
 /**
  * Class ProfileRepository
- * @package Style34\Repository\Profile
+ * @package eRyseClient\Repository\Profile
  * @method Profile|null findOneBy(array $criteria, array $orderBy = null)
  * @method Profile|null find($id, $lockMode = null, $lockVersion = null)
  */

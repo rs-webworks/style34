@@ -1,12 +1,12 @@
 <?php
 
-namespace Style34\Entity;
+namespace eRyseClient\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Trait ExpiresAt
- * @package Style34\Entity
+ * @package eRyseClient\Entity
  */
 trait ExpiresAt
 {

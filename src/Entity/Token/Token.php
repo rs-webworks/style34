@@ -1,17 +1,17 @@
 <?php declare(strict_types=1);
 
-namespace Style34\Entity\Token;
+namespace eRyseClient\Entity\Token;
 
 use Doctrine\ORM\Mapping as ORM;
-use Style34\Entity\CreatedAt;
-use Style34\Entity\ExpiresAt;
-use Style34\Entity\Identifier;
-use Style34\Entity\Profile\Profile;
+use eRyseClient\Entity\CreatedAt;
+use eRyseClient\Entity\ExpiresAt;
+use eRyseClient\Entity\Identifier;
+use eRyseClient\Entity\Profile\Profile;
 
 /**
  * Class Token
- * @package Style34\Entity\Token
- * @ORM\Entity(repositoryClass="Style34\Repository\Token\TokenRepository")
+ * @package eRyseClient\Entity\Token
+ * @ORM\Entity(repositoryClass="eRyseClient\Repository\Token\TokenRepository")
  */
 class Token
 {
@@ -33,13 +33,13 @@ class Token
 
     /**
      * @var TokenType $type
-     * @ORM\ManyToOne(targetEntity="Style34\Entity\Token\TokenType", inversedBy="tokens")
+     * @ORM\ManyToOne(targetEntity="eRyseClient\Entity\Token\TokenType", inversedBy="tokens")
      */
     protected $type;
 
     /**
      * @var Profile $profile ;
-     * @ORM\ManyToOne(targetEntity="Style34\Entity\Profile\Profile", inversedBy="tokens")
+     * @ORM\ManyToOne(targetEntity="eRyseClient\Entity\Profile\Profile", inversedBy="tokens")
      * @ORM\JoinColumn(name="profile_id", referencedColumnName="id", onDelete="CASCADE")
      */
     protected $profile;

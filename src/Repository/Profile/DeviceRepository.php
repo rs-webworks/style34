@@ -1,15 +1,15 @@
 <?php
 
 
-namespace Style34\Repository\Profile;
+namespace eRyseClient\Repository\Profile;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Style34\Entity\Profile\Device;
+use eRyseClient\Entity\Profile\Device;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
  * Class DeviceRepository
- * @package Style34\Repository\Profile
+ * @package eRyseClient\Repository\Profile
  */
 class DeviceRepository extends ServiceEntityRepository
 {

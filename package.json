@@ -1,8 +1,8 @@
 {
-  "name": "style34",
+  "name": "eRyseClient",
   "version": "1.0.0",
   "main": "public/",
-  "repository": "https://github.com/rs-webworks/style34",
+  "repository": "https://github.com/rs-webworks/eRyseClient",
   "author": "Raito Akehanareru <raito.akehanareru@gmail.com>",
   "license": "MIT",
   "dependencies": {

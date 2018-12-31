@@ -1,16 +1,16 @@
 <?php
 
 
-namespace Style34\Repository\Profile;
+namespace eRyseClient\Repository\Profile;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Style34\Entity\Profile\Profile;
-use Style34\Entity\Profile\Settings;
+use eRyseClient\Entity\Profile\Profile;
+use eRyseClient\Entity\Profile\Settings;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
  * Class SettingsRepository
- * @package Style34\Repository\Profile
+ * @package eRyseClient\Repository\Profile
  */
 class SettingsRepository extends ServiceEntityRepository
 {

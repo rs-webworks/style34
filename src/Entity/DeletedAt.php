@@ -1,12 +1,12 @@
 <?php
 
-namespace Style34\Entity;
+namespace eRyseClient\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Trait DeletedAt
- * @package Style34\Entity
+ * @package eRyseClient\Entity
  */
 trait DeletedAt
 {

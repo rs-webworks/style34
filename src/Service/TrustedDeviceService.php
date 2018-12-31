@@ -1,15 +1,15 @@
 <?php
 
-namespace Style34\Service;
+namespace eRyseClient\Service;
 
 use BrowscapPHP\Browscap;
 use Scheb\TwoFactorBundle\Security\TwoFactor\Trusted\TrustedDeviceManagerInterface;
-use Style34\Traits\LoggerTrait;
+use eRyseClient\Traits\LoggerTrait;
 use Symfony\Component\HttpFoundation\Cookie;
 
 /**
  * Class TrustedDeviceService
- * @package Style34\Service
+ * @package eRyseClient\Service
  */
 final class TrustedDeviceService extends AbstractService implements TrustedDeviceManagerInterface
 {

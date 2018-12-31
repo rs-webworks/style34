@@ -1,9 +1,9 @@
 <?php
 
-namespace Style34\Form\Profile;
+namespace eRyseClient\Form\Profile;
 
-use Style34\Entity\Profile\Profile;
-use Style34\Entity\Profile\Role;
+use eRyseClient\Entity\Profile\Profile;
+use eRyseClient\Entity\Profile\Role;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CountryType;
@@ -17,7 +17,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Class RegistrationForm
- * @package Style34\Form
+ * @package eRyseClient\Form
  */
 class RegistrationForm extends AbstractType
 {

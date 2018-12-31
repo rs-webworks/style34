@@ -1,6 +1,6 @@
 <?php
 
-namespace Style34\Form\Profile;
+namespace eRyseClient\Form\Profile;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -10,7 +10,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Class SettingsForm
- * @package Style34\Form\Profile
+ * @package eRyseClient\Form\Profile
  */
 class SettingsForm extends AbstractType
 {

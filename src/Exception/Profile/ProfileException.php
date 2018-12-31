@@ -1,12 +1,12 @@
 <?php
 
-namespace Style34\Exception\Profile;
+namespace eRyseClient\Exception\Profile;
 
-use Style34\Exception\Exception;
+use eRyseClient\Exception\Exception;
 
 /**
  * Class ProfileException
- * @package Style34\Exception\Profile
+ * @package eRyseClient\Exception\Profile
  */
 class ProfileException extends Exception implements \Throwable
 {

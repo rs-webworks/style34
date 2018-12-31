@@ -1,17 +1,17 @@
 <?php
 
-namespace Style34\Tests\Service;
+namespace eRyseClient\Tests\Service;
 
-use Style34\Entity\Profile\Profile;
-use Style34\Entity\Token\Token;
-use Style34\Entity\Token\TokenType;
-use Style34\Service\TokenService;
+use eRyseClient\Entity\Profile\Profile;
+use eRyseClient\Entity\Token\Token;
+use eRyseClient\Entity\Token\TokenType;
+use eRyseClient\Service\TokenService;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 /**
  * Class TokenServiceTest
- * @package Style34\Tests\Service
- * @covers \Style34\Service\TokenService
+ * @package eRyseClient\Tests\Service
+ * @covers \eRyseClient\Service\TokenService
  */
 class TokenServiceTest extends WebTestCase
 {
@@ -31,7 +31,7 @@ class TokenServiceTest extends WebTestCase
 
     /**
      * @throws \Exception
-     * @covers \Style34\Service\TokenService::generateActivationToken
+     * @covers \eRyseClient\Service\TokenService::generateActivationToken
      */
     public function testGetActivationToken()
     {
@@ -56,7 +56,7 @@ class TokenServiceTest extends WebTestCase
     /**
      * @dataProvider provideExpirationTokens
      * @throws \Exception
-     * @covers \Style34\Service\TokenService::isExpired
+     * @covers \eRyseClient\Service\TokenService::isExpired
      */
     public function testIsExpired($expired, $token)
     {
@@ -67,7 +67,7 @@ class TokenServiceTest extends WebTestCase
         }
     }
     /**
-     * @covers \Style34\Service\TokenService::isValid
+     * @covers \eRyseClient\Service\TokenService::isValid
      */
     public function testIsValid(){
        $validToken = new Token();
@@ -83,7 +83,7 @@ class TokenServiceTest extends WebTestCase
 
     /**
      * @throws \Exception
-     * @covers \Style34\Service\TokenService::createExpirationDateTime
+     * @covers \eRyseClient\Service\TokenService::createExpirationDateTime
      */
     public function testCreateExpiraitonDateTime(){
         $startTime = new \DateTime('2018-01-01 00:00:00');

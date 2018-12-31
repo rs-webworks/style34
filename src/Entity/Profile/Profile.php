@@ -1,22 +1,22 @@
 <?php declare(strict_types=1);
 
-namespace Style34\Entity\Profile;
+namespace eRyseClient\Entity\Profile;
 
 use Doctrine\ORM\Mapping as ORM;
 use Scheb\TwoFactorBundle\Model\Google\TwoFactorInterface;
 use Scheb\TwoFactorBundle\Model\TrustedDeviceInterface;
-use Style34\Entity\CreatedAt;
-use Style34\Entity\DeletedAt;
-use Style34\Entity\Token\Token;
-use Style34\Service\CryptService;
+use eRyseClient\Entity\CreatedAt;
+use eRyseClient\Entity\DeletedAt;
+use eRyseClient\Entity\Token\Token;
+use eRyseClient\Service\CryptService;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class Profile
- * @package Style34\Entity\Profile
- * @ORM\Entity(repositoryClass="Style34\Repository\Profile\ProfileRepository")
+ * @package eRyseClient\Entity\Profile
+ * @ORM\Entity(repositoryClass="eRyseClient\Repository\Profile\ProfileRepository")
  * @UniqueEntity("username", message="profile.username-taken")
  * @UniqueEntity("email", message="profile.email-taken")
  */
@@ -100,7 +100,7 @@ class Profile implements UserInterface, TwoFactorInterface, TrustedDeviceInterfa
 
     /**
      * @var Token[] $tokens
-     * @ORM\OneToMany(targetEntity="Style34\Entity\Token\Token", mappedBy="profile", cascade={"persist"},
+     * @ORM\OneToMany(targetEntity="eRyseClient\Entity\Token\Token", mappedBy="profile", cascade={"persist"},
      *                                                           orphanRemoval=true)
      */
     protected $tokens;
@@ -121,7 +121,7 @@ class Profile implements UserInterface, TwoFactorInterface, TrustedDeviceInterfa
 
     /**
      * @var Settings
-     * @ORM\OneToOne(targetEntity="Style34\Entity\Profile\Settings", mappedBy="profile",  cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="eRyseClient\Entity\Profile\Settings", mappedBy="profile",  cascade={"persist"})
      */
     protected $settings;
 
@@ -136,6 +136,7 @@ class Profile implements UserInterface, TwoFactorInterface, TrustedDeviceInterfa
      * @ORM\Column(type="integer", nullable=false)
      */
     protected $trustedTokenVersion;
+
 
     // Methods
     // -----------------------------------------------------------------------------------------------------------------

@@ -1,19 +1,19 @@
 <?php
 
-namespace Style34\Controller;
+namespace eRyseClient\Controller;
 
 use BrowscapPHP\Browscap;
 use BrowscapPHP\BrowscapUpdater;
 use Psr\SimpleCache\CacheInterface;
-use Style34\Repository\Token\TokenTypeRepository;
-use Style34\Traits\LoggerTrait;
+use eRyseClient\Repository\Token\TokenTypeRepository;
+use eRyseClient\Traits\LoggerTrait;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Class HomeController
- * @package Style34\Controller
+ * @package eRyseClient\Controller
  */
 class HomeController extends AbstractController
 {

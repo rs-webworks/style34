@@ -1,6 +1,6 @@
 <?php
 
-namespace Style34\DataFixtures;
+namespace eRyseClient\DataFixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -8,7 +8,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
  * Class ProfileFixtures
- * @package Style34\DataFixtures
+ * @package eRyseClient\DataFixtures
  */
 class ProfileFixtures extends Fixture {
     /** @var UserPasswordEncoderInterface */

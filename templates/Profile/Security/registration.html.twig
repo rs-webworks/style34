@@ -11,7 +11,7 @@
 		<nav aria-label="breadcrumb">
 			<ol class="breadcrumb">
 				<li class="breadcrumb-item">
-					<a href="{{ url('home-index') }}">{{ constant('Style34\\Kernel::SITE_NAME') }}</a></li>
+					<a href="{{ url('home-index') }}">{{ constant('eRyseClient\\Kernel::SITE_NAME') }}</a></li>
 				<li class="breadcrumb-item">
 					<a href="{{ url('profile-list') }}">{% trans from 'global' %}profiles{% endtrans %}</a></li>
 				<li class="breadcrumb-item active" aria-current="page">{% trans from 'global' %}registration{% endtrans %}</li>
@@ -22,7 +22,7 @@
 			<div class="col-md-5">
 				<h3>{% trans from 'profile' %}registration-fee{% endtrans %}</h3>
 				<p>
-					{% trans with {'%appname%': constant('Style34\\Kernel::SITE_NAME')} from 'global' %}registration-fee-desc{% endtrans %}
+					{% trans with {'%appname%': constant('eRyseClient\\Kernel::SITE_NAME')} from 'global' %}registration-fee-desc{% endtrans %}
 				</p>
 
 
@@ -30,7 +30,7 @@
 					<i class="fa fa-fw fa-trophy"></i> {% trans from 'profile' %}membership-traits{% endtrans %}</a>
 				<div class="btn btn-light">
 					{% trans from 'profile' %}membership-price{% endtrans %}:
-					<strong>{{ constant('Style34\\Kernel::MEMBERSHIP_PRICE') }} Kč </strong>
+					<strong>{{ constant('eRyseClient\\Kernel::MEMBERSHIP_PRICE') }} Kč </strong>
 				</div>
 			</div>
 
