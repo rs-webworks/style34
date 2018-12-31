@@ -2,11 +2,13 @@
 
 namespace Style34\Entity\Profile;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Scheb\TwoFactorBundle\Model\Google\TwoFactorInterface;
+use Scheb\TwoFactorBundle\Model\TrustedDeviceInterface;
 use Style34\Entity\CreatedAt;
 use Style34\Entity\DeletedAt;
 use Style34\Entity\Token\Token;
+use Style34\Service\CryptService;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -18,7 +20,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @UniqueEntity("username", message="profile.username-taken")
  * @UniqueEntity("email", message="profile.email-taken")
  */
-class Profile implements UserInterface
+class Profile implements UserInterface, TwoFactorInterface, TrustedDeviceInterface
 {
     use CreatedAt;
     use DeletedAt;
@@ -98,7 +100,8 @@ class Profile implements UserInterface
 
     /**
      * @var Token[] $tokens
-     * @ORM\OneToMany(targetEntity="Style34\Entity\Token\Token", mappedBy="profile", cascade={"persist"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="Style34\Entity\Token\Token", mappedBy="profile", cascade={"persist"},
+     *                                                           orphanRemoval=true)
      */
     protected $tokens;
 
@@ -122,6 +125,18 @@ class Profile implements UserInterface
      */
     protected $settings;
 
+    /**
+     * @var Device[]
+     * @ORM\OneToMany(targetEntity="Device", mappedBy="profile",  cascade={"persist"})
+     */
+    protected $devices;
+
+    /**
+     * @var integer
+     * @ORM\Column(type="integer", nullable=false)
+     */
+    protected $trustedTokenVersion;
+
     // Methods
     // -----------------------------------------------------------------------------------------------------------------
 
@@ -131,6 +146,7 @@ class Profile implements UserInterface
     public function __construct()
     {
         $this->addRole(Role::USER);
+        $this->trustedTokenVersion = 0;
     }
 
     /**
@@ -444,5 +460,93 @@ class Profile implements UserInterface
         $this->settings = $settings;
     }
 
+    // Two step authentificator
+    // -----------------------------------------------------------------------------------------------------------------
+
+    /**
+     * @return bool
+     */
+    public function isGoogleAuthenticatorEnabled(): bool
+    {
+        return $this->getSettings()->isTwoStepAuthEnabled();
+    }
+
+    /**
+     * @return string
+     */
+    public function getGoogleAuthenticatorUsername(): string
+    {
+        return $this->getEmail();
+    }
+
+    /**
+     * @return string
+     */
+    public function getGoogleAuthenticatorSecret(): string
+    {
+        return CryptService::getDecrypted($this->getSettings()->getGAuthSecret());
+    }
+
+    /**
+     * @param string|null $googleAuthenticatorSecret
+     */
+    public function setGoogleAuthenticatorSecret(?string $googleAuthenticatorSecret): void
+    {
+        $this->getSettings()->setGAuthSecret(CryptService::getEncrypted($googleAuthenticatorSecret));
+    }
+
+
+    // Devices
+    // -----------------------------------------------------------------------------------------------------------------
+
+    /**
+     * @return Device[]
+     */
+    public function getDevices(): array
+    {
+        return $this->devices;
+    }
+
+    /**
+     * @param Device[] $devices
+     */
+    public function setDevices(array $devices): void
+    {
+        $this->devices = $devices;
+    }
+
+    /**
+     * @param Device $device
+     */
+    public function addDevice(Device $device): void
+    {
+        if (!in_array($device, $this->devices)) {
+            array_push($this->devices, $device);
+        }
+    }
+
+    /**
+     * @param Device $device
+     */
+    public function removeDevice(Device $device): void
+    {
+        unset($this->devices[array_search($device, $this->devices)]);
+    }
+
+    /**
+     * @return int
+     */
+    public function getTrustedTokenVersion(): int
+    {
+        return $this->trustedTokenVersion;
+    }
+
+    /**
+     * @param int $version
+     */
+    public function setTrustedTokenVersion(int $version): void
+    {
+        $this->trustedTokenVersion = $version;
+    }
 
 }

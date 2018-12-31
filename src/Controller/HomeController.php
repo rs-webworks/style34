@@ -4,14 +4,10 @@ namespace Style34\Controller;
 
 use BrowscapPHP\Browscap;
 use BrowscapPHP\BrowscapUpdater;
-use Psr\Cache\CacheItemPoolInterface;
 use Psr\SimpleCache\CacheInterface;
-use Style34\Entity\Token\TokenType;
 use Style34\Repository\Token\TokenTypeRepository;
 use Style34\Traits\LoggerTrait;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Cache\Adapter\RedisAdapter;
-use Symfony\Component\Cache\Simple\RedisCache;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 

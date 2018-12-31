@@ -4,7 +4,6 @@
 namespace Style34\Command;
 
 use BrowscapPHP\BrowscapUpdater;
-use Doctrine\Common\Persistence\ObjectManager;
 use Psr\SimpleCache\CacheInterface;
 use Style34\Entity\Address\State;
 use Style34\Entity\Profile\Profile;
@@ -115,6 +114,10 @@ class InstallCommand extends Command
             // Build browsercap cache
             $io->section('Installing browsercap (this takes long...)');
             $this->fetchBrowsercap();
+
+            // Build browsercap cache
+            $io->section('Clearing cache...');
+            $this->clearCache();
 
             $io->success('Installation complete!');
         } catch (\Exception $ex) {
@@ -292,7 +295,8 @@ class InstallCommand extends Command
      * @throws \BrowscapPHP\Helper\Exception
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    protected function fetchBrowsercap(){
+    protected function fetchBrowsercap()
+    {
         $this->io->progressStart(2);
 
         $browscap_updater = new BrowscapUpdater($this->cacheInterface, $this->logger);
@@ -301,6 +305,21 @@ class InstallCommand extends Command
 
         $browscap_updater->update(\BrowscapPHP\Helper\IniLoader::PHP_INI_FULL);
 
+        $this->io->progressFinish();
+    }
+
+    /**
+     * @throws \Exception
+     */
+    protected function clearCache(){
+        $this->io->progressStart(1);
+
+        $command = $this->getApplication()->find('cache:clear');
+
+        $arguments = new ArrayInput([]);
+        $command->run($arguments, new NullOutput());
+
+        $this->io->progressAdvance(1);
         $this->io->progressFinish();
     }
 }

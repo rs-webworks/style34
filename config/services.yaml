@@ -33,14 +33,13 @@ services:
 
     # Manually defined services
     # ------------------------------------------------------------------------------------------------------------------
-    Style34\Service\CryptService:
-        arguments:
-            $appSecret: '%env(APP_SECRET)%'
-            $iv: '%env(APP_IV)%'
+    style34.services.trusted_device_service:
+        class: Style34\Service\TrustedDeviceService
+#
+#    style34.services.browscap_service:
+#        class: Style34\Service\BrowscapService
+#        arguments: ['@utils.browscap']
 
-    Style34\Service\GoogleAuthService:
-        arguments:
-            $googleAuth: "@google.authenticator"
 
     security.rememberme.token.provider.doctrine:
         class: Symfony\Bridge\Doctrine\Security\RememberMe\DoctrineTokenProvider
@@ -49,11 +48,8 @@ services:
 
     # Not shared services
     # ------------------------------------------------------------------------------------------------------------------
-    google.authenticator:
-        class: Sonata\GoogleAuthenticator\GoogleAuthenticator
-        arguments:
-            $passCodeLength: !php/const Style34\Service\GoogleAuthService::CODE_LENGTH
-            $secretLength: !php/const Style34\Service\GoogleAuthService::SECRET_LENGTH
+    BrowscapPHP\Browscap:
+        public: false
 
 
 imports:

@@ -2,6 +2,9 @@
 
 namespace Style34\Controller\Profile;
 
+use Scheb\TwoFactorBundle\Model\Google\TwoFactorInterface;
+use Scheb\TwoFactorBundle\Security\TwoFactor\Provider\Google\GoogleAuthenticatorInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Style34\Entity\Profile\Profile;
 use Style34\Entity\Token\TokenType;
 use Style34\Exception\Profile\ActivationException;
@@ -17,9 +20,12 @@ use Style34\Traits\EntityManagerTrait;
 use Style34\Traits\LoggerTrait;
 use Style34\Traits\TranslatorTrait;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Security;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Validator\ConstraintViolation;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -62,19 +68,23 @@ class SecurityController extends AbstractController
 
     /**
      * @Route("/login-authenticator", name="profile-two-step-auth")
+     * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\Security\Core\Exception\AccessDeniedException
+     * @IsGranted(Style34\Entity\Profile\Role::ADMIN)
      */
-    public function twoStepAuth(){
-        $error = [];
+    public function twoStepAuth(
+    ) {
 
         return $this->render('Profile/Login/two-step-auth.html.twig', array(
-            'error' => $error
+            'authenticationError' => null,
+            'trustedParameterName' => null
         ));
     }
 
     /**
      * @Route("/login-request-code", name="profile-request-email-code")
      */
-    public function requestEmailCode(){
+    public function requestEmailCode()
+    {
 
     }
 

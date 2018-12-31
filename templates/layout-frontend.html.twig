@@ -47,13 +47,16 @@
 {% include "partials/navigation-top-frontend.html.twig" %}
 
 <div class="container" id="flash-messages">
-{% for label, messages in app.flashes %}
-	{% for message in messages %}
-		<div class="alert alert-{{ label }}">
-			{{ message }}
-		</div>
-	{% endfor %}
-{% endfor %}
+
+	{% if app.request.hasPreviousSession %}
+		{% for label, messages in app.flashes %}
+			{% for message in messages %}
+				<div class="alert alert-{{ label }}">
+					{{ message }}
+				</div>
+			{% endfor %}
+		{% endfor %}
+	{% endif %}
 </div>
 
 {% block body %}{% endblock %}
@@ -64,6 +67,7 @@
 
 {% block javascripts %}
 	<script src="{{ asset('libraries/jquery/dist/jquery.slim.js') }}"></script>
+	<script src="{{ asset('libraries/popper.js/dist/umd/popper.min.js') }}"></script>
 	<script src="{{ asset('libraries/bootstrap/dist/js/bootstrap.js') }}"></script>
 	<script src="{{ asset('js/app.js') }}"></script>
 {% endblock %}

@@ -2,14 +2,15 @@
 
 namespace Style34\Security;
 
-use Doctrine\ORM\EntityManagerInterface;
 use Style34\Entity\Profile\Profile;
 use Style34\Exception\Security\LoginException;
+use Style34\Exception\Security\TwoStepAuthSetException;
 use Style34\Repository\Profile\ProfileRepository;
 use Style34\Traits\EntityManagerTrait;
 use Style34\Traits\TranslatorTrait;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -21,7 +22,6 @@ use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticator;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
-use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * Class LoginFormAuthenticator
@@ -33,6 +33,9 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     use TranslatorTrait;
     use EntityManagerTrait;
 
+    /** @var ProfileRepository $profileRepository */
+    private $profileRepository;
+
     /** @var RouterInterface */
     private $router;
 
@@ -42,8 +45,8 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     /** @var UserPasswordEncoderInterface */
     private $passwordEncoder;
 
-    /** @var ProfileRepository $profileRepository */
-    protected $profileRepository;
+    /** @var SessionInterface */
+    private $session;
 
     /**
      * LoginFormAuthenticator constructor.
@@ -51,17 +54,20 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
      * @param CsrfTokenManagerInterface $csrfTokenManager
      * @param UserPasswordEncoderInterface $passwordEncoder
      * @param ProfileRepository $profileRepository
+     * @param SessionInterface $session
      */
     public function __construct(
         RouterInterface $router,
         CsrfTokenManagerInterface $csrfTokenManager,
         UserPasswordEncoderInterface $passwordEncoder,
-        ProfileRepository $profileRepository
+        ProfileRepository $profileRepository,
+        SessionInterface $session
     ) {
         $this->router = $router;
         $this->csrfTokenManager = $csrfTokenManager;
         $this->passwordEncoder = $passwordEncoder;
         $this->profileRepository = $profileRepository;
+        $this->session = $session;
     }
 
     /**
@@ -83,6 +89,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         $credentials = [
             'auth' => $request->request->get('_auth'),
             'password' => $request->request->get('_password'),
+            'code' => $request->request->get('_code'),
             'csrf_token' => $request->request->get('_csrf_token'),
         ];
         $request->getSession()->set(
@@ -98,6 +105,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
      * @param UserProviderInterface $userProvider
      * @return object|UserInterface|null
      * @throws LoginException
+     * @throws TwoStepAuthSetException
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
     public function getUser($credentials, UserProviderInterface $userProvider)
@@ -107,6 +115,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
             throw new InvalidCsrfTokenException();
         }
 
+        /** @var Profile $user */
         $user = $this->profileRepository->loadUserByUsername($credentials['auth']);
 
         if (!$user) {

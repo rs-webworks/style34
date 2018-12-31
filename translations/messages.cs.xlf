@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:2.0" version="2.0" srcLang="en" trgLang="cs">
-  <file id="messages.cs"/>
+  <file id="messages.cs">
+    <unit id="J.vze.2" name="scheb_two_factor.trusted">
+      <segment>
+        <source>scheb_two_factor.trusted</source>
+        <target>Uložit jako známé zařízení (nebude již příště vyžadováno ověření)</target>
+      </segment>
+    </unit>
+  </file>
 </xliff>

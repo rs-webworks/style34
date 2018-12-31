@@ -678,5 +678,59 @@
         <target>Nyní zadej vygenerovaný kód z aplikace Google Authenticator na tvém telefonu:</target>
       </segment>
     </unit>
+    <unit id="aCZy.If" name="two-step-auth-help-desc">
+      <segment>
+        <source>two-step-auth-help-desc</source>
+        <target>Nemáš přístup ke svému Google Authenticatoru?</target>
+      </segment>
+    </unit>
+    <unit id="2zCmPCj" name="two-step-auth-help-link">
+      <segment>
+        <source>two-step-auth-help-link</source>
+        <target>Nápověda</target>
+      </segment>
+    </unit>
+    <unit id="GCj52nT" name="settings-forget-devices">
+      <segment>
+        <source>settings-forget-devices</source>
+        <target>Uložené zařízení</target>
+      </segment>
+    </unit>
+    <unit id="JFkKWjo" name="tsa-forget-devices">
+      <segment>
+        <source>tsa-forget-devices</source>
+        <target>Zapomenout</target>
+      </segment>
+    </unit>
+    <unit id="LAs_e.0" name="settings-forget-devices-button">
+      <segment>
+        <source>settings-forget-devices-button</source>
+        <target>Zapomenout</target>
+      </segment>
+    </unit>
+    <unit id="si2Mj8V" name="settings-forget-devices-help">
+      <segment>
+        <source>settings-forget-devices-help</source>
+        <target>Tímto tlačítkem můžeš smazat všechna zařízení, na kterých jsi úspěšně prošel dvou-fázovým ověřením a nastavil je jako uložená. Při dalším přihlášení bude vyžadováno nové ověření.</target>
+      </segment>
+    </unit>
+    <unit id="QBEkcRT" name="settings-logout-everywhere">
+      <segment>
+        <source>settings-logout-everywhere</source>
+        <target>Přihlášená zařízení</target>
+      </segment>
+    </unit>
+    <unit id="RF7y7_8" name="settings-logout-everywhere-button">
+      <segment>
+        <source>settings-logout-everywhere-button</source>
+        <target>Odhlásit všude</target>
+      </segment>
+    </unit>
+    <unit id="fmpOkOd" name="settings-logout-everywhere-help">
+      <segment>
+        <source>settings-logout-everywhere-help</source>
+        <target>Odhlásí tě na všech přihlášených zařízeních.</target>
+      </segment>
+    </unit>
   </file>
 </xliff>

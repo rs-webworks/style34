@@ -2,12 +2,13 @@
 
 namespace Style34\Controller\Profile;
 
+use Scheb\TwoFactorBundle\Security\TwoFactor\Provider\Google\GoogleAuthenticatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Style34\Entity\Profile\Profile;
 use Style34\Form\Profile\SettingsForm;
 use Style34\Repository\Profile\ProfileRepository;
-use Style34\Service\GoogleAuthService;
 use Style34\Service\ProfileService;
+use Style34\Traits\EntityManagerTrait;
 use Style34\Traits\LoggerTrait;
 use Style34\Traits\TranslatorTrait;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,6 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Class ProfileController
@@ -25,6 +27,7 @@ class ProfileController extends AbstractController
 {
     use TranslatorTrait;
     use LoggerTrait;
+    use EntityManagerTrait;
 
     /**
      * @Route("/profile/view/{username}", name="profile-view")
@@ -92,14 +95,18 @@ class ProfileController extends AbstractController
 
     /**
      * @Route("/profile/settings/enableTwoStepAuth", name="profile-settings-enable-two-step-auth")
-     * @param GoogleAuthService $authService
+     * @param GoogleAuthenticatorInterface $authService
      * @param SessionInterface $session
      * @param Request $request
      * @param ProfileService $profileService
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function enableTwoStepAuth(GoogleAuthService $authService, SessionInterface $session, Request $request, ProfileService $profileService)
-    {
+    public function enableTwoStepAuth(
+        GoogleAuthenticatorInterface $authService,
+        SessionInterface $session,
+        Request $request,
+        ProfileService $profileService
+    ) {
         /** @var Profile $profile */
         $profile = $this->getUser();
         $activationCode = $request->get('activation-code');
@@ -107,12 +114,14 @@ class ProfileController extends AbstractController
         // If activation code sent
         if ($activationCode) {
             $secret = $session->get('generated-secret');
+            $profile->setGoogleAuthenticatorSecret($secret);
 
             // If activation code matches generated secret check
-            if ($activationCode == $authService->checkCode($secret, $activationCode)) {
+            if ($activationCode == $authService->checkCode($profile, $activationCode)) {
                 $profileService->enableTwoStepAuth($profile, $secret);
 
                 $this->addFlash('success', $this->translator->trans('two-step-auth-enabled', [], 'profile'));
+
                 return $this->redirectToRoute('profile-settings');
             } else {
                 $this->addFlash('danger', $this->translator->trans('two-step-auth-failed', [], 'profile'));
@@ -120,10 +129,10 @@ class ProfileController extends AbstractController
         }
 
         $secret = $authService->generateSecret();
+        $profile->setGoogleAuthenticatorSecret($secret);
         $session->set('generated-secret', $secret);
 
-        $qrCode = $authService->generateQr($profile->getEmail(), $secret);
-
+        $qrCode = $authService->getUrl($profile);
 
         return $this->render('Profile/two-step-auth.html.twig',
             array('qrCode' => $qrCode)
@@ -133,16 +142,40 @@ class ProfileController extends AbstractController
     /**
      * @Route("/profile/settings/disableTwoStepAuth", name="profile-settings-disable-two-step-auth")
      * @param ProfileService $profileService
+     * @param UserInterface|Profile $profile
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function disableTwoStepAuth(ProfileService $profileService){
-        $profile = $this->getUser();
+    public function disableTwoStepAuth(ProfileService $profileService, UserInterface $profile)
+    {
 
         // TODO: Require user to either enter password again or add email token for this, security reasons
         $profileService->disableTwoStepAuth($profile);
 
         $this->addFlash('success', $this->translator->trans('two-step-auth-disabled', [], 'profile'));
+
         return $this->redirectToRoute('profile-settings');
+    }
+
+    /**
+     * @Route("/profile/settings/forgetDevices", name="profile-settings-forget-devices")
+     * @param ProfileService $profileService
+     * @param UserInterface|Profile $user
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function forgetDevices(ProfileService $profileService, UserInterface $user)
+    {
+        $profileService->forgetDevices($user);
+        $this->addFlash('success', $this->translator->trans('two-step-auth-devices-forgoten', [], 'profile'));
+
+        return $this->redirectToRoute('profile-settings');
+    }
+
+    /**
+     * @Route("/profile/settings/logoutEverywhere", name="profile-settings-logout-everywhere")
+     */
+    public function logoutEverywhere()
+    {
+
     }
 
     /**
@@ -152,8 +185,6 @@ class ProfileController extends AbstractController
     {
         return $this->render('Profile/delete.html.twig');
     }
-
-
 
 
     /**

@@ -50,10 +50,10 @@
 						{# Two step auth #}
 						{# ------------------------------------------------------------------------------------------ #}
 						<div class="form-group row">
-							<label for="two-step-auth" class="col-sm-6 col-form-label">
+							<label for="two-step-auth" class="col-sm-7 col-form-label">
 								{% trans from 'profile' %}settings-two-step-auth{% endtrans %}
 							</label>
-							<div class="col-sm-6">
+							<div class="col-sm-5">
 
 								{% if profile.settings.twoStepAuthEnabled %}
 									<a href="{{ url('profile-settings-disable-two-step-auth') }}" class="btn btn-primary float-right">
@@ -67,13 +67,43 @@
 							</div>
 						</div>
 
+						{% if profile.settings.twoStepAuthEnabled %}
+							<div class="form-group row">
+								<label for="two-step-auth" class="col-sm-7 col-form-label">
+									{% trans from 'profile' %}settings-forget-devices{% endtrans %}
+									<i data-toggle="tooltip" data-placement="top" title="{% trans from 'profile' %}settings-forget-devices-help{% endtrans %}" class="fa fa-fw fa-question-circle"></i>
+								</label>
+								<div class="col-sm-5">
+									<a href="{{ url('profile-settings-forget-devices') }}" class="btn btn-outline-primary float-right">
+										<i class="fa fa-fw fa-laptop"></i> {% trans from 'profile' %}settings-forget-devices-button{% endtrans %}
+									</a>
+
+								</div>
+							</div>
+						{% endif %}
+
+						{# Logout everywhere #}
+						{# ------------------------------------------------------------------------------------------ #}
+						<div class="form-group row">
+							<label for="change-password" class="col-sm-7 col-form-label">
+								{% trans from 'profile' %}settings-logout-everywhere{% endtrans %}
+								<i data-toggle="tooltip" data-placement="top" title="{% trans from 'profile' %}settings-logout-everywhere-help{% endtrans %}" class="fa fa-fw fa-question-circle"></i>
+							</label>
+							<div class="col-sm-5">
+
+								<a href="{{ url('profile-settings-forget-devices') }}" class="btn btn-outline-primary float-right">
+									<i class="fa fa-fw fa-sign-out-alt"></i> {% trans from 'profile' %}settings-logout-everywhere-button{% endtrans %}
+								</a>
+							</div>
+						</div>
+
 						{# Change password #}
 						{# ------------------------------------------------------------------------------------------ #}
 						<div class="form-group row">
-							<label for="change-password" class="col-sm-6 col-form-label">
+							<label for="change-password" class="col-sm-7 col-form-label">
 								{% trans from 'profile' %}settings-change-password{% endtrans %}
 							</label>
-							<div class="col-sm-6">
+							<div class="col-sm-5">
 
 								<a href="{{ url('profile-reset-password') }}" class="btn btn-outline-primary float-right">
 									<i class="fa fa-fw fa-edit"></i> {% trans from 'profile' %}change-password{% endtrans %}
@@ -86,10 +116,10 @@
 						{# Delete profile #}
 						{# ------------------------------------------------------------------------------------------ #}
 						<div class="form-group row">
-							<label for="delete-profile" class="col-sm-6 col-form-label">
+							<label for="delete-profile" class="col-sm-7 col-form-label">
 								{% trans from 'profile' %}settings-delete-profile{% endtrans %}
 							</label>
-							<div class="col-sm-6">
+							<div class="col-sm-5">
 
 								<a href="{{ url('profile-delete') }}" class="btn btn-outline-danger float-right">
 									<i class="fa fa-fw fa-times"></i> {% trans from 'profile' %}delete-profile{% endtrans %}
@@ -125,19 +155,19 @@
 						{# first #}
 						{# ------------------------------------------------------------------------------------------ #}
 						<div class="form-check mb-4">
-							<input class="form-check-input" type="checkbox" id="newsletter-weekly" />
+							<input class="form-check-input" type="checkbox" id="newsletter-weekly"/>
 							<label class="form-check-label" for="newsletter-weekly" class="col-sm-12 col-form-label">
 								{% trans from 'profile' %}newsletter-weekly{% endtrans %}
 							</label>
 						</div>
 						<div class="form-check mb-4">
-							<input class="form-check-input" type="checkbox" id="newsletter-monthly" />
+							<input class="form-check-input" type="checkbox" id="newsletter-monthly"/>
 							<label class="form-check-label" for="newsletter-monthly" class="col-sm-12 col-form-label">
 								{% trans from 'profile' %}newsletter-monthly{% endtrans %}
 							</label>
 						</div>
 						<div class="form-check mb-4">
-							<input class="form-check-input" type="checkbox" id="newsletter-yearly" />
+							<input class="form-check-input" type="checkbox" id="newsletter-yearly"/>
 							<label class="form-check-label" for="newsletter-yearly" class="col-sm-12 col-form-label">
 								{% trans from 'profile' %}newsletter-yearl{% endtrans %}
 							</label>

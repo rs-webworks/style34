@@ -193,9 +193,10 @@ class ProfileService extends AbstractService
      */
     public function enableTwoStepAuth(Profile $profile, string $secret)
     {
+        $profile->setGoogleAuthenticatorSecret($secret);
         $settings = $profile->getSettings();
 
-        $settings->setGAuthSecret($this->cryptService->encrypt($secret));
+        //        $settings->setGAuthSecret($this->cryptService->encrypt($secret));
         $settings->setTwoStepAuthEnabled(true);
 
         $this->em->persist($settings);
@@ -213,6 +214,16 @@ class ProfileService extends AbstractService
         $settings->setTwoStepAuthEnabled(false);
 
         $this->em->persist($settings);
+        $this->em->flush();
+    }
+
+    /**
+     * @param Profile $profile
+     */
+    public function forgetDevices(Profile $profile)
+    {
+        $profile->setTrustedTokenVersion($profile->getTrustedTokenVersion()+1);
+        $this->em->persist($profile);
         $this->em->flush();
     }
 }
