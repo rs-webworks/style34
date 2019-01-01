@@ -1,17 +1,18 @@
-<?php
-namespace eRyseClient\Entity\Token;
+<?php declare(strict_types=1);
+
+namespace EryseClient\Entity\Token;
 
 use Doctrine\ORM\Mapping as ORM;
-use eRyseClient\Entity\MasterData;
+use EryseClient\Entity\MasterData;
 
 /**
  * Class TokenType
- * @package eRyseClient\Entity\Token
- * @ORM\Entity(repositoryClass="eRyseClient\Repository\Token\TokenTypeRepository")
+ * @package EryseClient\Entity\Token
+ * @ORM\Entity(repositoryClass="EryseClient\Repository\Token\TokenTypeRepository")
  */
 class TokenType
 {
-    const PROFILE = array(
+    const USER = array(
         'ACTIVATION' => 'profile.activation',
         'REQUEST_RESET_PASSWORD' => 'profile.request-reset-password'
     );
@@ -20,7 +21,7 @@ class TokenType
 
     /**
      * @var Token[] $tokens
-     * @ORM\OneToMany(targetEntity="eRyseClient\Entity\Token\Token", mappedBy="type")
+     * @ORM\OneToMany(targetEntity="EryseClient\Entity\Token\Token", mappedBy="type")
      */
     protected $tokens;
 }

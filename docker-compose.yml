@@ -5,19 +5,19 @@ services:
     # ------------------------------------------------------------------------------------------------------------------
     memcached:
       image: memcached:alpine
-      container_name: memcached
+      container_name: ec-memcached
 
     # Redis
     # ------------------------------------------------------------------------------------------------------------------
     redis:
       image: redis:alpine
-      container_name: redis
+      container_name: ec-redis
 
     # Postgres
     # ------------------------------------------------------------------------------------------------------------------
     postgres:
       image: postgres:9.6-alpine
-      container_name: postgres
+      container_name: ec-postgres
       working_dir: /application
       ports:
         - "5455:5432"
@@ -32,9 +32,9 @@ services:
     # ------------------------------------------------------------------------------------------------------------------
     pgadmin:
       image: dpage/pgadmin4
-      container_name: pgadmin
+      container_name: ec-pgadmin
       environment:
-        PGADMIN_DEFAULT_EMAIL: admin@eRyseClient.net
+        PGADMIN_DEFAULT_EMAIL: admin@EryseClient.net
         PGADMIN_DEFAULT_PASSWORD: root
       volumes:
         - pgadmin:/root/.pgadmin
@@ -48,7 +48,7 @@ services:
     # ------------------------------------------------------------------------------------------------------------------
     webserver:
       build: phpdocker/nginx
-      container_name: webserver
+      container_name: ec-webserver
       working_dir: /application
       volumes:
           - .:/application
@@ -60,7 +60,7 @@ services:
 
     mailcatcher:
       image: yappabe/mailcatcher
-      container_name: mailcatcher
+      container_name: ec-mailcatcher
       ports:
         - 1025:1025
         - 1080:1080
@@ -69,7 +69,7 @@ services:
     # ------------------------------------------------------------------------------------------------------------------
     php-fpm:
       build: phpdocker/php-fpm
-      container_name: php-fpm
+      container_name: ec-php-fpm
       working_dir: /application
       links:
         - mailcatcher

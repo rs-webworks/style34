@@ -1,24 +1,24 @@
 <?php
 
-namespace eRyseClient\Tests\Service;
+namespace EryseClient\Tests\Service;
 
-use eRyseClient\Entity\Profile\Profile;
-use eRyseClient\Entity\Profile\Role;
-use eRyseClient\Entity\Token\Token;
-use eRyseClient\Entity\Token\TokenType;
-use eRyseClient\Exception\Profile\ActivationException;
-use eRyseClient\Exception\Token\ExpiredTokenException;
-use eRyseClient\Exception\Token\InvalidTokenException;
-use eRyseClient\Repository\Profile\ProfileRepository;
-use eRyseClient\Repository\Token\TokenTypeRepository;
-use eRyseClient\Service\ProfileService;
+use EryseClient\Entity\Profile\Profile;
+use EryseClient\Entity\Profile\Role;
+use EryseClient\Entity\Token\Token;
+use EryseClient\Entity\Token\TokenType;
+use EryseClient\Exception\User\ActivationException;
+use EryseClient\Exception\Token\ExpiredTokenException;
+use EryseClient\Exception\Token\InvalidTokenException;
+use EryseClient\Repository\Profile\ProfileRepository;
+use EryseClient\Repository\Token\TokenTypeRepository;
+use EryseClient\Service\ProfileService;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
  * Class ProfileServiceTest
- * @package eRyseClient\Tests\Service
- * @covers  \eRyseClient\Service\ProfileService
+ * @package EryseClient\Tests\Service
+ * @covers  \EryseClient\Service\ProfileService
  */
 class ProfileServiceTest extends WebTestCase
 {

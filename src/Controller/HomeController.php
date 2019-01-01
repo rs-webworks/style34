@@ -1,19 +1,17 @@
 <?php
 
-namespace eRyseClient\Controller;
+namespace EryseClient\Controller;
 
-use BrowscapPHP\Browscap;
-use BrowscapPHP\BrowscapUpdater;
+use EryseClient\Repository\Token\TokenTypeRepository;
+use EryseClient\Traits\LoggerTrait;
 use Psr\SimpleCache\CacheInterface;
-use eRyseClient\Repository\Token\TokenTypeRepository;
-use eRyseClient\Traits\LoggerTrait;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Class HomeController
- * @package eRyseClient\Controller
+ * @package EryseClient\Controller
  */
 class HomeController extends AbstractController
 {
@@ -35,17 +33,5 @@ class HomeController extends AbstractController
     public function dev(Request $request, CacheInterface $cache)
     {
 
-        $browscap_updater = new BrowscapUpdater($cache, $this->logger);
-        $browscap_updater->update(\BrowscapPHP\Helper\IniLoader::PHP_INI_FULL);
-
-        $bc = new Browscap($cache, $this->logger);
-        dump($bc);
-
-
-
-
-        $ua = $request->server->get('HTTP_USER_AGENT');
-        dump($bc->getBrowser($ua));
-        return $this->render('dev.html.twig');
     }
 }

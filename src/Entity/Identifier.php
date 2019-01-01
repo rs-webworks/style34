@@ -1,6 +1,6 @@
 <?php
 
-namespace eRyseClient\Entity;
+namespace EryseClient\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 

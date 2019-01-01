@@ -241,7 +241,7 @@
       </notes>
       <segment>
         <source>settings-delete-profile</source>
-        <target>Smazání profilu</target>
+        <target>Smazání účtu</target>
       </segment>
     </unit>
     <unit id="6MWcHBq" name="delete-profile">

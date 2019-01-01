@@ -1,8 +1,8 @@
 {
-  "name": "eRyseClient",
+  "name": "eryse-client",
   "version": "1.0.0",
   "main": "public/",
-  "repository": "https://github.com/rs-webworks/eRyseClient",
+  "repository": "https://github.com/rs-webworks/EryseClient",
   "author": "Raito Akehanareru <raito.akehanareru@gmail.com>",
   "license": "MIT",
   "dependencies": {

@@ -1,12 +1,12 @@
 <?php
 
-namespace eRyseClient\Entity;
+namespace EryseClient\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Trait CreatedAt
- * @package eRyseClient\Entity
+ * @package EryseClient\Entity
  */
 trait CreatedAt
 {

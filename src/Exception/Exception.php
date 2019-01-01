@@ -1,10 +1,10 @@
 <?php
 
-namespace eRyseClient\Exception;
+namespace EryseClient\Exception;
 
 /**
  * Class Exception
- * @package eRyseClient\Exception
+ * @package EryseClient\Exception
  */
 class Exception extends \Exception implements \Throwable
 {

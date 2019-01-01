@@ -1,11 +1,11 @@
 <?php
 
-namespace eRyseClient\Exception\Security;
+namespace EryseClient\Exception\Security;
 
 
 /**
  * Class ResetPasswordException
- * @package eRyseClient\Exception\Security
+ * @package EryseClient\Exception\Security
  */
 class ResetPasswordException extends SecurityException implements \Throwable
 {

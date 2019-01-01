@@ -1,27 +1,17 @@
 <?php
 
-namespace eRyseClient\Controller\Profile;
+namespace EryseClient\Controller\Profile;
 
-use Scheb\TwoFactorBundle\Security\TwoFactor\Provider\Google\GoogleAuthenticatorInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use eRyseClient\Entity\Profile\Profile;
-use eRyseClient\Form\Profile\SettingsForm;
-use eRyseClient\Repository\Profile\ProfileRepository;
-use eRyseClient\Service\ProfileService;
-use eRyseClient\Traits\EntityManagerTrait;
-use eRyseClient\Traits\LoggerTrait;
-use eRyseClient\Traits\TranslatorTrait;
+use EryseClient\Repository\Profile\ProfileRepository;
+use EryseClient\Traits\EntityManagerTrait;
+use EryseClient\Traits\LoggerTrait;
+use EryseClient\Traits\TranslatorTrait;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * Class ProfileController
- * @package eRyseClient\Controller\Profile
- * @IsGranted(eRyseClient\Entity\Profile\Role::MEMBER)
+ * Class UserController
+ * @package EryseClient\Controller\Profile
  */
 class ProfileController extends AbstractController
 {
@@ -37,21 +27,6 @@ class ProfileController extends AbstractController
      */
     public function view(ProfileRepository $profileRepository, $username = null)
     {
-        if ($username == null) {
-            $username = $this->getUser()->getUsername();
-        }
-
-        try {
-            $profile = $profileRepository->loadUserByUsername($username);
-            if (!$profile) {
-                throw new NotFoundHttpException();
-            }
-        } catch (\Exception $ex) {
-            $this->logger->notice('controller.profile.view: user not found',
-                ['username' => $username, 'message' => $ex->getMessage()]);
-            throw new NotFoundHttpException($this->translator->trans('profile-not-found', ['username' => $username],
-                'profile'), $ex);
-        }
 
         return $this->render("Profile/view.html.twig");
     }
@@ -65,132 +40,6 @@ class ProfileController extends AbstractController
         return $this->render("Profile/list.html.twig");
     }
 
-    /**
-     * @Route("/profile/edit/{username}", name="profile-edit")
-     */
-    public function edit($username = null)
-    {
-
-    }
-
-
-    /**
-     * @Route("/profile/settings", name="profile-settings")
-     * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function settings(Request $request)
-    {
-        /** @var Profile $profile */
-        $profile = $this->getUser();
-
-        $form = $this->createForm(SettingsForm::class);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-        }
-
-        return $this->render('Profile/settings.html.twig', array('form' => $form->createView(), 'profile' => $profile));
-    }
-
-    /**
-     * @Route("/profile/settings/enableTwoStepAuth", name="profile-settings-enable-two-step-auth")
-     * @param GoogleAuthenticatorInterface $authService
-     * @param SessionInterface $session
-     * @param Request $request
-     * @param ProfileService $profileService
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function enableTwoStepAuth(
-        GoogleAuthenticatorInterface $authService,
-        SessionInterface $session,
-        Request $request,
-        ProfileService $profileService
-    ) {
-        /** @var Profile $profile */
-        $profile = $this->getUser();
-        $activationCode = $request->get('activation-code');
-
-        // If activation code sent
-        if ($activationCode) {
-            $secret = $session->get('generated-secret');
-            $profile->setGoogleAuthenticatorSecret($secret);
-
-            // If activation code matches generated secret check
-            if ($activationCode == $authService->checkCode($profile, $activationCode)) {
-                $profileService->enableTwoStepAuth($profile, $secret);
-
-                $this->addFlash('success', $this->translator->trans('two-step-auth-enabled', [], 'profile'));
-
-                return $this->redirectToRoute('profile-settings');
-            } else {
-                $this->addFlash('danger', $this->translator->trans('two-step-auth-failed', [], 'profile'));
-            }
-        }
-
-        $secret = $authService->generateSecret();
-        $profile->setGoogleAuthenticatorSecret($secret);
-        $session->set('generated-secret', $secret);
-
-        $qrCode = $authService->getUrl($profile);
-
-        return $this->render('Profile/two-step-auth.html.twig',
-            array('qrCode' => $qrCode)
-        );
-    }
-
-    /**
-     * @Route("/profile/settings/disableTwoStepAuth", name="profile-settings-disable-two-step-auth")
-     * @param ProfileService $profileService
-     * @param UserInterface|Profile $profile
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     */
-    public function disableTwoStepAuth(ProfileService $profileService, UserInterface $profile)
-    {
-        // TODO: Require user to either enter password again or add email token for this, security reasons
-        $profileService->disableTwoStepAuth($profile);
-
-        $this->addFlash('success', $this->translator->trans('two-step-auth-disabled', [], 'profile'));
-
-        return $this->redirectToRoute('profile-settings');
-    }
-
-    /**
-     * @Route("/profile/settings/forgetDevices", name="profile-settings-forget-devices")
-     * @param ProfileService $profileService
-     * @param UserInterface|Profile $user
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     */
-    public function forgetDevices(ProfileService $profileService, UserInterface $user)
-    {
-        $profileService->forgetDevices($user);
-        $this->addFlash('success', $this->translator->trans('two-step-auth-devices-forgoten', [], 'profile'));
-
-        return $this->redirectToRoute('profile-settings');
-    }
-
-    /**
-     * @Route("/profile/settings/logoutEverywhere", name="profile-settings-logout-everywhere")
-     * @param ProfileService $profileService
-     * @param UserInterface|Profile $user
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     */
-    public function logoutEverywhere(ProfileService $profileService, UserInterface $user)
-    {
-        $profileService->logoutEverywhere($user);
-        $this->addFlash('success', $this->translator->trans('settings-logged-out-everywhere', [], 'profile'));
-
-        return $this->redirectToRoute('profile-settings');
-    }
-
-    /**
-     * @Route("/profile/settings/delete-profile", name="profile-delete")
-     */
-    public function delete()
-    {
-        return $this->render('Profile/delete.html.twig');
-    }
-
 
     /**
      * @Route("/profile/membership", name="profile-membership")
@@ -199,4 +48,5 @@ class ProfileController extends AbstractController
     {
         return $this->render("Profile/membership.html.twig");
     }
+
 }

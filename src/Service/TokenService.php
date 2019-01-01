@@ -1,17 +1,17 @@
 <?php
 
-namespace eRyseClient\Service;
+namespace EryseClient\Service;
 
-use eRyseClient\Entity\Profile\Profile;
-use eRyseClient\Entity\Token\Token;
-use eRyseClient\Entity\Token\TokenType;
-use eRyseClient\Repository\Token\TokenRepository;
-use eRyseClient\Repository\Token\TokenTypeRepository;
-use eRyseClient\Traits\EntityManagerTrait;
+use EryseClient\Entity\User\User;
+use EryseClient\Entity\Token\Token;
+use EryseClient\Entity\Token\TokenType;
+use EryseClient\Repository\Token\TokenRepository;
+use EryseClient\Repository\Token\TokenTypeRepository;
+use EryseClient\Traits\EntityManagerTrait;
 
 /**
  * Class TokenService
- * @package eRyseClient\Service
+ * @package EryseClient\Service
  */
 class TokenService extends AbstractService
 {
@@ -56,20 +56,20 @@ class TokenService extends AbstractService
     }
 
     /**
-     * @param Profile $profile
+     * @param User $user
      * @return Token
      * @throws \Exception
      */
-    public function getActivationToken(Profile $profile): Token
+    public function getActivationToken(User $user): Token
     {
         $token = new Token();
         $token->setHash($this->generateHash());
-        $token->setProfile($profile);
+        $token->setUser($user);
         $createdAt = new \DateTime();
         $expiresAt = new \DateTime();
         $token->setCreatedAt($createdAt);
         $token->setExpiresAt($this->createExpirationDateTime($expiresAt, Token::EXPIRY_HOUR * 2));
-        $token->setType($this->tokenTypeRepository->findOneBy(array('name' => TokenType::PROFILE['ACTIVATION'])));
+        $token->setType($this->tokenTypeRepository->findOneBy(array('name' => TokenType::USER['ACTIVATION'])));
 
         return $token;
     }
@@ -95,37 +95,37 @@ class TokenService extends AbstractService
     }
 
     /**
-     * @param Profile $profile
+     * @param User $user
      * @return Token
      * @throws \Exception
      */
-    public function getResetPasswordToken(Profile $profile): Token
+    public function getResetPasswordToken(User $user): Token
     {
         $createdAt = new \DateTime();
         $expiresAt = new \DateTime();
 
         $token = new Token();
         $token->setHash($this->generateHash());
-        $token->setProfile($profile);
+        $token->setUser($user);
         $token->setCreatedAt($createdAt);
         $token->setExpiresAt($this->createExpirationDateTime($expiresAt, Token::EXPIRY_HOUR * 2));
         $token->setType($this->tokenTypeRepository->findOneBy(array(
-            'name' => TokenType::PROFILE['REQUEST_RESET_PASSWORD']
+            'name' => TokenType::USER['REQUEST_RESET_PASSWORD']
         )));
 
         return $token;
     }
 
     /**
-     * Check whether the profile has currently token of specified type and it is valid & un-expired
-     * @param Profile $profile
+     * Check whether the user has currently token of specified type and it is valid & un-expired
+     * @param User $user
      * @param TokenType $tokenType
      * @return bool If Token of TokenType is found, is valid and is not expired
      * @throws \Exception
      */
-    public function hasProfileActiveTokenType(Profile $profile, TokenType $tokenType): bool
+    public function hasUserActiveTokenType(User $user, TokenType $tokenType): bool
     {
-        $result = count($this->tokenRepository->findProfileValidTokensOfType($profile, $tokenType));
+        $result = count($this->tokenRepository->findUserValidTokensOfType($user, $tokenType));
 
         return ($result ? true : false);
     }

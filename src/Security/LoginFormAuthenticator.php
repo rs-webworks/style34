@@ -1,13 +1,13 @@
 <?php
 
-namespace eRyseClient\Security;
+namespace EryseClient\Security;
 
-use eRyseClient\Entity\Profile\Profile;
-use eRyseClient\Exception\Security\LoginException;
-use eRyseClient\Exception\Security\TwoStepAuthSetException;
-use eRyseClient\Repository\Profile\ProfileRepository;
-use eRyseClient\Traits\EntityManagerTrait;
-use eRyseClient\Traits\TranslatorTrait;
+use EryseClient\Entity\User\User;
+use EryseClient\Exception\Security\LoginException;
+use EryseClient\Exception\Security\TwoStepAuthSetException;
+use EryseClient\Repository\User\UserRepository;
+use EryseClient\Traits\EntityManagerTrait;
+use EryseClient\Traits\TranslatorTrait;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -25,7 +25,7 @@ use Symfony\Component\Security\Http\Util\TargetPathTrait;
 
 /**
  * Class LoginFormAuthenticator
- * @package eRyseClient\Security
+ * @package EryseClient\Security
  */
 class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 {
@@ -33,8 +33,8 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     use TranslatorTrait;
     use EntityManagerTrait;
 
-    /** @var ProfileRepository $profileRepository */
-    private $profileRepository;
+    /** @var UserRepository $userRepository */
+    private $userRepository;
 
     /** @var RouterInterface */
     private $router;
@@ -53,20 +53,20 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
      * @param RouterInterface $router
      * @param CsrfTokenManagerInterface $csrfTokenManager
      * @param UserPasswordEncoderInterface $passwordEncoder
-     * @param ProfileRepository $profileRepository
+     * @param UserRepository $userRepository
      * @param SessionInterface $session
      */
     public function __construct(
         RouterInterface $router,
         CsrfTokenManagerInterface $csrfTokenManager,
         UserPasswordEncoderInterface $passwordEncoder,
-        ProfileRepository $profileRepository,
+        UserRepository $userRepository,
         SessionInterface $session
     ) {
         $this->router = $router;
         $this->csrfTokenManager = $csrfTokenManager;
         $this->passwordEncoder = $passwordEncoder;
-        $this->profileRepository = $profileRepository;
+        $this->userRepository = $userRepository;
         $this->session = $session;
     }
 
@@ -76,7 +76,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
      */
     public function supports(Request $request)
     {
-        return 'profile-login' === $request->attributes->get('_route')
+        return 'security-login' === $request->attributes->get('_route')
             && $request->isMethod('POST');
     }
 
@@ -115,8 +115,8 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
             throw new InvalidCsrfTokenException();
         }
 
-        /** @var Profile $user */
-        $user = $this->profileRepository->loadUserByUsername($credentials['auth']);
+        /** @var User $user */
+        $user = $this->userRepository->loadUserByUsername($credentials['auth']);
 
         if (!$user) {
             // fail authentication with a custom error
@@ -157,6 +157,6 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
      */
     protected function getLoginUrl()
     {
-        return $this->router->generate('profile-login');
+        return $this->router->generate('security-login');
     }
 }

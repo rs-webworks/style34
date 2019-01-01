@@ -1,6 +1,6 @@
 <?php
 
-namespace eRyseClient\Service;
+namespace EryseClient\Service;
 
 
 use Sonata\GoogleAuthenticator\GoogleAuthenticator;
@@ -8,7 +8,7 @@ use Sonata\GoogleAuthenticator\GoogleQrUrl;
 
 /**
  * Class GoogleAuthService
- * @package eRyseClient\Service
+ * @package EryseClient\Service
  */
 final class GoogleAuthService extends AbstractService
 {

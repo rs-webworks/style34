@@ -1,10 +1,10 @@
 <?php
 
-namespace eRyseClient\EventListener;
+namespace EryseClient\EventListener;
 
-use eRyseClient\Entity\Profile\Profile;
-use eRyseClient\Entity\Profile\Role;
-use eRyseClient\Service\ProfileService;
+use EryseClient\Entity\Profile\Profile;
+use EryseClient\Entity\Profile\Role;
+use EryseClient\Service\ProfileService;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\Routing\Router;
@@ -14,7 +14,7 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 /**
  * Class KernelRequestListener
- * @package eRyseClient\EventListener
+ * @package EryseClient\EventListener
  */
 class KernelRequestListener
 {

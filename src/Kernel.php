@@ -1,6 +1,6 @@
 <?php
 
-namespace eRyseClient;
+namespace EryseClient;
 
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\Config\Loader\LoaderInterface;
@@ -11,15 +11,15 @@ use Symfony\Component\Routing\RouteCollectionBuilder;
 
 /**
  * Class Kernel
- * @package eRyseClient
+ * @package EryseClient
  */
 class Kernel extends BaseKernel
 {
     use MicroKernelTrait;
 
-    const SITE_NAME = "eRyseClient";
-    const CONTACT_MAIL = "admin@eRyseClient.net";
-    const INFO_MAIL = "info@eRyseClient.net";
+    const SITE_NAME = "Style34";
+    const CONTACT_MAIL = "admin@EryseClient.net";
+    const INFO_MAIL = "info@EryseClient.net";
     const MEMBERSHIP_PRICE = "299";
 
     const CONFIG_EXTS = '.{php,xml,yaml,yml}';

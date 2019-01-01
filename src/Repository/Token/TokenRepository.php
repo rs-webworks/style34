@@ -1,18 +1,18 @@
 <?php
 
 
-namespace eRyseClient\Repository\Token;
+namespace EryseClient\Repository\Token;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use eRyseClient\Entity\Profile\Profile;
-use eRyseClient\Entity\Token\Token;
-use eRyseClient\Entity\Token\TokenType;
-use eRyseClient\Traits\SaveEntityTrait;
+use EryseClient\Entity\Token\Token;
+use EryseClient\Entity\Token\TokenType;
+use EryseClient\Entity\User\User;
+use EryseClient\Traits\SaveEntityTrait;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
  * Class TokenRepository
- * @package eRyseClient\Repository\Profile
+ * @package EryseClient\Repository\Token
  * @method Token|null findOneBy(array $criteria, array $orderBy = null)
  */
 class TokenRepository extends ServiceEntityRepository
@@ -61,23 +61,23 @@ class TokenRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param Profile $profile
+     * @param User $user
      * @param TokenType $tokenType
      * @return mixed
      * @throws \Exception
      */
-    public function findProfileValidTokensOfType(Profile $profile, TokenType $tokenType)
+    public function findUserValidTokensOfType(User $user, TokenType $tokenType)
     {
         return $this->createQueryBuilder('t')
             ->where('t.type = :tokenType')
             ->andWhere('t.invalid = :invalid')
             ->andWhere('t.expiresAt > :datetimeNow')
-            ->andWhere('t.profile = :profile')
+            ->andWhere('t.user = :user')
             ->setParameters(array(
                 'tokenType' => $tokenType,
                 'datetimeNow' => new \DateTime(),
                 'invalid' => false,
-                'profile' => $profile
+                'user' => $user
             ))
             ->getQuery()
             ->getResult();

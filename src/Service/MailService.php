@@ -1,11 +1,11 @@
 <?php
 
-namespace eRyseClient\Service;
+namespace EryseClient\Service;
 
-use eRyseClient\Entity\Profile\Profile;
-use eRyseClient\Entity\Token\Token;
-use eRyseClient\Kernel;
-use eRyseClient\Traits\TranslatorTrait;
+use EryseClient\Entity\User\User;
+use EryseClient\Entity\Token\Token;
+use EryseClient\Kernel;
+use EryseClient\Traits\TranslatorTrait;
 use Swift_Message;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -13,7 +13,7 @@ use Twig\Environment;
 
 /**
  * Class MailService
- * @package eRyseClient\Service
+ * @package EryseClient\Service
  */
 class MailService extends AbstractService
 {
@@ -29,8 +29,7 @@ class MailService extends AbstractService
     /**
      * MailService constructor.
      * @param \Swift_Mailer $mailer
-     * @param TranslatorInterface $translator
-     * @param Response $renderer
+     * @param Environment $renderer
      */
     public function __construct(\Swift_Mailer $mailer, Environment $renderer)
     {
@@ -39,22 +38,22 @@ class MailService extends AbstractService
     }
 
     /**
-     * @param Profile $profile
+     * @param User $user
      * @param Token $token
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function sendActivationMail(Profile $profile, Token $token): void
+    public function sendActivationMail(User $user, Token $token): void
     {
         $message = (new Swift_Message(Kernel::SITE_NAME . ' - '. $this->translator->trans('email-activation-title', [], 'profile')))
             ->setFrom(Kernel::INFO_MAIL)
-            ->setTo($profile->getEmail())
+            ->setTo($user->getEmail())
             ->setBody(
                 $this->renderer->render(
-                    'emails/profile-activation.html.twig',
+                    'emails/user-activation.html.twig',
                     array(
-                        'profile' => $profile,
+                        'user' => $user,
                         'token' => $token
                     )
                 ),
@@ -66,21 +65,21 @@ class MailService extends AbstractService
     }
 
     /**
-     * @param Profile $profile
+     * @param User $user
      * @param Token $token
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function sendRequestResetPasswordMail(Profile $profile, Token $token){
+    public function sendRequestResetPasswordMail(User $user, Token $token){
         $message = (new Swift_Message(Kernel::SITE_NAME . ' - '. $this->translator->trans('email-request-reset-password-title', [], 'profile')))
             ->setFrom(Kernel::INFO_MAIL)
-            ->setTo($profile->getEmail())
+            ->setTo($user->getEmail())
             ->setBody(
                 $this->renderer->render(
-                    'emails/profile-request-reset-password.twig',
+                    'emails/user-request-reset-password.twig',
                     array(
-                        'profile' => $profile,
+                        'user' => $user,
                         'token' => $token
                     )
                 ),

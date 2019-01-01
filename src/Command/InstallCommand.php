@@ -1,17 +1,16 @@
 <?php declare(strict_types=1);
 
 
-namespace eRyseClient\Command;
+namespace EryseClient\Command;
 
 use BrowscapPHP\BrowscapUpdater;
+use EryseClient\Entity\Token\TokenType;
+use EryseClient\Entity\User\Role;
+use EryseClient\Entity\User\Settings;
+use EryseClient\Entity\User\User;
+use EryseClient\Traits\EntityManagerTrait;
+use EryseClient\Traits\LoggerTrait;
 use Psr\SimpleCache\CacheInterface;
-use eRyseClient\Entity\Address\State;
-use eRyseClient\Entity\Profile\Profile;
-use eRyseClient\Entity\Profile\Role;
-use eRyseClient\Entity\Profile\Settings;
-use eRyseClient\Entity\Token\TokenType;
-use eRyseClient\Traits\EntityManagerTrait;
-use eRyseClient\Traits\LoggerTrait;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;
@@ -24,7 +23,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 /**
  * Class InstallCommand.
  * Install only app-required data, not testing fixtures! For dev/test data use fixtures in DataFixtures.
- * @package eRyseClient\Command
+ * @package EryseClient\Command
  */
 class InstallCommand extends Command
 {
@@ -230,11 +229,11 @@ class InstallCommand extends Command
     {
         /** @var array $users Username, mail, password */
         $users = array(
-            ['admin', 'admin@eRyseClient.net', 'rootpass', [Role::ADMIN, Role::MEMBER, Role::VERIFIED]],
-            ['spravce', 'spravce@eRyseClient.net', '', [Role::BANNED]],
-            ['moderator', 'moderator@eRyseClient.net', '', [Role::BANNED]],
-            ['mod', 'mod@eRyseClient.net', '', [Role::BANNED]],
-            ['administrator', 'administrator@eRyseClient.net', '', [Role::BANNED]]
+            ['admin', 'admin@EryseClient.net', 'rootpass', [Role::ADMIN, Role::MEMBER, Role::VERIFIED]],
+            ['spravce', 'spravce@EryseClient.net', '', [Role::BANNED]],
+            ['moderator', 'moderator@EryseClient.net', '', [Role::BANNED]],
+            ['mod', 'mod@EryseClient.net', '', [Role::BANNED]],
+            ['administrator', 'administrator@EryseClient.net', '', [Role::BANNED]]
         );
 
         $this->io->progressStart(count($users));
@@ -242,7 +241,7 @@ class InstallCommand extends Command
         foreach ($users as $user) {
             list($username, $email, $password, $roles) = $user;
 
-            $profile = new Profile();
+            $profile = new User();
             $profile->setUsername($username);
             $profile->setEmail($email);
             $profile->setCreatedAt(new \DateTime());
@@ -270,8 +269,8 @@ class InstallCommand extends Command
     protected function createTokenTypes()
     {
         $types = array(
-            [TokenType::PROFILE['ACTIVATION']],
-            [TokenType::PROFILE['REQUEST_RESET_PASSWORD']],
+            [TokenType::USER['ACTIVATION']],
+            [TokenType::USER['REQUEST_RESET_PASSWORD']],
         );
 
         $this->io->progressStart(count($types));
@@ -311,7 +310,8 @@ class InstallCommand extends Command
     /**
      * @throws \Exception
      */
-    protected function clearCache(){
+    protected function clearCache()
+    {
         $this->io->progressStart(1);
 
         $command = $this->getApplication()->find('cache:clear');

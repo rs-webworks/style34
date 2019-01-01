@@ -1,12 +1,12 @@
 <?php
 
-namespace eRyseClient\Traits;
+namespace EryseClient\Traits;
 
 use Psr\Log\LoggerInterface;
 
 /**
  * Trait LoggerTrait
- * @package eRyseClient\Service\Traits
+ * @package EryseClient\Service\Traits
  */
 trait LoggerTrait
 {

@@ -1,12 +1,12 @@
 <?php
 
-namespace eRyseClient\Service;
+namespace EryseClient\Service;
 
 use OpenCrypt\OpenCrypt;
 
 /**
  * Class GdprService
- * @package eRyseClient\Service
+ * @package EryseClient\Service
  */
 final class GdprService extends AbstractService
 {

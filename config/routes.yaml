@@ -1,4 +1,0 @@
-#index:
-#    path: /
-#    controller: eRyseClient\Controller\HomeController::index
-

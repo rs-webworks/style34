@@ -1,13 +1,13 @@
 <?php
 
-namespace eRyseClient\DataFixtures;
+namespace EryseClient\DataFixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 
 /**
  * Class AppFixtures
- * @package eRyseClient\DataFixtures
+ * @package EryseClient\DataFixtures
  */
 class AppFixtures extends Fixture
 {

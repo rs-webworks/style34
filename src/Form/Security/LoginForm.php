@@ -1,6 +1,6 @@
 <?php
 
-namespace eRyseClient\Form\Security;
+namespace EryseClient\Form\Security;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -10,7 +10,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 /**
  * Class LoginForm
- * @package eRyseClient\Form\Profile
+ * @package EryseClient\Form\Profile
  */
 class LoginForm extends AbstractType
 {

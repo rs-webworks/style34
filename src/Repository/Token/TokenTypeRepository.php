@@ -1,15 +1,15 @@
 <?php
 
-namespace eRyseClient\Repository\Token;
+namespace EryseClient\Repository\Token;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface;
-use eRyseClient\Entity\Token\TokenType;
+use EryseClient\Entity\Token\TokenType;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
  * Class TokenTypeRepository
- * @package eRyseClient\Repository\Token
+ * @package EryseClient\Repository\Token
  * @method TokenType|null findOneBy(array $criteria, array $orderBy = null)
  */
 class TokenTypeRepository extends ServiceEntityRepository implements ServiceEntityRepositoryInterface

@@ -4,11 +4,11 @@ scheb_two_factor:
 
     google:
         enabled: true
-        template: Profile/Login/two-step-auth.html.twig
+        template: User/Login/two-step-auth.html.twig
 
     trusted_device:
         enabled: true
-        #        manager: eRyseClient.services.trusted_device_service  # Use a custom trusted device manager
+        #        manager: EryseClient.services.trusted_device_service  # Use a custom trusted device manager
         lifetime: 5184000
         extend_lifetime: false         # Automatically extend lifetime of the trusted cookie on re-login
         cookie_name: trusted_device    # Name of the trusted device cookie

@@ -1,12 +1,12 @@
 <?php
 
-namespace eRyseClient\Traits;
+namespace EryseClient\Traits;
 
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * Trait TranslatorTrait
- * @package eRyseClient\Service\Traits
+ * @package EryseClient\Service\Traits
  */
 trait TranslatorTrait
 {

@@ -1,17 +1,17 @@
 <?php declare(strict_types=1);
 
-namespace eRyseClient\Entity\Token;
+namespace EryseClient\Entity\Token;
 
 use Doctrine\ORM\Mapping as ORM;
-use eRyseClient\Entity\CreatedAt;
-use eRyseClient\Entity\ExpiresAt;
-use eRyseClient\Entity\Identifier;
-use eRyseClient\Entity\Profile\Profile;
+use EryseClient\Entity\CreatedAt;
+use EryseClient\Entity\ExpiresAt;
+use EryseClient\Entity\Identifier;
+use EryseClient\Entity\User\User;
 
 /**
  * Class Token
- * @package eRyseClient\Entity\Token
- * @ORM\Entity(repositoryClass="eRyseClient\Repository\Token\TokenRepository")
+ * @package EryseClient\Entity\Token
+ * @ORM\Entity(repositoryClass="EryseClient\Repository\Token\TokenRepository")
  */
 class Token
 {
@@ -33,16 +33,16 @@ class Token
 
     /**
      * @var TokenType $type
-     * @ORM\ManyToOne(targetEntity="eRyseClient\Entity\Token\TokenType", inversedBy="tokens")
+     * @ORM\ManyToOne(targetEntity="EryseClient\Entity\Token\TokenType", inversedBy="tokens")
      */
     protected $type;
 
     /**
-     * @var Profile $profile ;
-     * @ORM\ManyToOne(targetEntity="eRyseClient\Entity\Profile\Profile", inversedBy="tokens")
+     * @var User $user ;
+     * @ORM\ManyToOne(targetEntity="EryseClient\Entity\User\User", inversedBy="tokens")
      * @ORM\JoinColumn(name="profile_id", referencedColumnName="id", onDelete="CASCADE")
      */
-    protected $profile;
+    protected $user;
 
     /**
      * @var bool
@@ -83,19 +83,19 @@ class Token
     }
 
     /**
-     * @return Profile
+     * @return User
      */
-    public function getProfile(): Profile
+    public function getUser(): User
     {
-        return $this->profile;
+        return $this->user;
     }
 
     /**
-     * @param Profile $profile
+     * @param User $user
      */
-    public function setProfile(Profile $profile): void
+    public function setUser(User $user): void
     {
-        $this->profile = $profile;
+        $this->user = $user;
     }
 
     /**
@@ -113,7 +113,6 @@ class Token
     {
         $this->invalid = $invalid;
     }
-
 
 
 }

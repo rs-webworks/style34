@@ -1,12 +1,12 @@
 <?php
 
-namespace eRyseClient\Traits;
+namespace EryseClient\Traits;
 
 use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * Trait EntityManagerTrait
- * @package eRyseClient\Service\Traits
+ * @package EryseClient\Service\Traits
  */
 trait EntityManagerTrait
 {
