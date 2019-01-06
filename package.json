@@ -2,7 +2,7 @@
   "name": "eryse-client",
   "version": "1.0.0",
   "main": "public/",
-  "repository": "https://github.com/rs-webworks/EryseClient",
+  "repository": "https://github.com/raitocz/eryse-client",
   "author": "Raito Akehanareru <raito.akehanareru@gmail.com>",
   "license": "MIT",
   "dependencies": {

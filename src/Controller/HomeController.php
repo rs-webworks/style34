@@ -3,6 +3,7 @@
 namespace EryseClient\Controller;
 
 use EryseClient\Repository\Token\TokenTypeRepository;
+use EryseClient\Service\ApplicationService;
 use EryseClient\Traits\LoggerTrait;
 use Psr\SimpleCache\CacheInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -29,9 +30,11 @@ class HomeController extends AbstractController
      * @Route("/dev", name="dev")
      * @param TokenTypeRepository $tokenTypeRepository
      * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \EryseClient\Exception\Application\KeysAlreadyExists
      */
-    public function dev(Request $request, CacheInterface $cache)
+    public function dev(ApplicationService $applicationService)
     {
 
+        return $this->render('dev.html.twig');
     }
 }
