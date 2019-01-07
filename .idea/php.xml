@@ -131,6 +131,7 @@
       <path value="$PROJECT_DIR$/vendor/guzzlehttp/psr7" />
       <path value="$PROJECT_DIR$/vendor/lcobucci/jwt" />
       <path value="$PROJECT_DIR$/vendor/scheb/two-factor-bundle" />
+      <path value="$PROJECT_DIR$/vendor/raitocz/eryse-structures" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.1" />

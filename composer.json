@@ -1,11 +1,18 @@
 {
     "type": "project",
     "license": "proprietary",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url":  "git@github.com:raitocz/eryse-structures"
+        }
+    ],
     "require": {
         "php": "^7.1.3",
         "ext-ctype": "*",
         "ext-iconv": "*",
         "ext-openssl": "*",
+        "ext-json": "*",
         "browscap/browscap-php": "^4.1",
         "doctrine/doctrine-fixtures-bundle": "^3.0",
         "google/recaptcha": "^1.2",
@@ -35,7 +42,8 @@
         "symfony/twig-bundle": "^4.2",
         "symfony/validator": "*",
         "symfony/web-link": "*",
-        "symfony/yaml": "^4.2"
+        "symfony/yaml": "^4.2",
+        "raitocz/eryse-structures": "*"
     },
     "require-dev": {
         "symfony/debug-pack": "*",
@@ -44,7 +52,8 @@
         "symfony/phpunit-bridge": "^4.2",
         "symfony/profiler-pack": "^1.0",
         "symfony/test-pack": "*",
-        "symfony/web-server-bundle": "*"
+        "symfony/web-server-bundle": "*",
+        "raitocz/eryse-structures": "*@dev"
     },
     "config": {
         "preferred-install": {
