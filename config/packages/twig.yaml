@@ -1,3 +1,6 @@
+imports:
+    - { resource: '../eryse_client.yaml' }
+
 twig:
     default_path: '%kernel.project_dir%/templates'
     debug: '%kernel.debug%'
@@ -5,11 +8,4 @@ twig:
     form_themes: ['bootstrap_4_layout.html.twig']
 
     globals:
-        eryse:
-            client:
-                name: '%env(resolve:ERYSE_CLIENT_NAME)%'
-            emails:
-                info: '%env(resolve:ERYSE_EMAIL_INFO)%'
-                admin: '%env(resolve:ERYSE_EMAIL_ADMIN)%'
-            membership:
-                price: '%env(resolve:ERYSE_MEMBERSHIP_PRICE)%'
+        eryseClient: '%eryseClient%'

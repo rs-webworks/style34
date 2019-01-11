@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xliff xmlns="urn:oasis:names:tc:xliff:document:2.0" version="2.0" srcLang="en" trgLang="cs">
+<xliff xmlns="urn:oasis:names:tc:xliff:document:2.0" version="2.0" srcLang="cs" trgLang="cs">
   <file id="email.cs">
     <unit id="d2wyez_" name="profile-activation-preheader">
       <notes>
-        <note category="file-source" priority="1">templates/emails/profile-activation.html.twig:4</note>
+        <note category="file-source" priority="1">templates/_emails/user-activation.html.twig:4</note>
       </notes>
       <segment>
         <source>profile-activation-preheader</source>
@@ -12,7 +12,7 @@
     </unit>
     <unit id="yBlC9yd" name="profile-activation-heading">
       <notes>
-        <note category="file-source" priority="1">templates/emails/profile-activation.html.twig:9</note>
+        <note category="file-source" priority="1">templates/_emails/user-activation.html.twig:9</note>
       </notes>
       <segment>
         <source>profile-activation-heading</source>
@@ -24,7 +24,7 @@
     </unit>
     <unit id="_iA4f.k" name="profile-activation-button">
       <notes>
-        <note category="file-source" priority="1">templates/emails/profile-activation.html.twig:18</note>
+        <note category="file-source" priority="1">templates/_emails/user-activation.html.twig:18</note>
       </notes>
       <segment>
         <source>profile-activation-button</source>
@@ -33,7 +33,7 @@
     </unit>
     <unit id="AwGETM2" name="footer">
       <notes>
-        <note category="file-source" priority="1">templates/emails/layout/email-layout.html.twig:359</note>
+        <note category="file-source" priority="1">templates/_emails/layout/email-layout.html.twig:359</note>
       </notes>
       <segment>
         <source>footer</source>
@@ -42,7 +42,7 @@
     </unit>
     <unit id="otYMw2_" name="unsuscribe-desc">
       <notes>
-        <note category="file-source" priority="1">templates/emails/layout/email-layout.html.twig:360</note>
+        <note category="file-source" priority="1">templates/_emails/layout/email-layout.html.twig:360</note>
       </notes>
       <segment>
         <source>unsuscribe-desc</source>
@@ -51,7 +51,7 @@
     </unit>
     <unit id="gz5x90A" name="unsuscribe">
       <notes>
-        <note category="file-source" priority="1">templates/emails/layout/email-layout.html.twig:360</note>
+        <note category="file-source" priority="1">templates/_emails/layout/email-layout.html.twig:360</note>
       </notes>
       <segment>
         <source>unsuscribe</source>
@@ -60,7 +60,7 @@
     </unit>
     <unit id="qQjt7Mu" name="profile-activation-title">
       <notes>
-        <note category="file-source" priority="1">templates/emails/profile-activation.html.twig:8</note>
+        <note category="file-source" priority="1">templates/_emails/user-activation.html.twig:8</note>
       </notes>
       <segment>
         <source>profile-activation-title</source>
@@ -69,7 +69,7 @@
     </unit>
     <unit id="D9579qE" name="profile-request-reset-password-preheader">
       <notes>
-        <note category="file-source" priority="1">templates/emails/profile-request-reset-password.twig:4</note>
+        <note category="file-source" priority="1">templates/_emails/user-request-reset-password.twig:4</note>
       </notes>
       <segment>
         <source>profile-request-reset-password-preheader</source>
@@ -78,7 +78,7 @@
     </unit>
     <unit id="x4pV46p" name="profile-request-reset-password-title">
       <notes>
-        <note category="file-source" priority="1">templates/emails/profile-request-reset-password.twig:8</note>
+        <note category="file-source" priority="1">templates/_emails/user-request-reset-password.twig:8</note>
       </notes>
       <segment>
         <source>profile-request-reset-password-title</source>
@@ -87,7 +87,7 @@
     </unit>
     <unit id="WCwhBxq" name="profile-request-reset-password-heading">
       <notes>
-        <note category="file-source" priority="1">templates/emails/profile-request-reset-password.twig:9</note>
+        <note category="file-source" priority="1">templates/_emails/user-request-reset-password.twig:9</note>
       </notes>
       <segment>
         <source>profile-request-reset-password-heading</source>
@@ -96,7 +96,7 @@
     </unit>
     <unit id="KKQdw2n" name="profile-request-reset-password-button">
       <notes>
-        <note category="file-source" priority="1">templates/emails/profile-request-reset-password.twig:18</note>
+        <note category="file-source" priority="1">templates/_emails/user-request-reset-password.twig:18</note>
       </notes>
       <segment>
         <source>profile-request-reset-password-button</source>
@@ -105,7 +105,7 @@
     </unit>
     <unit id="8jsJszU" name="profile-request-reset-password-bottom">
       <notes>
-        <note category="file-source" priority="1">templates/emails/profile-request-reset-password.twig:27</note>
+        <note category="file-source" priority="1">templates/_emails/user-request-reset-password.twig:27</note>
       </notes>
       <segment>
         <source>profile-request-reset-password-bottom</source>

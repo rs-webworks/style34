@@ -7,6 +7,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 # Install selected extensions and other stuff
 RUN apt-get update \
     && apt-get -y --no-install-recommends install  php-memcached php7.2-pgsql php-redis unzip php7.2-zip \
+    && php-xml \
     && apt-get clean; rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
 
 # Install git
@@ -20,9 +21,9 @@ RUN curl -sS https://getcomposer.org/installer |\
     php -- --install-dir=/usr/local/bin --filename=composer
 
 # Cleanup
-RUN rm -rf /var/cache/apk/*\
-    && find / -type f -iname \*.apk-new -delete\
-    && rm -rf /var/cache/apk/*
+#RUN rm -rf /var/cache/apk/*\
+#    && find / -type f -iname \*.apk-new -delete\
+#    && rm -rf /var/cache/apk/*
 
 
 # Make translations directory writtable from web

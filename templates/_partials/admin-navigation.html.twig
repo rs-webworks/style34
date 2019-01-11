@@ -1,0 +1,30 @@
+<div class="col col-xs-12 col-sm-3 border-right">
+	<ul class="nav flex-column">
+		<li class="nav-item">
+			<a class="nav-link {{ app.request.get('_route') == 'administration-dashboard' ? 'active' }}" href="{{ url('administration-dashboard') }}">
+				{% trans from 'administration' %}dashboard{% endtrans %}
+			</a>
+		</li>
+
+
+		{# Server #}
+		{# ---------------------------------------------------------------------------------------------------------- #}
+		<li class="nav-item">
+			<a class="nav-link disabled pb-0" href="#" tabindex="-1" aria-disabled="true">
+				{% trans from 'administration' %}server{% endtrans %}
+			</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link pl-4 {{ app.request.get('_route') == 'administration-server-configuration' ? 'active' }}" href="{{ url('administration-server-configuration') }}">
+				{% trans from 'administration' %}server-settings-menu{% endtrans %}
+			</a>
+		</li>
+
+
+		{# Server #}
+		{# ---------------------------------------------------------------------------------------------------------- #}
+		<li class="nav-item">
+			<a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+		</li>
+	</ul>
+</div>

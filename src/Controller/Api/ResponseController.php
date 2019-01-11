@@ -23,6 +23,7 @@ class ResponseController extends AbstractController
 
     const PACKAGE_STRUCTURES = 'raitocz/eryse-structures';
     const PACKAGE_SERVICES = 'raitocz/eryse-services';
+    const PACKAGE_CONTROLLERS = 'raitocz/eryse-controllers';
     const CACHEKEY_PACKAGES = 'controller.api.response.ping-packages';
 
     /**
@@ -39,7 +40,7 @@ class ResponseController extends AbstractController
     }
 
     /**
-     * @Route("/api/packagesVersions", name="api-packages-versions")
+     * @Route("/api/packages-version", name="api-packages-versions")
      * @param KernelInterface $kernel
      * @param CacheService $cacheService
      * @return JsonResponse

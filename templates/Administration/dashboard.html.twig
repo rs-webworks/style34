@@ -1,0 +1,29 @@
+{% extends 'layout-frontend.html.twig' %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+
+	<div class="container">
+
+		<h2>{% trans from 'administration' %}dashboard{% endtrans %}</h2>
+
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="{{ url('home-index') }}">{{ eryseClient.name }}</a></li>
+				<li class="breadcrumb-item active" aria-current="page">{% trans from 'administration' %}dashboard{% endtrans %}</li>
+			</ol>
+		</nav>
+
+		<div class="row">
+			{% include '_partials/admin-navigation.html.twig' %}
+
+			<div class="col col-xs-12 col-sm-9">
+				<h3>Dash</h3>
+			</div>
+		</div>
+
+	</div>
+
+
+{% endblock %}

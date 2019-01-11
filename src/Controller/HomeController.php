@@ -3,8 +3,9 @@
 namespace EryseClient\Controller;
 
 use EryseClient\Repository\Token\TokenTypeRepository;
-use EryseClient\Service\ApplicationService;
+use EryseClient\Service\RsaService;
 use EryseClient\Traits\LoggerTrait;
+use phpseclib\Crypt\RSA;
 use Psr\SimpleCache\CacheInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,38 +30,27 @@ class HomeController extends AbstractController
 
     /**
      * @Route("/dev", name="dev")
-     * @param TokenTypeRepository $tokenTypeRepository
+     * @param RsaService $rsaService
+     * @param KernelInterface $kernel
+     * @param RSA $crypt
      * @return \Symfony\Component\HttpFoundation\Response
-     * @throws \EryseClient\Exception\Application\KeysAlreadyExists
+     * @throws \EryseClient\Exception\Security\InvalidKeyTypeException
+     * @throws \EryseClient\Exception\Security\KeysAlreadyExistsException
      */
-    public function dev(ApplicationService $applicationService, KernelInterface $kernel)
+    public function dev(RsaService $rsaService, KernelInterface $kernel)
     {
 
-        //TODO: rewrite this to: https://github.com/phpseclib/phpseclib
-        //TODO: create custom rsa-key-service for such thing
-
         $token = '8997fb5c02b7292e39fc26fa4bc8b5a53b0f344c';
-//        $applicationService->generateKeyPair($token, true);
-
-        $privateKey = file_get_contents($kernel->getProjectDir() . '/config/rsa/private.key');
-        $publicKey = file_get_contents($kernel->getProjectDir() . '/config/rsa/public.key');
-
-        $prkRes = openssl_get_privatekey($privateKey, $token);
-        $ppkRes = openssl_get_publickey($publicKey);
-
-        dump($prkRes);
-        dump($ppkRes);
-
-        $encrypted = '';
-        $decrypted = '';
+        $rsaService->generateKeyPair($token, true);
 
         $plaintext = 'Lazy fox and shit';
 
-        openssl_public_encrypt($plaintext, $encrypted, $ppkRes);
-        openssl_public_decrypt($encrypted, $decrypted, $prkRes);
+        $crypt = $rsaService->rsaEncodeMessage($plaintext, RsaService::PRIVATE_KEY_FILE);
+        dump($crypt);
+        $decrypt = $rsaService->rsaDecodeMessage($crypt, RsaService::PUBLIC_KEY_FILE);
+        dump($decrypt);
 
-        dump($encrypted);
-        dump($decrypted);
+
 
         return $this->render('dev.html.twig');
     }

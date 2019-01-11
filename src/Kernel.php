@@ -20,7 +20,6 @@ class Kernel extends BaseKernel
     const SITE_NAME = "Style34";
     const CONTACT_MAIL = "admin@EryseClient.net";
     const INFO_MAIL = "info@EryseClient.net";
-    const MEMBERSHIP_PRICE = "299";
 
     const CONFIG_EXTS = '.{php,xml,yaml,yml}';
 

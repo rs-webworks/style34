@@ -1,0 +1,12 @@
+# Eryse ACP configurations
+parameters:
+    eryseClient:
+        name: '%env(resolve:ERYSE_CLIENT_NAME)%'
+        emails:
+            info: '%env(resolve:ERYSE_EMAIL_INFO)%'
+            admin: '%env(resolve:ERYSE_EMAIL_ADMIN)%'
+        membership:
+            price: '%env(resolve:ERYSE_MEMBERSHIP_PRICE)%'
+        server:
+            url: '%env(resolve:ERYSE_SERVER_URL)%'
+            token: '%env(resolve:ERYSE_SERVER_TOKEN)%'

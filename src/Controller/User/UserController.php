@@ -58,7 +58,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/user/settings/enableTwoStepAuth", name="user-settings-enable-two-step-auth")
+     * @Route("/user/settings/enable-two-step-auth", name="user-settings-enable-two-step-auth")
      * @param GoogleAuthenticatorInterface $authService
      * @param SessionInterface $session
      * @param Request $request

@@ -10,7 +10,7 @@
 	{# --------------------------------------------------------------------------------------------------------------------------------------------------------- #}
 	{# // META Tags #}
 
-	<title>{% block title %}Home{% endblock %} - EryseClient</title>
+	<title>{% block title %}Home{% endblock %} - {{ eryseClient.name }}</title>
 	<link rel="canonical" href="{{ url(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) }}"/>
 	<link rel="icon" type="image/x-icon" href="{#{{ asset('favicon.ico') }}#}"/>
 	<link rel="icon" sizes="192x192" href="{#{{ asset('bigicon.png') }}#}"/>
