@@ -415,7 +415,7 @@ class User implements UserInterface, TwoFactorInterface, TrustedDeviceInterface
      */
     public function getGoogleAuthenticatorSecret(): string
     {
-        return CryptService::getDecrypted($this->getSettings()->getGAuthSecret());
+        return $this->getSettings()->getGAuthSecret();
     }
 
     /**
@@ -423,7 +423,7 @@ class User implements UserInterface, TwoFactorInterface, TrustedDeviceInterface
      */
     public function setGoogleAuthenticatorSecret(?string $googleAuthenticatorSecret): void
     {
-        $this->getSettings()->setGAuthSecret(CryptService::getEncrypted($googleAuthenticatorSecret));
+        $this->getSettings()->setGAuthSecret($googleAuthenticatorSecret);
     }
 
 

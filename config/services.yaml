@@ -33,12 +33,16 @@ services:
 
     # Manually defined services
     # ------------------------------------------------------------------------------------------------------------------
-    EryseClient.services.trusted_device_service:
+    eryseclient.services.trusted_device_service:
         class: EryseClient\Service\TrustedDeviceService
 #
 #    EryseClient.services.browscap_service:
 #        class: EryseClient\Service\BrowscapService
 #        arguments: ['@utils.browscap']
+
+    eryseclient.services.server_rest_api:
+        class: EryseClient\Service\ServerRestService
+        arguments: ['%env(resolve:ERYSE_SERVER_URL)%']
 
 
     security.rememberme.token.provider.doctrine:

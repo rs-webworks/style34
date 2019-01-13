@@ -14,9 +14,6 @@ final class CryptService extends AbstractService
     const CRYPT_SECRET = 'e64e0ce4f66c48d3b95357d6f7cdc7b5';
     const CRYPT_IV = '1*]r[oě=,s¶#6@';
 
-    /** @var CryptService $_instance */
-    private static $_instance;
-
     /** @var OpenCrypt $openCrypt */
     private $openCrypt;
 
@@ -27,37 +24,7 @@ final class CryptService extends AbstractService
      */
     public function __construct()
     {
-        if (!self::$_instance) {
-            self::$_instance = $this->openCrypt = new OpenCrypt(self::CRYPT_SECRET, self::CRYPT_IV);
-        } else {
-            $this->openCrypt = self::$_instance;
-        }
-    }
-
-    /**
-     * @param string $val
-     * @return string
-     */
-    public static function getEncrypted(string $val): string
-    {
-        if(!self::$_instance){
-            self::$_instance = new OpenCrypt(self::CRYPT_SECRET, self::CRYPT_IV);
-        }
-
-        return self::$_instance->encrypt($val);
-    }
-
-    /**
-     * @param string $val
-     * @return string
-     */
-    public static function getDecrypted(string $val): string
-    {
-        if(!self::$_instance){
-            self::$_instance = new OpenCrypt(self::CRYPT_SECRET, self::CRYPT_IV);
-        }
-
-        return self::$_instance->decrypt($val);
+        $this->openCrypt = new OpenCrypt(self::CRYPT_SECRET, self::CRYPT_IV);
     }
 
     /**
