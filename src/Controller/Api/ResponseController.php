@@ -48,6 +48,7 @@ class ResponseController extends AbstractController
      */
     public function packagesVersions(KernelInterface $kernel, CacheService $cacheService){
         $versions = $cacheService->callCached(self::CACHEKEY_PACKAGES, function() use($kernel){
+            $versions = array();
             $packages = json_decode(file_get_contents($kernel->getProjectDir() . '/vendor/composer/installed.json'));
 
             foreach($packages as $package){

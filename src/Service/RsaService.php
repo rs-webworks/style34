@@ -53,14 +53,12 @@ final class RsaService extends AbstractService
 
         $this->rsa->setPassword($token);
 
-        /**
-         * @var $publickey  string
-         * @var $privatekey string
-         */
-        extract($this->rsa->createKey());
+        $keys = $this->rsa->createKey();
+        $publicKey = $keys['publickey'];
+        $privateKey = $keys['privatekey'];
 
-        file_put_contents($this->kernel->getProjectDir() . self::PUBLIC_KEY_FILE, $publickey);
-        file_put_contents($this->kernel->getProjectDir() . self::PRIVATE_KEY_FILE, $privatekey);
+        file_put_contents($this->kernel->getProjectDir() . self::PUBLIC_KEY_FILE, $publicKey);
+        file_put_contents($this->kernel->getProjectDir() . self::PRIVATE_KEY_FILE, $privateKey);
     }
 
     /**

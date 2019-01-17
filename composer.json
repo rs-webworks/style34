@@ -48,14 +48,15 @@
         "symfony/yaml": "^4.2"
     },
     "require-dev": {
+        "phpstan/phpstan": "^0.11.0",
+        "raitocz/eryse-structures": "*@dev",
         "symfony/debug-pack": "*",
         "symfony/dotenv": "^4.2",
         "symfony/maker-bundle": "^1.9",
         "symfony/phpunit-bridge": "^4.2",
         "symfony/profiler-pack": "^1.0",
         "symfony/test-pack": "*",
-        "symfony/web-server-bundle": "*",
-        "raitocz/eryse-structures": "*@dev"
+        "symfony/web-server-bundle": "*"
     },
     "config": {
         "preferred-install": {

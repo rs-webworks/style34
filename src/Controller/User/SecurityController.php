@@ -3,6 +3,7 @@
 namespace EryseClient\Controller\User;
 
 use EryseClient\Entity\Token\TokenType;
+use EryseClient\Entity\User\User;
 use EryseClient\Exception\Security\ResetPasswordException;
 use EryseClient\Exception\User\ActivationException;
 use EryseClient\Form\User\RegistrationForm;
