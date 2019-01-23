@@ -4,7 +4,7 @@ namespace EryseClient\Service;
 
 use BrowscapPHP\Browscap;
 use Scheb\TwoFactorBundle\Security\TwoFactor\Trusted\TrustedDeviceManagerInterface;
-use EryseClient\Traits\LoggerTrait;
+use EryseClient\Utility\LoggerTrait;
 use Symfony\Component\HttpFoundation\Cookie;
 
 /**
@@ -36,7 +36,7 @@ final class TrustedDeviceService extends AbstractService implements TrustedDevic
      */
     public function addTrustedDevice($user, string $firewallName): void
     {
-
+        // TODO: add functionality for trusted devices
     }
 
     /**

@@ -4,7 +4,7 @@ namespace EryseClient\Security;
 
 use EryseClient\Entity\User\User;
 use EryseClient\Repository\User\UserRepository;
-use EryseClient\Traits\EntityManagerTrait;
+use EryseClient\Utility\EntityManagerTrait;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;

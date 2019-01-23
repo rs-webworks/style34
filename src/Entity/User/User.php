@@ -7,7 +7,6 @@ use EryseClient\Entity\CreatedAt;
 use EryseClient\Entity\DeletedAt;
 use EryseClient\Entity\Profile\Profile;
 use EryseClient\Entity\Token\Token;
-use EryseClient\Service\CryptService;
 use Scheb\TwoFactorBundle\Model\Google\TwoFactorInterface;
 use Scheb\TwoFactorBundle\Model\TrustedDeviceInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;

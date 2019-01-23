@@ -1,10 +1,22 @@
 {
     "type": "project",
     "license": "proprietary",
+    "name": "raitocz/eryse-client",
+    "description": "Eryse ACP Client Application",
+    "authors": [
+        {
+            "name": "raitocz",
+            "email": "raito.akehanareru@gmail.com"
+        }
+    ],
     "repositories": [
         {
             "type": "vcs",
-            "url":  "git@github.com:raitocz/eryse-structures"
+            "url":  "git@github.com:raitocz/eryse-structures.git"
+        },
+        {
+            "type": "vcs",
+            "url":  "git@github.com:raitocz/eryse-services.git"
         }
     ],
     "require": {
@@ -13,19 +25,6 @@
         "ext-iconv": "*",
         "ext-json": "*",
         "ext-openssl": "*",
-        "browscap/browscap-php": "^4.1",
-        "doctrine/doctrine-fixtures-bundle": "^3.0",
-        "google/recaptcha": "^1.2",
-        "martinusso/opencrypt": "^3.1",
-        "mashape/unirest-php": "^3.0",
-        "php-translation/symfony-bundle": "^0.8.1",
-        "phpseclib/phpseclib": "^2.0",
-        "raitocz/eryse-structures": "*",
-        "scheb/two-factor-bundle": "^3.16",
-        "sensio/framework-extra-bundle": "^5.2",
-        "sonata-project/google-authenticator": "^2.2",
-        "squizlabs/php_codesniffer": "3.3.2",
-        "stof/doctrine-extensions-bundle": "^1.3",
         "symfony/apache-pack": "^1.0",
         "symfony/asset": "^4.2",
         "symfony/console": "^4.0",
@@ -45,18 +44,37 @@
         "symfony/twig-bundle": "^4.2",
         "symfony/validator": "*",
         "symfony/web-link": "*",
-        "symfony/yaml": "^4.2"
+        "symfony/yaml": "^4.2",
+
+        "doctrine/doctrine-fixtures-bundle": "^3.0",
+        "php-translation/symfony-bundle": "^0.8.1",
+        "sensio/framework-extra-bundle": "^5.2",
+        "stof/doctrine-extensions-bundle": "^1.3",
+
+        "phpseclib/phpseclib": "^2.0",
+        "scheb/two-factor-bundle": "^3.16",
+        "squizlabs/php_codesniffer": "3.3.2",
+        "mashape/unirest-php": "^3.0",
+        "martinusso/opencrypt": "^3.1",
+        "browscap/browscap-php": "^4.1",
+        "google/recaptcha": "^1.2",
+
+        "raitocz/eryse-structures": "*",
+        "raitocz/eryse-services": "*"
     },
     "require-dev": {
-        "phpstan/phpstan": "^0.11.0",
-        "raitocz/eryse-structures": "*@dev",
         "symfony/debug-pack": "*",
         "symfony/dotenv": "^4.2",
         "symfony/maker-bundle": "^1.9",
         "symfony/phpunit-bridge": "^4.2",
         "symfony/profiler-pack": "^1.0",
         "symfony/test-pack": "*",
-        "symfony/web-server-bundle": "*"
+        "symfony/web-server-bundle": "*",
+
+        "phpstan/phpstan": "^0.11.0",
+
+        "raitocz/eryse-structures": "*@dev",
+        "raitocz/eryse-services": "*@dev"
     },
     "config": {
         "preferred-install": {

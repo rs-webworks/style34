@@ -3,9 +3,9 @@
 namespace EryseClient\Controller\Profile;
 
 use EryseClient\Repository\Profile\ProfileRepository;
-use EryseClient\Traits\EntityManagerTrait;
-use EryseClient\Traits\LoggerTrait;
-use EryseClient\Traits\TranslatorTrait;
+use EryseClient\Utility\EntityManagerTrait;
+use EryseClient\Utility\LoggerTrait;
+use EryseClient\Utility\TranslatorTrait;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 

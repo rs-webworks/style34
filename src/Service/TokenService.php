@@ -7,7 +7,7 @@ use EryseClient\Entity\Token\Token;
 use EryseClient\Entity\Token\TokenType;
 use EryseClient\Repository\Token\TokenRepository;
 use EryseClient\Repository\Token\TokenTypeRepository;
-use EryseClient\Traits\EntityManagerTrait;
+use EryseClient\Utility\EntityManagerTrait;
 
 /**
  * Class TokenService

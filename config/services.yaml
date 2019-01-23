@@ -5,7 +5,6 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: 'cs'
-    google_recaptcha_site_key: '%env(GOOGLE_RECAPTCHA_SITE_KEY)%'
 
 services:
     # default configuration for services in *this* file
@@ -31,6 +30,16 @@ services:
         tags: ['controller.service_arguments']
 
 
+    # Shared services via packages:
+    RaitoCZ\EryseServices\:
+        resource: '../vendor/raitocz/eryse-services/src/*'
+
+    RaitoCZ\EryseServices\Service\RsaService:
+        arguments: ['%kernel.project_dir%']
+
+    RaitoCZ\EryseServices\Service\RestService:
+      arguments: ['%env(resolve:ERYSE_SERVER_URL)%']
+
     # Manually defined services
     # ------------------------------------------------------------------------------------------------------------------
     eryseclient.services.trusted_device_service:
@@ -39,11 +48,6 @@ services:
 #    EryseClient.services.browscap_service:
 #        class: EryseClient\Service\BrowscapService
 #        arguments: ['@utils.browscap']
-
-    eryseclient.services.server_rest_api:
-        class: EryseClient\Service\ServerRestService
-        arguments: ['%env(resolve:ERYSE_SERVER_URL)%']
-
 
     security.rememberme.token.provider.doctrine:
         class: Symfony\Bridge\Doctrine\Security\RememberMe\DoctrineTokenProvider

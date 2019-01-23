@@ -5,7 +5,7 @@ namespace EryseClient\Service;
 use EryseClient\Entity\User\User;
 use EryseClient\Entity\Token\Token;
 use EryseClient\Kernel;
-use EryseClient\Traits\TranslatorTrait;
+use EryseClient\Utility\TranslatorTrait;
 use Swift_Message;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\Translation\TranslatorInterface;

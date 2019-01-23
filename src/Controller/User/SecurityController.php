@@ -13,9 +13,9 @@ use EryseClient\Repository\User\UserRepository;
 use EryseClient\Service\MailService;
 use EryseClient\Service\TokenService;
 use EryseClient\Service\UserService;
-use EryseClient\Traits\EntityManagerTrait;
-use EryseClient\Traits\LoggerTrait;
-use EryseClient\Traits\TranslatorTrait;
+use EryseClient\Utility\EntityManagerTrait;
+use EryseClient\Utility\LoggerTrait;
+use EryseClient\Utility\TranslatorTrait;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -102,7 +102,7 @@ class SecurityController extends AbstractController
                 // Flash & redirect
                 $this->addFlash('success', $this->translator->trans('registration-success', [], 'profile'));
 
-                return $this->redirectToRoute("profile-registration-success");
+                return $this->redirectToRoute("user-registration-success");
             } catch (\Exception $ex) {
                 $this->addFlash('danger', $this->translator->trans('registration-failed', [], 'profile'));
                 $this->logger->error('controller.user.security.registration: registration failed',

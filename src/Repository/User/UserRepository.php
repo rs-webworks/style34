@@ -5,7 +5,7 @@ namespace EryseClient\Repository\User;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use EryseClient\Entity\User\User;
-use EryseClient\Traits\SaveEntityTrait;
+use EryseClient\Utility\SaveEntityTrait;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
 

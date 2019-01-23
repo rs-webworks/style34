@@ -14,9 +14,9 @@ use EryseClient\Exception\Token\InvalidTokenException;
 use EryseClient\Kernel;
 use EryseClient\Repository\Token\TokenRepository;
 use EryseClient\Repository\Token\TokenTypeRepository;
-use EryseClient\Traits\EntityManagerTrait;
-use EryseClient\Traits\LoggerTrait;
-use EryseClient\Traits\TranslatorTrait;
+use EryseClient\Utility\EntityManagerTrait;
+use EryseClient\Utility\LoggerTrait;
+use EryseClient\Utility\TranslatorTrait;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**

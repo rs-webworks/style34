@@ -7,7 +7,7 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use EryseClient\Entity\Token\Token;
 use EryseClient\Entity\Token\TokenType;
 use EryseClient\Entity\User\User;
-use EryseClient\Traits\SaveEntityTrait;
+use EryseClient\Utility\SaveEntityTrait;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**

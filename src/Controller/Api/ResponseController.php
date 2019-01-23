@@ -3,8 +3,8 @@
 namespace EryseClient\Controller\Api;
 
 
-use EryseClient\Service\CacheService;
-use EryseClient\Traits\LoggerTrait;
+use RaitoCZ\EryseServices\Service\CacheService;
+use EryseClient\Utility\LoggerTrait;
 use Psr\Cache\CacheItemPoolInterface;
 use Psr\SimpleCache\CacheInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -32,6 +32,7 @@ class ResponseController extends AbstractController
      */
     public function ping()
     {
+        //TODO: Add response for OFFLINE status (when application is refusing connections but is running.)
         $data = array(
             'status' => 'OK'
         );
