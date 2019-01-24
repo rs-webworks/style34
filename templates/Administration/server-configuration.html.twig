@@ -39,6 +39,11 @@
 					</div>
 
 					<div class="form-group">
+						<label for="client-api">{% trans from 'administration' %}client-api{% endtrans %}</label>
+						<input type="text" class="form-control" id="client-api" name="client-api" aria-describedby="" value="{{ url('api-index') }}">
+					</div>
+
+					<div class="form-group">
 						<label for="rsa-key">{% trans from 'administration' %}rsa-key{% endtrans %}</label>
 
 						{% if rsaKeys %}

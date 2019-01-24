@@ -3137,15 +3137,16 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:raitocz/eryse-services.git",
-                "reference": "78e18c4ca1ed436b35d10a8e145b56400a13d809"
+                "reference": "c76b32eaa9dce3b8055661fe26187b87b0cd97da"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/raitocz/eryse-services/zipball/78e18c4ca1ed436b35d10a8e145b56400a13d809",
-                "reference": "78e18c4ca1ed436b35d10a8e145b56400a13d809",
+                "url": "https://api.github.com/repos/raitocz/eryse-services/zipball/c76b32eaa9dce3b8055661fe26187b87b0cd97da",
+                "reference": "c76b32eaa9dce3b8055661fe26187b87b0cd97da",
                 "shasum": ""
             },
             "require": {
+                "guzzlehttp/guzzle": "^6.3",
                 "martinusso/opencrypt": "^3.1",
                 "mashape/unirest-php": "^3.0",
                 "phpseclib/phpseclib": "^2.0"
@@ -3174,7 +3175,7 @@
                 "source": "https://github.com/raitocz/eryse-services/tree/master",
                 "issues": "https://github.com/raitocz/eryse-services/issues"
             },
-            "time": "2019-01-20T13:56:56+00:00"
+            "time": "2019-01-20T14:26:58+00:00"
         },
         {
             "name": "raitocz/eryse-structures",
@@ -3311,16 +3312,16 @@
         },
         {
             "name": "scheb/two-factor-bundle",
-            "version": "v3.16.2",
+            "version": "v3.17.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/scheb/two-factor-bundle.git",
-                "reference": "410d2b7dee90bdbeb4653fd188bda1d47e512938"
+                "reference": "5a2347ae5c75a6d95ce117a60ba986b2751ffe8c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/scheb/two-factor-bundle/zipball/410d2b7dee90bdbeb4653fd188bda1d47e512938",
-                "reference": "410d2b7dee90bdbeb4653fd188bda1d47e512938",
+                "url": "https://api.github.com/repos/scheb/two-factor-bundle/zipball/5a2347ae5c75a6d95ce117a60ba986b2751ffe8c",
+                "reference": "5a2347ae5c75a6d95ce117a60ba986b2751ffe8c",
                 "shasum": ""
             },
             "require": {
@@ -3369,7 +3370,7 @@
                 "two-factor",
                 "two-step"
             ],
-            "time": "2018-12-02T11:35:02+00:00"
+            "time": "2019-01-23T21:12:53+00:00"
         },
         {
             "name": "sensio/framework-extra-bundle",

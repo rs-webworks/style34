@@ -54,7 +54,7 @@ services:
           - .:/application
           - ./phpdocker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
       ports:
-       - "8989:80"
+       - "8001:8001"
       depends_on:
        - "php-fpm"
 
@@ -81,3 +81,8 @@ services:
 volumes:
   postgres:
   pgadmin:
+
+networks:
+  default:
+    external:
+      name: eryse-net

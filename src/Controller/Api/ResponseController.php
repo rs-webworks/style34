@@ -27,6 +27,14 @@ class ResponseController extends AbstractController
     const CACHEKEY_PACKAGES = 'controller.api.response.ping-packages';
 
     /**
+     * @Route("/api", name="api-index")
+     */
+    public function index()
+    {
+        return $this->redirectToRoute('api-ping');
+    }
+
+    /**
      * @Route("/api/ping", name="api-ping")
      * @return JsonResponse
      */
@@ -34,7 +42,7 @@ class ResponseController extends AbstractController
     {
         //TODO: Add response for OFFLINE status (when application is refusing connections but is running.)
         $data = array(
-            'status' => 'OK'
+            'status' => 'ONLINE'
         );
 
         return new JsonResponse($data);
