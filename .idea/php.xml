@@ -146,7 +146,6 @@
       <path value="$PROJECT_DIR$/vendor/psr/container" />
       <path value="$PROJECT_DIR$/vendor/fig/link-util" />
       <path value="$PROJECT_DIR$/vendor/composer" />
-      <path value="$PROJECT_DIR$/../eryse-structures" />
     </include_path>
   </component>
   <component name="PhpProjectServersManager">

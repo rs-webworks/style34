@@ -44,8 +44,6 @@ class UserService extends AbstractService
     /** @var TokenRepository $tokenRepository */
     private $tokenRepository;
 
-    /** @var CryptService $cryptService */
-    private $cryptService;
 
     /**
      * UserService constructor.
@@ -54,22 +52,19 @@ class UserService extends AbstractService
      * @param MailService $mailService
      * @param TokenTypeRepository $tokenTypeRepository
      * @param TokenRepository $tokenRepository
-     * @param CryptService $cryptService
      */
     public function __construct(
         UserPasswordEncoderInterface $passwordEncoder,
         TokenService $tokenService,
         MailService $mailService,
         TokenTypeRepository $tokenTypeRepository,
-        TokenRepository $tokenRepository,
-        CryptService $cryptService
+        TokenRepository $tokenRepository
     ) {
         $this->passwordEncoder = $passwordEncoder;
         $this->tokenService = $tokenService;
         $this->mailService = $mailService;
         $this->tokenTypeRepository = $tokenTypeRepository;
         $this->tokenRepository = $tokenRepository;
-        $this->cryptService = $cryptService;
     }
 
     /**
@@ -198,7 +193,6 @@ class UserService extends AbstractService
         $user->setGoogleAuthenticatorSecret($secret);
         $settings = $user->getSettings();
 
-        //        $settings->setGAuthSecret($this->cryptService->encrypt($secret));
         $settings->setTwoStepAuthEnabled(true);
 
         $this->em->persist($settings);
