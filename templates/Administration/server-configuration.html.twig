@@ -4,78 +4,96 @@
 
 {% block body %}
 
-	<div class="container">
+    <div class="container">
 
-		<h2>{% trans from 'administration' %}server-settings{% endtrans %}</h2>
+        <h2>{% trans from 'administration' %}server-settings{% endtrans %}</h2>
 
-		<nav aria-label="breadcrumb">
-			<ol class="breadcrumb">
-				<li class="breadcrumb-item">
-					<a href="{{ url('home-index') }}">{{ eryseClient.name }}</a>
-				</li>
-				<li class="breadcrumb-item">
-					<a href="{{ url('administration-dashboard') }}">{% trans from 'administration' %}dashboard{% endtrans %}</a>
-				</li>
-				<li class="breadcrumb-item active" aria-current="page">
-					{% trans from 'administration' %}server-settings{% endtrans %}
-				</li>
-			</ol>
-		</nav>
-
-
-		<div class="row">
-			{% include '_partials/admin-navigation.html.twig' %}
-
-			<div class="col col-xs-12 col-sm-9 pl-4">
-				<form>
-					<div class="form-group">
-						<label for="server-url">{% trans from 'administration' %}server-url{% endtrans %}</label>
-						<input type="text" class="form-control" id="server-url" name="server-url" aria-describedby="" value="{{ eryseClient.server.url }}">
-					</div>
-
-					<div class="form-group">
-						<label for="server-token">{% trans from 'administration' %}server-token{% endtrans %}</label>
-						<input type="text" class="form-control" id="server-token" name="server-token" aria-describedby="" value="{{ eryseClient.server.token }}">
-					</div>
-
-					<div class="form-group">
-						<label for="client-api">{% trans from 'administration' %}client-api{% endtrans %}</label>
-						<input type="text" class="form-control" id="client-api" name="client-api" aria-describedby="" value="{{ url('api-index') }}">
-					</div>
-
-					<div class="form-group">
-						<label for="rsa-key">{% trans from 'administration' %}rsa-key{% endtrans %}</label>
-
-						{% if rsaKeys %}
-						<input type="text" class="form-control is-valid" id="rsa-key" value="{% trans from 'administration' %}rsa-key-found{% endtrans %}" required>
-						<div class="valid-feedback">
-							{% trans from 'administration' %}rsa-key-found-desc{% endtrans %}
-						</div>
-						{% else %}
-							<input type="text" class="form-control is-invalid" id="rsa-key" value="{% trans from 'administration' %}rsa-key-missing{% endtrans %}" required>
-							<div class="invalid-feedback">
-								V konfiguraci chybí public.rsa a private.rsa klíče. <a href="{{ url('administration-server-configuration-generate-keys') }}">{% trans from 'administration' %}rsa-key-generate{% endtrans %}</a>
-							</div>
-						{% endif %}
-					</div>
-
-					<div class="form-group">
-						<label for="server-public-key">{% trans from 'administration' %}server-public-key{% endtrans %}</label>
-						<textarea class="form-control" id="server-public-key" name="server-public-key" aria-describedby="">
-							{{ publicKey }}
-						</textarea>
-					</div>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="{{ url('home-index') }}">{{ eryseClient.name }}</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="{{ url('administration-dashboard') }}">{% trans from 'administration' %}dashboard{% endtrans %}</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">
+                    {% trans from 'administration' %}server-settings{% endtrans %}
+                </li>
+            </ol>
+        </nav>
 
 
-					{#<button type="submit" class="btn btn-primary">#}
-					{#<i class="fa fa-fw fa-save"></i>#}
-					{#{% trans from 'global' %}save{% endtrans %}#}
-					{#</button>#}
-				</form>
-			</div>
-		</div>
+        <div class="row">
+            {% include '_partials/admin-navigation.html.twig' %}
 
-	</div>
+            <div class="col col-xs-12 col-sm-9 pl-4">
+                <form>
+                    <div class="form-group">
+                        <label for="server-url">{% trans from 'administration' %}server-url{% endtrans %}
+                            <div class="badge badge-light">ENV</div>
+                        </label>
+                        <input type="text" class="form-control" id="server-url" name="server-url" aria-describedby=""
+                               value="{{ eryseClient.server.url }}" disabled="disabled">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="server-token">{% trans from 'administration' %}server-token{% endtrans %}
+                            <div class="badge badge-light">ENV</div>
+                        </label>
+                        <input type="text" class="form-control" id="server-token" name="server-token"
+                               aria-describedby="" value="{{ eryseClient.server.token }}" disabled="disabled">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="client-api">{% trans from 'administration' %}client-api{% endtrans %}</label>
+                        <input type="text" class="form-control" id="client-api" name="client-api" aria-describedby=""
+                               value="{{ url('api-index') }}/" disabled="disabled">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="server-ping">{% trans from 'administration' %}server-ping{% endtrans %}</label>
+                        <input type="text" class="form-control" id="server-ping" name="server-ping" aria-describedby=""
+                               value="{{ serverPing.statusCode }} {{ serverPing.reasonPhrase }}" disabled="disabled">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="rsa-key">{% trans from 'administration' %}rsa-key{% endtrans %}</label>
+
+                        {% if rsaKeys %}
+                            <input type="text" class="form-control is-valid" id="rsa-key"
+                                   value="{% trans from 'administration' %}rsa-key-found{% endtrans %}" required
+                                   disabled="disabled">
+                            <div class="valid-feedback">
+                                {% trans from 'administration' %}rsa-key-found-desc{% endtrans %}
+                            </div>
+                        {% else %}
+                            <input type="text" class="form-control is-invalid" id="rsa-key"
+                                   value="{% trans from 'administration' %}rsa-key-missing{% endtrans %}" required
+                                   disabled="disabled">
+                            <div class="invalid-feedback">
+                                {% trans from 'administration' %}rsa-key-missing-desc{% endtrans %}
+                                <a href="{{ url('administration-server-configuration-generate-keys') }}">{% trans from 'administration' %}rsa-key-generate{% endtrans %}</a>
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="server-public-key">{% trans from 'administration' %}server-public-key{% endtrans %}</label>
+                        <textarea class="form-control" id="server-public-key" name="server-public-key"
+                                  aria-describedby="" rows="6">{{ publicKey }}</textarea>
+                    </div>
+
+
+                    {#<button type="submit" class="btn btn-primary">#}
+                    {#<i class="fa fa-fw fa-save"></i>#}
+                    {#{% trans from 'global' %}save{% endtrans %}#}
+                    {#</button>#}
+                </form>
+
+            </div>
+        </div>
+
+    </div>
 
 
 {% endblock %}

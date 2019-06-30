@@ -37,8 +37,9 @@ services:
     RaitoCZ\EryseServices\Service\RsaService:
         arguments: ['%kernel.project_dir%']
 
-    RaitoCZ\EryseServices\Service\RestService:
-      arguments: ['%env(resolve:ERYSE_SERVER_URL)%']
+    RaitoCZ\EryseServices\Service\ApiClient:
+        $serverUrl: '%env(resolve:ERYSE_SERVER_URL)%'
+        $disableSslVerification: true
 
     # Manually defined services
     # ------------------------------------------------------------------------------------------------------------------

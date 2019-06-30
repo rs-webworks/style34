@@ -3,6 +3,7 @@
     <words>
       <w>birthdate</w>
       <w>browsercap</w>
+      <w>cachekey</w>
       <w>csrf</w>
       <w>exts</w>
     </words>

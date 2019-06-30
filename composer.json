@@ -25,6 +25,8 @@
         "ext-iconv": "*",
         "ext-json": "*",
         "ext-openssl": "*",
+        "ext-curl": "*",
+        "ext-http": "*",
         "symfony/apache-pack": "^1.0",
         "symfony/asset": "^4.2",
         "symfony/console": "^4.0",

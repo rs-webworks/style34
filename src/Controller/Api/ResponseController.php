@@ -3,13 +3,13 @@
 namespace EryseClient\Controller\Api;
 
 
-use RaitoCZ\EryseServices\Service\CacheService;
 use EryseClient\Utility\LoggerTrait;
-use Psr\Cache\CacheItemPoolInterface;
-use Psr\SimpleCache\CacheInterface;
+use EryseClient\Utility\RsaServiceTrait;
+use RaitoCZ\EryseServices\Service\CacheService;
+use RaitoCZ\EryseServices\Service\RsaService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -20,6 +20,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ResponseController extends AbstractController
 {
     use LoggerTrait;
+    use RsaServiceTrait;
 
     const PACKAGE_STRUCTURES = 'raitocz/eryse-structures';
     const PACKAGE_SERVICES = 'raitocz/eryse-services';
@@ -36,14 +37,22 @@ class ResponseController extends AbstractController
 
     /**
      * @Route("/api/ping", name="api-ping")
+     * @param Request $request
      * @return JsonResponse
+     * @throws \RaitoCZ\EryseServices\Exception\RsaService\InvalidKeyTypeException
      */
-    public function ping()
+    public function ping(Request $request)
     {
-        //TODO: Add response for OFFLINE status (when application is refusing connections but is running.)
-        $data = array(
-            'status' => 'ONLINE'
-        );
+        $this->logger->debug('request', [$request->get('token'), $request->query->get('token')]);
+        if ($this->checkSecurityToken($request->get('token'), $this->getParameter('eryseClient')['server']['token'])) {
+            $data = array(
+                'status' => 'ONLINE'
+            );
+        } else {
+            $data = array(
+                'status' => 'FAILED_AUTH'
+            );
+        }
 
         return new JsonResponse($data);
     }
@@ -55,13 +64,14 @@ class ResponseController extends AbstractController
      * @return JsonResponse
      * @throws \Psr\Cache\InvalidArgumentException
      */
-    public function packagesVersions(KernelInterface $kernel, CacheService $cacheService){
-        $versions = $cacheService->callCached(self::CACHEKEY_PACKAGES, function() use($kernel){
+    public function packagesVersions(KernelInterface $kernel, CacheService $cacheService)
+    {
+        $versions = $cacheService->callCached(self::CACHEKEY_PACKAGES, function () use ($kernel) {
             $versions = array();
             $packages = json_decode(file_get_contents($kernel->getProjectDir() . '/vendor/composer/installed.json'));
 
-            foreach($packages as $package){
-                if($package->name == self::PACKAGE_SERVICES || $package->name == self::PACKAGE_STRUCTURES){
+            foreach ($packages as $package) {
+                if ($package->name == self::PACKAGE_SERVICES || $package->name == self::PACKAGE_STRUCTURES) {
                     $versions[$package->name] = array(
                         'version' => $package->version,
                         'time' => $package->time
@@ -77,6 +87,28 @@ class ResponseController extends AbstractController
         );
 
         return new JsonResponse($data);
+    }
+
+    /**
+     * @param string|null $secureToken
+     * @param string $token
+     * @return bool
+     * @throws \RaitoCZ\EryseServices\Exception\RsaService\InvalidKeyTypeException
+     */
+    public function checkSecurityToken($secureToken, string $token): bool
+    {
+        if ($secureToken === null) {
+            return false;
+        }
+
+        $this->logger->debug('base decode: ', [urldecode($secureToken)]);
+
+        $this->logger->debug('controller.api.response.checkSecurityToken.incomingToken:', [$secureToken]);
+        $decodedToken = $this->rsaService->rsaDecodeMessage($secureToken, RsaService::PRIVATE_KEY_FILE);
+        $this->logger->debug('controller.api.response.checkSecurityToken.decodedTokenCompare:',
+            [$decodedToken, $token]);
+
+        return $decodedToken == $token;
     }
 
 }

@@ -7,7 +7,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 # Install selected extensions and other stuff
 RUN apt-get update \
     && apt-get -y --no-install-recommends install  php-memcached php7.2-pgsql php-redis unzip php7.2-zip \
-    && apt-get -y install php-xml \
+    && apt-get -y install php-xml php-soap php-http \
     && apt-get clean; rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
 
 # Install git
