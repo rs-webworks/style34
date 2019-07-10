@@ -5,7 +5,9 @@ namespace EryseClient\Repository\User;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use EryseClient\Entity\User\User;
+use EryseClient\Repository\AbstractServerRepository;
 use EryseClient\Utility\SaveEntityTrait;
+use RaitoCZ\EryseServices\Service\ApiClientInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
 
@@ -15,17 +17,13 @@ use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
  * @method User|null findOneBy(array $criteria, array $orderBy = null)
  * @method User|null find($id, $lockMode = null, $lockVersion = null)
  */
-class UserRepository extends ServiceEntityRepository implements UserLoaderInterface
+class UserRepository extends AbstractServerRepository implements UserLoaderInterface
 {
     use SaveEntityTrait;
 
-    /**
-     * UserRepository constructor
-     * @param RegistryInterface $registry
-     */
-    public function __construct(RegistryInterface $registry)
+    public function __construct(ApiClientInterface $apiClient)
     {
-        parent::__construct($registry, User::class);
+        parent::__construct($apiClient);
     }
 
     /**
@@ -35,6 +33,8 @@ class UserRepository extends ServiceEntityRepository implements UserLoaderInterf
      */
     public function loadUserByUsername($username)
     {
+        $this->apiClient->call("user/getByUsernameOrMail");
+
         return $this->createQueryBuilder('u')
             ->where('u.username = :username OR u.email = :email')
             ->setParameter('username', $username)

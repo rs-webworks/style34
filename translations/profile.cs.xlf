@@ -793,5 +793,11 @@
         <target></target>
       </segment>
     </unit>
+    <unit id="c.Ff0u7" name="login-sign-up">
+      <segment>
+        <source>login-sign-up</source>
+        <target>Registrace</target>
+      </segment>
+    </unit>
   </file>
 </xliff>

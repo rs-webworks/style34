@@ -99,6 +99,14 @@
 						</button>
 						<ul class="dropdown-menu dropdown-menu-right mt-2">
 							<li class="px-3 py-2">
+								<div class="form-group">
+									<a href="{{ url('user-registration') }}" class="btn btn-success btn-block">
+										{% trans from 'profile' %}login-sign-up{% endtrans %}
+									</a>
+								</div>
+
+								<div class="dropdown-divider"></div>
+
 								{{ include('_partials/login-form.html.twig') }}
 							</li>
 						</ul>

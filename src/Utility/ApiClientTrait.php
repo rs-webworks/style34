@@ -2,7 +2,7 @@
 
 namespace EryseClient\Utility;
 
-use RaitoCZ\EryseServices\Service\ApiClient;
+use RaitoCZ\EryseServices\Service\ApiClientInterface;
 
 /**
  * Trait ApiClientTrait
@@ -11,14 +11,14 @@ use RaitoCZ\EryseServices\Service\ApiClient;
 trait ApiClientTrait
 {
 
-    /** @var ApiClient */
+    /** @var ApiClientInterface */
     protected $apiClient;
 
     /**
      * @required
-     * @param ApiClient $apiClient
+     * @param ApiClientInterface $apiClient
      */
-    public function setRsaService(ApiClient $apiClient)
+    public function setRsaService(ApiClientInterface $apiClient)
     {
         $this->apiClient = $apiClient;
     }
