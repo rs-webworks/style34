@@ -1,17 +1,18 @@
 <?php declare(strict_types=1);
 
-namespace EryseClient\Entity\Token;
+namespace EryseClient\Entity\Client\Token;
 
 use Doctrine\ORM\Mapping as ORM;
-use EryseClient\Entity\CreatedAt;
-use EryseClient\Entity\ExpiresAt;
-use EryseClient\Entity\Identifier;
-use EryseClient\Entity\User\User;
+use EryseClient\Entity\Common\CreatedAt;
+use EryseClient\Entity\Common\ExpiresAt;
+use EryseClient\Entity\Common\Identifier;
+use EryseClient\Entity\Server\User\User;
+
 
 /**
  * Class Token
  * @package EryseClient\Entity\Token
- * @ORM\Entity(repositoryClass="EryseClient\Repository\Token\TokenRepository")
+ * @ORM\Entity(repositoryClass="EryseClient\Repository\Client\Token\TokenRepository")
  */
 class Token
 {

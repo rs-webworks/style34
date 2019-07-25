@@ -1,7 +1,8 @@
 <?php
 
-namespace EryseClient\Entity;
+namespace EryseClient\Entity\Common;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -13,22 +14,16 @@ trait ExpiresAt
 
     /**
      * @ORM\Column(type="datetime", nullable=false)
-     * @var \DateTime
+     * @var DateTime
      */
     private $expiresAt;
 
-    /**
-     * @return \DateTime
-     */
-    public function getExpiresAt(): \DateTime
+    public function getExpiresAt(): DateTime
     {
         return $this->expiresAt;
     }
 
-    /**
-     * @param \DateTime $expiresAt
-     */
-    public function setExpiresAt(\DateTime $expiresAt): void
+    public function setExpiresAt(DateTime $expiresAt): void
     {
         $this->expiresAt = $expiresAt;
     }

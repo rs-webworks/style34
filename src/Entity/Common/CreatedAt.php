@@ -1,7 +1,8 @@
 <?php
 
-namespace EryseClient\Entity;
+namespace EryseClient\Entity\Common;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -13,22 +14,16 @@ trait CreatedAt
 
     /**
      * @ORM\Column(type="datetime", nullable=false)
-     * @var \DateTime
+     * @var DateTime
      */
     private $createdAt;
 
-    /**
-     * @return \DateTime
-     */
-    public function getCreatedAt(): \DateTime
+    public function getCreatedAt(): DateTime
     {
         return $this->createdAt;
     }
 
-    /**
-     * @param \DateTime $createdAt
-     */
-    public function setCreatedAt(\DateTime $createdAt): void
+    public function setCreatedAt(DateTime $createdAt): void
     {
         $this->createdAt = $createdAt;
     }

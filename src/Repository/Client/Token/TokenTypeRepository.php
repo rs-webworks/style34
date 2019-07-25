@@ -1,10 +1,10 @@
 <?php
 
-namespace EryseClient\Repository\Token;
+namespace EryseClient\Repository\Client\Token;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface;
-use EryseClient\Entity\Token\TokenType;
+use EryseClient\Entity\Client\Token\TokenType;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**

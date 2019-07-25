@@ -1,14 +1,15 @@
 <?php declare(strict_types=1);
 
-namespace EryseClient\Entity\User;
+namespace EryseClient\Entity\Client\User;
 
 use Doctrine\ORM\Mapping as ORM;
-use EryseClient\Entity\Identifier;
+use EryseClient\Entity\Common\Identifier;
+use EryseClient\Entity\Server\User\User;
 
 /**
  * Class Settings
  * @package EryseClient\Entity\User
- * @ORM\Entity(repositoryClass="EryseClient\Repository\User\SettingsRepository")
+ * @ORM\Entity(repositoryClass="EryseClient\Repository\Client\User\SettingsRepository")
  */
 class Settings
 {

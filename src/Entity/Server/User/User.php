@@ -1,12 +1,14 @@
 <?php declare(strict_types=1);
 
-namespace EryseClient\Entity\User;
+namespace EryseClient\Entity\Server\User;
 
 use Doctrine\ORM\Mapping as ORM;
-use EryseClient\Entity\CreatedAt;
-use EryseClient\Entity\DeletedAt;
-use EryseClient\Entity\Profile\Profile;
-use EryseClient\Entity\Token\Token;
+use EryseClient\Entity\Client\Profile\Profile;
+use EryseClient\Entity\Client\Token\Token;
+use EryseClient\Entity\Client\User\Role;
+use EryseClient\Entity\Client\User\Settings;
+use EryseClient\Entity\Common\CreatedAt;
+use EryseClient\Entity\Common\DeletedAt;
 use Scheb\TwoFactorBundle\Model\Google\TwoFactorInterface;
 use Scheb\TwoFactorBundle\Model\TrustedDeviceInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -16,7 +18,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Class User
  * @package EryseClient\Entity\User
- * @ORM\Entity(repositoryClass="EryseClient\Repository\User\UserRepository")
+ * @ORM\Entity(repositoryClass="EryseClient\Repository\Server\User\DeviceRepository")
  * @ORM\Table(name="global_users")
  * @UniqueEntity("username", message="user.username-taken")
  * @UniqueEntity("email", message="user.email-taken")
@@ -390,7 +392,7 @@ class User implements UserInterface, TwoFactorInterface, TrustedDeviceInterface
         $this->settings = $settings;
     }
 
-    // Two step authentificator
+    // Two step authenticator
     // -----------------------------------------------------------------------------------------------------------------
 
     /**

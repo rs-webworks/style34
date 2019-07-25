@@ -1,15 +1,15 @@
 <?php
 
 
-namespace EryseClient\Repository\User;
+namespace EryseClient\Repository\Server\User;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use EryseClient\Entity\User\User;
-use EryseClient\Repository\AbstractServerRepository;
+use Doctrine\ORM\NonUniqueResultException;
+use EryseClient\Entity\Server\User\User;
 use EryseClient\Utility\SaveEntityTrait;
-use RaitoCZ\EryseServices\Service\ApiClientInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Class UserRepository
@@ -17,24 +17,26 @@ use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
  * @method User|null findOneBy(array $criteria, array $orderBy = null)
  * @method User|null find($id, $lockMode = null, $lockVersion = null)
  */
-class UserRepository extends AbstractServerRepository implements UserLoaderInterface
+class UserRepository extends ServiceEntityRepository implements UserLoaderInterface
 {
     use SaveEntityTrait;
 
-    public function __construct(ApiClientInterface $apiClient)
+    /**
+     * UserRepository constructor
+     * @param RegistryInterface $registry
+     */
+    public function __construct(RegistryInterface $registry)
     {
-        parent::__construct($apiClient);
+        parent::__construct($registry, User::class);
     }
 
     /**
      * @param string $username
-     * @return mixed|null|\Symfony\Component\Security\Core\User\UserInterface
-     * @throws \Doctrine\ORM\NonUniqueResultException
+     * @return mixed|null|UserInterface
+     * @throws NonUniqueResultException
      */
     public function loadUserByUsername($username)
     {
-        $this->apiClient->call("user/getByUsernameOrMail");
-
         return $this->createQueryBuilder('u')
             ->where('u.username = :username OR u.email = :email')
             ->setParameter('username', $username)
@@ -47,12 +49,13 @@ class UserRepository extends AbstractServerRepository implements UserLoaderInter
      * @param $role
      * @return mixed
      */
-    public function findByRole($role){
+    public function findByRole($role)
+    {
         $qb = $this->_em->createQueryBuilder();
         $qb->select('u')
             ->from($this->_entityName, 'u')
             ->where('u.roles LIKE :roles')
-            ->setParameter('roles', '%"'.$role.'"%');
+            ->setParameter('roles', '%"' . $role . '"%');
 
         return $qb->getQuery()->getResult();
     }
@@ -62,7 +65,7 @@ class UserRepository extends AbstractServerRepository implements UserLoaderInter
      */
     public function removeUsers(array $users): void
     {
-        foreach($users as $user){
+        foreach ($users as $user) {
             $this->_em->remove($user);
         }
 

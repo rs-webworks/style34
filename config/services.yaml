@@ -52,7 +52,7 @@ services:
 
     security.rememberme.token.provider.doctrine:
         class: Symfony\Bridge\Doctrine\Security\RememberMe\DoctrineTokenProvider
-        arguments: ['@doctrine.dbal.default_connection']
+        arguments: ['@doctrine.dbal.eryseClient_connection']
 
 
     # Not shared services

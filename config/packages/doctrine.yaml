@@ -7,23 +7,43 @@ parameters:
 
 doctrine:
     dbal:
-        # configure these for your database server
-        driver: 'pdo_pgsql'
-        server_version: '9.6.11'
-        charset: utf8
-        default_table_options:
-            charset: utf8mb4
-            collate: utf8mb4_unicode_ci
+        default_connection: eryseClient
+        connections:
+            eryseClient:
+                url: '%env(resolve:ERYSE_CLIENT_DATABASE_URL)%'
+                driver: 'pdo_pgsql'
+                server_version: '9.6.11'
+                charset: utf8
+                default_table_options:
+                    charset: utf8mb4
+                    collate: utf8mb4_unicode_ci
+            eryseServer:
+                url: '%env(ERYSE_SERVER_DATABASE_URL)%'
+                driver: 'pdo_pgsql'
+                server_version: '9.6.11'
+                charset: utf8
+                default_table_options:
+                    charset: utf8mb4
+                    collate: utf8mb4_unicode_ci
 
-        url: '%env(resolve:DATABASE_URL)%'
     orm:
-        auto_generate_proxy_classes: '%kernel.debug%'
-        naming_strategy: doctrine.orm.naming_strategy.underscore
-        auto_mapping: true
-        mappings:
-            App:
-                is_bundle: false
-                type: annotation
-                dir: '%kernel.project_dir%/src/Entity'
-                prefix: 'EryseClient\Entity'
-                alias: EryseClient
+        default_entity_manager: eryseClient
+        entity_managers:
+            eryseClient:
+                connection: eryseClient
+                mappings:
+                    Client:
+                        is_bundle: false
+                        type: annotation
+                        dir: '%kernel.project_dir%/src/Entity/Client'
+                        prefix: 'EryseClient\Entity\Client'
+                        alias: EryseClient
+            eryseServer:
+                connection: eryseServer
+                mappings:
+                    Server:
+                        is_bundle: false
+                        type: annotation
+                        dir: '%kernel.project_dir%/src/Entity/Server'
+                        prefix: 'EryseClient\Entity\Server'
+                        alias: EryseServer

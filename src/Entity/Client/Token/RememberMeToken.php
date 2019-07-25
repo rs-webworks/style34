@@ -1,7 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace EryseClient\Entity\Token;
+namespace EryseClient\Entity\Client\Token;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -26,7 +27,7 @@ class RememberMeToken
     protected $value;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      * @ORM\Column(type="datetime", nullable=false, name="lastused")
      */
     protected $lastUsed;

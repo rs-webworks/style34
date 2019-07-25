@@ -1,14 +1,14 @@
 <?php declare(strict_types=1);
 
-namespace EryseClient\Entity\Token;
+namespace EryseClient\Entity\Client\Token;
 
 use Doctrine\ORM\Mapping as ORM;
-use EryseClient\Entity\MasterData;
+use EryseClient\Entity\Common\MasterData;
 
 /**
  * Class TokenType
  * @package EryseClient\Entity\Token
- * @ORM\Entity(repositoryClass="EryseClient\Repository\Token\TokenTypeRepository")
+ * @ORM\Entity(repositoryClass="EryseClient\Repository\Client\Token\TokenTypeRepository")
  */
 class TokenType
 {

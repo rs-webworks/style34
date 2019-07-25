@@ -1,10 +1,10 @@
 <?php
 
 
-namespace EryseClient\Repository\User;
+namespace EryseClient\Repository\Client\User;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use EryseClient\Entity\User\Role;
+use EryseClient\Entity\Client\User\Role;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**

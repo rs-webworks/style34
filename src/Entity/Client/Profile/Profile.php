@@ -1,16 +1,16 @@
 <?php declare(strict_types=1);
 
-namespace EryseClient\Entity\Profile;
+namespace EryseClient\Entity\Client\Profile;
 
 use Doctrine\ORM\Mapping as ORM;
-use EryseClient\Entity\Identifier;
-use EryseClient\Entity\User\User;
+use EryseClient\Entity\Common\Identifier;
+use EryseClient\Entity\Server\User\User;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class Profile
- * @package EryseClient\Entity\Profile
- * @ORM\Entity(repositoryClass="EryseClient\Repository\Profile\ProfileRepository")
+ * @package EryseClient\Entity\Client\Profile
+ * @ORM\Entity(repositoryClass="EryseClient\Repository\Client\Profile\ProfileRepository")
  */
 class Profile
 {
