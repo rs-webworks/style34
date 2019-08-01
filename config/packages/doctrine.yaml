@@ -31,6 +31,7 @@ doctrine:
         entity_managers:
             eryseClient:
                 connection: eryseClient
+                naming_strategy: doctrine.orm.naming_strategy.underscore
                 mappings:
                     Client:
                         is_bundle: false
@@ -40,6 +41,7 @@ doctrine:
                         alias: EryseClient
             eryseServer:
                 connection: eryseServer
+                naming_strategy: doctrine.orm.naming_strategy.underscore
                 mappings:
                     Server:
                         is_bundle: false

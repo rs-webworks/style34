@@ -7,7 +7,7 @@ use EryseClient\Entity\Common\MasterData;
 
 /**
  * Class TokenType
- * @package EryseClient\Entity\Token
+ * @package EryseClient\Entity\Client\Token
  * @ORM\Entity(repositoryClass="EryseClient\Repository\Client\Token\TokenTypeRepository")
  */
 class TokenType
@@ -21,7 +21,7 @@ class TokenType
 
     /**
      * @var Token[] $tokens
-     * @ORM\OneToMany(targetEntity="EryseClient\Entity\Token\Token", mappedBy="type")
+     * @ORM\OneToMany(targetEntity="EryseClient\Entity\Client\Token\Token", mappedBy="type")
      */
     protected $tokens;
 }

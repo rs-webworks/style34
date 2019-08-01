@@ -2,15 +2,12 @@
 
 namespace EryseClient\Tests\Service;
 
-use EryseClient\Entity\Profile\Profile;
-use EryseClient\Entity\Profile\Role;
-use EryseClient\Entity\Token\Token;
-use EryseClient\Entity\Token\TokenType;
+use EryseClient\Entity\Client\Profile\Profile;
 use EryseClient\Exception\User\ActivationException;
 use EryseClient\Exception\Token\ExpiredTokenException;
 use EryseClient\Exception\Token\InvalidTokenException;
-use EryseClient\Repository\Profile\ProfileRepository;
-use EryseClient\Repository\Token\TokenTypeRepository;
+use EryseClient\Repository\Client\Profile\ProfileRepository;
+use EryseClient\Repository\Client\Token\TokenTypeRepository;
 use EryseClient\Service\ProfileService;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;

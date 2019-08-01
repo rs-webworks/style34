@@ -81,8 +81,3 @@ services:
 volumes:
   postgres:
   pgadmin:
-
-networks:
-  default:
-    external:
-      name: eryse-net

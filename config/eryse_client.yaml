@@ -7,6 +7,3 @@ parameters:
             admin: '%env(resolve:ERYSE_EMAIL_ADMIN)%'
         membership:
             price: '%env(resolve:ERYSE_MEMBERSHIP_PRICE)%'
-        server:
-            url: '%env(resolve:ERYSE_SERVER_URL)%'
-            token: '%env(resolve:ERYSE_SERVER_TOKEN)%'

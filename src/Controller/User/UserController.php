@@ -18,7 +18,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * Class UserController
  * @package EryseClient\Controller\User
- * @IsGranted(EryseClient\Entity\User\Role::USER)
+ * @IsGranted(EryseClient\Entity\Client\User\Role::USER)
  */
 class UserController extends AbstractController
 {

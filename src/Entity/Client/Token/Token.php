@@ -11,7 +11,7 @@ use EryseClient\Entity\Server\User\User;
 
 /**
  * Class Token
- * @package EryseClient\Entity\Token
+ * @package EryseClient\Entity\Client\Token
  * @ORM\Entity(repositoryClass="EryseClient\Repository\Client\Token\TokenRepository")
  */
 class Token
@@ -34,14 +34,13 @@ class Token
 
     /**
      * @var TokenType $type
-     * @ORM\ManyToOne(targetEntity="EryseClient\Entity\Token\TokenType", inversedBy="tokens")
+     * @ORM\ManyToOne(targetEntity="EryseClient\Entity\Client\Token\TokenType", inversedBy="tokens")
      */
     protected $type;
 
     /**
      * @var User $user ;
-     * @ORM\ManyToOne(targetEntity="EryseClient\Entity\User\User", inversedBy="tokens")
-     * @ORM\JoinColumn(name="profile_id", referencedColumnName="id", onDelete="CASCADE")
+     * @ORM\Column(type="integer", nullable=false)
      */
     protected $user;
 

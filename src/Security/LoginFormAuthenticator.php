@@ -4,7 +4,7 @@ namespace EryseClient\Security;
 use EryseClient\Entity\User\User;
 use EryseClient\Exception\Security\LoginException;
 use EryseClient\Exception\Security\TwoStepAuthSetException;
-use EryseClient\Repository\User\UserRepository;
+use EryseClient\Repository\Server\User\UserRepository;
 use EryseClient\Utility\EntityManagerTrait;
 use EryseClient\Utility\TranslatorTrait;
 use Symfony\Component\HttpFoundation\RedirectResponse;

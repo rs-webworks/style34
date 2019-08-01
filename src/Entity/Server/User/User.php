@@ -2,6 +2,7 @@
 
 namespace EryseClient\Entity\Server\User;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use EryseClient\Entity\Client\Profile\Profile;
 use EryseClient\Entity\Client\Token\Token;
@@ -9,6 +10,9 @@ use EryseClient\Entity\Client\User\Role;
 use EryseClient\Entity\Client\User\Settings;
 use EryseClient\Entity\Common\CreatedAt;
 use EryseClient\Entity\Common\DeletedAt;
+use EryseClient\Repository\Client\Profile\ProfileRepository;
+use EryseClient\Repository\Client\Token\TokenRepository;
+use EryseClient\Repository\Client\User\SettingsRepository;
 use Scheb\TwoFactorBundle\Model\Google\TwoFactorInterface;
 use Scheb\TwoFactorBundle\Model\TrustedDeviceInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -17,9 +21,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class User
- * @package EryseClient\Entity\User
+ * @package EryseClient\Entity\Server\User
  * @ORM\Entity(repositoryClass="EryseClient\Repository\Server\User\DeviceRepository")
- * @ORM\Table(name="global_users")
+ * @ORM\Table(name="user")
  * @UniqueEntity("username", message="user.username-taken")
  * @UniqueEntity("email", message="user.email-taken")
  */
@@ -74,7 +78,7 @@ class User implements UserInterface, TwoFactorInterface, TrustedDeviceInterface
     protected $plainPassword;
 
     /**
-     * @var \DateTime $activatedAt
+     * @var DateTime $activatedAt
      * @ORM\Column(type="datetime", nullable=true)
      */
     protected $activatedAt;
@@ -85,11 +89,8 @@ class User implements UserInterface, TwoFactorInterface, TrustedDeviceInterface
      */
     protected $roles = [];
 
-
     /**
      * @var Token[] $tokens
-     * @ORM\OneToMany(targetEntity="EryseClient\Entity\Token\Token", mappedBy="user", cascade={"persist"},
-     *                                                           orphanRemoval=true)
      */
     protected $tokens;
 
@@ -106,16 +107,15 @@ class User implements UserInterface, TwoFactorInterface, TrustedDeviceInterface
      */
     protected $registeredAs;
 
-
     /**
      * @var Settings
-     * @ORM\OneToOne(targetEntity="EryseClient\Entity\User\Settings", mappedBy="user", cascade={"persist"})
+     * @ORM\Column(type="integer", nullable=false)
      */
-    protected $settings;
+    protected $settingsId;
 
     /**
      * @var Device[]
-     * @ORM\OneToMany(targetEntity="EryseClient\Entity\User\Device", mappedBy="user",  cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="EryseClient\Entity\Server\User\Device", mappedBy="user",  cascade={"persist"})
      */
     protected $devices;
 
@@ -127,16 +127,30 @@ class User implements UserInterface, TwoFactorInterface, TrustedDeviceInterface
 
     /**
      * @var Profile
-     * @ORM\OneToOne(targetEntity="EryseClient\Entity\Profile\Profile", inversedBy="user", cascade={"persist"})
+     * @ORM\Column(type="integer", nullable=false)
      */
-    protected $profile;
+    protected $profileId;
 
-    // Methods
-    // -----------------------------------------------------------------------------------------------------------------
-    public function __construct()
-    {
+    /** @var ProfileRepository */
+    private $profileRepository;
+
+    /** @var TokenRepository */
+    private $tokenRepository;
+
+    /** @var SettingsRepository */
+    private $settingsRepository;
+
+    public function __construct(
+        ProfileRepository $profileRepository,
+        TokenRepository $tokenRepository,
+        SettingsRepository $settingsRepository
+    ) {
         $this->addRole(Role::USER);
         $this->trustedTokenVersion = 0;
+
+        $this->profileRepository = $profileRepository;
+        $this->tokenRepository = $tokenRepository;
+        $this->settingsRepository = $settingsRepository;
     }
 
     public function eraseCredentials(): void
@@ -176,6 +190,7 @@ class User implements UserInterface, TwoFactorInterface, TrustedDeviceInterface
     {
         return $this->email;
     }
+
     public function setEmail(string $email): void
     {
         $this->email = $email;
@@ -230,17 +245,17 @@ class User implements UserInterface, TwoFactorInterface, TrustedDeviceInterface
     // -----------------------------------------------------------------------------------------------------------------
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getActivatedAt(): \DateTime
+    public function getActivatedAt(): DateTime
     {
         return $this->activatedAt;
     }
 
     /**
-     * @param \DateTime $activatedAt
+     * @param DateTime $activatedAt
      */
-    public function setActivatedAt(\DateTime $activatedAt): void
+    public function setActivatedAt(DateTime $activatedAt): void
     {
         $this->activatedAt = $activatedAt;
     }
@@ -291,7 +306,7 @@ class User implements UserInterface, TwoFactorInterface, TrustedDeviceInterface
      */
     public function getTokens(): array
     {
-        return $this->tokens;
+        return $this->tokenRepository->findBy(['user' => $this->id]);
     }
 
     /**
@@ -299,7 +314,7 @@ class User implements UserInterface, TwoFactorInterface, TrustedDeviceInterface
      */
     public function setTokens(array $tokens): void
     {
-        $this->tokens = $tokens;
+        $this->tokenRepository->save($tokens);
     }
 
 
@@ -351,7 +366,7 @@ class User implements UserInterface, TwoFactorInterface, TrustedDeviceInterface
      */
     public function getSettings(): Settings
     {
-        return $this->settings;
+        return $this->settingsRepository->find($this->settingsId);
     }
 
     /**
@@ -359,7 +374,7 @@ class User implements UserInterface, TwoFactorInterface, TrustedDeviceInterface
      */
     public function setSettings(Settings $settings): void
     {
-        $this->settings = $settings;
+        $this->settingsRepository->save($settings);
     }
 
     // Two step authenticator
@@ -450,4 +465,25 @@ class User implements UserInterface, TwoFactorInterface, TrustedDeviceInterface
     {
         $this->trustedTokenVersion = $version;
     }
+
+    // Profile
+    // -----------------------------------------------------------------------------------------------------------------
+
+    /**
+     * @return Profile
+     */
+    public function getProfileId(): Profile
+    {
+        return $this->profileRepository->find($this->profileId);
+    }
+
+    /**
+     * @param Profile $profileId
+     */
+    public function setProfileId(Profile $profileId): void
+    {
+        $this->profileRepository->save($profileId);
+    }
+
+
 }

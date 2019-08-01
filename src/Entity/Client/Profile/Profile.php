@@ -19,7 +19,7 @@ class Profile
 
     /**
      * @var User
-     * @ORM\OneToOne(targetEntity="EryseClient\Entity\User\User", mappedBy="profile")
+     * @ORM\Column(type="integer", nullable=false)
      */
     protected $user;
 

@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 namespace EryseClient\Security;
 
-use EryseClient\Entity\User\User;
-use EryseClient\Repository\User\UserRepository;
+use EryseClient\Entity\Server\User\User;
+use EryseClient\Repository\Server\User\UserRepository;
 use EryseClient\Utility\EntityManagerTrait;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;

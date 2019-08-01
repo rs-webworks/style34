@@ -2,9 +2,7 @@
 
 namespace EryseClient\Tests\Service;
 
-use EryseClient\Entity\Profile\Profile;
-use EryseClient\Entity\Token\Token;
-use EryseClient\Entity\Token\TokenType;
+use EryseClient\Entity\Client\Profile\Profile;
 use EryseClient\Service\TokenService;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
@@ -56,28 +54,30 @@ class TokenServiceTest extends WebTestCase
     /**
      * @dataProvider provideExpirationTokens
      * @throws \Exception
-     * @covers \EryseClient\Service\TokenService::isExpired
+     * @covers       \EryseClient\Service\TokenService::isExpired
      */
     public function testIsExpired($expired, $token)
     {
-        if($expired){
+        if ($expired) {
             $this->assertTrue($this->tokenService->isExpired($token));
-        }else{
+        } else {
             $this->assertFalse($this->tokenService->isExpired($token));
         }
     }
+
     /**
      * @covers \EryseClient\Service\TokenService::isValid
      */
-    public function testIsValid(){
-       $validToken = new Token();
-       $validToken->setInvalid(false);
+    public function testIsValid()
+    {
+        $validToken = new Token();
+        $validToken->setInvalid(false);
 
-       $invalidToken = new Token();
-       $invalidToken->setInvalid(true);
+        $invalidToken = new Token();
+        $invalidToken->setInvalid(true);
 
-       $this->assertTrue($this->tokenService->isValid($validToken));
-       $this->assertFalse($this->tokenService->isValid($invalidToken));
+        $this->assertTrue($this->tokenService->isValid($validToken));
+        $this->assertFalse($this->tokenService->isValid($invalidToken));
     }
 
 
@@ -85,7 +85,8 @@ class TokenServiceTest extends WebTestCase
      * @throws \Exception
      * @covers \EryseClient\Service\TokenService::createExpirationDateTime
      */
-    public function testCreateExpiraitonDateTime(){
+    public function testCreateExpiraitonDateTime()
+    {
         $startTime = new \DateTime('2018-01-01 00:00:00');
         $expectedExpiryTime = new \DateTime('2018-01-02 00:00:00');
 

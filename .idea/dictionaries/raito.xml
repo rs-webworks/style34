@@ -5,7 +5,9 @@
       <w>browsercap</w>
       <w>cachekey</w>
       <w>csrf</w>
+      <w>eryse</w>
       <w>exts</w>
+      <w>pgsql</w>
     </words>
   </dictionary>
 </component>

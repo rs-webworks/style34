@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class Role
- * @package EryseClient\Entity\User
+ * @package EryseClient\Entity\Client\User
  * @ORM\Entity(repositoryClass="EryseClient\Repository\Client\User\RoleRepository")
  * @UniqueEntity("name")
  */

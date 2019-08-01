@@ -4,6 +4,7 @@ namespace EryseClient\Repository\Client\Profile;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use EryseClient\Entity\Client\Profile\Profile;
+use EryseClient\Utility\SaveEntityTrait;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -14,6 +15,8 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class ProfileRepository extends ServiceEntityRepository
 {
+    use SaveEntityTrait;
+
     /**
      * ProfileRepository constructor
      * @param RegistryInterface $registry

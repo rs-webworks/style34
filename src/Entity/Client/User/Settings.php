@@ -8,7 +8,7 @@ use EryseClient\Entity\Server\User\User;
 
 /**
  * Class Settings
- * @package EryseClient\Entity\User
+ * @package EryseClient\Entity\Client\User
  * @ORM\Entity(repositoryClass="EryseClient\Repository\Client\User\SettingsRepository")
  */
 class Settings
@@ -18,7 +18,7 @@ class Settings
 
     /**
      * @var User
-     * @ORM\OneToOne(targetEntity="EryseClient\Entity\User\User", inversedBy="settings")
+     * @ORM\Column(type="integer", nullable=false)
      */
     protected $user;
 
