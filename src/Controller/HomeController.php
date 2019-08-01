@@ -1,5 +1,4 @@
-<?php
-
+<?php declare(strict_types=1);
 namespace EryseClient\Controller;
 
 use EryseClient\Utility\LoggerTrait;
@@ -27,7 +26,6 @@ class HomeController extends AbstractController
 
     /**
      * @Route("/dev", name="dev")
-     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function dev()
     {

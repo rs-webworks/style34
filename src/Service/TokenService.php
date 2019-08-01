@@ -1,13 +1,14 @@
-<?php
-
+<?php declare(strict_types=1);
 namespace EryseClient\Service;
 
-use EryseClient\Entity\User\User;
-use EryseClient\Entity\Token\Token;
-use EryseClient\Entity\Token\TokenType;
-use EryseClient\Repository\Token\TokenRepository;
-use EryseClient\Repository\Token\TokenTypeRepository;
+use DateTime;
+use EryseClient\Entity\Client\Token\Token;
+use EryseClient\Entity\Client\Token\TokenType;
+use EryseClient\Entity\Server\User\User;
+use EryseClient\Repository\Client\Token\TokenRepository;
+use EryseClient\Repository\Client\Token\TokenTypeRepository;
 use EryseClient\Utility\EntityManagerTrait;
+use Exception;
 
 /**
  * Class TokenService
@@ -37,11 +38,11 @@ class TokenService extends AbstractService
     /**
      * @param Token $token
      * @return bool
-     * @throws \Exception
+     * @throws Exception
      */
     public function isExpired(Token $token): bool
     {
-        $now = new \DateTime();
+        $now = new DateTime();
 
         return $token->getExpiresAt() < $now;
     }
@@ -58,15 +59,15 @@ class TokenService extends AbstractService
     /**
      * @param User $user
      * @return Token
-     * @throws \Exception
+     * @throws Exception
      */
     public function getActivationToken(User $user): Token
     {
         $token = new Token();
         $token->setHash($this->generateHash());
         $token->setUser($user);
-        $createdAt = new \DateTime();
-        $expiresAt = new \DateTime();
+        $createdAt = new DateTime();
+        $expiresAt = new DateTime();
         $token->setCreatedAt($createdAt);
         $token->setExpiresAt($this->createExpirationDateTime($expiresAt, Token::EXPIRY_HOUR * 2));
         $token->setType($this->tokenTypeRepository->findOneBy(array('name' => TokenType::USER['ACTIVATION'])));
@@ -76,7 +77,7 @@ class TokenService extends AbstractService
 
     /**
      * @return string
-     * @throws \Exception
+     * @throws Exception
      */
     protected function generateHash(): string
     {
@@ -84,12 +85,12 @@ class TokenService extends AbstractService
     }
 
     /**
-     * @param \DateTime $start
+     * @param DateTime $start
      * @param int $expiryInSeconds
-     * @return \DateTime
-     * @throws \Exception
+     * @return DateTime
+     * @throws Exception
      */
-    public function createExpirationDateTime(\DateTime $start, int $expiryInSeconds): \DateTime
+    public function createExpirationDateTime(DateTime $start, int $expiryInSeconds): DateTime
     {
         return $start->add(new \DateInterval('PT' . $expiryInSeconds . 'S'));
     }
@@ -97,12 +98,12 @@ class TokenService extends AbstractService
     /**
      * @param User $user
      * @return Token
-     * @throws \Exception
+     * @throws Exception
      */
     public function getResetPasswordToken(User $user): Token
     {
-        $createdAt = new \DateTime();
-        $expiresAt = new \DateTime();
+        $createdAt = new DateTime();
+        $expiresAt = new DateTime();
 
         $token = new Token();
         $token->setHash($this->generateHash());
@@ -121,7 +122,7 @@ class TokenService extends AbstractService
      * @param User $user
      * @param TokenType $tokenType
      * @return bool If Token of TokenType is found, is valid and is not expired
-     * @throws \Exception
+     * @throws Exception
      */
     public function hasUserActiveTokenType(User $user, TokenType $tokenType): bool
     {

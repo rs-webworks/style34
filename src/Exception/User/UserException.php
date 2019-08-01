@@ -1,5 +1,4 @@
-<?php
-
+<?php declare(strict_types=1);
 namespace EryseClient\Exception\User;
 
 use EryseClient\Exception\Exception;

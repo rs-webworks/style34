@@ -1,8 +1,7 @@
-<?php
-
+<?php declare(strict_types=1);
 namespace EryseClient\Controller\User;
 
-use EryseClient\Entity\User\User;
+use EryseClient\Entity\Server\User\User;
 use EryseClient\Form\User\SettingsForm;
 use EryseClient\Service\UserService;
 use EryseClient\Utility\EntityManagerTrait;
@@ -98,9 +97,7 @@ class UserController extends AbstractController
 
         $qrCode = $authService->getUrl($user);
 
-        return $this->render('User/two-step-auth.html.twig',
-            array('qrCode' => $qrCode)
-        );
+        return $this->render('User/two-step-auth.html.twig', ['qrCode' => $qrCode]);
     }
 
     /**

@@ -133,19 +133,12 @@ class User implements UserInterface, TwoFactorInterface, TrustedDeviceInterface
 
     // Methods
     // -----------------------------------------------------------------------------------------------------------------
-
-    /**
-     * Profile constructor.
-     */
     public function __construct()
     {
         $this->addRole(Role::USER);
         $this->trustedTokenVersion = 0;
     }
 
-    /**
-     *
-     */
     public function eraseCredentials(): void
     {
         // TODO: Implement eraseCredentials() method.
@@ -153,39 +146,24 @@ class User implements UserInterface, TwoFactorInterface, TrustedDeviceInterface
 
     // ID
     // -----------------------------------------------------------------------------------------------------------------
-
-    /**
-     * @return int
-     */
     final public function getId(): int
     {
         return $this->id;
     }
 
-    /**
-     * @param int $id
-     */
     public function setId(int $id): void
     {
         $this->id = $id;
-
     }
 
 
     // Username
     // -----------------------------------------------------------------------------------------------------------------
-
-    /**
-     * @return string
-     */
     public function getUsername(): ?string
     {
         return $this->username;
     }
 
-    /**
-     * @param string $username
-     */
     public function setUsername(string $username): void
     {
         $this->username = $username;
@@ -194,18 +172,10 @@ class User implements UserInterface, TwoFactorInterface, TrustedDeviceInterface
 
     // Email
     // -----------------------------------------------------------------------------------------------------------------
-
-    /**
-     * @return string
-     */
     public function getEmail(): ?string
     {
         return $this->email;
     }
-
-    /**
-     * @param string $email
-     */
     public function setEmail(string $email): void
     {
         $this->email = $email;

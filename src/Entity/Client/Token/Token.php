@@ -51,65 +51,41 @@ class Token
      */
     protected $invalid = false;
 
-    /**
-     * @return string
-     */
     public function getHash(): string
     {
         return $this->hash;
     }
 
-    /**
-     * @param string $hash
-     */
     public function setHash(string $hash): void
     {
         $this->hash = $hash;
     }
 
-    /**
-     * @return TokenType
-     */
     public function getType(): TokenType
     {
         return $this->type;
     }
 
-    /**
-     * @param TokenType $type
-     */
     public function setType(TokenType $type): void
     {
         $this->type = $type;
     }
 
-    /**
-     * @return User
-     */
     public function getUser(): User
     {
         return $this->user;
     }
 
-    /**
-     * @param User $user
-     */
     public function setUser(User $user): void
     {
         $this->user = $user;
     }
 
-    /**
-     * @return bool
-     */
     public function isInvalid(): bool
     {
         return $this->invalid;
     }
 
-    /**
-     * @param bool $invalid
-     */
     public function setInvalid(bool $invalid): void
     {
         $this->invalid = $invalid;

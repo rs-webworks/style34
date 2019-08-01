@@ -1,12 +1,13 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace EryseClient\Controller\Profile;
 
-use EryseClient\Repository\Profile\ProfileRepository;
+use EryseClient\Repository\Client\Profile\ProfileRepository;
 use EryseClient\Utility\EntityManagerTrait;
 use EryseClient\Utility\LoggerTrait;
 use EryseClient\Utility\TranslatorTrait;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -21,9 +22,6 @@ class ProfileController extends AbstractController
 
     /**
      * @Route("/profile/view/{username}", name="profile-view")
-     * @param ProfileRepository $profileRepository
-     * @param null $username
-     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function view(ProfileRepository $profileRepository, $username = null)
     {

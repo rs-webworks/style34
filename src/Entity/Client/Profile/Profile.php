@@ -48,17 +48,11 @@ class Profile
     // Birthdate
     // -----------------------------------------------------------------------------------------------------------------
 
-    /**
-     * @return \DateTime
-     */
     public function getBirthdate(): \DateTime
     {
         return $this->birthdate;
     }
 
-    /**
-     * @param \DateTime $birthdate
-     */
     public function setBirthdate(\DateTime $birthdate): void
     {
         $this->birthdate = $birthdate;
@@ -71,17 +65,11 @@ class Profile
     // State
     // -----------------------------------------------------------------------------------------------------------------
 
-    /**
-     * @return string
-     */
     public function getState(): ?string
     {
         return $this->state;
     }
 
-    /**
-     * @param string $state
-     */
     public function setState(string $state): void
     {
         $this->state = $state;
@@ -91,17 +79,11 @@ class Profile
     // City
     // -----------------------------------------------------------------------------------------------------------------
 
-    /**
-     * @return mixed
-     */
     public function getCity()
     {
         return $this->city;
     }
 
-    /**
-     * @param mixed $city
-     */
     public function setCity($city): void
     {
         $this->city = $city;

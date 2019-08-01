@@ -1,19 +1,19 @@
-<?php
-
+<?php declare(strict_types=1);
 namespace EryseClient\Service;
 
-use EryseClient\Entity\User\User;
-use EryseClient\Entity\User\Role;
-use EryseClient\Entity\User\Settings;
-use EryseClient\Entity\Token\RememberMeToken;
-use EryseClient\Entity\Token\Token;
-use EryseClient\Entity\Token\TokenType;
-use EryseClient\Exception\User\ActivationException;
+use DateTime;
+use EryseClient\Entity\Client\Token\RememberMeToken;
+use EryseClient\Entity\Client\Token\Token;
+use EryseClient\Entity\Client\Token\TokenType;
+use EryseClient\Entity\Client\User\Role;
+use EryseClient\Entity\Client\User\Settings;
+use EryseClient\Entity\Server\User\User;
 use EryseClient\Exception\Token\ExpiredTokenException;
 use EryseClient\Exception\Token\InvalidTokenException;
+use EryseClient\Exception\User\ActivationException;
 use EryseClient\Kernel;
-use EryseClient\Repository\Token\TokenRepository;
-use EryseClient\Repository\Token\TokenTypeRepository;
+use EryseClient\Repository\Client\Token\TokenRepository;
+use EryseClient\Repository\Client\Token\TokenTypeRepository;
 use EryseClient\Utility\EntityManagerTrait;
 use EryseClient\Utility\LoggerTrait;
 use EryseClient\Utility\TranslatorTrait;
@@ -44,15 +44,6 @@ class UserService extends AbstractService
     /** @var TokenRepository $tokenRepository */
     private $tokenRepository;
 
-
-    /**
-     * UserService constructor.
-     * @param UserPasswordEncoderInterface $passwordEncoder
-     * @param TokenService $tokenService
-     * @param MailService $mailService
-     * @param TokenTypeRepository $tokenTypeRepository
-     * @param TokenRepository $tokenRepository
-     */
     public function __construct(
         UserPasswordEncoderInterface $passwordEncoder,
         TokenService $tokenService,
@@ -67,13 +58,7 @@ class UserService extends AbstractService
         $this->tokenRepository = $tokenRepository;
     }
 
-    /**
-     * @param User $user
-     * @param string $lastIp
-     * @return User
-     * @throws \Exception
-     */
-    public function prepareNewUser(User $user, string $lastIp = '127.0.0.1')
+    public function prepareNewUser(User $user, string $lastIp = '127.0.0.1'): User
     {
         // Get default user role
         $user->addRole(Role::INACTIVE);
@@ -83,7 +68,7 @@ class UserService extends AbstractService
         $user->setPassword($password);
 
         // Set defaults
-        $user->setCreatedAt(new \DateTime());
+        $user->setCreatedAt(new DateTime());
         $user->setLastIp($lastIp);
         $user->setRegisteredAs(serialize(array($user->getUsername(), $user->getEmail())));
         $user->setSettings(new Settings());
@@ -91,61 +76,42 @@ class UserService extends AbstractService
         return $user;
     }
 
-    /**
-     * @param User $user
-     * @param Token|null $token
-     * @return User|null
-     * @throws ActivationException
-     * @throws ExpiredTokenException
-     * @throws InvalidTokenException
-     * @throws \Exception
-     */
     public function activateUser(User $user, Token $token = null): ?User
     {
         if ($token) {
             if ($this->tokenService->isExpired($token)) {
-                throw new ExpiredTokenException($this->translator->trans('activation-expired-token',
-                    [], 'profile'));
+                throw new ExpiredTokenException($this->translator->trans('activation-expired-token', [], 'profile'));
             }
 
             if ($token->isInvalid()) {
-                throw new InvalidTokenException($this->translator->trans('activation-invalid-token',
-                    [], 'profile'));
+                throw new InvalidTokenException($this->translator->trans('activation-invalid-token', [], 'profile'));
             }
         }
 
         if ($user->hasRole(Role::INACTIVE)) {
             $user->addRole(Role::VERIFIED);
             $user->removeRole(Role::INACTIVE);
-            $user->setActivatedAt(new \DateTime);
+            $user->setActivatedAt(new DateTime());
 
             return $user;
         }
 
-        throw new ActivationException($this->translator->trans('contact-support',
-            ['contactmail' => Kernel::CONTACT_MAIL], 'global'));
+        throw new ActivationException($this->translator->trans(
+            'contact-support',
+            ['contactmail' => Kernel::CONTACT_MAIL],
+            'global'
+        ));
     }
 
-    /**
-     * @param string $newPassword
-     * @param User $user
-     * @param Token|null $token
-     * @return User|null
-     * @throws ExpiredTokenException
-     * @throws InvalidTokenException
-     * @throws \Exception
-     */
     public function updatePassword(string $newPassword, User $user, Token $token = null): ?User
     {
         if ($token) {
             if ($this->tokenService->isExpired($token)) {
-                throw new ExpiredTokenException($this->translator->trans('activation-expired-token',
-                    [], 'profile'));
+                throw new ExpiredTokenException($this->translator->trans('activation-expired-token', [], 'profile'));
             }
 
             if ($token->isInvalid()) {
-                throw new InvalidTokenException($this->translator->trans('activation-invalid-token',
-                    [], 'profile'));
+                throw new InvalidTokenException($this->translator->trans('activation-invalid-token', [], 'profile'));
             }
         }
 
@@ -155,9 +121,6 @@ class UserService extends AbstractService
         return $user;
     }
 
-    /**
-     * @return User[]|null
-     */
     public function getExpiredRegistrations(): ?array
     {
         try {
@@ -184,11 +147,7 @@ class UserService extends AbstractService
         return null;
     }
 
-    /**
-     * @param User $user
-     * @param string $secret
-     */
-    public function enableTwoStepAuth(User $user, string $secret)
+    public function enableTwoStepAuth(User $user, string $secret): void
     {
         $user->setGoogleAuthenticatorSecret($secret);
         $settings = $user->getSettings();

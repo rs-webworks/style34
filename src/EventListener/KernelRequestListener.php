@@ -1,5 +1,4 @@
-<?php
-
+<?php declare(strict_types=1);
 namespace EryseClient\EventListener;
 
 use EryseClient\Entity\Profile\Profile;

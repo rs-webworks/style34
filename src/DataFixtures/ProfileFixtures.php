@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace EryseClient\DataFixtures;
 
@@ -10,22 +10,19 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
  * Class ProfileFixtures
  * @package EryseClient\DataFixtures
  */
-class ProfileFixtures extends Fixture {
+class ProfileFixtures extends Fixture
+{
     /** @var UserPasswordEncoderInterface */
     private $passwordEncoder;
 
-    /**
-     * ProfileFixtures constructor
-     * @param UserPasswordEncoderInterface $passwordEncoder
-     */
-    public function __construct(UserPasswordEncoderInterface $passwordEncoder) {
+    public function __construct(UserPasswordEncoderInterface $passwordEncoder)
+    {
         $this->passwordEncoder = $passwordEncoder;
     }
 
-    /**
-     * @param ObjectManager $manager
-     */
-    public function load(ObjectManager $manager) {
+    public function load(ObjectManager $manager): void
+    {
 
     }
+
 }

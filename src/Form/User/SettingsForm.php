@@ -1,5 +1,4 @@
-<?php
-
+<?php declare(strict_types=1);
 namespace EryseClient\Form\User;
 
 use Symfony\Component\Form\AbstractType;

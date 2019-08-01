@@ -9,16 +9,6 @@
             "email": "raito.akehanareru@gmail.com"
         }
     ],
-    "repositories": [
-        {
-            "type": "vcs",
-            "url":  "git@github.com:raitocz/eryse-structures.git"
-        },
-        {
-            "type": "vcs",
-            "url":  "git@github.com:raitocz/eryse-services.git"
-        }
-    ],
     "require": {
         "php": "^7.3.0",
         "ext-ctype": "*",
@@ -59,10 +49,7 @@
         "mashape/unirest-php": "^3.0",
         "martinusso/opencrypt": "^3.1",
         "browscap/browscap-php": "^4.1",
-        "google/recaptcha": "^1.2",
-
-        "raitocz/eryse-structures": "*",
-        "raitocz/eryse-services": "*"
+        "google/recaptcha": "^1.2"
     },
     "require-dev": {
         "symfony/debug-pack": "*",

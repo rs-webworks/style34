@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace EryseClient\Service;
 
@@ -15,35 +15,19 @@ final class TrustedDeviceService extends AbstractService implements TrustedDevic
 {
     use LoggerTrait;
 
-    /**
-     * @var Browscap
-     */
+    /** @var Browscap */
     private $browscap;
 
-    /**
-     * TrustedDeviceService constructor.
-     * @param Browscap $browscap
-     */
     public function __construct(Browscap $browscap)
     {
         $this->browscap = $browscap;
     }
 
-
-    /**
-     * @param mixed $user
-     * @param string $firewallName
-     */
     public function addTrustedDevice($user, string $firewallName): void
     {
         // TODO: add functionality for trusted devices
     }
 
-    /**
-     * @param mixed $user
-     * @param string $firewallName
-     * @return bool
-     */
     public function isTrustedDevice($user, string $firewallName): bool
     {
         return false;

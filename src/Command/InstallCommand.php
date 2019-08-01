@@ -1,13 +1,12 @@
 <?php declare(strict_types=1);
 
-
 namespace EryseClient\Command;
 
 use BrowscapPHP\BrowscapUpdater;
-use EryseClient\Entity\Token\TokenType;
-use EryseClient\Entity\User\Role;
-use EryseClient\Entity\User\Settings;
-use EryseClient\Entity\User\User;
+use EryseClient\Entity\Client\Token\TokenType;
+use EryseClient\Entity\Client\User\Role;
+use EryseClient\Entity\Client\User\Settings;
+use EryseClient\Entity\Server\User\User;
 use EryseClient\Utility\EntityManagerTrait;
 use EryseClient\Utility\LoggerTrait;
 use Psr\SimpleCache\CacheInterface;
@@ -139,11 +138,10 @@ class InstallCommand extends Command
 
         $command = $this->getApplication()->find('doctrine:schema:drop');
 
-        $arguments = new ArrayInput(array(
+        $arguments = new ArrayInput([
                 '--full-database' => true,
                 '--force' => true
-            )
-        );
+            ]);
         $command->run($arguments, new NullOutput());
 
         $this->io->progressAdvance(1);
@@ -159,7 +157,7 @@ class InstallCommand extends Command
 
         $command = $this->getApplication()->find('doctrine:database:create');
 
-        $arguments = new ArrayInput(array());
+        $arguments = new ArrayInput([]);
         $command->run($arguments, new NullOutput());
 
         $this->io->progressAdvance(1);
@@ -173,14 +171,13 @@ class InstallCommand extends Command
     protected function runMigrations()
     {
         $this->io->progressStart(1);
-
         $command = $this->getApplication()->find('doctrine:migrations:migrate');
 
-        $options = array(
+        $options = [
             "command" => "doctrine:migrations:migrate",
             "--quiet" => true,
             "--no-interaction" => true
-        );
+        ];
 
         $arguments = new ArrayInput($options);
         $arguments->setInteractive(false);
@@ -195,7 +192,7 @@ class InstallCommand extends Command
      */
     protected function createRoles()
     {
-        $roles = array(
+        $roles = [
             [Role::ADMIN, '#CB2910'],
             [Role::MODERATOR, '#00B639'],
             [Role::MEMBER, '#1D1D1D'],
@@ -203,7 +200,7 @@ class InstallCommand extends Command
             [Role::USER, '#888888'],
             [Role::VERIFIED, '#626262'],
             [Role::BANNED, '#A2A2A2']
-        );
+        ];
 
         $this->io->progressStart(count($roles));
 
@@ -228,13 +225,13 @@ class InstallCommand extends Command
     protected function registerUsers()
     {
         /** @var array $users Username, mail, password */
-        $users = array(
+        $users = [
             ['admin', 'admin@EryseClient.net', 'rootpass', [Role::ADMIN, Role::MEMBER, Role::VERIFIED]],
             ['spravce', 'spravce@EryseClient.net', '', [Role::BANNED]],
             ['moderator', 'moderator@EryseClient.net', '', [Role::BANNED]],
             ['mod', 'mod@EryseClient.net', '', [Role::BANNED]],
             ['administrator', 'administrator@EryseClient.net', '', [Role::BANNED]]
-        );
+        ];
 
         $this->io->progressStart(count($users));
 
@@ -251,7 +248,7 @@ class InstallCommand extends Command
                 $profile->addRole($role);
             }
             $profile->setLastIp('127.0.0.1');
-            $profile->setRegisteredAs(serialize(array($profile->getUsername(), $profile->getEmail())));
+            $profile->setRegisteredAs(serialize([$profile->getUsername(), $profile->getEmail()]));
 
             $profile->setSettings(new Settings($profile));
 
@@ -268,10 +265,10 @@ class InstallCommand extends Command
      */
     protected function createTokenTypes()
     {
-        $types = array(
+        $types = [
             [TokenType::USER['ACTIVATION']],
             [TokenType::USER['REQUEST_RESET_PASSWORD']],
-        );
+        ];
 
         $this->io->progressStart(count($types));
 
@@ -289,21 +286,12 @@ class InstallCommand extends Command
         $this->io->progressFinish();
     }
 
-    /**
-     * @throws \BrowscapPHP\Exception\FileNotFoundException
-     * @throws \BrowscapPHP\Helper\Exception
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     */
     protected function fetchBrowsercap()
     {
         $this->io->progressStart(2);
-
         $browscap_updater = new BrowscapUpdater($this->cacheInterface, $this->logger);
-
         $this->io->progressAdvance(1);
-
         $browscap_updater->update(\BrowscapPHP\Helper\IniLoader::PHP_INI_FULL);
-
         $this->io->progressFinish();
     }
 
@@ -313,10 +301,9 @@ class InstallCommand extends Command
     protected function clearCache()
     {
         $this->io->progressStart(1);
-
         $command = $this->getApplication()->find('cache:clear');
-
         $arguments = new ArrayInput([]);
+
         $command->run($arguments, new NullOutput());
 
         $this->io->progressAdvance(1);

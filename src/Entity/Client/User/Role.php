@@ -4,8 +4,8 @@ namespace EryseClient\Entity\Client\User;
 
 use Doctrine\ORM\Mapping as ORM;
 use EryseClient\Entity\Common\Identifier;
-use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class Role
@@ -13,7 +13,8 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @ORM\Entity(repositoryClass="EryseClient\Repository\Client\User\RoleRepository")
  * @UniqueEntity("name")
  */
-class Role {
+class Role
+{
 
     const ADMIN = 'ROLE_ADMIN';
     const MODERATOR = 'ROLE_MODERATOR';
@@ -39,31 +40,23 @@ class Role {
      */
     protected $color;
 
-    /**
-     * @return string
-     */
-    public function getName(): string {
+    public function getName(): string
+    {
         return $this->name;
     }
 
-    /**
-     * @param string $name
-     */
-    public function setName(string $name): void {
+    public function setName(string $name): void
+    {
         $this->name = $name;
     }
 
-    /**
-     * @return string
-     */
-    public function getColor(): string {
+    public function getColor(): string
+    {
         return $this->color;
     }
 
-    /**
-     * @param string $color
-     */
-    public function setColor(string $color): void {
+    public function setColor(string $color): void
+    {
         $this->color = $color;
     }
 

@@ -1,15 +1,14 @@
-<?php
-
+<?php declare(strict_types=1);
 namespace EryseClient\Controller\User;
 
-use EryseClient\Entity\Token\TokenType;
-use EryseClient\Entity\User\User;
+use EryseClient\Entity\Client\Token\TokenType;
+use EryseClient\Entity\Server\User\User;
 use EryseClient\Exception\Security\ResetPasswordException;
 use EryseClient\Exception\User\ActivationException;
 use EryseClient\Form\User\RegistrationForm;
-use EryseClient\Repository\Token\TokenRepository;
-use EryseClient\Repository\Token\TokenTypeRepository;
-use EryseClient\Repository\User\UserRepository;
+use EryseClient\Repository\Client\Token\TokenRepository;
+use EryseClient\Repository\Client\Token\TokenTypeRepository;
+use EryseClient\Repository\Server\User\UserRepository;
 use EryseClient\Service\MailService;
 use EryseClient\Service\TokenService;
 use EryseClient\Service\UserService;
@@ -37,8 +36,6 @@ class SecurityController extends AbstractController
 
     /**
      * @Route("/login", name="security-login")
-     * @param AuthenticationUtils $authenticationUtils
-     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function login(AuthenticationUtils $authenticationUtils)
     {
@@ -63,12 +60,6 @@ class SecurityController extends AbstractController
 
     /**
      * @Route("/user/registration", name="user-registration")
-     * @param Request $request
-     * @param UserService $userService
-     * @param MailService $mailService
-     * @param TokenService $tokenService
-     * @param UserRepository $userRepository
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function registration(
         Request $request,
@@ -105,8 +96,10 @@ class SecurityController extends AbstractController
                 return $this->redirectToRoute("user-registration-success");
             } catch (\Exception $ex) {
                 $this->addFlash('danger', $this->translator->trans('registration-failed', [], 'profile'));
-                $this->logger->error('controller.user.security.registration: registration failed',
-                    array($ex, $user));
+                $this->logger->error(
+                    'controller.user.security.registration: registration failed',
+                    array($ex, $user)
+                );
             }
         }
 
@@ -118,10 +111,6 @@ class SecurityController extends AbstractController
 
     /**
      * @Route("/user/registration/activate/{tokenHash}", name="user-registration-activate")
-     * @param UserService $userService
-     * @param TokenRepository $tokenRepository
-     * @param $tokenHash
-     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function activate(UserService $userService, TokenRepository $tokenRepository, $tokenHash)
     {
@@ -161,17 +150,6 @@ class SecurityController extends AbstractController
 
     /**
      * @Route("/user/request-reset-password", name="user-request-reset-password")
-     * @param Request $request
-     * @param UserRepository $userRepository
-     * @param TokenService $tokenService
-     * @param MailService $mailService
-     * @param TokenRepository $tokenRepository
-     * @param TokenTypeRepository $tokenTypeRepository
-     * @return \Symfony\Component\HttpFoundation\Response
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
-     * @throws \Exception
      */
     public function requestResetPassword(
         Request $request,
@@ -191,8 +169,10 @@ class SecurityController extends AbstractController
 
             // Check if we have this email address in DB
             if (!$user) {
-                $this->addFlash('danger',
-                    $this->translator->trans('request-reset-password-unknown-mail', [], 'profile'));
+                $this->addFlash(
+                    'danger',
+                    $this->translator->trans('request-reset-password-unknown-mail', [], 'profile')
+                );
                 $this->logger->notice('controller.user.security.requestResetPassword: unknown-mail', array($email));
 
                 return $this->redirectToRoute('user-request-reset-password');
@@ -200,8 +180,10 @@ class SecurityController extends AbstractController
 
             // Check if there is already pending request
             if ($tokenService->hasUserActiveTokenType($user, $tokenType)) {
-                $this->addFlash('danger',
-                    $this->translator->trans('request-reset-password-already-pending', [], 'profile'));
+                $this->addFlash(
+                    'danger',
+                    $this->translator->trans('request-reset-password-already-pending', [], 'profile')
+                );
 
                 return $this->redirectToRoute('user-request-reset-password');
             }
@@ -223,15 +205,6 @@ class SecurityController extends AbstractController
 
     /**
      * @Route("/user/reset-password/{tokenHash}", name="user-reset-password")
-     * @param Request $request
-     * @param UserService $userService
-     * @param TokenService $tokenService
-     * @param TokenRepository $tokenRepository
-     * @param ValidatorInterface $validator
-     * @param Security $security
-     * @param $tokenHash
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
-     * @throws \Exception
      */
     public function resetPassword(
         Request $request,
@@ -264,15 +237,18 @@ class SecurityController extends AbstractController
 
         if ($request->isMethod('post')) {
             try {
-
                 $newPassword = $request->get('new-password');
                 $newPasswordCheck = $request->get('new-password-check');
 
                 // Check if password & password check are the same
                 if ($newPassword !== $newPasswordCheck) {
-                    throw new ResetPasswordException($this->translator->trans('reset-password-new-password-mismatch',
-                        [],
-                        'profile'));
+                    throw new ResetPasswordException(
+                        $this->translator->trans(
+                            'reset-password-new-password-mismatch',
+                            [],
+                            'profile'
+                        )
+                    );
                 }
 
                 // Validate new password
@@ -296,7 +272,9 @@ class SecurityController extends AbstractController
                 $this->em->persist($user);
                 $this->em->flush();
             } catch (\Exception $ex) {
-                $this->addFlash('danger', $this->translator->trans('reset-password-failed', [], 'profile')
+                $this->addFlash(
+                    'danger',
+                    $this->translator->trans('reset-password-failed', [], 'profile')
                     . ($ex->getMessage() ?? ' - ' . $ex->getMessage())
                 );
                 $this->logger->error('controller.user.security.resetPassword: reset failed', array($ex, $tokenHash));

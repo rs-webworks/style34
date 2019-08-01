@@ -1,5 +1,4 @@
-<?php
-
+<?php declare(strict_types=1);
 
 namespace EryseClient\Repository\Server\User;
 
@@ -21,10 +20,6 @@ class UserRepository extends ServiceEntityRepository implements UserLoaderInterf
 {
     use SaveEntityTrait;
 
-    /**
-     * UserRepository constructor
-     * @param RegistryInterface $registry
-     */
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, User::class);
@@ -45,11 +40,7 @@ class UserRepository extends ServiceEntityRepository implements UserLoaderInterf
             ->getOneOrNullResult();
     }
 
-    /**
-     * @param $role
-     * @return mixed
-     */
-    public function findByRole($role)
+    public function findByRole(string $role): ?User
     {
         $qb = $this->_em->createQueryBuilder();
         $qb->select('u')
@@ -60,9 +51,6 @@ class UserRepository extends ServiceEntityRepository implements UserLoaderInterf
         return $qb->getQuery()->getResult();
     }
 
-    /**
-     * @param array $users
-     */
     public function removeUsers(array $users): void
     {
         foreach ($users as $user) {
