@@ -10,6 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Class Profile
  * @package EryseClient\Entity\Client\Profile
+ * @ORM\Table(name="profiles")
  * @ORM\Entity(repositoryClass="EryseClient\Repository\Client\Profile\ProfileRepository")
  */
 class Profile

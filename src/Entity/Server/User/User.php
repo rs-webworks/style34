@@ -22,8 +22,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Class User
  * @package EryseClient\Entity\Server\User
- * @ORM\Entity(repositoryClass="EryseClient\Repository\Server\User\DeviceRepository")
- * @ORM\Table(name="user")
+ * @ORM\Entity(repositoryClass="EryseClient\Repository\Server\User\UserRepository")
+ * @ORM\Table(name="users")
  * @UniqueEntity("username", message="user.username-taken")
  * @UniqueEntity("email", message="user.email-taken")
  */

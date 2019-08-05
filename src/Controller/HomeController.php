@@ -1,11 +1,9 @@
 <?php declare(strict_types=1);
+
 namespace EryseClient\Controller;
 
 use EryseClient\Utility\LoggerTrait;
-use phpseclib\Crypt\RSA;
-use RaitoCZ\EryseServices\Service\RsaService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -30,7 +28,7 @@ class HomeController extends AbstractController
     public function dev()
     {
 
-
         return $this->render('dev.html.twig');
     }
+
 }

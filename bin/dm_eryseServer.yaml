@@ -1,0 +1,4 @@
+migrations_directory: './src/Migrations/eryseServer'
+migrations_namespace: EryseServer\Migrations
+table_name: migration_versions
+name: Application_Migrations_EryseServer

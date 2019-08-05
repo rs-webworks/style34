@@ -8,6 +8,7 @@ use EryseClient\Entity\Common\MasterData;
 /**
  * Class TokenType
  * @package EryseClient\Entity\Client\Token
+ * @ORM\Table(name="token_types")
  * @ORM\Entity(repositoryClass="EryseClient\Repository\Client\Token\TokenTypeRepository")
  */
 class TokenType

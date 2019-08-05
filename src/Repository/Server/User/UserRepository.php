@@ -12,7 +12,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Class UserRepository
- * @package EryseClient\Repository\User
+ * @package EryseClient\Repository\Server\User
  * @method User|null findOneBy(array $criteria, array $orderBy = null)
  * @method User|null find($id, $lockMode = null, $lockVersion = null)
  */
@@ -32,6 +32,12 @@ class UserRepository extends ServiceEntityRepository implements UserLoaderInterf
      */
     public function loadUserByUsername($username)
     {
+        dump($this->createQueryBuilder('u')
+                 ->where('u.username = :username OR u.email = :email')
+                 ->setParameter('username', $username)
+                 ->setParameter('email', $username)
+                 ->getQuery()->getSQL());
+
         return $this->createQueryBuilder('u')
             ->where('u.username = :username OR u.email = :email')
             ->setParameter('username', $username)

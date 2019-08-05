@@ -12,6 +12,7 @@ use EryseClient\Entity\Server\User\User;
 /**
  * Class Token
  * @package EryseClient\Entity\Client\Token
+ * @ORM\Table(name="tokens")
  * @ORM\Entity(repositoryClass="EryseClient\Repository\Client\Token\TokenRepository")
  */
 class Token

@@ -9,6 +9,7 @@ use EryseClient\Entity\Server\User\User;
 /**
  * Class Settings
  * @package EryseClient\Entity\Client\User
+ * @ORM\Table(name="user_settings")
  * @ORM\Entity(repositoryClass="EryseClient\Repository\Client\User\SettingsRepository")
  */
 class Settings
