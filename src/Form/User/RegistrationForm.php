@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 namespace EryseClient\Form\User;
 
-use EryseClient\Entity\User\User;
+use EryseClient\Entity\Server\User\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;

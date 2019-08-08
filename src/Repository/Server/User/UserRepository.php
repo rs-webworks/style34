@@ -4,7 +4,9 @@ namespace EryseClient\Repository\Server\User;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
+use EryseClient\Entity\Client\User\Settings;
 use EryseClient\Entity\Server\User\User;
+use EryseClient\Repository\Client\User\SettingsRepository;
 use EryseClient\Utility\SaveEntityTrait;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
@@ -20,9 +22,21 @@ class UserRepository extends ServiceEntityRepository implements UserLoaderInterf
 {
     use SaveEntityTrait;
 
-    public function __construct(RegistryInterface $registry)
+    /** @var SettingsRepository */
+    private $settingsRepository;
+
+    public function __construct(RegistryInterface $registry, SettingsRepository $settingsRepository)
     {
         parent::__construct($registry, User::class);
+        $this->settingsRepository = $settingsRepository;
+    }
+
+
+    public function saveNew(User $user): void
+    {
+        $this->save($user);
+        $settings = new Settings($user);
+        $this->settingsRepository->save($settings);
     }
 
     /**
@@ -32,12 +46,6 @@ class UserRepository extends ServiceEntityRepository implements UserLoaderInterf
      */
     public function loadUserByUsername($username)
     {
-        dump($this->createQueryBuilder('u')
-                 ->where('u.username = :username OR u.email = :email')
-                 ->setParameter('username', $username)
-                 ->setParameter('email', $username)
-                 ->getQuery()->getSQL());
-
         return $this->createQueryBuilder('u')
             ->where('u.username = :username OR u.email = :email')
             ->setParameter('username', $username)

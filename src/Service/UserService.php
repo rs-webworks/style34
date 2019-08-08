@@ -71,7 +71,6 @@ class UserService extends AbstractService
         $user->setCreatedAt(new DateTime());
         $user->setLastIp($lastIp);
         $user->setRegisteredAs(serialize(array($user->getUsername(), $user->getEmail())));
-        $user->setSettings(new Settings());
 
         return $user;
     }

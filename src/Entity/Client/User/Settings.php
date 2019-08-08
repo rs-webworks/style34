@@ -18,10 +18,10 @@ class Settings
     use Identifier;
 
     /**
-     * @var User
+     * @var int
      * @ORM\Column(type="integer", nullable=false)
      */
-    protected $user;
+    protected $userId;
 
     /**
      * @var bool $name
@@ -38,19 +38,20 @@ class Settings
 
     public function __construct(User $user = null)
     {
-        $this->setUser($user);
+        $this->setUserId($user->getId());
         $this->twoStepAuthEnabled = false;
     }
 
-    public function getUser(): User
+    public function getUserId(): int
     {
-        return $this->user;
+        return $this->userId;
     }
 
-    public function setUser(User $user): void
+    public function setUserId(int $userId): void
     {
-        $this->user = $user;
+        $this->userId = $userId;
     }
+
 
     public function isTwoStepAuthEnabled(): bool
     {

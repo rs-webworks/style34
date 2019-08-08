@@ -3,10 +3,12 @@
 namespace EryseClient\Command;
 
 use BrowscapPHP\BrowscapUpdater;
+use Doctrine\Bundle\MigrationsBundle\Command\MigrationsMigrateDoctrineCommand;
 use EryseClient\Entity\Client\Token\TokenType;
 use EryseClient\Entity\Client\User\Role;
-use EryseClient\Entity\Client\User\Settings;
 use EryseClient\Entity\Server\User\User;
+use EryseClient\Repository\Server\User\UserRepository;
+use EryseClient\Service\UserService;
 use EryseClient\Utility\EntityManagerTrait;
 use EryseClient\Utility\LoggerTrait;
 use Psr\SimpleCache\CacheInterface;
@@ -42,15 +44,25 @@ class InstallCommand extends Command
     /** @var UserPasswordEncoderInterface $passwordEncoder */
     protected $passwordEncoder;
 
+    /** @var UserService */
+    private $userService;
+
+    /** @var UserRepository */
+    private $userRepository;
+
     /**
      * InstallBaseCommand constructor
      * @param CacheInterface $cache
      * @param UserPasswordEncoderInterface $passwordEncoder
      */
-    public function __construct(CacheInterface $cache, UserPasswordEncoderInterface $passwordEncoder)
-    {
+    public function __construct(
+        CacheInterface $cache,
+        UserPasswordEncoderInterface $passwordEncoder,
+        UserRepository $userRepository
+    ) {
         $this->cacheInterface = $cache;
         $this->passwordEncoder = $passwordEncoder;
+        $this->userRepository = $userRepository;
         parent::__construct();
     }
 
@@ -61,13 +73,16 @@ class InstallCommand extends Command
     {
         $this->setName('app:install')
             ->setDescription('Install the basic database stuff (Roles, Permissions, Users...')
-            ->setHelp('This will run some persists to DB and create basic stuff. !IMPORTANT! Run fixtures
-            only AFTER this installation!')
+            ->setHelp(
+                'This will run some persists to DB and create basic stuff. !IMPORTANT! Run fixtures
+            only AFTER this installation!'
+            )
             ->addOption(
                 'drop',
                 'd',
                 InputOption::VALUE_NONE,
-                'Reinstall option, this will drop schema instead of creating database. You will lost any DB data.');
+                'Reinstall option, this will drop schema instead of creating database. You will lost any DB data.'
+            );
     }
 
     /**
@@ -84,12 +99,12 @@ class InstallCommand extends Command
         try {
             $io->title('Starting the app installation');
 
-            // Prepare database
+            // Prepare databases
             if ($input->getOption('drop')) {
-                $io->section('Clearing database...');
+                $io->section('Clearing databases...');
                 $this->dropSchema();
             } else {
-                $io->section('Creating database...');
+                $io->section('Creating databases...');
                 $this->createDatabase();
             }
 
@@ -134,17 +149,33 @@ class InstallCommand extends Command
      */
     protected function dropSchema()
     {
-        $this->io->progressStart(1);
+        $command = $this->getApplication()
+            ->find('doctrine:schema:drop');
 
-        $command = $this->getApplication()->find('doctrine:schema:drop');
+        $arguments = [
+            new ArrayInput(
+                [
+                    '--full-database' => true,
+                    '--force' => true,
+                    "--em" => "eryseClient"
+                ]
+            ),
+            new ArrayInput(
+                [
+                    '--full-database' => true,
+                    '--force' => true,
+                    "--em" => "eryseServer"
+                ]
+            )
+        ];
 
-        $arguments = new ArrayInput([
-                '--full-database' => true,
-                '--force' => true
-            ]);
-        $command->run($arguments, new NullOutput());
+        $this->io->progressStart(count($arguments));
 
-        $this->io->progressAdvance(1);
+        foreach ($arguments as $args) {
+            $command->run($args, new NullOutput());
+            $this->io->progressAdvance(1);
+        }
+
         $this->io->progressFinish();
     }
 
@@ -155,9 +186,23 @@ class InstallCommand extends Command
     {
         $this->io->progressStart(1);
 
-        $command = $this->getApplication()->find('doctrine:database:create');
+        $command = $this->getApplication()
+            ->find('doctrine:database:create');
 
-        $arguments = new ArrayInput([]);
+        $options = [
+            "command" => "doctrine:database:create",
+            "--connection" => "eryseClient",
+        ];
+
+        $arguments = new ArrayInput($options);
+        $command->run($arguments, new NullOutput());
+
+        $options = [
+            "command" => "doctrine:database:create",
+            "--connection" => "eryseServer",
+        ];
+
+        $arguments = new ArrayInput($options);
         $command->run($arguments, new NullOutput());
 
         $this->io->progressAdvance(1);
@@ -170,20 +215,36 @@ class InstallCommand extends Command
      */
     protected function runMigrations()
     {
-        $this->io->progressStart(1);
-        $command = $this->getApplication()->find('doctrine:migrations:migrate');
-
-        $options = [
-            "command" => "doctrine:migrations:migrate",
-            "--quiet" => true,
-            "--no-interaction" => true
+        $arguments = [
+            [
+                "command" => "doctrine:migrations:migrate",
+                "--quiet" => true,
+                "--no-interaction" => true,
+                "--em" => "eryseClient",
+                "--configuration" => "./bin/dm_eryseClient.yaml"
+            ],
+            [
+                "command" => "doctrine:migrations:migrate",
+                "--quiet" => true,
+                "--no-interaction" => true,
+                "--em" => "eryseServer",
+                "--configuration" => "./bin/dm_eryseServer.yaml"
+            ]
         ];
 
-        $arguments = new ArrayInput($options);
-        $arguments->setInteractive(false);
-        $command->run($arguments, new NullOutput());
+        $this->io->progressStart(count($arguments));
 
-        $this->io->progressAdvance(1);
+        foreach ($arguments as $args) {
+            $command = new MigrationsMigrateDoctrineCommand();
+            $command->setApplication($this->getApplication());
+
+            $arguments = new ArrayInput($args);
+            $arguments->setInteractive(false);
+
+            $command->run($arguments, new NullOutput());
+            $this->io->progressAdvance(1);
+        }
+
         $this->io->progressFinish();
     }
 
@@ -238,21 +299,19 @@ class InstallCommand extends Command
         foreach ($users as $user) {
             list($username, $email, $password, $roles) = $user;
 
-            $profile = new User();
-            $profile->setUsername($username);
-            $profile->setEmail($email);
-            $profile->setCreatedAt(new \DateTime());
-            $profile->setPassword($this->passwordEncoder->encodePassword($profile, $password));
+            $user = new User();
+            $user->setUsername($username);
+            $user->setEmail($email);
+            $user->setCreatedAt(new \DateTime());
+            $user->setPassword($this->passwordEncoder->encodePassword($user, $password));
 
             foreach ($roles as $role) {
-                $profile->addRole($role);
+                $user->addRole($role);
             }
-            $profile->setLastIp('127.0.0.1');
-            $profile->setRegisteredAs(serialize([$profile->getUsername(), $profile->getEmail()]));
+            $user->setLastIp('127.0.0.1');
+            $user->setRegisteredAs(serialize([$user->getUsername(), $user->getEmail()]));
 
-            $profile->setSettings(new Settings($profile));
-
-            $this->em->persist($profile);
+            $this->userRepository->saveNew($user);
             $this->io->progressAdvance(1);
         }
 
@@ -301,7 +360,8 @@ class InstallCommand extends Command
     protected function clearCache()
     {
         $this->io->progressStart(1);
-        $command = $this->getApplication()->find('cache:clear');
+        $command = $this->getApplication()
+            ->find('cache:clear');
         $arguments = new ArrayInput([]);
 
         $command->run($arguments, new NullOutput());
@@ -309,4 +369,5 @@ class InstallCommand extends Command
         $this->io->progressAdvance(1);
         $this->io->progressFinish();
     }
+
 }

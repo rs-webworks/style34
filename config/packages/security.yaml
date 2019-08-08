@@ -7,7 +7,7 @@ security:
             id: EryseClient\Security\UserProvider
 
     encoders:
-        EryseClient\Entity\User\User:
+        EryseClient\Entity\Server\User\User:
             algorithm: bcrypt
             cost: 12
 

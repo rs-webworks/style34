@@ -1,4 +1,5 @@
 <?php declare(strict_types=1);
+
 namespace EryseClient\Controller\User;
 
 use EryseClient\Entity\Client\Token\TokenType;
@@ -44,10 +45,13 @@ class SecurityController extends AbstractController
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        return $this->render('User/Login/login.html.twig', [
-            'last_username' => $lastUsername,
-            'error' => $error
-        ]);
+        return $this->render(
+            'User/Login/login.html.twig',
+            [
+                'last_username' => $lastUsername,
+                'error' => $error
+            ]
+        );
     }
 
     /**
@@ -69,7 +73,10 @@ class SecurityController extends AbstractController
         UserRepository $userRepository
     ) {
         // Purge all expired & invalid requests for registration
-        $userRepository->removeUsers($userService->getExpiredRegistrations());
+        if ($expiredRegistrations = $userService->getExpiredRegistrations()) {
+            $userRepository->removeUsers($expiredRegistrations);
+        }
+
 
         // Load form data
         $user = new User();
@@ -86,7 +93,7 @@ class SecurityController extends AbstractController
                 // Send registration email
                 $mailService->sendActivationMail($user, $token);
 
-                $this->em->persist($user);
+                $userRepository->saveNew($user);
                 $this->em->persist($token);
                 $this->em->flush();
 
@@ -274,8 +281,8 @@ class SecurityController extends AbstractController
             } catch (\Exception $ex) {
                 $this->addFlash(
                     'danger',
-                    $this->translator->trans('reset-password-failed', [], 'profile')
-                    . ($ex->getMessage() ?? ' - ' . $ex->getMessage())
+                    $this->translator->trans('reset-password-failed', [], 'profile') . ($ex->getMessage(
+                        ) ?? ' - ' . $ex->getMessage())
                 );
                 $this->logger->error('controller.user.security.resetPassword: reset failed', array($ex, $tokenHash));
 
