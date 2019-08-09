@@ -7,7 +7,7 @@ use EryseClient\Entity\Client\Token\TokenType;
 use EryseClient\Entity\Server\User\User;
 use EryseClient\Repository\Client\Token\TokenRepository;
 use EryseClient\Repository\Client\Token\TokenTypeRepository;
-use EryseClient\Utility\EntityManagerTrait;
+use EryseClient\Utility\EntityManagersTrait;
 use Exception;
 
 /**
@@ -16,7 +16,7 @@ use Exception;
  */
 class TokenService extends AbstractService
 {
-    use EntityManagerTrait;
+    use EntityManagersTrait;
 
     /** @var TokenTypeRepository $tokenTypeRepository */
     private $tokenTypeRepository;
@@ -65,7 +65,7 @@ class TokenService extends AbstractService
     {
         $token = new Token();
         $token->setHash($this->generateHash());
-        $token->setUser($user);
+        $token->setUserId($user->getId());
         $createdAt = new DateTime();
         $expiresAt = new DateTime();
         $token->setCreatedAt($createdAt);
@@ -107,7 +107,7 @@ class TokenService extends AbstractService
 
         $token = new Token();
         $token->setHash($this->generateHash());
-        $token->setUser($user);
+        $token->setUserId($user->getId());
         $token->setCreatedAt($createdAt);
         $token->setExpiresAt($this->createExpirationDateTime($expiresAt, Token::EXPIRY_HOUR * 2));
         $token->setType($this->tokenTypeRepository->findOneBy(array(

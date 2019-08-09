@@ -30,6 +30,7 @@ services:
         tags: ['controller.service_arguments']
 
 
+
     # Shared services via packages:
     RaitoCZ\EryseServices\:
         resource: '../vendor/raitocz/eryse-services/src/*'

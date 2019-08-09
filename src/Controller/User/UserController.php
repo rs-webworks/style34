@@ -4,7 +4,7 @@ namespace EryseClient\Controller\User;
 use EryseClient\Entity\Server\User\User;
 use EryseClient\Form\User\SettingsForm;
 use EryseClient\Service\UserService;
-use EryseClient\Utility\EntityManagerTrait;
+use EryseClient\Utility\EntityManagersTrait;
 use EryseClient\Utility\LoggerTrait;
 use EryseClient\Utility\TranslatorTrait;
 use Scheb\TwoFactorBundle\Security\TwoFactor\Provider\Google\GoogleAuthenticatorInterface;
@@ -24,7 +24,7 @@ class UserController extends AbstractController
 {
     use TranslatorTrait;
     use LoggerTrait;
-    use EntityManagerTrait;
+    use EntityManagersTrait;
 
 
     /**

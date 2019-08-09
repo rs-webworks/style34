@@ -3,7 +3,7 @@
 namespace EryseClient\Controller\Profile;
 
 use EryseClient\Repository\Client\Profile\ProfileRepository;
-use EryseClient\Utility\EntityManagerTrait;
+use EryseClient\Utility\EntityManagersTrait;
 use EryseClient\Utility\LoggerTrait;
 use EryseClient\Utility\TranslatorTrait;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -18,7 +18,7 @@ class ProfileController extends AbstractController
 {
     use TranslatorTrait;
     use LoggerTrait;
-    use EntityManagerTrait;
+    use EntityManagersTrait;
 
     /**
      * @Route("/profile/view/{username}", name="profile-view")

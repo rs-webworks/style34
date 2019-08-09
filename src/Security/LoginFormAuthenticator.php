@@ -1,11 +1,12 @@
 <?php declare(strict_types=1);
+
 namespace EryseClient\Security;
 
-use EryseClient\Entity\User\User;
+use EryseClient\Entity\Server\User\User;
 use EryseClient\Exception\Security\LoginException;
 use EryseClient\Exception\Security\TwoStepAuthSetException;
 use EryseClient\Repository\Server\User\UserRepository;
-use EryseClient\Utility\EntityManagerTrait;
+use EryseClient\Utility\EntityManagersTrait;
 use EryseClient\Utility\TranslatorTrait;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -30,7 +31,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 {
     use TargetPathTrait;
     use TranslatorTrait;
-    use EntityManagerTrait;
+    use EntityManagersTrait;
 
     /** @var UserRepository $userRepository */
     private $userRepository;
@@ -75,8 +76,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
      */
     public function supports(Request $request)
     {
-        return 'security-login' === $request->attributes->get('_route')
-            && $request->isMethod('POST');
+        return 'security-login' === $request->attributes->get('_route') && $request->isMethod('POST');
     }
 
     /**
@@ -91,10 +91,11 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
             'code' => $request->request->get('_code'),
             'csrf_token' => $request->request->get('_csrf_token'),
         ];
-        $request->getSession()->set(
-            Security::LAST_USERNAME,
-            $credentials['auth']
-        );
+        $request->getSession()
+            ->set(
+                Security::LAST_USERNAME,
+                $credentials['auth']
+            );
 
         return $credentials;
     }
@@ -158,4 +159,5 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     {
         return $this->router->generate('security-login');
     }
+
 }

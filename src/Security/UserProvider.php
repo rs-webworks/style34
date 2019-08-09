@@ -3,7 +3,7 @@ namespace EryseClient\Security;
 
 use EryseClient\Entity\Server\User\User;
 use EryseClient\Repository\Server\User\UserRepository;
-use EryseClient\Utility\EntityManagerTrait;
+use EryseClient\Utility\EntityManagersTrait;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -15,7 +15,7 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
  */
 class UserProvider implements UserProviderInterface
 {
-    use EntityManagerTrait;
+    use EntityManagersTrait;
     /**
      * @var UserRepository
      */

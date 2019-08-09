@@ -26,8 +26,8 @@ RUN curl -sS https://getcomposer.org/installer |\
 #    && rm -rf /var/cache/apk/*
 
 
- Make translations directory writtable from web
-RUN chmod 0777 /application/translations/ -R
+# Make translations directory writtable from web
+#RUN chmod 0777 /application/translations/ -R
 
 # Install Yarn
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -

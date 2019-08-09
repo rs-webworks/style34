@@ -9,8 +9,9 @@ use EryseClient\Entity\Client\User\Role;
 use EryseClient\Entity\Server\User\User;
 use EryseClient\Repository\Server\User\UserRepository;
 use EryseClient\Service\UserService;
-use EryseClient\Utility\EntityManagerTrait;
+use EryseClient\Utility\EntityManagersTrait;
 use EryseClient\Utility\LoggerTrait;
+use Exception;
 use Psr\SimpleCache\CacheInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\ArrayInput;
@@ -28,7 +29,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
  */
 class InstallCommand extends Command
 {
-    use EntityManagerTrait;
+    use EntityManagersTrait;
     use LoggerTrait;
 
 
@@ -133,7 +134,7 @@ class InstallCommand extends Command
             $this->clearCache();
 
             $io->success('Installation complete!');
-        } catch (\Exception $ex) {
+        } catch (Exception $ex) {
             $io->newLine();
             $io->newLine();
             $io->error($ex->getMessage());
@@ -145,7 +146,7 @@ class InstallCommand extends Command
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     protected function dropSchema()
     {
@@ -180,7 +181,7 @@ class InstallCommand extends Command
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     protected function createDatabase()
     {
@@ -211,7 +212,7 @@ class InstallCommand extends Command
 
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     protected function runMigrations()
     {
@@ -272,16 +273,16 @@ class InstallCommand extends Command
             $r->setName($name);
             $r->setColor($color);
 
-            $this->em->persist($r);
+            $this->clientEm->persist($r);
             $this->io->progressAdvance(1);
         }
 
-        $this->em->flush();
+        $this->clientEm->flush();
         $this->io->progressFinish();
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     protected function registerUsers()
     {
@@ -315,7 +316,7 @@ class InstallCommand extends Command
             $this->io->progressAdvance(1);
         }
 
-        $this->em->flush();
+        $this->serverEm->flush();
         $this->io->progressFinish();
     }
 
@@ -337,11 +338,11 @@ class InstallCommand extends Command
             $tt = new TokenType();
             $tt->setName($name);
 
-            $this->em->persist($tt);
+            $this->clientEm->persist($tt);
             $this->io->progressAdvance(1);
         }
 
-        $this->em->flush();
+        $this->clientEm->flush();
         $this->io->progressFinish();
     }
 
@@ -355,7 +356,7 @@ class InstallCommand extends Command
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     protected function clearCache()
     {

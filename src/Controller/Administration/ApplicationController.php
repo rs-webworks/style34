@@ -3,7 +3,7 @@
 namespace EryseClient\Controller\Administration;
 
 use EryseClient\Utility\ApiClientTrait;
-use EryseClient\Utility\EntityManagerTrait;
+use EryseClient\Utility\EntityManagersTrait;
 use EryseClient\Utility\LoggerTrait;
 use EryseClient\Utility\TranslatorTrait;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -19,7 +19,7 @@ class ApplicationController extends AbstractController
 {
     use TranslatorTrait;
     use LoggerTrait;
-    use EntityManagerTrait;
+    use EntityManagersTrait;
     use ApiClientTrait;
 
     /**

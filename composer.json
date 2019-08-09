@@ -60,10 +60,7 @@
         "symfony/test-pack": "*",
         "symfony/web-server-bundle": "*",
 
-        "phpstan/phpstan": "^0.11.0",
-
-        "raitocz/eryse-structures": "*@dev",
-        "raitocz/eryse-services": "*@dev"
+        "phpstan/phpstan": "^0.11.0"
     },
     "config": {
         "preferred-install": {

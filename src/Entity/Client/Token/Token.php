@@ -40,10 +40,10 @@ class Token
     protected $type;
 
     /**
-     * @var User $user ;
+     * @var int
      * @ORM\Column(type="integer", nullable=false)
      */
-    protected $user;
+    protected $userId;
 
     /**
      * @var bool
@@ -71,14 +71,14 @@ class Token
         $this->type = $type;
     }
 
-    public function getUser(): User
+    public function getUserId(): int
     {
-        return $this->user;
+        return $this->userId;
     }
 
-    public function setUser(User $user): void
+    public function setUserId(int $userId): void
     {
-        $this->user = $user;
+        $this->userId = $userId;
     }
 
     public function isInvalid(): bool

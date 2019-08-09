@@ -2,10 +2,10 @@
 
 namespace EryseClient\Controller\User;
 
+use EryseClient\Controller\AbstractController;
 use EryseClient\Entity\Client\Token\TokenType;
 use EryseClient\Entity\Server\User\User;
 use EryseClient\Exception\Security\ResetPasswordException;
-use EryseClient\Exception\User\ActivationException;
 use EryseClient\Form\User\RegistrationForm;
 use EryseClient\Repository\Client\Token\TokenRepository;
 use EryseClient\Repository\Client\Token\TokenTypeRepository;
@@ -13,10 +13,8 @@ use EryseClient\Repository\Server\User\UserRepository;
 use EryseClient\Service\MailService;
 use EryseClient\Service\TokenService;
 use EryseClient\Service\UserService;
-use EryseClient\Utility\EntityManagerTrait;
 use EryseClient\Utility\LoggerTrait;
 use EryseClient\Utility\TranslatorTrait;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Security;
@@ -30,8 +28,6 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
  */
 class SecurityController extends AbstractController
 {
-
-    use EntityManagerTrait;
     use LoggerTrait;
     use TranslatorTrait;
 
@@ -88,14 +84,14 @@ class SecurityController extends AbstractController
                 // Prepare user & token
                 $thisIp = $request->getClientIp();
                 $user = $userService->prepareNewUser($user, $thisIp);
+                $userRepository->saveNew($user);
+
                 $token = $tokenService->getActivationToken($user);
 
                 // Send registration email
                 $mailService->sendActivationMail($user, $token);
-
-                $userRepository->saveNew($user);
-                $this->em->persist($token);
-                $this->em->flush();
+                $this->clientEm->persist($token);
+                $this->clientEm->flush();
 
                 // Flash & redirect
                 $this->addFlash('success', $this->translator->trans('registration-success', [], 'profile'));
@@ -119,8 +115,12 @@ class SecurityController extends AbstractController
     /**
      * @Route("/user/registration/activate/{tokenHash}", name="user-registration-activate")
      */
-    public function activate(UserService $userService, TokenRepository $tokenRepository, $tokenHash)
-    {
+    public function activate(
+        UserService $userService,
+        UserRepository $userRepository,
+        TokenRepository $tokenRepository,
+        $tokenHash
+    ) {
         try {
             $token = $tokenRepository->findOneBy(array('hash' => $tokenHash));
 
@@ -128,12 +128,15 @@ class SecurityController extends AbstractController
                 throw new ActivationException($this->translator->trans('activation-invalid-token', [], 'profile'));
             }
 
-            $profile = $userService->activateUser($token->getUser(), $token);
+            $user = $userRepository->find($token->getUserId());
+            $user = $userService->activateUser($user, $token);
             $token->setInvalid(true);
 
-            $this->em->persist($profile);
-            $this->em->persist($token);
-            $this->em->flush();
+
+            $this->serverEm->persist($user);
+            $this->serverEm->flush();
+            $this->clientEm->persist($token);
+            $this->clientEm->flush();
 
             $this->addFlash('success', $this->translator->trans('activation-success', [], 'profile'));
         } catch (\Exception $ex) {

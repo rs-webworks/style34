@@ -6,7 +6,6 @@ use EryseClient\Entity\Client\Token\RememberMeToken;
 use EryseClient\Entity\Client\Token\Token;
 use EryseClient\Entity\Client\Token\TokenType;
 use EryseClient\Entity\Client\User\Role;
-use EryseClient\Entity\Client\User\Settings;
 use EryseClient\Entity\Server\User\User;
 use EryseClient\Exception\Token\ExpiredTokenException;
 use EryseClient\Exception\Token\InvalidTokenException;
@@ -14,7 +13,7 @@ use EryseClient\Exception\User\ActivationException;
 use EryseClient\Kernel;
 use EryseClient\Repository\Client\Token\TokenRepository;
 use EryseClient\Repository\Client\Token\TokenTypeRepository;
-use EryseClient\Utility\EntityManagerTrait;
+use EryseClient\Utility\EntityManagersTrait;
 use EryseClient\Utility\LoggerTrait;
 use EryseClient\Utility\TranslatorTrait;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -26,7 +25,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class UserService extends AbstractService
 {
     use LoggerTrait;
-    use EntityManagerTrait;
+    use EntityManagersTrait;
     use TranslatorTrait;
 
     /** @var UserPasswordEncoderInterface $passwordEncoder */
@@ -153,8 +152,8 @@ class UserService extends AbstractService
 
         $settings->setTwoStepAuthEnabled(true);
 
-        $this->em->persist($settings);
-        $this->em->flush();
+        $this->clientEm->persist($settings);
+        $this->clientEm->flush();
     }
 
     /**
@@ -168,9 +167,9 @@ class UserService extends AbstractService
         $settings->setTwoStepAuthEnabled(false);
         $user->setTrustedTokenVersion($user->getTrustedTokenVersion() + 1);
 
-        $this->em->persist($settings);
-        $this->em->persist($user);
-        $this->em->flush();
+        $this->clientEm->persist($settings);
+        $this->clientEm->persist($user);
+        $this->clientEm->flush();
     }
 
     /**
@@ -179,8 +178,8 @@ class UserService extends AbstractService
     public function forgetDevices(User $user)
     {
         $user->setTrustedTokenVersion($user->getTrustedTokenVersion() + 1);
-        $this->em->persist($user);
-        $this->em->flush();
+        $this->serverEm->persist($user);
+        $this->serverEm->flush();
     }
 
     /**
@@ -189,7 +188,7 @@ class UserService extends AbstractService
      */
     public function hasRememberMeToken(User $user)
     {
-        $token = $this->em->getRepository(RememberMeToken::class)->findOneBy(array(
+        $token = $this->clientEm->getRepository(RememberMeToken::class)->findOneBy(array(
             'username' => $user->getUsername()
         ));
 

@@ -41,7 +41,7 @@ class MailService extends AbstractService
             ->setTo($user->getEmail())
             ->setBody(
                 $this->renderer->render(
-                    'emails/user-activation.html.twig',
+                    '_emails/user-activation.html.twig',
                     array(
                         'user' => $user,
                         'token' => $token
@@ -63,7 +63,7 @@ class MailService extends AbstractService
             ->setTo($user->getEmail())
             ->setBody(
                 $this->renderer->render(
-                    'emails/user-request-reset-password.twig',
+                    '_emails/user-request-reset-password.twig',
                     array(
                         'user' => $user,
                         'token' => $token
