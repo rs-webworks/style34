@@ -1,8 +1,10 @@
 <?php declare(strict_types=1);
+
 namespace EryseClient\Controller\User;
 
 use EryseClient\Entity\Server\User\User;
 use EryseClient\Form\User\SettingsForm;
+use EryseClient\Repository\Client\User\SettingsRepository;
 use EryseClient\Service\UserService;
 use EryseClient\Utility\EntityManagersTrait;
 use EryseClient\Utility\LoggerTrait;
@@ -36,13 +38,29 @@ class UserController extends AbstractController
 
     }
 
+    /**
+     * @Route("/user/list", name="user-list")
+     */
+    public function list()
+    {
+
+    }
+
+    /**
+     * @Route("/user/view", name="user-view")
+     */
+    public function view()
+    {
+
+    }
+
 
     /**
      * @Route("/user/settings", name="user-settings")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function settings(Request $request)
+    public function settings(Request $request, SettingsRepository $settingsRepository)
     {
         /** @var User $user */
         $user = $this->getUser();
@@ -53,7 +71,14 @@ class UserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
         }
 
-        return $this->render('User/settings.html.twig', array('form' => $form->createView(), 'profile' => $user));
+        return $this->render(
+            'User/settings.html.twig',
+            [
+                'form' => $form->createView(),
+                'user' => $user,
+                'settings' => $settingsRepository->findOneBy(["userId" => $user->getId()])
+            ]
+        );
     }
 
     /**

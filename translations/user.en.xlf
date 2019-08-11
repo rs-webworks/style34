@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:2.0" version="2.0" srcLang="cs" trgLang="en">
+  <file id="user.en">
+    <unit id="zeD7Dew" name="settings">
+      <notes>
+        <note category="file-source" priority="1">templates/User/settings.html.twig:9</note>
+        <note category="file-source" priority="1">templates/User/settings.html.twig:23</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>settings</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="XS0863q" name="security">
+      <notes>
+        <note category="file-source" priority="1">templates/User/settings.html.twig:42</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>security</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="DMbpYop" name="security-desc">
+      <notes>
+        <note category="file-source" priority="1">templates/User/settings.html.twig:45</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>security-desc</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="ErXb3q4" name="settings-two-step-auth">
+      <notes>
+        <note category="file-source" priority="1">templates/User/settings.html.twig:54</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>settings-two-step-auth</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="GCj52nT" name="settings-forget-devices">
+      <notes>
+        <note category="file-source" priority="1">templates/User/settings.html.twig:73</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>settings-forget-devices</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="si2Mj8V" name="settings-forget-devices-help">
+      <notes>
+        <note category="file-source" priority="1">templates/User/settings.html.twig:74</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>settings-forget-devices-help</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="LAs_e.0" name="settings-forget-devices-button">
+      <notes>
+        <note category="file-source" priority="1">templates/User/settings.html.twig:78</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>settings-forget-devices-button</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="QBEkcRT" name="settings-logout-everywhere">
+      <notes>
+        <note category="file-source" priority="1">templates/User/settings.html.twig:89</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>settings-logout-everywhere</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="fmpOkOd" name="settings-logout-everywhere-help">
+      <notes>
+        <note category="file-source" priority="1">templates/User/settings.html.twig:90</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>settings-logout-everywhere-help</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="RF7y7_8" name="settings-logout-everywhere-button">
+      <notes>
+        <note category="file-source" priority="1">templates/User/settings.html.twig:95</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>settings-logout-everywhere-button</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="4jqMFec" name="settings-change-password">
+      <notes>
+        <note category="file-source" priority="1">templates/User/settings.html.twig:104</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>settings-change-password</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="ziubWKT" name="change-password">
+      <notes>
+        <note category="file-source" priority="1">templates/User/settings.html.twig:109</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>change-password</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id=".vHdpUx" name="settings-delete-user">
+      <notes>
+        <note category="file-source" priority="1">templates/User/settings.html.twig:120</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>settings-delete-user</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="BD1LOZu" name="delete-user">
+      <notes>
+        <note category="file-source" priority="1">templates/User/settings.html.twig:125</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>delete-user</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="3W9GX2g" name="newsletter">
+      <notes>
+        <note category="file-source" priority="1">templates/User/settings.html.twig:143</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>newsletter</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="hSBFe8E" name="newsletter-desc">
+      <notes>
+        <note category="file-source" priority="1">templates/User/settings.html.twig:146</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>newsletter-desc</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="JXCvcyd" name="newsletter-overall-desc">
+      <notes>
+        <note category="file-source" priority="1">templates/User/settings.html.twig:152</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>newsletter-overall-desc</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="xN3wMsj" name="newsletter-weekly">
+      <notes>
+        <note category="file-source" priority="1">templates/User/settings.html.twig:160</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>newsletter-weekly</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="2KG6zz7" name="newsletter-monthly">
+      <notes>
+        <note category="file-source" priority="1">templates/User/settings.html.twig:166</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>newsletter-monthly</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="7AjSSvv" name="newsletter-yearl">
+      <notes>
+        <note category="file-source" priority="1">templates/User/settings.html.twig:172</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>newsletter-yearl</source>
+        <target></target>
+      </segment>
+    </unit>
+  </file>
+</xliff>

@@ -4,7 +4,6 @@
     <unit id="J.vze.2" name="scheb_two_factor.trusted">
       <notes>
         <note category="file-source" priority="1">templates/User/Login/two-step-auth.html.twig:34</note>
-        <note category="state" priority="1">new</note>
       </notes>
       <segment>
         <source>scheb_two_factor.trusted</source>

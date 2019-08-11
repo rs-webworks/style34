@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xliff xmlns="urn:oasis:names:tc:xliff:document:2.0" version="2.0" srcLang="en" trgLang="cs">
+<xliff xmlns="urn:oasis:names:tc:xliff:document:2.0" version="2.0" srcLang="cs" trgLang="cs">
   <file id="administration.cs">
     <unit id="9q05t7H" name="server-settings">
       <notes>
-        <note category="file-source" priority="1">templates/Administration/server-configuration.html.twig:9</note>
-        <note category="file-source" priority="1">templates/Administration/server-configuration.html.twig:20</note>
+        <note category="state" priority="1">obsolete</note>
       </notes>
       <segment>
         <source>server-settings</source>
@@ -13,7 +12,6 @@
     </unit>
     <unit id="Zs2WiKK" name="dashboard">
       <notes>
-        <note category="file-source" priority="1">templates/Administration/server-configuration.html.twig:17</note>
         <note category="file-source" priority="1">templates/Administration/dashboard.html.twig:9</note>
         <note category="file-source" priority="1">templates/Administration/dashboard.html.twig:14</note>
         <note category="file-source" priority="1">templates/_partials/admin-navigation.html.twig:5</note>
@@ -25,7 +23,7 @@
     </unit>
     <unit id="wS6cvQt" name="server-url">
       <notes>
-        <note category="file-source" priority="1">templates/Administration/server-configuration.html.twig:32</note>
+        <note category="state" priority="1">obsolete</note>
       </notes>
       <segment>
         <source>server-url</source>
@@ -34,7 +32,7 @@
     </unit>
     <unit id="kub12XF" name="server-token">
       <notes>
-        <note category="file-source" priority="1">templates/Administration/server-configuration.html.twig:37</note>
+        <note category="state" priority="1">obsolete</note>
       </notes>
       <segment>
         <source>server-token</source>
@@ -61,7 +59,7 @@
     </unit>
     <unit id="HkiRAqN" name="rsa-key">
       <notes>
-        <note category="file-source" priority="1">templates/Administration/server-configuration.html.twig:42</note>
+        <note category="state" priority="1">obsolete</note>
       </notes>
       <segment>
         <source>rsa-key</source>
@@ -70,7 +68,7 @@
     </unit>
     <unit id="lCJbi_k" name="rsa-key-missing">
       <notes>
-        <note category="file-source" priority="1">templates/Administration/server-configuration.html.twig:50</note>
+        <note category="state" priority="1">obsolete</note>
       </notes>
       <segment>
         <source>rsa-key-missing</source>
@@ -79,7 +77,7 @@
     </unit>
     <unit id="pwbJb.r" name="rsa-key-generate">
       <notes>
-        <note category="file-source" priority="1">templates/Administration/server-configuration.html.twig:52</note>
+        <note category="state" priority="1">obsolete</note>
       </notes>
       <segment>
         <source>rsa-key-generate</source>
@@ -88,7 +86,7 @@
     </unit>
     <unit id="AG_cn7O" name="server-public-key">
       <notes>
-        <note category="file-source" priority="1">templates/Administration/server-configuration.html.twig:58</note>
+        <note category="state" priority="1">obsolete</note>
       </notes>
       <segment>
         <source>server-public-key</source>
@@ -97,8 +95,7 @@
     </unit>
     <unit id="poNZyTQ" name="rsa-key-found">
       <notes>
-        <note category="file-source" priority="1">templates/Administration/server-configuration.html.twig:45</note>
-        <note category="state" priority="1">new</note>
+        <note category="state" priority="1">obsolete</note>
       </notes>
       <segment>
         <source>rsa-key-found</source>
@@ -107,8 +104,7 @@
     </unit>
     <unit id="B0.TfTj" name="rsa-key-found-desc">
       <notes>
-        <note category="file-source" priority="1">templates/Administration/server-configuration.html.twig:47</note>
-        <note category="state" priority="1">new</note>
+        <note category="state" priority="1">obsolete</note>
       </notes>
       <segment>
         <source>rsa-key-found-desc</source>
@@ -117,8 +113,7 @@
     </unit>
     <unit id="86jQSKB" name="rsa-keys-generated">
       <notes>
-        <note category="file-source" priority="1">src/Controller/Administration/ApplicationController.php:62</note>
-        <note category="state" priority="1">new</note>
+        <note category="state" priority="1">obsolete</note>
       </notes>
       <segment>
         <source>rsa-keys-generated</source>
@@ -126,12 +121,18 @@
       </segment>
     </unit>
     <unit id="A2yihhJ" name="client-api">
+      <notes>
+        <note category="state" priority="1">obsolete</note>
+      </notes>
       <segment>
         <source>client-api</source>
         <target>Klientské API</target>
       </segment>
     </unit>
     <unit id="uIteXXr" name="server-ping">
+      <notes>
+        <note category="state" priority="1">obsolete</note>
+      </notes>
       <segment>
         <source>server-ping</source>
         <target>Komunikace se serverem</target>

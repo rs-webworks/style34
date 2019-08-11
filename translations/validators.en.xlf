@@ -3,7 +3,7 @@
   <file id="validators.en">
     <unit id="_vR8dBH" name="profile.username-required">
       <notes>
-        <note category="file-source" priority="1">src/Entity/User/User.php:0</note>
+        <note category="file-source" priority="1">src/Entity/Server/User/User.php:0</note>
       </notes>
       <segment>
         <source>profile.username-required</source>
@@ -12,7 +12,7 @@
     </unit>
     <unit id="g_LaU.T" name="profile.username-invalid">
       <notes>
-        <note category="file-source" priority="1">src/Entity/User/User.php:0</note>
+        <note category="file-source" priority="1">src/Entity/Server/User/User.php:0</note>
       </notes>
       <segment>
         <source>profile.username-invalid</source>
@@ -21,7 +21,7 @@
     </unit>
     <unit id="cSy6rPU" name="profile.email-invalid">
       <notes>
-        <note category="file-source" priority="1">src/Entity/User/User.php:0</note>
+        <note category="file-source" priority="1">src/Entity/Server/User/User.php:0</note>
       </notes>
       <segment>
         <source>profile.email-invalid</source>
@@ -30,7 +30,7 @@
     </unit>
     <unit id="6fCJAzB" name="profile.email-required">
       <notes>
-        <note category="file-source" priority="1">src/Entity/User/User.php:0</note>
+        <note category="file-source" priority="1">src/Entity/Server/User/User.php:0</note>
       </notes>
       <segment>
         <source>profile.email-required</source>
@@ -39,7 +39,7 @@
     </unit>
     <unit id="Qa24BYX" name="profile.password-required">
       <notes>
-        <note category="file-source" priority="1">src/Entity/User/User.php:0</note>
+        <note category="file-source" priority="1">src/Entity/Server/User/User.php:0</note>
       </notes>
       <segment>
         <source>profile.password-required</source>
@@ -48,7 +48,7 @@
     </unit>
     <unit id="v.wlXyw" name="profile.password-max.length">
       <notes>
-        <note category="file-source" priority="1">src/Entity/User/User.php:0</note>
+        <note category="file-source" priority="1">src/Entity/Server/User/User.php:0</note>
       </notes>
       <segment>
         <source>profile.password-max.length</source>
@@ -57,7 +57,7 @@
     </unit>
     <unit id="GcUuMpE" name="profile.password-min-length">
       <notes>
-        <note category="file-source" priority="1">src/Entity/User/User.php:0</note>
+        <note category="file-source" priority="1">src/Entity/Server/User/User.php:0</note>
       </notes>
       <segment>
         <source>profile.password-min-length</source>
@@ -66,7 +66,7 @@
     </unit>
     <unit id="T9vXiNk" name="profile.state-required">
       <notes>
-        <note category="file-source" priority="1">src/Entity/Profile/Profile.php:0</note>
+        <note category="file-source" priority="1">src/Entity/Client/Profile/Profile.php:0</note>
       </notes>
       <segment>
         <source>profile.state-required</source>
@@ -75,8 +75,8 @@
     </unit>
     <unit id="cLU_EGF" name="profile.role.name-required">
       <notes>
-        <note category="file-source" priority="1">src/Entity/User/Role.php:0</note>
-        <note category="file-source" priority="1">src/Entity/User/Device.php:0</note>
+        <note category="file-source" priority="1">src/Entity/Server/User/Device.php:0</note>
+        <note category="file-source" priority="1">src/Entity/Client/User/Role.php:0</note>
       </notes>
       <segment>
         <source>profile.role.name-required</source>
@@ -85,7 +85,7 @@
     </unit>
     <unit id="bttfsN0" name="profile.role.color-required">
       <notes>
-        <note category="file-source" priority="1">src/Entity/User/Role.php:0</note>
+        <note category="file-source" priority="1">src/Entity/Client/User/Role.php:0</note>
       </notes>
       <segment>
         <source>profile.role.color-required</source>
@@ -94,7 +94,7 @@
     </unit>
     <unit id="vbhkPxD" name="profile.username-max-length">
       <notes>
-        <note category="file-source" priority="1">src/Entity/User/User.php:0</note>
+        <note category="file-source" priority="1">src/Entity/Server/User/User.php:0</note>
       </notes>
       <segment>
         <source>profile.username-max-length</source>
@@ -103,7 +103,7 @@
     </unit>
     <unit id="4HbsR0O" name="profile.username-min-length">
       <notes>
-        <note category="file-source" priority="1">src/Entity/User/User.php:0</note>
+        <note category="file-source" priority="1">src/Entity/Server/User/User.php:0</note>
       </notes>
       <segment>
         <source>profile.username-min-length</source>
@@ -130,7 +130,7 @@
     </unit>
     <unit id="QucYGJB" name="profile.ip-expected">
       <notes>
-        <note category="file-source" priority="1">src/Entity/User/User.php:0</note>
+        <note category="file-source" priority="1">src/Entity/Server/User/User.php:0</note>
       </notes>
       <segment>
         <source>profile.ip-expected</source>
@@ -139,8 +139,7 @@
     </unit>
     <unit id="6BDxmEh" name="user.username-taken">
       <notes>
-        <note category="file-source" priority="1">src/Entity/User/User.php:0</note>
-        <note category="state" priority="1">new</note>
+        <note category="file-source" priority="1">src/Entity/Server/User/User.php:0</note>
       </notes>
       <segment>
         <source>user.username-taken</source>
@@ -149,8 +148,7 @@
     </unit>
     <unit id="R9NVvdm" name="user.email-taken">
       <notes>
-        <note category="file-source" priority="1">src/Entity/User/User.php:0</note>
-        <note category="state" priority="1">new</note>
+        <note category="file-source" priority="1">src/Entity/Server/User/User.php:0</note>
       </notes>
       <segment>
         <source>user.email-taken</source>

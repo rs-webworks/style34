@@ -7,6 +7,7 @@ use EryseClient\Entity\Client\Token\Token;
 use EryseClient\Entity\Client\Token\TokenType;
 use EryseClient\Entity\Server\User\User;
 use EryseClient\Utility\SaveEntityTrait;
+use Exception;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -30,7 +31,7 @@ class TokenRepository extends ServiceEntityRepository
     /**
      * @param TokenType $tokenType
      * @return mixed
-     * @throws \Exception
+     * @throws Exception
      */
     public function findExpiredTokens(TokenType $tokenType)
     {
@@ -63,7 +64,7 @@ class TokenRepository extends ServiceEntityRepository
      * @param User $user
      * @param TokenType $tokenType
      * @return mixed
-     * @throws \Exception
+     * @throws Exception
      */
     public function findUserValidTokensOfType(User $user, TokenType $tokenType)
     {
@@ -71,12 +72,12 @@ class TokenRepository extends ServiceEntityRepository
             ->where('t.type = :tokenType')
             ->andWhere('t.invalid = :invalid')
             ->andWhere('t.expiresAt > :datetimeNow')
-            ->andWhere('t.user = :user')
+            ->andWhere('t.userId = :userId')
             ->setParameters(array(
                 'tokenType' => $tokenType,
                 'datetimeNow' => new \DateTime(),
                 'invalid' => false,
-                'user' => $user
+                'userId' => $user->getId()
             ))
             ->getQuery()
             ->getResult();

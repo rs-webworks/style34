@@ -6,7 +6,7 @@
 
 	<div class="container">
 
-		<h2>{% trans from 'profile' %}settings{% endtrans %}</h2>
+		<h2>{% trans from 'user' %}settings{% endtrans %}</h2>
 		<hr>
 		<nav aria-label="breadcrumb">
 			<ol class="breadcrumb">
@@ -14,13 +14,13 @@
 					<a href="{{ url('home-index') }}">{{ eryseClient.name }}</a>
 				</li>
 				<li class="breadcrumb-item">
-					<a href="{{ url('profile-list') }}">{% trans from 'global' %}profiles{% endtrans %}</a>
+					<a href="{{ url('user-list') }}">{% trans from 'global' %}users{% endtrans %}</a>
 				</li>
 				<li class="breadcrumb-item">
-					<a href="{{ url('profile-view') }}">{{ app.user.getUsername() }}</a>
+					<a href="{{ url('user-view') }}">{{ app.user.getUsername() }}</a>
 				</li>
 				<li class="breadcrumb-item active" aria-current="page">
-					{% trans from 'profile' %}settings{% endtrans %}
+					{% trans from 'user' %}settings{% endtrans %}
 				</li>
 			</ol>
 		</nav>
@@ -39,10 +39,10 @@
 
 						<h5 class="card-title">
 							<i class="fa fa-fw fa-key"></i>
-							{% trans from 'profile' %}security{% endtrans %}
+							{% trans from 'user' %}security{% endtrans %}
 						</h5>
 						<h6 class="card-subtitle mb-4 text-muted">
-							{% trans from 'profile' %}security-desc{% endtrans %}
+							{% trans from 'user' %}security-desc{% endtrans %}
 						</h6>
 
 						<hr>
@@ -51,11 +51,11 @@
 						{# ------------------------------------------------------------------------------------------ #}
 						<div class="form-group row">
 							<label for="two-step-auth" class="col-sm-7 col-form-label">
-								{% trans from 'profile' %}settings-two-step-auth{% endtrans %}
+								{% trans from 'user' %}settings-two-step-auth{% endtrans %}
 							</label>
 							<div class="col-sm-5">
 
-								{% if profile.settings.twoStepAuthEnabled %}
+								{% if settings.twoStepAuthEnabled %}
 									<a href="{{ url('user-settings-disable-two-step-auth') }}" class="btn btn-primary float-right">
 										<i class="fa fa-fw fa-ban"></i> {% trans from 'global' %}disable{% endtrans %}
 									</a>
@@ -67,15 +67,15 @@
 							</div>
 						</div>
 
-						{% if profile.settings.twoStepAuthEnabled %}
+						{% if settings.twoStepAuthEnabled %}
 							<div class="form-group row">
 								<label for="two-step-auth" class="col-sm-7 col-form-label">
-									{% trans from 'profile' %}settings-forget-devices{% endtrans %}
-									<i data-toggle="tooltip" data-placement="top" title="{% trans from 'profile' %}settings-forget-devices-help{% endtrans %}" class="fa fa-fw fa-question-circle"></i>
+									{% trans from 'user' %}settings-forget-devices{% endtrans %}
+									<i data-toggle="tooltip" data-placement="top" title="{% trans from 'user' %}settings-forget-devices-help{% endtrans %}" class="fa fa-fw fa-question-circle"></i>
 								</label>
 								<div class="col-sm-5">
 									<a href="{{ url('user-settings-forget-devices') }}" class="btn btn-outline-primary float-right">
-										<i class="fa fa-fw fa-laptop"></i> {% trans from 'profile' %}settings-forget-devices-button{% endtrans %}
+										<i class="fa fa-fw fa-laptop"></i> {% trans from 'user' %}settings-forget-devices-button{% endtrans %}
 									</a>
 
 								</div>
@@ -86,13 +86,13 @@
 						{# ------------------------------------------------------------------------------------------ #}
 						<div class="form-group row">
 							<label for="change-password" class="col-sm-7 col-form-label">
-								{% trans from 'profile' %}settings-logout-everywhere{% endtrans %}
-								<i data-toggle="tooltip" data-placement="top" title="{% trans from 'profile' %}settings-logout-everywhere-help{% endtrans %}" class="fa fa-fw fa-question-circle"></i>
+								{% trans from 'user' %}settings-logout-everywhere{% endtrans %}
+								<i data-toggle="tooltip" data-placement="top" title="{% trans from 'user' %}settings-logout-everywhere-help{% endtrans %}" class="fa fa-fw fa-question-circle"></i>
 							</label>
 							<div class="col-sm-5">
 
 								<a href="{{ url('user-settings-logout-everywhere') }}" class="btn btn-outline-primary float-right">
-									<i class="fa fa-fw fa-sign-out-alt"></i> {% trans from 'profile' %}settings-logout-everywhere-button{% endtrans %}
+									<i class="fa fa-fw fa-sign-out-alt"></i> {% trans from 'user' %}settings-logout-everywhere-button{% endtrans %}
 								</a>
 							</div>
 						</div>
@@ -101,28 +101,28 @@
 						{# ------------------------------------------------------------------------------------------ #}
 						<div class="form-group row">
 							<label for="change-password" class="col-sm-7 col-form-label">
-								{% trans from 'profile' %}settings-change-password{% endtrans %}
+								{% trans from 'user' %}settings-change-password{% endtrans %}
 							</label>
 							<div class="col-sm-5">
 
 								<a href="{{ url('user-reset-password') }}" class="btn btn-outline-primary float-right">
-									<i class="fa fa-fw fa-edit"></i> {% trans from 'profile' %}change-password{% endtrans %}
+									<i class="fa fa-fw fa-edit"></i> {% trans from 'user' %}change-password{% endtrans %}
 								</a>
 							</div>
 						</div>
 
 						<hr>
 
-						{# Delete profile #}
+						{# Delete user #}
 						{# ------------------------------------------------------------------------------------------ #}
 						<div class="form-group row">
-							<label for="delete-profile" class="col-sm-7 col-form-label">
-								{% trans from 'profile' %}settings-delete-profile{% endtrans %}
+							<label for="delete-user" class="col-sm-7 col-form-label">
+								{% trans from 'user' %}settings-delete-user{% endtrans %}
 							</label>
 							<div class="col-sm-5">
 
 								<a href="{{ url('user-delete') }}" class="btn btn-outline-danger float-right">
-									<i class="fa fa-fw fa-times"></i> {% trans from 'profile' %}delete-profile{% endtrans %}
+									<i class="fa fa-fw fa-times"></i> {% trans from 'user' %}delete-user{% endtrans %}
 								</a>
 							</div>
 						</div>
@@ -140,16 +140,16 @@
 
 						<h5 class="card-title">
 							<i class="fas fa-fw fa-envelope"></i>
-							{% trans from 'profile' %}newsletter{% endtrans %}
+							{% trans from 'user' %}newsletter{% endtrans %}
 						</h5>
 						<h6 class="card-subtitle mb-4 text-muted">
-							{% trans from 'profile' %}newsletter-desc{% endtrans %}
+							{% trans from 'user' %}newsletter-desc{% endtrans %}
 						</h6>
 
 						<hr>
 
 						<p class="text-muted small">
-							{% trans from 'profile' %}newsletter-overall-desc{% endtrans %}
+							{% trans from 'user' %}newsletter-overall-desc{% endtrans %}
 						</p>
 
 						{# first #}
@@ -157,19 +157,19 @@
 						<div class="form-check mb-4">
 							<input class="form-check-input" type="checkbox" id="newsletter-weekly"/>
 							<label class="form-check-label" for="newsletter-weekly" class="col-sm-12 col-form-label">
-								{% trans from 'profile' %}newsletter-weekly{% endtrans %}
+								{% trans from 'user' %}newsletter-weekly{% endtrans %}
 							</label>
 						</div>
 						<div class="form-check mb-4">
 							<input class="form-check-input" type="checkbox" id="newsletter-monthly"/>
 							<label class="form-check-label" for="newsletter-monthly" class="col-sm-12 col-form-label">
-								{% trans from 'profile' %}newsletter-monthly{% endtrans %}
+								{% trans from 'user' %}newsletter-monthly{% endtrans %}
 							</label>
 						</div>
 						<div class="form-check mb-4">
 							<input class="form-check-input" type="checkbox" id="newsletter-yearly"/>
 							<label class="form-check-label" for="newsletter-yearly" class="col-sm-12 col-form-label">
-								{% trans from 'profile' %}newsletter-yearl{% endtrans %}
+								{% trans from 'user' %}newsletter-yearl{% endtrans %}
 							</label>
 						</div>
 

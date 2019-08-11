@@ -12,7 +12,7 @@
     </unit>
     <unit id="qBJPsnB" name="registration-success">
       <notes>
-        <note category="file-source" priority="1">src/Controller/User/SecurityController.php:102</note>
+        <note category="file-source" priority="1">src/Controller/User/SecurityController.php:97</note>
       </notes>
       <segment>
         <source>registration-success</source>
@@ -48,7 +48,7 @@
     </unit>
     <unit id="EzOj_bG" name="registration-failed">
       <notes>
-        <note category="file-source" priority="1">src/Controller/User/SecurityController.php:106</note>
+        <note category="file-source" priority="1">src/Controller/User/SecurityController.php:101</note>
       </notes>
       <segment>
         <source>registration-failed</source>
@@ -57,7 +57,7 @@
     </unit>
     <unit id="6111zBr" name="email-activation-title">
       <notes>
-        <note category="file-source" priority="1">src/Service/MailService.php:49</note>
+        <note category="file-source" priority="1">src/Service/MailService.php:38</note>
       </notes>
       <segment>
         <source>email-activation-title</source>
@@ -84,9 +84,9 @@
     </unit>
     <unit id="e1gwb0M" name="activation-invalid-token">
       <notes>
-        <note category="file-source" priority="1">src/Service/UserService.php:117</note>
-        <note category="file-source" priority="1">src/Service/UserService.php:152</note>
-        <note category="file-source" priority="1">src/Controller/User/SecurityController.php:131</note>
+        <note category="file-source" priority="1">src/Service/UserService.php:85</note>
+        <note category="file-source" priority="1">src/Service/UserService.php:112</note>
+        <note category="file-source" priority="1">src/Controller/User/SecurityController.php:128</note>
       </notes>
       <segment>
         <source>activation-invalid-token</source>
@@ -113,8 +113,8 @@
     </unit>
     <unit id="57GlP5." name="activation-expired-token">
       <notes>
-        <note category="file-source" priority="1">src/Service/UserService.php:112</note>
-        <note category="file-source" priority="1">src/Service/UserService.php:147</note>
+        <note category="file-source" priority="1">src/Service/UserService.php:81</note>
+        <note category="file-source" priority="1">src/Service/UserService.php:108</note>
       </notes>
       <segment>
         <source>activation-expired-token</source>
@@ -123,7 +123,6 @@
     </unit>
     <unit id="ErXb3q4" name="settings-two-step-auth">
       <notes>
-        <note category="file-source" priority="1">templates/User/settings.html.twig:54</note>
         <note category="file-source" priority="1">templates/User/two-step-auth.html.twig:9</note>
         <note category="file-source" priority="1">templates/User/two-step-auth.html.twig:26</note>
         <note category="file-source" priority="1">templates/User/two-step-auth.html.twig:36</note>
@@ -135,10 +134,8 @@
     </unit>
     <unit id="zeD7Dew" name="settings">
       <notes>
-        <note category="file-source" priority="1">templates/User/delete.html.twig:23</note>
-        <note category="file-source" priority="1">templates/User/settings.html.twig:9</note>
-        <note category="file-source" priority="1">templates/User/settings.html.twig:23</note>
         <note category="file-source" priority="1">templates/User/two-step-auth.html.twig:23</note>
+        <note category="file-source" priority="1">templates/User/delete.html.twig:23</note>
       </notes>
       <segment>
         <source>settings</source>
@@ -156,7 +153,7 @@
     </unit>
     <unit id="XS0863q" name="security">
       <notes>
-        <note category="file-source" priority="1">templates/User/settings.html.twig:42</note>
+        <note category="state" priority="1">obsolete</note>
       </notes>
       <segment>
         <source>security</source>
@@ -165,7 +162,7 @@
     </unit>
     <unit id="DMbpYop" name="security-desc">
       <notes>
-        <note category="file-source" priority="1">templates/User/settings.html.twig:45</note>
+        <note category="state" priority="1">obsolete</note>
       </notes>
       <segment>
         <source>security-desc</source>
@@ -174,7 +171,7 @@
     </unit>
     <unit id="4jqMFec" name="settings-change-password">
       <notes>
-        <note category="file-source" priority="1">templates/User/settings.html.twig:104</note>
+        <note category="state" priority="1">obsolete</note>
       </notes>
       <segment>
         <source>settings-change-password</source>
@@ -183,7 +180,7 @@
     </unit>
     <unit id="ziubWKT" name="change-password">
       <notes>
-        <note category="file-source" priority="1">templates/User/settings.html.twig:109</note>
+        <note category="state" priority="1">obsolete</note>
       </notes>
       <segment>
         <source>change-password</source>
@@ -192,7 +189,7 @@
     </unit>
     <unit id="imf6FiK" name="settings-delete-profile">
       <notes>
-        <note category="file-source" priority="1">templates/User/settings.html.twig:120</note>
+        <note category="state" priority="1">obsolete</note>
       </notes>
       <segment>
         <source>settings-delete-profile</source>
@@ -202,7 +199,6 @@
     <unit id="6MWcHBq" name="delete-profile">
       <notes>
         <note category="file-source" priority="1">templates/User/delete.html.twig:54</note>
-        <note category="file-source" priority="1">templates/User/settings.html.twig:125</note>
       </notes>
       <segment>
         <source>delete-profile</source>
@@ -211,7 +207,7 @@
     </unit>
     <unit id="3W9GX2g" name="newsletter">
       <notes>
-        <note category="file-source" priority="1">templates/User/settings.html.twig:143</note>
+        <note category="state" priority="1">obsolete</note>
       </notes>
       <segment>
         <source>newsletter</source>
@@ -220,7 +216,7 @@
     </unit>
     <unit id="hSBFe8E" name="newsletter-desc">
       <notes>
-        <note category="file-source" priority="1">templates/User/settings.html.twig:146</note>
+        <note category="state" priority="1">obsolete</note>
       </notes>
       <segment>
         <source>newsletter-desc</source>
@@ -229,7 +225,7 @@
     </unit>
     <unit id="JXCvcyd" name="newsletter-overall-desc">
       <notes>
-        <note category="file-source" priority="1">templates/User/settings.html.twig:152</note>
+        <note category="state" priority="1">obsolete</note>
       </notes>
       <segment>
         <source>newsletter-overall-desc</source>
@@ -238,7 +234,7 @@
     </unit>
     <unit id="xN3wMsj" name="newsletter-weekly">
       <notes>
-        <note category="file-source" priority="1">templates/User/settings.html.twig:160</note>
+        <note category="state" priority="1">obsolete</note>
       </notes>
       <segment>
         <source>newsletter-weekly</source>
@@ -247,7 +243,7 @@
     </unit>
     <unit id="2KG6zz7" name="newsletter-monthly">
       <notes>
-        <note category="file-source" priority="1">templates/User/settings.html.twig:166</note>
+        <note category="state" priority="1">obsolete</note>
       </notes>
       <segment>
         <source>newsletter-monthly</source>
@@ -256,7 +252,7 @@
     </unit>
     <unit id="7AjSSvv" name="newsletter-yearl">
       <notes>
-        <note category="file-source" priority="1">templates/User/settings.html.twig:172</note>
+        <note category="state" priority="1">obsolete</note>
       </notes>
       <segment>
         <source>newsletter-yearl</source>
@@ -320,8 +316,8 @@
     </unit>
     <unit id="0mRwX4u" name="login-sign-in">
       <notes>
-        <note category="file-source" priority="1">templates/_partials/login-form.html.twig:41</note>
         <note category="file-source" priority="1">templates/User/Login/two-step-auth.html.twig:43</note>
+        <note category="file-source" priority="1">templates/_partials/login-form.html.twig:41</note>
       </notes>
       <segment>
         <source>login-sign-in</source>
@@ -348,7 +344,7 @@
     </unit>
     <unit id="QnGf_HM" name="two-step-auth-enabled">
       <notes>
-        <note category="file-source" priority="1">src/Controller/User/UserController.php:87</note>
+        <note category="file-source" priority="1">src/Controller/User/UserController.php:111</note>
       </notes>
       <segment>
         <source>two-step-auth-enabled</source>
@@ -357,7 +353,7 @@
     </unit>
     <unit id="fSNFRZg" name="two-step-auth-failed">
       <notes>
-        <note category="file-source" priority="1">src/Controller/User/UserController.php:91</note>
+        <note category="file-source" priority="1">src/Controller/User/UserController.php:115</note>
       </notes>
       <segment>
         <source>two-step-auth-failed</source>
@@ -403,7 +399,7 @@
     </unit>
     <unit id="DQTOAQU" name="request-reset-password-unknown-mail">
       <notes>
-        <note category="file-source" priority="1">src/Controller/User/SecurityController.php:194</note>
+        <note category="file-source" priority="1">src/Controller/User/SecurityController.php:184</note>
       </notes>
       <segment>
         <source>request-reset-password-unknown-mail</source>
@@ -412,7 +408,7 @@
     </unit>
     <unit id="_y8Pmge" name="two-step-auth-disabled">
       <notes>
-        <note category="file-source" priority="1">src/Controller/User/UserController.php:117</note>
+        <note category="file-source" priority="1">src/Controller/User/UserController.php:139</note>
       </notes>
       <segment>
         <source>two-step-auth-disabled</source>
@@ -494,7 +490,7 @@
     </unit>
     <unit id="7m3gYY5" name="email-request-reset-password-title">
       <notes>
-        <note category="file-source" priority="1">src/Service/MailService.php:75</note>
+        <note category="file-source" priority="1">src/Service/MailService.php:60</note>
       </notes>
       <segment>
         <source>email-request-reset-password-title</source>
@@ -503,7 +499,7 @@
     </unit>
     <unit id="b_GYALw" name="request-reset-password-already-pending">
       <notes>
-        <note category="file-source" priority="1">src/Controller/User/SecurityController.php:203</note>
+        <note category="file-source" priority="1">src/Controller/User/SecurityController.php:195</note>
       </notes>
       <segment>
         <source>request-reset-password-already-pending</source>
@@ -512,7 +508,7 @@
     </unit>
     <unit id="bBNCqnd" name="request-reset-password-sent">
       <notes>
-        <note category="file-source" priority="1">src/Controller/User/SecurityController.php:215</note>
+        <note category="file-source" priority="1">src/Controller/User/SecurityController.php:208</note>
       </notes>
       <segment>
         <source>request-reset-password-sent</source>
@@ -594,7 +590,7 @@
     </unit>
     <unit id="vRAQKoo" name="reset-password-new-password-mismatch">
       <notes>
-        <note category="file-source" priority="1">src/Controller/User/SecurityController.php:272</note>
+        <note category="file-source" priority="1">src/Controller/User/SecurityController.php:256</note>
       </notes>
       <segment>
         <source>reset-password-new-password-mismatch</source>
@@ -603,7 +599,7 @@
     </unit>
     <unit id="HjQChF8" name="reset-password-failed">
       <notes>
-        <note category="file-source" priority="1">src/Controller/User/SecurityController.php:298</note>
+        <note category="file-source" priority="1">src/Controller/User/SecurityController.php:287</note>
       </notes>
       <segment>
         <source>reset-password-failed</source>
@@ -612,7 +608,7 @@
     </unit>
     <unit id="tdmsrLr" name="reset-password-invalid-token">
       <notes>
-        <note category="file-source" priority="1">src/Controller/User/SecurityController.php:255</note>
+        <note category="file-source" priority="1">src/Controller/User/SecurityController.php:239</note>
       </notes>
       <segment>
         <source>reset-password-invalid-token</source>
@@ -621,7 +617,7 @@
     </unit>
     <unit id="aJBmLIx" name="reset-password-success">
       <notes>
-        <note category="file-source" priority="1">src/Controller/User/SecurityController.php:306</note>
+        <note category="file-source" priority="1">src/Controller/User/SecurityController.php:295</note>
       </notes>
       <segment>
         <source>reset-password-success</source>
@@ -630,8 +626,7 @@
     </unit>
     <unit id="GCj52nT" name="settings-forget-devices">
       <notes>
-        <note category="file-source" priority="1">templates/User/settings.html.twig:73</note>
-        <note category="state" priority="1">new</note>
+        <note category="state" priority="1">obsolete</note>
       </notes>
       <segment>
         <source>settings-forget-devices</source>
@@ -640,8 +635,7 @@
     </unit>
     <unit id="si2Mj8V" name="settings-forget-devices-help">
       <notes>
-        <note category="file-source" priority="1">templates/User/settings.html.twig:74</note>
-        <note category="state" priority="1">new</note>
+        <note category="state" priority="1">obsolete</note>
       </notes>
       <segment>
         <source>settings-forget-devices-help</source>
@@ -650,8 +644,7 @@
     </unit>
     <unit id="LAs_e.0" name="settings-forget-devices-button">
       <notes>
-        <note category="file-source" priority="1">templates/User/settings.html.twig:78</note>
-        <note category="state" priority="1">new</note>
+        <note category="state" priority="1">obsolete</note>
       </notes>
       <segment>
         <source>settings-forget-devices-button</source>
@@ -660,8 +653,7 @@
     </unit>
     <unit id="QBEkcRT" name="settings-logout-everywhere">
       <notes>
-        <note category="file-source" priority="1">templates/User/settings.html.twig:89</note>
-        <note category="state" priority="1">new</note>
+        <note category="state" priority="1">obsolete</note>
       </notes>
       <segment>
         <source>settings-logout-everywhere</source>
@@ -670,8 +662,7 @@
     </unit>
     <unit id="fmpOkOd" name="settings-logout-everywhere-help">
       <notes>
-        <note category="file-source" priority="1">templates/User/settings.html.twig:90</note>
-        <note category="state" priority="1">new</note>
+        <note category="state" priority="1">obsolete</note>
       </notes>
       <segment>
         <source>settings-logout-everywhere-help</source>
@@ -680,8 +671,7 @@
     </unit>
     <unit id="RF7y7_8" name="settings-logout-everywhere-button">
       <notes>
-        <note category="file-source" priority="1">templates/User/settings.html.twig:95</note>
-        <note category="state" priority="1">new</note>
+        <note category="state" priority="1">obsolete</note>
       </notes>
       <segment>
         <source>settings-logout-everywhere-button</source>
@@ -691,7 +681,6 @@
     <unit id=".pBmoMr" name="two-step-auth">
       <notes>
         <note category="file-source" priority="1">templates/User/Login/two-step-auth.html.twig:13</note>
-        <note category="state" priority="1">new</note>
       </notes>
       <segment>
         <source>two-step-auth</source>
@@ -701,7 +690,6 @@
     <unit id="n_zSYI." name="two-step-auth-desc">
       <notes>
         <note category="file-source" priority="1">templates/User/Login/two-step-auth.html.twig:19</note>
-        <note category="state" priority="1">new</note>
       </notes>
       <segment>
         <source>two-step-auth-desc</source>
@@ -711,7 +699,6 @@
     <unit id="rkzmjFQ" name="login-code">
       <notes>
         <note category="file-source" priority="1">templates/User/Login/two-step-auth.html.twig:30</note>
-        <note category="state" priority="1">new</note>
       </notes>
       <segment>
         <source>login-code</source>
@@ -721,7 +708,6 @@
     <unit id="aCZy.If" name="two-step-auth-help-desc">
       <notes>
         <note category="file-source" priority="1">templates/User/Login/two-step-auth.html.twig:50</note>
-        <note category="state" priority="1">new</note>
       </notes>
       <segment>
         <source>two-step-auth-help-desc</source>
@@ -731,7 +717,6 @@
     <unit id="2zCmPCj" name="two-step-auth-help-link">
       <notes>
         <note category="file-source" priority="1">templates/User/Login/two-step-auth.html.twig:52</note>
-        <note category="state" priority="1">new</note>
       </notes>
       <segment>
         <source>two-step-auth-help-link</source>
@@ -740,8 +725,7 @@
     </unit>
     <unit id="EHvLJgU" name="two-step-auth-devices-forgoten">
       <notes>
-        <note category="file-source" priority="1">src/Controller/User/UserController.php:131</note>
-        <note category="state" priority="1">new</note>
+        <note category="file-source" priority="1">src/Controller/User/UserController.php:153</note>
       </notes>
       <segment>
         <source>two-step-auth-devices-forgoten</source>
@@ -750,11 +734,20 @@
     </unit>
     <unit id="I0n8Km5" name="settings-logged-out-everywhere">
       <notes>
-        <note category="file-source" priority="1">src/Controller/User/UserController.php:146</note>
-        <note category="state" priority="1">new</note>
+        <note category="file-source" priority="1">src/Controller/User/UserController.php:168</note>
       </notes>
       <segment>
         <source>settings-logged-out-everywhere</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="c.Ff0u7" name="login-sign-up">
+      <notes>
+        <note category="file-source" priority="1">templates/_partials/navigation-top-frontend.html.twig:104</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>login-sign-up</source>
         <target></target>
       </segment>
     </unit>
