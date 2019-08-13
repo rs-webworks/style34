@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xliff xmlns="urn:oasis:names:tc:xliff:document:2.0" version="2.0" srcLang="cs" trgLang="cs">
+<xliff xmlns="urn:oasis:names:tc:xliff:document:2.0" version="2.0" srcLang="en" trgLang="cs">
   <file id="profile.cs">
     <unit id="giREF.l" name="email">
       <notes>
@@ -339,7 +339,7 @@
       </notes>
       <segment>
         <source>view</source>
-        <target></target>
+        <target>Zobrazit</target>
       </segment>
     </unit>
     <unit id="nZcjZox" name="profile-not-found">
@@ -775,7 +775,7 @@
       </notes>
       <segment>
         <source>two-step-auth-devices-forgoten</source>
-        <target></target>
+        <target>Všechna povolená zařízení byla zapomenuta</target>
       </segment>
     </unit>
     <unit id="I0n8Km5" name="settings-logged-out-everywhere">
@@ -784,7 +784,7 @@
       </notes>
       <segment>
         <source>settings-logged-out-everywhere</source>
-        <target></target>
+        <target>Úspěšně odhlášeno na všech zařízeních</target>
       </segment>
     </unit>
     <unit id="c.Ff0u7" name="login-sign-up">

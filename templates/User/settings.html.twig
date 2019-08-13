@@ -14,9 +14,6 @@
 					<a href="{{ url('home-index') }}">{{ eryseClient.name }}</a>
 				</li>
 				<li class="breadcrumb-item">
-					<a href="{{ url('user-list') }}">{% trans from 'global' %}users{% endtrans %}</a>
-				</li>
-				<li class="breadcrumb-item">
 					<a href="{{ url('user-view') }}">{{ app.user.getUsername() }}</a>
 				</li>
 				<li class="breadcrumb-item active" aria-current="page">

@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Class RememberMeToken
  * @package EryseClient\Entity\Client\Token
  * @ORM\Entity()
- * @ORM\Table(name="token_rememberMe")
+ * @ORM\Table(name="rememberme_token")
  */
 class RememberMeToken
 {

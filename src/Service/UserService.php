@@ -201,7 +201,9 @@ class UserService extends AbstractService
 
     public function logoutEverywhere(User $user)
     {
-        $user;
+        $user->setTrustedTokenVersion($user->getTrustedTokenVersion()+1);
+        $this->userRepository->save($user);
+
     }
 
 }

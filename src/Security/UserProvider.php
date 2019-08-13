@@ -1,9 +1,12 @@
 <?php declare(strict_types=1);
+
 namespace EryseClient\Security;
 
 use EryseClient\Entity\Server\User\User;
 use EryseClient\Repository\Server\User\UserRepository;
-use EryseClient\Utility\EntityManagersTrait;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -15,19 +18,16 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
  */
 class UserProvider implements UserProviderInterface
 {
-    use EntityManagersTrait;
-    /**
-     * @var UserRepository
-     */
+    /** @var UserRepository */
     private $userRepository;
-
 
     /**
      * UserProvider constructor.
      * @param UserRepository $userRepository
      */
-    public function __construct(UserRepository $userRepository)
-    {
+    public function __construct(
+        UserRepository $userRepository
+    ) {
         $this->userRepository = $userRepository;
     }
 
@@ -63,7 +63,12 @@ class UserProvider implements UserProviderInterface
             throw new UnsupportedUserException(sprintf('Invalid user class "%s".', get_class($user)));
         }
 
-        return $this->userRepository->find($user->getId());
+        $refreshedUser = $this->userRepository->find($user->getId());
+        if ($refreshedUser->getTrustedTokenVersion() !== $user->getTrustedTokenVersion()) {
+            throw new AuthenticationException();
+        }
+
+        return $refreshedUser;
     }
 
     /**
@@ -74,4 +79,5 @@ class UserProvider implements UserProviderInterface
     {
         return User::class === $class;
     }
+
 }

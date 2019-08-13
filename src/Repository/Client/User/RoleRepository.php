@@ -4,14 +4,19 @@ namespace EryseClient\Repository\Client\User;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use EryseClient\Entity\Client\User\Role;
+use EryseClient\Entity\Server\User\User;
+use EryseClient\Utility\FindByUserTrait;
+use EryseClient\Utility\SaveEntityTrait;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
  * Class RoleRepository
- * @package EryseClient\Repository\Profile
+ * @package EryseClient\Repository\Client\User
  */
 class RoleRepository extends ServiceEntityRepository
 {
+    use SaveEntityTrait;
+
     /**
      * RoleRepository constructor
      * @param RegistryInterface $registry

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xliff xmlns="urn:oasis:names:tc:xliff:document:2.0" version="2.0" srcLang="cs" trgLang="cs">
+<xliff xmlns="urn:oasis:names:tc:xliff:document:2.0" version="2.0" srcLang="en" trgLang="cs">
   <file id="validators.cs">
     <unit id="_vR8dBH" name="profile.username-required">
       <notes>
@@ -110,15 +110,6 @@
         <target>Přezdívka můsí mít alespoň {{ limit }} znaků</target>
       </segment>
     </unit>
-    <unit id="NOauvLq" name="profile.username-taken">
-      <notes>
-        <note category="state" priority="1">obsolete</note>
-      </notes>
-      <segment>
-        <source>profile.username-taken</source>
-        <target>Tato přezdívka je už zabraná</target>
-      </segment>
-    </unit>
     <unit id="XSa.kSY" name="profile.email-taken">
       <notes>
         <note category="state" priority="1">obsolete</note>
@@ -134,7 +125,7 @@
       </notes>
       <segment>
         <source>profile.ip-expected</source>
-        <target></target>
+        <target>Chybí IP adresa</target>
       </segment>
     </unit>
     <unit id="6BDxmEh" name="user.username-taken">
@@ -143,7 +134,7 @@
       </notes>
       <segment>
         <source>user.username-taken</source>
-        <target></target>
+        <target>Tato přezdívka je už zabrána</target>
       </segment>
     </unit>
     <unit id="R9NVvdm" name="user.email-taken">
@@ -152,7 +143,7 @@
       </notes>
       <segment>
         <source>user.email-taken</source>
-        <target></target>
+        <target>Tento email je už registrovaný</target>
       </segment>
     </unit>
   </file>
