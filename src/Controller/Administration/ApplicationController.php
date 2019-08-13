@@ -20,7 +20,6 @@ class ApplicationController extends AbstractController
     use TranslatorTrait;
     use LoggerTrait;
     use EntityManagersTrait;
-    use ApiClientTrait;
 
     /**
      * @Route("/administration", name="administration-dashboard")

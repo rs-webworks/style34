@@ -4,8 +4,11 @@ namespace EryseClient\Repository\Server\User;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
-use EryseClient\Entity\Client\User\Settings;
+use EryseClient\Entity\Client\User\ClientSettings;
+use EryseClient\Entity\Server\User\GoogleAuth;
+use EryseClient\Entity\Server\User\ServerSettings;
 use EryseClient\Entity\Server\User\User;
+use EryseClient\Repository\Client\User\ClientSettingsRepository;
 use EryseClient\Repository\Client\User\SettingsRepository;
 use EryseClient\Utility\SaveEntityTrait;
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -22,21 +25,28 @@ class UserRepository extends ServiceEntityRepository implements UserLoaderInterf
 {
     use SaveEntityTrait;
 
-    /** @var SettingsRepository */
-    private $settingsRepository;
+    /** @var ServerSettingsRepository */
+    private $serverSettingsRepository;
 
-    public function __construct(RegistryInterface $registry, SettingsRepository $settingsRepository)
-    {
+    /** @var ClientSettingsRepository */
+    private $clientSettingsRepository;
+
+    public function __construct(
+        RegistryInterface $registry,
+        ServerSettingsRepository $serverSettingsRepository,
+        ClientSettingsRepository $clientSettingsRepository
+    ) {
         parent::__construct($registry, User::class);
-        $this->settingsRepository = $settingsRepository;
+        $this->serverSettingsRepository = $serverSettingsRepository;
+        $this->clientSettingsRepository = $clientSettingsRepository;
     }
 
 
     public function saveNew(User $user): void
     {
         $this->save($user);
-        $settings = new Settings($user);
-        $this->settingsRepository->save($settings);
+        $this->serverSettingsRepository->save(new ServerSettings($user));
+        $this->clientSettingsRepository->save(new ClientSettings($user));
     }
 
     /**
@@ -62,7 +72,8 @@ class UserRepository extends ServiceEntityRepository implements UserLoaderInterf
             ->where('u.roles LIKE :roles')
             ->setParameter('roles', '%"' . $role . '"%');
 
-        return $qb->getQuery()->getResult();
+        return $qb->getQuery()
+            ->getResult();
     }
 
     public function removeUsers(array $users): void
@@ -73,4 +84,12 @@ class UserRepository extends ServiceEntityRepository implements UserLoaderInterf
 
         $this->_em->flush();
     }
+
+    public function getGoogleAuthEntity(User $user): ?GoogleAuth
+    {
+        $settings = $this->serverSettingsRepository->findByUser($user);
+
+        return new GoogleAuth($user, $settings);
+    }
+
 }

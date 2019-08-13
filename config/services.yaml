@@ -32,15 +32,7 @@ services:
 
 
     # Shared services via packages:
-    RaitoCZ\EryseServices\:
-        resource: '../vendor/raitocz/eryse-services/src/*'
 
-    RaitoCZ\EryseServices\Service\RsaService:
-        arguments: ['%kernel.project_dir%']
-
-    RaitoCZ\EryseServices\Service\EryseServerApiService:
-        $serverUrl: '%env(resolve:ERYSE_SERVER_URL)%'
-        $disableSslVerification: true
 
     # Manually defined services
     # ------------------------------------------------------------------------------------------------------------------

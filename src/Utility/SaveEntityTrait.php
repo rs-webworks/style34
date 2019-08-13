@@ -1,4 +1,5 @@
 <?php declare(strict_types=1);
+
 namespace EryseClient\Utility;
 
 use Doctrine\ORM\EntityManagerInterface;
@@ -13,10 +14,7 @@ trait SaveEntityTrait
     /** @var EntityManagerInterface */
     protected $_em;
 
-    /**
-     * @param array $entities
-     */
-    public function save(...$entities)
+    public function save(...$entities): void
     {
         foreach ($entities as $entity) {
             $this->_em->persist($entity);
@@ -24,4 +22,5 @@ trait SaveEntityTrait
 
         $this->_em->flush();
     }
+
 }

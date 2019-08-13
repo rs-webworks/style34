@@ -2,7 +2,6 @@
 
 namespace EryseClient\Controller\User;
 
-use EryseClient\Controller\AbstractController;
 use EryseClient\Entity\Client\Token\TokenType;
 use EryseClient\Entity\Server\User\User;
 use EryseClient\Exception\Security\ResetPasswordException;
@@ -15,6 +14,7 @@ use EryseClient\Service\TokenService;
 use EryseClient\Service\UserService;
 use EryseClient\Utility\LoggerTrait;
 use EryseClient\Utility\TranslatorTrait;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Security;
@@ -66,6 +66,7 @@ class SecurityController extends AbstractController
         UserService $userService,
         MailService $mailService,
         TokenService $tokenService,
+        TokenRepository $tokenRepository,
         UserRepository $userRepository
     ) {
         // Purge all expired & invalid requests for registration
@@ -90,8 +91,7 @@ class SecurityController extends AbstractController
 
                 // Send registration email
                 $mailService->sendActivationMail($user, $token);
-                $this->clientEm->persist($token);
-                $this->clientEm->flush();
+                $tokenRepository->save($token);
 
                 // Flash & redirect
                 $this->addFlash('success', $this->translator->trans('registration-success', [], 'profile'));
@@ -132,11 +132,8 @@ class SecurityController extends AbstractController
             $user = $userService->activateUser($user, $token);
             $token->setInvalid(true);
 
-
-            $this->serverEm->persist($user);
-            $this->serverEm->flush();
-            $this->clientEm->persist($token);
-            $this->clientEm->flush();
+            $userRepository->save($user);
+            $tokenRepository->save($token);
 
             $this->addFlash('success', $this->translator->trans('activation-success', [], 'profile'));
         } catch (\Exception $ex) {
@@ -200,8 +197,7 @@ class SecurityController extends AbstractController
 
             // Generate reset token
             $token = $tokenService->getResetPasswordToken($user);
-            $this->em->persist($token);
-            $this->em->flush();
+            $tokenRepository->save($token);
 
             // Send email & flash info
             $mailService->sendRequestResetPasswordMail($user, $token);
@@ -219,6 +215,7 @@ class SecurityController extends AbstractController
     public function resetPassword(
         Request $request,
         UserService $userService,
+        UserRepository $userRepository,
         TokenService $tokenService,
         TokenRepository $tokenRepository,
         ValidatorInterface $validator,
@@ -242,7 +239,7 @@ class SecurityController extends AbstractController
             }
 
             // Load user, prepare pass
-            $user = $token->getUser();
+            $user = $userRepository->find($token->getUserId());
         }
 
         if ($request->isMethod('post')) {
@@ -277,10 +274,9 @@ class SecurityController extends AbstractController
 
                 if ($token) {
                     $token->setInvalid(true);
-                    $this->em->persist($token);
+                    $tokenRepository->save($token);
                 }
-                $this->em->persist($user);
-                $this->em->flush();
+                $userRepository->save($user);
             } catch (\Exception $ex) {
                 $this->addFlash(
                     'danger',

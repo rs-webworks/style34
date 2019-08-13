@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7dadcb95e9eff6976fbc6e1a1e9a11ac",
+    "content-hash": "c32c17b4c0feeb9fbfae59657c51bab8",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -3148,97 +3148,6 @@
                 "simple-cache"
             ],
             "time": "2017-10-23T01:57:42+00:00"
-        },
-        {
-            "name": "raitocz/eryse-services",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "git@github.com:raitocz/eryse-services.git",
-                "reference": "3d85ffe104dccc72a75ddd7f9c75c678ef74a9f3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/raitocz/eryse-services/zipball/3d85ffe104dccc72a75ddd7f9c75c678ef74a9f3",
-                "reference": "3d85ffe104dccc72a75ddd7f9c75c678ef74a9f3",
-                "shasum": ""
-            },
-            "require": {
-                "ext-curl": "*",
-                "ext-http": "*",
-                "guzzlehttp/guzzle": "^6.3",
-                "martinusso/opencrypt": "^3.1",
-                "mashape/unirest-php": "^3.0",
-                "phpseclib/phpseclib": "^2.0"
-            },
-            "require-dev": {
-                "raitocz/eryse-structures": "*@dev",
-                "symfony/cache": "^4.2"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "RaitoCZ\\EryseServices\\": "src/"
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "raitocz",
-                    "email": "raito.akehanareru@gmail.com"
-                }
-            ],
-            "description": "Shared symfony services for Eryse ACP",
-            "support": {
-                "source": "https://github.com/raitocz/eryse-services/tree/master",
-                "issues": "https://github.com/raitocz/eryse-services/issues"
-            },
-            "time": "2019-07-10T19:33:30+00:00"
-        },
-        {
-            "name": "raitocz/eryse-structures",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "git@github.com:raitocz/eryse-structures.git",
-                "reference": "7db5b26855f3890f69ba3c6c2dadcbe719955355"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/raitocz/eryse-structures/zipball/7db5b26855f3890f69ba3c6c2dadcbe719955355",
-                "reference": "7db5b26855f3890f69ba3c6c2dadcbe719955355",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.2.0"
-            },
-            "require-dev": {
-                "symfony/orm-pack": "^1.0",
-                "symfony/validator": "*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "RaitoCZ\\EryseStructures\\": "src/"
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "raitocz",
-                    "email": "raito.akehanareru@gmail.com"
-                }
-            ],
-            "description": "Basic structures for eRyse ACP",
-            "support": {
-                "source": "https://github.com/raitocz/eryse-structures/tree/master",
-                "issues": "https://github.com/raitocz/eryse-structures/issues"
-            },
-            "time": "2019-06-30T09:17:27+00:00"
         },
         {
             "name": "ralouphie/getallheaders",
@@ -8861,14 +8770,11 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "raitocz/eryse-structures": 20,
-        "raitocz/eryse-services": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.1.3",
+        "php": "^7.2.0",
         "ext-ctype": "*",
         "ext-iconv": "*",
         "ext-json": "*",

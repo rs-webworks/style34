@@ -1,18 +1,19 @@
 <?php declare(strict_types=1);
 
-namespace EryseClient\Entity\Client\User;
+namespace EryseClient\Entity\Server\User;
 
 use Doctrine\ORM\Mapping as ORM;
 use EryseClient\Entity\Common\Identifier;
 use EryseClient\Entity\Server\User\User;
+use Scheb\TwoFactorBundle\Model\Google\TwoFactorInterface;
 
 /**
- * Class Settings
- * @package EryseClient\Entity\Client\User
+ * Class ServerSettings
+ * @package EryseClient\Entity\Server\User
  * @ORM\Table(name="user_settings")
- * @ORM\Entity(repositoryClass="EryseClient\Repository\Client\User\SettingsRepository")
+ * @ORM\Entity(repositoryClass="EryseClient\Repository\Server\User\ServerSettingsRepository")
  */
-class Settings
+class ServerSettings
 {
 
     use Identifier;
@@ -72,6 +73,5 @@ class Settings
     {
         $this->gAuthSecret = $gAuthSecret;
     }
-
 
 }

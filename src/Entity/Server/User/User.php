@@ -5,7 +5,7 @@ namespace EryseClient\Entity\Server\User;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use EryseClient\Entity\Client\User\Role;
-use EryseClient\Entity\Client\User\Settings;
+use EryseClient\Entity\Client\User\ClientSettings;
 use EryseClient\Entity\Common\CreatedAt;
 use EryseClient\Entity\Common\DeletedAt;
 use Scheb\TwoFactorBundle\Model\Google\TwoFactorInterface;
@@ -96,12 +96,6 @@ class User implements UserInterface, TrustedDeviceInterface
      * @ORM\Column(type="string", nullable=false)
      */
     protected $registeredAs;
-
-    /**
-     * @var int
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    protected $settingsId;
 
     /**
      * @var integer
@@ -261,20 +255,6 @@ class User implements UserInterface, TrustedDeviceInterface
     {
         $this->registeredAs = $registeredAs;
     }
-
-
-    // Settings
-    // -----------------------------------------------------------------------------------------------------------------
-    public function getSettingsId(): ?int
-    {
-        return $this->settingsId;
-    }
-
-    public function setSettingsId(int $settingsId): void
-    {
-        $this->settingsId = $settingsId;
-    }
-
 
     // Devices
     // -----------------------------------------------------------------------------------------------------------------

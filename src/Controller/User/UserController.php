@@ -5,6 +5,8 @@ namespace EryseClient\Controller\User;
 use EryseClient\Entity\Server\User\User;
 use EryseClient\Form\User\SettingsForm;
 use EryseClient\Repository\Client\User\SettingsRepository;
+use EryseClient\Repository\Server\User\ServerSettingsRepository;
+use EryseClient\Repository\Server\User\UserRepository;
 use EryseClient\Service\UserService;
 use EryseClient\Utility\EntityManagersTrait;
 use EryseClient\Utility\LoggerTrait;
@@ -60,7 +62,7 @@ class UserController extends AbstractController
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function settings(Request $request, SettingsRepository $settingsRepository)
+    public function settings(Request $request, ServerSettingsRepository $serverSettingsRepository)
     {
         /** @var User $user */
         $user = $this->getUser();
@@ -76,7 +78,7 @@ class UserController extends AbstractController
             [
                 'form' => $form->createView(),
                 'user' => $user,
-                'settings' => $settingsRepository->findOneBy(["userId" => $user->getId()])
+                'settings' => $serverSettingsRepository->findOneBy(["userId" => $user->getId()])
             ]
         );
     }
@@ -93,19 +95,22 @@ class UserController extends AbstractController
         GoogleAuthenticatorInterface $authService,
         SessionInterface $session,
         Request $request,
-        UserService $userService
+        UserService $userService,
+        UserRepository $userRepository,
+        ServerSettingsRepository $serverSettingsRepository
     ) {
-        /** @var User $user */
         $user = $this->getUser();
+        $gAuthEntity = $userRepository->getGoogleAuthEntity($user);
         $activationCode = $request->get('activation-code');
+        $serverSettings = $serverSettingsRepository->findByUser($user);
 
         // If activation code sent
         if ($activationCode) {
             $secret = $session->get('generated-secret');
-            $user->setGoogleAuthenticatorSecret($secret);
+            $serverSettings->setGAuthSecret($secret);
 
             // If activation code matches generated secret check
-            if ($activationCode == $authService->checkCode($user, $activationCode)) {
+            if ($activationCode == $authService->checkCode($gAuthEntity, $activationCode)) {
                 $userService->enableTwoStepAuth($user, $secret);
 
                 $this->addFlash('success', $this->translator->trans('two-step-auth-enabled', [], 'profile'));
@@ -117,10 +122,10 @@ class UserController extends AbstractController
         }
 
         $secret = $authService->generateSecret();
-        $user->setGoogleAuthenticatorSecret($secret);
+        $serverSettings->setGAuthSecret($secret);
         $session->set('generated-secret', $secret);
 
-        $qrCode = $authService->getUrl($user);
+        $qrCode = $authService->getUrl($gAuthEntity);
 
         return $this->render('User/two-step-auth.html.twig', ['qrCode' => $qrCode]);
     }
@@ -136,7 +141,7 @@ class UserController extends AbstractController
         // TODO: Require user to either enter password again or add email token for this, security reasons
         $userService->disableTwoStepAuth($user);
 
-        $this->addFlash('success', $this->translator->trans('two-step-auth-disabled', [], 'profile'));
+        $this->addFlash('success', $this->translator->trans('two-step-auth-disabled', [], 'user'));
 
         return $this->redirectToRoute('user-settings');
     }
@@ -150,7 +155,7 @@ class UserController extends AbstractController
     public function forgetDevices(UserService $userService, UserInterface $user)
     {
         $userService->forgetDevices($user);
-        $this->addFlash('success', $this->translator->trans('two-step-auth-devices-forgoten', [], 'profile'));
+        $this->addFlash('success', $this->translator->trans('two-step-auth-devices-forgoten', [], 'user'));
 
         return $this->redirectToRoute('user-settings');
     }
@@ -165,7 +170,7 @@ class UserController extends AbstractController
     {
         // TODO: This is not working yet
         $userService->logoutEverywhere($user);
-        $this->addFlash('success', $this->translator->trans('settings-logged-out-everywhere', [], 'profile'));
+        $this->addFlash('success', $this->translator->trans('settings-logged-out-everywhere', [], 'user'));
 
         return $this->redirectToRoute('user-settings');
     }

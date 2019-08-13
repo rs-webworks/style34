@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
+
 namespace EryseClient\Service;
 
 use DateTime;
-use EryseClient\Entity\Client\Token\RememberMeToken;
 use EryseClient\Entity\Client\Token\Token;
 use EryseClient\Entity\Client\Token\TokenType;
 use EryseClient\Entity\Client\User\Role;
@@ -11,8 +11,11 @@ use EryseClient\Exception\Token\ExpiredTokenException;
 use EryseClient\Exception\Token\InvalidTokenException;
 use EryseClient\Exception\User\ActivationException;
 use EryseClient\Kernel;
+use EryseClient\Repository\Client\Token\RememberMeTokenRepository;
 use EryseClient\Repository\Client\Token\TokenRepository;
 use EryseClient\Repository\Client\Token\TokenTypeRepository;
+use EryseClient\Repository\Server\User\ServerSettingsRepository;
+use EryseClient\Repository\Server\User\UserRepository;
 use EryseClient\Utility\EntityManagersTrait;
 use EryseClient\Utility\LoggerTrait;
 use EryseClient\Utility\TranslatorTrait;
@@ -43,18 +46,33 @@ class UserService extends AbstractService
     /** @var TokenRepository $tokenRepository */
     private $tokenRepository;
 
+    /** @var ServerSettingsRepository */
+    private $serverSettingsRepository;
+
+    /** @var UserRepository */
+    private $userRepository;
+
+    /** @var RememberMeTokenRepository */
+    private $rememberMeTokenRepository;
+
     public function __construct(
         UserPasswordEncoderInterface $passwordEncoder,
         TokenService $tokenService,
         MailService $mailService,
         TokenTypeRepository $tokenTypeRepository,
-        TokenRepository $tokenRepository
+        TokenRepository $tokenRepository,
+        ServerSettingsRepository $serverSettingsRepository,
+        UserRepository $userRepository,
+        RememberMeTokenRepository $rememberMeTokenRepository
     ) {
         $this->passwordEncoder = $passwordEncoder;
         $this->tokenService = $tokenService;
         $this->mailService = $mailService;
         $this->tokenTypeRepository = $tokenTypeRepository;
         $this->tokenRepository = $tokenRepository;
+        $this->serverSettingsRepository = $serverSettingsRepository;
+        $this->userRepository = $userRepository;
+        $this->rememberMeTokenRepository = $rememberMeTokenRepository;
     }
 
     public function prepareNewUser(User $user, string $lastIp = '127.0.0.1'): User
@@ -94,11 +112,13 @@ class UserService extends AbstractService
             return $user;
         }
 
-        throw new ActivationException($this->translator->trans(
-            'contact-support',
-            ['contactmail' => Kernel::CONTACT_MAIL],
-            'global'
-        ));
+        throw new ActivationException(
+            $this->translator->trans(
+                'contact-support',
+                ['contactmail' => Kernel::CONTACT_MAIL],
+                'global'
+            )
+        );
     }
 
     public function updatePassword(string $newPassword, User $user, Token $token = null): ?User
@@ -125,16 +145,16 @@ class UserService extends AbstractService
             $users = array();
 
             /** @var TokenType $tokenType */
-            $tokenType = $this->tokenTypeRepository->findOneBy(array(
-                'name' => TokenType::USER['ACTIVATION']
-            ));
+            $tokenType = $this->tokenTypeRepository->findOneBy(
+                array(
+                    'name' => TokenType::USER['ACTIVATION']
+                )
+            );
 
             $expiredTokens = $this->tokenRepository->findExpiredTokens($tokenType);
 
-            /** @var Token $token */
             foreach ($expiredTokens as $token) {
-                $user = $token->getUser();
-                $users[] = $user;
+                $users[] = $this->userRepository->find($token->getUserId());
             }
 
             return $users;
@@ -147,57 +167,38 @@ class UserService extends AbstractService
 
     public function enableTwoStepAuth(User $user, string $secret): void
     {
-        $user->setGoogleAuthenticatorSecret($secret);
-        $settings = $user->getSettings();
-
+        $settings = $this->serverSettingsRepository->findByUser($user);
+        $settings->setGAuthSecret($secret);
         $settings->setTwoStepAuthEnabled(true);
 
-        $this->clientEm->persist($settings);
-        $this->clientEm->flush();
+        $this->serverSettingsRepository->save($settings);
     }
 
-    /**
-     * @param User $user
-     */
-    public function disableTwoStepAuth(User $user)
+    public function disableTwoStepAuth(User $user): void
     {
-        $settings = $user->getSettings();
-
+        $settings = $this->serverSettingsRepository->findByUser($user);
         $settings->setGAuthSecret(null);
         $settings->setTwoStepAuthEnabled(false);
-        $user->setTrustedTokenVersion($user->getTrustedTokenVersion() + 1);
 
-        $this->clientEm->persist($settings);
-        $this->clientEm->persist($user);
-        $this->clientEm->flush();
+        $this->serverSettingsRepository->save($settings);
+
+        $user->setTrustedTokenVersion($user->getTrustedTokenVersion() + 1);
+        $this->userRepository->save($user);
     }
 
-    /**
-     * @param User $user
-     */
     public function forgetDevices(User $user)
     {
         $user->setTrustedTokenVersion($user->getTrustedTokenVersion() + 1);
-        $this->serverEm->persist($user);
-        $this->serverEm->flush();
+        $this->userRepository->save($user);
     }
 
-    /**
-     * @param User $user
-     * @return bool
-     */
     public function hasRememberMeToken(User $user)
     {
-        $token = $this->clientEm->getRepository(RememberMeToken::class)->findOneBy(array(
-            'username' => $user->getUsername()
-        ));
+        $token = $this->rememberMeTokenRepository->findByUser($user);
 
         return $token ? true : false;
     }
 
-    /**
-     * @param User $user
-     */
     public function logoutEverywhere(User $user)
     {
         $user;

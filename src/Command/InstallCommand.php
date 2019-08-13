@@ -289,10 +289,10 @@ class InstallCommand extends Command
         /** @var array $users Username, mail, password */
         $users = [
             ['admin', 'admin@EryseClient.net', 'rootpass', [Role::ADMIN, Role::MEMBER, Role::VERIFIED]],
-            ['spravce', 'spravce@EryseClient.net', '', [Role::BANNED]],
-            ['moderator', 'moderator@EryseClient.net', '', [Role::BANNED]],
-            ['mod', 'mod@EryseClient.net', '', [Role::BANNED]],
-            ['administrator', 'administrator@EryseClient.net', '', [Role::BANNED]]
+            ['spravce', 'spravce@EryseClient.net', 'null', [Role::BANNED]],
+            ['moderator', 'moderator@EryseClient.net', 'null', [Role::BANNED]],
+            ['mod', 'mod@EryseClient.net', 'null', [Role::BANNED]],
+            ['administrator', 'administrator@EryseClient.net', 'null', [Role::BANNED]]
         ];
 
         $this->io->progressStart(count($users));

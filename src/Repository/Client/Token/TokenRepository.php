@@ -30,7 +30,7 @@ class TokenRepository extends ServiceEntityRepository
 
     /**
      * @param TokenType $tokenType
-     * @return mixed
+     * @return Token[]
      * @throws Exception
      */
     public function findExpiredTokens(TokenType $tokenType)

@@ -49,7 +49,7 @@
       </notes>
       <segment>
         <source>settings-forget-devices</source>
-        <target></target>
+        <target>Forget devices</target>
       </segment>
     </unit>
     <unit id="si2Mj8V" name="settings-forget-devices-help">
