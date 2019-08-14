@@ -32,7 +32,7 @@ class UserController extends AbstractController
 
 
     /**
-     * @Route("/user/edit/{username}", name="user-edit")
+     * @Route("/user/edit/{id}/{username}", name="user-edit")
      * @param null $username
      */
     public function edit($username = null)
@@ -49,7 +49,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/user/view", name="user-view")
+     * @Route("/user/{id}/{username}", name="user-view")
      */
     public function view()
     {

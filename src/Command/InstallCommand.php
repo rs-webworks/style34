@@ -261,7 +261,8 @@ class InstallCommand extends Command
             [Role::INACTIVE, '#626262'],
             [Role::USER, '#888888'],
             [Role::VERIFIED, '#626262'],
-            [Role::BANNED, '#A2A2A2']
+            [Role::BANNED, '#A2A2A2'],
+            [Role::SERVER_BANNED, '#A2A2A2']
         ];
 
         $this->io->progressStart(count($roles));
@@ -289,10 +290,10 @@ class InstallCommand extends Command
         /** @var array $users Username, mail, password */
         $users = [
             ['admin', 'admin@EryseClient.net', 'rootpass', [Role::ADMIN, Role::MEMBER, Role::VERIFIED]],
-            ['spravce', 'spravce@EryseClient.net', 'null', [Role::BANNED]],
-            ['moderator', 'moderator@EryseClient.net', 'null', [Role::BANNED]],
-            ['mod', 'mod@EryseClient.net', 'null', [Role::BANNED]],
-            ['administrator', 'administrator@EryseClient.net', 'null', [Role::BANNED]]
+            ['spravce', 'spravce@EryseClient.net', 'null', [Role::SERVER_BANNED]],
+            ['moderator', 'moderator@EryseClient.net', 'null', [Role::SERVER_BANNED]],
+            ['mod', 'mod@EryseClient.net', 'null', [Role::SERVER_BANNED]],
+            ['administrator', 'administrator@EryseClient.net', 'null', [Role::SERVER_BANNED]]
         ];
 
         $this->io->progressStart(count($users));

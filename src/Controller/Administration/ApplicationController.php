@@ -6,6 +6,7 @@ use EryseClient\Utility\ApiClientTrait;
 use EryseClient\Utility\EntityManagersTrait;
 use EryseClient\Utility\LoggerTrait;
 use EryseClient\Utility\TranslatorTrait;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * Class ApplicationController
  * @package EryseClient\Controller\Administration\Application
- * IsGranted(EryseClient\Entity\User\Role::ADMIN)
+ * @IsGranted(EryseClient\Entity\Client\User\Role::ADMIN)
  */
 class ApplicationController extends AbstractController
 {

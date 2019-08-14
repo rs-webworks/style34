@@ -104,6 +104,9 @@
     "fig/link-util": {
         "version": "1.0.0"
     },
+    "fzaninotto/faker": {
+        "version": "v1.8.0"
+    },
     "gedmo/doctrine-extensions": {
         "version": "v2.4.36"
     },
@@ -130,6 +133,12 @@
     },
     "jean85/pretty-package-versions": {
         "version": "1.2"
+    },
+    "knplabs/knp-components": {
+        "version": "v2.1.1"
+    },
+    "knplabs/knp-paginator-bundle": {
+        "version": "v4.0.0"
     },
     "lcobucci/jwt": {
         "version": "3.2.5"

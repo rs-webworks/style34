@@ -14,11 +14,14 @@
       <notes>
         <note category="file-source" priority="1">templates/Administration/dashboard.html.twig:9</note>
         <note category="file-source" priority="1">templates/Administration/dashboard.html.twig:14</note>
+        <note category="file-source" priority="1">templates/Administration/User/Role/index.html.twig:9</note>
+        <note category="file-source" priority="1">templates/Administration/User/Role/index.html.twig:15</note>
+        <note category="file-source" priority="1">templates/Administration/User/Role/users.html.twig:15</note>
         <note category="file-source" priority="1">templates/_partials/admin-navigation.html.twig:5</note>
       </notes>
       <segment>
         <source>dashboard</source>
-        <target>Přehled</target>
+        <target>Dashboard</target>
       </segment>
     </unit>
     <unit id="wS6cvQt" name="server-url">
@@ -41,7 +44,7 @@
     </unit>
     <unit id="s_rNM0M" name="server">
       <notes>
-        <note category="file-source" priority="1">templates/_partials/admin-navigation.html.twig:14</note>
+        <note category="state" priority="1">obsolete</note>
       </notes>
       <segment>
         <source>server</source>
@@ -50,7 +53,7 @@
     </unit>
     <unit id="Xx1uRQ4" name="server-settings-menu">
       <notes>
-        <note category="file-source" priority="1">templates/_partials/admin-navigation.html.twig:19</note>
+        <note category="state" priority="1">obsolete</note>
       </notes>
       <segment>
         <source>server-settings-menu</source>
@@ -136,6 +139,105 @@
       <segment>
         <source>server-ping</source>
         <target>Komunikace se serverem</target>
+      </segment>
+    </unit>
+    <unit id="Zs9VE7N" name="roles">
+      <notes>
+        <note category="file-source" priority="1">templates/Administration/User/Role/index.html.twig:3</note>
+        <note category="file-source" priority="1">templates/Administration/User/Role/index.html.twig:23</note>
+        <note category="file-source" priority="1">templates/_partials/admin-navigation.html.twig:14</note>
+      </notes>
+      <segment>
+        <source>roles</source>
+        <target>Role</target>
+      </segment>
+    </unit>
+    <unit id="WMOUvZz" name="roles-menu">
+      <notes>
+        <note category="file-source" priority="1">templates/_partials/admin-navigation.html.twig:19</note>
+      </notes>
+      <segment>
+        <source>roles-menu</source>
+        <target>Přehled</target>
+      </segment>
+    </unit>
+    <unit id="A_wOReZ" name="role-name">
+      <notes>
+        <note category="file-source" priority="1">templates/Administration/User/Role/index.html.twig:28</note>
+      </notes>
+      <segment>
+        <source>role-name</source>
+        <target>Název</target>
+      </segment>
+    </unit>
+    <unit id="CxxJmx4" name="role-users">
+      <notes>
+        <note category="file-source" priority="1">templates/Administration/User/Role/index.html.twig:29</note>
+        <note category="file-source" priority="1">templates/Administration/User/Role/users.html.twig:3</note>
+        <note category="file-source" priority="1">templates/Administration/User/Role/users.html.twig:9</note>
+      </notes>
+      <segment>
+        <source>role-users</source>
+        <target>Uživatelé</target>
+      </segment>
+    </unit>
+    <unit id="NMaPMRN" name="role-color">
+      <notes>
+        <note category="file-source" priority="1">templates/Administration/User/Role/index.html.twig:30</note>
+      </notes>
+      <segment>
+        <source>role-color</source>
+        <target>Barva</target>
+      </segment>
+    </unit>
+    <unit id="mfict7E" name="users-count">
+      <notes>
+        <note category="file-source" priority="1">templates/Administration/User/Role/users.html.twig:23</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>users-count</source>
+        <target>Počet</target>
+      </segment>
+    </unit>
+    <unit id="yTwjjaZ" name="role-users-id">
+      <notes>
+        <note category="file-source" priority="1">templates/Administration/User/Role/users.html.twig:28</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>role-users-id</source>
+        <target>ID</target>
+      </segment>
+    </unit>
+    <unit id="bicD25W" name="role-users-name">
+      <notes>
+        <note category="file-source" priority="1">templates/Administration/User/Role/users.html.twig:29</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>role-users-name</source>
+        <target>Přezdívka</target>
+      </segment>
+    </unit>
+    <unit id="oLrYSQp" name="role-users-actions">
+      <notes>
+        <note category="file-source" priority="1">templates/Administration/User/Role/users.html.twig:30</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>role-users-actions</source>
+        <target>Akce</target>
+      </segment>
+    </unit>
+    <unit id="ARL4dS9" name="users-edit">
+      <notes>
+        <note category="file-source" priority="1">templates/Administration/User/Role/users.html.twig:44</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>users-edit</source>
+        <target>Upravit</target>
       </segment>
     </unit>
   </file>

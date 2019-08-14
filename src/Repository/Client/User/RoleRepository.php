@@ -12,6 +12,8 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
 /**
  * Class RoleRepository
  * @package EryseClient\Repository\Client\User
+ * @method Role|null findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Role|null findOneBy(array $criteria, array $orderBy = null)
  */
 class RoleRepository extends ServiceEntityRepository
 {

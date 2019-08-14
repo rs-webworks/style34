@@ -6,7 +6,7 @@
 
 	<div class="container">
 
-		<h2>{% trans from 'profile'%}view{% endtrans %}</h2>
+		<h2>{{ app.user.getUsername() }}</h2>
 		<hr>
 		<nav aria-label="breadcrumb">
 			<ol class="breadcrumb">

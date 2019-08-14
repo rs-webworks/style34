@@ -17,13 +17,14 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Role
 {
 
-    const ADMIN = 'ROLE_ADMIN';
-    const MODERATOR = 'ROLE_MODERATOR';
-    const MEMBER = 'ROLE_MEMBER';
-    const INACTIVE = 'ROLE_INACTIVE';
-    const USER = 'ROLE_USER';
-    const VERIFIED = 'ROLE_VERIFIED';
-    const BANNED = 'ROLE_BANNED';
+    public const ADMIN = 'ROLE_ADMIN';
+    public const MODERATOR = 'ROLE_MODERATOR';
+    public const MEMBER = 'ROLE_MEMBER';
+    public const INACTIVE = 'ROLE_INACTIVE';
+    public const USER = 'ROLE_USER';
+    public const VERIFIED = 'ROLE_VERIFIED';
+    public const BANNED = 'ROLE_BANNED';
+    public const SERVER_BANNED = 'ROLE_SERVER_BANNED';
 
     use Identifier;
 

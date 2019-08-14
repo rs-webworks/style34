@@ -4,6 +4,11 @@ $colorPrimary: #1C002D;
 $colorSecondary: lighten($colorPrimary, 20%);
 $colorWhite: #fff;
 
+$container-max-widths: (
+	lg: 1090px,
+	xl: 1460px
+);
+
 $theme-colors: (
 		"primary": $colorPrimary,
 );

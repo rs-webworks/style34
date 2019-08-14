@@ -2,6 +2,7 @@
 
 namespace EryseClient\Security;
 
+use EryseClient\Entity\Client\User\Role;
 use EryseClient\Entity\Server\User\User;
 use EryseClient\Exception\Security\LoginException;
 use EryseClient\Exception\Security\TwoStepAuthSetException;
@@ -100,6 +101,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         return $credentials;
     }
 
+
     /**
      * @param mixed $credentials
      * @param UserProviderInterface $userProvider
@@ -121,6 +123,16 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         if (!$user) {
             // fail authentication with a custom error
             throw new LoginException($this->translator->trans('login-failed', [], 'security'));
+        }
+
+        if ($user->hasOneOfRoles(
+            [
+                Role::SERVER_BANNED,
+                Role::BANNED,
+                Role::INACTIVE,
+            ]
+        )) {
+            throw new LoginException($this->translator->trans('login-not-allowed', [], 'security'));
         }
 
         return $user;

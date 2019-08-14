@@ -11,12 +11,12 @@
 		{# ---------------------------------------------------------------------------------------------------------- #}
 		<li class="nav-item">
 			<a class="nav-link disabled pb-0" href="#" tabindex="-1" aria-disabled="true">
-				{% trans from 'administration' %}server{% endtrans %}
+				{% trans from 'administration' %}roles{% endtrans %}
 			</a>
 		</li>
 		<li class="nav-item">
-			<a class="nav-link pl-4 {{ app.request.get('_route') == 'administration-server-configuration' ? 'active' }}" href="{{ url('administration-server-configuration') }}">
-				{% trans from 'administration' %}server-settings-menu{% endtrans %}
+			<a class="nav-link pl-4 {{ app.request.get('_route') == 'administration-server-configuration' ? 'active' }}" href="{{ url('administration-user-role-index') }}">
+				{% trans from 'administration' %}roles-menu{% endtrans %}
 			</a>
 		</li>
 

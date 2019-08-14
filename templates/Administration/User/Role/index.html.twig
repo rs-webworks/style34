@@ -1,0 +1,58 @@
+{% extends 'layout-frontend.html.twig' %}
+
+{% block title %}{% trans from 'administration' %}roles{% endtrans %}{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+
+        <h2>{% trans from 'administration' %}dashboard{% endtrans %}</h2>
+
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ url('home-index') }}">{{ eryseClient.name }}</a></li>
+                <li class="breadcrumb-item active"
+                    aria-current="page">{% trans from 'administration' %}dashboard{% endtrans %}</li>
+            </ol>
+        </nav>
+
+        <div class="row">
+            {% include '_partials/admin-navigation.html.twig' %}
+
+            <div class="col col-xs-12 col-sm-9">
+                <h3>{% trans from 'administration' %}roles{% endtrans %}</h3>
+
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>{% trans from 'administration' %}role-name{% endtrans %}</th>
+						<th>{% trans from 'administration' %}role-users{% endtrans %}</th>
+						<th>{% trans from 'administration' %}role-color{% endtrans %}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                        {% for role in roles %}
+                            <tr>
+                                <td>{{ role.getName() }}</td>
+                                <td>
+                                    <a href="{{ url('administration-user-role-users', {"role": role.getName()}) }}">
+                                        12 uživatelů
+                                    </a>
+                                </td>
+                                <td>
+                                    <span style="color:{{ role.getColor() }};">{{ role.getColor() }}</span>
+                                </td>
+                            </tr>
+                        {% endfor %}
+
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+
+    </div>
+
+
+{% endblock %}

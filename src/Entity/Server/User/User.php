@@ -5,10 +5,8 @@ namespace EryseClient\Entity\Server\User;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use EryseClient\Entity\Client\User\Role;
-use EryseClient\Entity\Client\User\ClientSettings;
 use EryseClient\Entity\Common\CreatedAt;
 use EryseClient\Entity\Common\DeletedAt;
-use Scheb\TwoFactorBundle\Model\Google\TwoFactorInterface;
 use Scheb\TwoFactorBundle\Model\TrustedDeviceInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -38,14 +36,14 @@ class User implements UserInterface, TrustedDeviceInterface
 
     /**
      * @ORM\Column(type="string", unique=true)
-     * @Assert\NotBlank(message="profile.username-required")
+     * @Assert\NotBlank(message="user.username-required")
      * @Assert\Length(min=3, max=20,
-     *      minMessage="profile.username-min-length",
-     *      maxMessage="profile.username-max-length",
+     *      minMessage="user.username-min-length",
+     *      maxMessage="user.username-max-length",
      * )
      * @Assert\Regex(
      *     pattern="/^[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*$/",
-     *     message="profile.username-invalid"
+     *     message="user.username-invalid"
      * )
      */
     protected $username;
@@ -53,8 +51,8 @@ class User implements UserInterface, TrustedDeviceInterface
 
     /**
      * @ORM\Column(type="string", unique=true)
-     * @Assert\Email(message="profile.email-invalid")
-     * @Assert\NotBlank(message="profile.email-required")
+     * @Assert\Email(message="user.email-invalid")
+     * @Assert\NotBlank(message="user.email-required")
      */
     protected $email;
 
@@ -64,10 +62,10 @@ class User implements UserInterface, TrustedDeviceInterface
     protected $password;
 
     /**
-     * @Assert\NotBlank(message="profile.password-required")
+     * @Assert\NotBlank(message="user.password-required")
      * @Assert\Length(min=6, max=4096,
-     *     minMessage="profile.password-min-length",
-     *     maxMessage="profile.password-max.length"
+     *     minMessage="user.password-min-length",
+     *     maxMessage="user.password-max.length"
      * )
      */
     protected $plainPassword;
@@ -80,14 +78,14 @@ class User implements UserInterface, TrustedDeviceInterface
 
     /**
      * @var array
-     * @ORM\Column(type="json")
+     * @ORM\Column(type="array")
      */
     protected $roles = [];
 
     /**
      * @var string $lastIp
      * @ORM\Column(type="string", nullable=false)
-     * @Assert\Ip(message="profile.ip-expected")
+     * @Assert\Ip(message="user.ip-expected")
      */
     protected $lastIp;
 
@@ -223,6 +221,17 @@ class User implements UserInterface, TrustedDeviceInterface
     public function hasRole(string $role): bool
     {
         return in_array($role, $this->roles);
+    }
+
+    public function hasOneOfRoles(array $roles): bool
+    {
+        foreach ($roles as $role) {
+            if ($this->hasRole($role)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public function removeRole(string $role): void
