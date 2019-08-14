@@ -4,6 +4,7 @@ namespace EryseClient\Controller\Administration\User;
 
 use EryseClient\Controller\ControllerSettings;
 use EryseClient\Form\Administration\User\UserSearchForm;
+use EryseClient\Form\User\UserForm;
 use EryseClient\Repository\Server\User\UserRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -48,6 +49,21 @@ class UserController extends AbstractController
         return $this->render(
             'Administration/User/User/index.html.twig',
             ["users" => $users, "searchForm" => $searchForm->createView()]
+        );
+    }
+
+    /**
+     * @Route("/administration/user/{id}/{username}", name="administration-user-view")
+     */
+    public function view($id, UserRepository $userRepository)
+    {
+        $user = $userRepository->find($id);
+        $userForm = $this->createForm(UserForm::class, $user);
+        $userForm->remove("username");
+
+        return $this->render(
+            'Administration/User/User/view.html.twig',
+            ["user" => $user, "userForm" => $userForm->createView()]
         );
     }
 

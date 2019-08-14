@@ -32,6 +32,8 @@
                 {# Search form #}
                 {# -------------------------------------------------------------------------------------------------- #}
                 {{ form_start(searchForm)}}
+                    {{ form_errors(searchForm) }}
+
                     <div class="row">
                         <div class="col-xs-12 col-sm-3">
                             {{ form_row(searchForm.username) }}
@@ -67,7 +69,7 @@
                         <tr>
                             <td>{{ user.getId() }}</td>
                             <td>
-                                <a href="{{ url('user-view', {"id": user.getId(), "username": user.getUsername()}) }}">
+                                <a href="{{ url('administration-user-view', {"id": user.getId(), "username": user.getUsername()}) }}">
                                     {{ user.getUsername() }}
                                 </a>
                             </td>

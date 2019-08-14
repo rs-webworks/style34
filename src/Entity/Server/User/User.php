@@ -194,7 +194,7 @@ class User implements UserInterface, TrustedDeviceInterface
 
     // Activated At
     // -----------------------------------------------------------------------------------------------------------------
-    public function getActivatedAt(): DateTime
+    public function getActivatedAt(): ?DateTime
     {
         return $this->activatedAt;
     }

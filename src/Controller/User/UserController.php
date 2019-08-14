@@ -51,7 +51,7 @@ class UserController extends AbstractController
     /**
      * @Route("/user/{id}/{username}", name="user-view")
      */
-    public function view()
+    public function view($id, UserRepository $userRepository)
     {
 
     }
