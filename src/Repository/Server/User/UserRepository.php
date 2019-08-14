@@ -64,7 +64,7 @@ class UserRepository extends ServiceEntityRepository implements UserLoaderInterf
             ->getOneOrNullResult();
     }
 
-    public function findByRole(string $role): ?User
+    public function findByRole(string $role): ?array
     {
         $qb = $this->_em->createQueryBuilder();
         $qb->select('u')

@@ -1,4 +1,4 @@
-{% extends 'layout-frontend.html.twig' %}
+{% extends 'layout-administration.html.twig' %}
 
 {% block title %}{% trans from 'administration' %}role-users{% endtrans %}{% endblock %}
 
@@ -11,23 +11,28 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
-                    <a href="{{ url('home-index') }}">{{ eryseClient.name }}</a>
+                    <a href="{{ url('administration-dashboard') }}">
+                        {{ eryseClient.name }}
+                    </a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="{{ url('administration-dashboard') }}">
+                        {% trans from 'administration' %}dashboard{% endtrans %}
+                    </a>
                 </li>
                 <li class="breadcrumb-item">
                     <a href="{{ url('administration-user-role-index') }}">
-                        {% trans from 'administration' %}roles-menu{% endtrans %}
+                        {% trans from 'administration' %}roles{% endtrans %}
                     </a>
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">
-                    {% trans from 'administration' %}dashboard{% endtrans %}
+                    {% trans from 'administration' %}role-users{% endtrans %}
                 </li>
             </ol>
         </nav>
 
         <div class="row">
-            {% include '_partials/admin-navigation.html.twig' %}
-
-            <div class="col col-xs-12 col-sm-9">
+            <div class="col col-xs-12">
                 <h3>
                     {{ role.getName() }}
                     <span class="badge badge-primary">{{ users.getTotalItemCount }}</span>

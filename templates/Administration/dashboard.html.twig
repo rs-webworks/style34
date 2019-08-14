@@ -1,29 +1,49 @@
-{% extends 'layout-frontend.html.twig' %}
+{% extends 'layout-administration.html.twig' %}
 
 {% block title %}Home{% endblock %}
 
 {% block body %}
 
-	<div class="container">
+    <div class="container">
 
-		<h2>{% trans from 'administration' %}dashboard{% endtrans %}</h2>
+        <h2>{% trans from 'administration' %}dashboard{% endtrans %}</h2>
 
-		<nav aria-label="breadcrumb">
-			<ol class="breadcrumb">
-				<li class="breadcrumb-item"><a href="{{ url('home-index') }}">{{ eryseClient.name }}</a></li>
-				<li class="breadcrumb-item active" aria-current="page">{% trans from 'administration' %}dashboard{% endtrans %}</li>
-			</ol>
-		</nav>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ url('administration-dashboard') }}">{{ eryseClient.name }}</a></li>
+                <li class="breadcrumb-item active"
+                    aria-current="page">{% trans from 'administration' %}dashboard{% endtrans %}</li>
+            </ol>
+        </nav>
 
-		<div class="row">
-			{% include '_partials/admin-navigation.html.twig' %}
+        <div class="row">
 
-			<div class="col col-xs-12 col-sm-9">
-				<h3>Dash</h3>
-			</div>
-		</div>
+            {# Users #}
+            {# ------------------------------------------------------------------------------------------ #}
+            <div class="card col-xs-12 col-md-3 m-3">
+                <div class="card-body">
 
-	</div>
+                    <h5 class="card-title">
+                        <i class="fa fa-fw fa-users"></i>
+                        {% trans from 'administration' %}users{% endtrans %}
+                    </h5>
+					<hr>
+
+					<div class="list-group">
+						<a href="{{ url("administration-users-index") }}" class="list-group-item list-group-item-action">
+                            <i class="fa fa-fw fa-chevron-right"></i>
+							{% trans from 'administration' %}users{% endtrans %}
+						</a>
+						<a href="{{ url("administration-user-role-index") }}" class="list-group-item list-group-item-action">
+                            <i class="fa fa-fw fa-chevron-right"></i>
+							{% trans from 'administration' %}roles{% endtrans %}
+						</a>
+					</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
 
 
 {% endblock %}

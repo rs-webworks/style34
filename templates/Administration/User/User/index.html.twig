@@ -1,0 +1,94 @@
+{% extends 'layout-administration.html.twig' %}
+
+{% block title %}{% trans from 'administration' %}users{% endtrans %}{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+
+        <h2>{% trans from 'administration' %}users{% endtrans %}</h2>
+
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="{{ url('administration-dashboard') }}">
+                        {{ eryseClient.name }}
+                    </a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="{{ url('administration-dashboard') }}">
+                        {% trans from 'administration' %}dashboard{% endtrans %}
+                    </a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">
+                    {% trans from 'administration' %}users{% endtrans %}
+                </li>
+            </ol>
+        </nav>
+
+        <div class="row">
+            <div class="col col-xs-12">
+
+                {# Search form #}
+                {# -------------------------------------------------------------------------------------------------- #}
+                {{ form_start(searchForm)}}
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-3">
+                            {{ form_row(searchForm.username) }}
+                        </div>
+
+                        <div class="col-xs-12 col-sm-3">
+                            {{ form_row(searchForm.email) }}
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">
+                        {% trans from 'global' %}find{% endtrans %}
+                    </button>
+                {{ form_end(searchForm) }}
+
+                {# Table list #}
+                {# -------------------------------------------------------------------------------------------------- #}
+                <hr>
+                <h3>{% trans from 'administration' %}users-list{% endtrans %}</h3>
+
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>{% trans from 'global' %}id{% endtrans %}</th>
+                        <th>{% trans from 'administration' %}user-username{% endtrans %}</th>
+                        <th>{% trans from 'administration' %}user-email{% endtrans %}</th>
+                        <th>{% trans from 'administration' %}user-role{% endtrans %}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    {% for user in users %}
+                        <tr>
+                            <td>{{ user.getId() }}</td>
+                            <td>
+                                <a href="{{ url('user-view', {"id": user.getId(), "username": user.getUsername()}) }}">
+                                    {{ user.getUsername() }}
+                                </a>
+                            </td>
+                            <td>
+                                {{ user.getEmail() }}
+                            </td>
+                            <td>
+                                -
+                            </td>
+                        </tr>
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+
+                {{ knp_pagination_render(users) }}
+
+            </div>
+        </div>
+
+    </div>
+
+
+{% endblock %}

@@ -12,12 +12,12 @@
     </unit>
     <unit id="Zs2WiKK" name="dashboard">
       <notes>
-        <note category="file-source" priority="1">templates/Administration/dashboard.html.twig:9</note>
-        <note category="file-source" priority="1">templates/Administration/dashboard.html.twig:14</note>
+        <note category="file-source" priority="1">templates/Administration/User/User/index.html.twig:20</note>
         <note category="file-source" priority="1">templates/Administration/User/Role/index.html.twig:9</note>
-        <note category="file-source" priority="1">templates/Administration/User/Role/index.html.twig:15</note>
-        <note category="file-source" priority="1">templates/Administration/User/Role/users.html.twig:15</note>
-        <note category="file-source" priority="1">templates/_partials/admin-navigation.html.twig:5</note>
+        <note category="file-source" priority="1">templates/Administration/User/Role/index.html.twig:20</note>
+        <note category="file-source" priority="1">templates/Administration/User/Role/users.html.twig:20</note>
+        <note category="file-source" priority="1">templates/Administration/dashboard.html.twig:9</note>
+        <note category="file-source" priority="1">templates/Administration/dashboard.html.twig:15</note>
       </notes>
       <segment>
         <source>dashboard</source>
@@ -144,8 +144,10 @@
     <unit id="Zs9VE7N" name="roles">
       <notes>
         <note category="file-source" priority="1">templates/Administration/User/Role/index.html.twig:3</note>
-        <note category="file-source" priority="1">templates/Administration/User/Role/index.html.twig:23</note>
-        <note category="file-source" priority="1">templates/_partials/admin-navigation.html.twig:14</note>
+        <note category="file-source" priority="1">templates/Administration/User/Role/index.html.twig:24</note>
+        <note category="file-source" priority="1">templates/Administration/User/Role/index.html.twig:31</note>
+        <note category="file-source" priority="1">templates/Administration/User/Role/users.html.twig:25</note>
+        <note category="file-source" priority="1">templates/Administration/dashboard.html.twig:39</note>
       </notes>
       <segment>
         <source>roles</source>
@@ -154,7 +156,7 @@
     </unit>
     <unit id="WMOUvZz" name="roles-menu">
       <notes>
-        <note category="file-source" priority="1">templates/_partials/admin-navigation.html.twig:19</note>
+        <note category="state" priority="1">obsolete</note>
       </notes>
       <segment>
         <source>roles-menu</source>
@@ -163,7 +165,7 @@
     </unit>
     <unit id="A_wOReZ" name="role-name">
       <notes>
-        <note category="file-source" priority="1">templates/Administration/User/Role/index.html.twig:28</note>
+        <note category="file-source" priority="1">templates/Administration/User/Role/index.html.twig:36</note>
       </notes>
       <segment>
         <source>role-name</source>
@@ -172,9 +174,10 @@
     </unit>
     <unit id="CxxJmx4" name="role-users">
       <notes>
-        <note category="file-source" priority="1">templates/Administration/User/Role/index.html.twig:29</note>
+        <note category="file-source" priority="1">templates/Administration/User/Role/index.html.twig:37</note>
         <note category="file-source" priority="1">templates/Administration/User/Role/users.html.twig:3</note>
         <note category="file-source" priority="1">templates/Administration/User/Role/users.html.twig:9</note>
+        <note category="file-source" priority="1">templates/Administration/User/Role/users.html.twig:29</note>
       </notes>
       <segment>
         <source>role-users</source>
@@ -183,7 +186,7 @@
     </unit>
     <unit id="NMaPMRN" name="role-color">
       <notes>
-        <note category="file-source" priority="1">templates/Administration/User/Role/index.html.twig:30</note>
+        <note category="file-source" priority="1">templates/Administration/User/Role/index.html.twig:38</note>
       </notes>
       <segment>
         <source>role-color</source>
@@ -192,8 +195,7 @@
     </unit>
     <unit id="mfict7E" name="users-count">
       <notes>
-        <note category="file-source" priority="1">templates/Administration/User/Role/users.html.twig:23</note>
-        <note category="state" priority="1">new</note>
+        <note category="state" priority="1">obsolete</note>
       </notes>
       <segment>
         <source>users-count</source>
@@ -202,8 +204,7 @@
     </unit>
     <unit id="yTwjjaZ" name="role-users-id">
       <notes>
-        <note category="file-source" priority="1">templates/Administration/User/Role/users.html.twig:28</note>
-        <note category="state" priority="1">new</note>
+        <note category="file-source" priority="1">templates/Administration/User/Role/users.html.twig:44</note>
       </notes>
       <segment>
         <source>role-users-id</source>
@@ -212,8 +213,7 @@
     </unit>
     <unit id="bicD25W" name="role-users-name">
       <notes>
-        <note category="file-source" priority="1">templates/Administration/User/Role/users.html.twig:29</note>
-        <note category="state" priority="1">new</note>
+        <note category="file-source" priority="1">templates/Administration/User/Role/users.html.twig:45</note>
       </notes>
       <segment>
         <source>role-users-name</source>
@@ -222,8 +222,7 @@
     </unit>
     <unit id="oLrYSQp" name="role-users-actions">
       <notes>
-        <note category="file-source" priority="1">templates/Administration/User/Role/users.html.twig:30</note>
-        <note category="state" priority="1">new</note>
+        <note category="file-source" priority="1">templates/Administration/User/Role/users.html.twig:46</note>
       </notes>
       <segment>
         <source>role-users-actions</source>
@@ -232,12 +231,62 @@
     </unit>
     <unit id="ARL4dS9" name="users-edit">
       <notes>
-        <note category="file-source" priority="1">templates/Administration/User/Role/users.html.twig:44</note>
-        <note category="state" priority="1">new</note>
+        <note category="file-source" priority="1">templates/Administration/User/Role/users.html.twig:60</note>
       </notes>
       <segment>
         <source>users-edit</source>
         <target>Upravit</target>
+      </segment>
+    </unit>
+    <unit id="fftM9nd" name="users">
+      <notes>
+        <note category="file-source" priority="1">templates/Administration/User/User/index.html.twig:3</note>
+        <note category="file-source" priority="1">templates/Administration/User/User/index.html.twig:9</note>
+        <note category="file-source" priority="1">templates/Administration/User/User/index.html.twig:24</note>
+        <note category="file-source" priority="1">templates/Administration/dashboard.html.twig:28</note>
+        <note category="file-source" priority="1">templates/Administration/dashboard.html.twig:35</note>
+      </notes>
+      <segment>
+        <source>users</source>
+        <target>Uživatelé</target>
+      </segment>
+    </unit>
+    <unit id="uXtF9bh" name="user-username">
+      <notes>
+        <note category="file-source" priority="1">templates/Administration/User/User/index.html.twig:35</note>
+        <note category="file-source" priority="1">templates/Administration/User/User/index.html.twig:37</note>
+        <note category="file-source" priority="1">templates/Administration/User/User/index.html.twig:53</note>
+      </notes>
+      <segment>
+        <source>user-username</source>
+        <target>Přezdívka</target>
+      </segment>
+    </unit>
+    <unit id="_KS1yX5" name="user-email">
+      <notes>
+        <note category="file-source" priority="1">templates/Administration/User/User/index.html.twig:54</note>
+      </notes>
+      <segment>
+        <source>user-email</source>
+        <target>Email</target>
+      </segment>
+    </unit>
+    <unit id="hgc38QE" name="user-role">
+      <notes>
+        <note category="file-source" priority="1">templates/Administration/User/User/index.html.twig:55</note>
+      </notes>
+      <segment>
+        <source>user-role</source>
+        <target>Role</target>
+      </segment>
+    </unit>
+    <unit id="e4E32jg" name="users-list">
+      <notes>
+        <note category="file-source" priority="1">templates/Administration/User/User/index.html.twig:47</note>
+      </notes>
+      <segment>
+        <source>users-list</source>
+        <target>Seznam uživatelů</target>
       </segment>
     </unit>
   </file>

@@ -84,9 +84,9 @@
     </unit>
     <unit id="e1gwb0M" name="activation-invalid-token">
       <notes>
+        <note category="file-source" priority="1">src/Controller/User/SecurityController.php:128</note>
         <note category="file-source" priority="1">src/Service/UserService.php:103</note>
         <note category="file-source" priority="1">src/Service/UserService.php:132</note>
-        <note category="file-source" priority="1">src/Controller/User/SecurityController.php:128</note>
       </notes>
       <segment>
         <source>activation-invalid-token</source>

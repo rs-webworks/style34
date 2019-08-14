@@ -14,8 +14,8 @@
     </unit>
     <unit id="KcnDDgY" name="registration">
       <notes>
-        <note category="file-source" priority="1">templates/User/Security/success.html.twig:17</note>
         <note category="file-source" priority="1">templates/User/Security/activation.html.twig:20</note>
+        <note category="file-source" priority="1">templates/User/Security/success.html.twig:17</note>
         <note category="file-source" priority="1">templates/User/Security/registration.html.twig:20</note>
       </notes>
       <segment>
@@ -27,8 +27,8 @@
       <notes>
         <note category="file-source" priority="1">templates/User/Security/activation.html.twig:17</note>
         <note category="file-source" priority="1">templates/User/Security/registration.html.twig:17</note>
-        <note category="file-source" priority="1">templates/_partials/navigation-top-frontend.html.twig:21</note>
         <note category="file-source" priority="1">templates/Profile/view.html.twig:17</note>
+        <note category="file-source" priority="1">templates/_partials/navigation-top-frontend.html.twig:21</note>
       </notes>
       <segment>
         <source>profiles</source>
@@ -187,6 +187,25 @@
       <segment>
         <source>administration</source>
         <target>Administrace</target>
+      </segment>
+    </unit>
+    <unit id="pWFFJwz" name="id">
+      <notes>
+        <note category="file-source" priority="1">templates/Administration/User/User/index.html.twig:52</note>
+      </notes>
+      <segment>
+        <source>id</source>
+        <target>ID</target>
+      </segment>
+    </unit>
+    <unit id="5mQN6DW" name="find">
+      <notes>
+        <note category="file-source" priority="1">templates/Administration/User/User/index.html.twig:42</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>find</source>
+        <target>Vyhledat</target>
       </segment>
     </unit>
   </file>

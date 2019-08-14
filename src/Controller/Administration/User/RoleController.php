@@ -25,6 +25,7 @@ class RoleController extends AbstractController
     public function index(RoleRepository $roleRepository)
     {
         $roles = $roleRepository->findAll();
+        dump($roles);
         return $this->render('Administration/User/Role/index.html.twig', ["roles" => $roles]);
     }
 

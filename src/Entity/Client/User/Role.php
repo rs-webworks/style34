@@ -4,6 +4,7 @@ namespace EryseClient\Entity\Client\User;
 
 use Doctrine\ORM\Mapping as ORM;
 use EryseClient\Entity\Common\Identifier;
+use EryseClient\Entity\Server\User\User;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -12,6 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @package EryseClient\Entity\Client\User
  * @ORM\Table(name="user_roles")
  * @ORM\Entity(repositoryClass="EryseClient\Repository\Client\User\RoleRepository")
+ * @ORM\EntityListeners({"EryseClient\EntityListener\Client\User\RoleListener"})
  * @UniqueEntity("name")
  */
 class Role
@@ -42,6 +44,11 @@ class Role
      */
     protected $color;
 
+    /**
+     * @var User[]
+     */
+    protected $users;
+
     public function getName(): string
     {
         return $this->name;
@@ -61,6 +68,17 @@ class Role
     {
         $this->color = $color;
     }
+
+    public function getUsers(): array
+    {
+        return $this->users;
+    }
+
+    public function setUsers(array $users): void
+    {
+        $this->users = $users;
+    }
+
 
 
 }

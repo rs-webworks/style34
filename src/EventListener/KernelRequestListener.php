@@ -1,8 +1,6 @@
 <?php declare(strict_types=1);
 namespace EryseClient\EventListener;
 
-use EryseClient\Entity\Profile\Profile;
-use EryseClient\Entity\Profile\Role;
 use EryseClient\Service\ProfileService;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
@@ -58,19 +56,7 @@ class KernelRequestListener
      */
     public function onKernelRequest(GetResponseEvent $event)
     {
-        // Invalidate user is there is remember-me token missing in database
-        /** @var Profile $user */
-//        $token = $this->tokenStorage->getToken();
-//        $user = $token ? $token->getUser() : null;
-//
-//        if ($this->authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
-//
-//            if (!$this->profileService->hasRememberMeToken($user)) {
-//                $url = $this->router->generate('profile-logout');
-//                $response = new RedirectResponse($url);
-//                $event->setResponse($response);
-//            }
-//        }
+
     }
 
 }
