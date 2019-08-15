@@ -1,4 +1,12 @@
 security:
+    role_hierarchy:
+        ROLE_SERVER_BANNED: ROLE_BANNED
+
+        ROLE_VERIFIED: ROLE_INACTIVE
+        ROLE_MEMBER: ROLE_VERIFIED
+
+        ROLE_MODERATOR: ROLE_MEMBER
+        ROLE_ADMIN: ROLE_MODERATOR
 
     providers:
         in_memory: { memory: ~ }

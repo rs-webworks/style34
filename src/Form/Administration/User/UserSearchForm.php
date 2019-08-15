@@ -3,6 +3,8 @@
 namespace EryseClient\Form\Administration\User;
 
 
+use EryseClient\Entity\Client\User\Role;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -17,21 +19,36 @@ class UserSearchForm extends AbstractType
         $builder->add(
             'username',
             TextType::class,
-            array(
+            [
                 "required" => false,
                 "label" => 'user-username',
                 "translation_domain" => 'administration'
-            )
+            ]
         );
 
         $builder->add(
             'email',
             TextType::class,
-            array(
+            [
                 "required" => false,
                 "label" => 'user-email',
                 "translation_domain" => 'administration'
-            )
+            ]
+        );
+
+        $builder->add(
+            "roleEntity",
+            EntityType::class,
+            [
+                "class" => Role::class,
+                "choice_label" => "name",
+                "choice_name" => "name",
+                "choice_value" => "name",
+                "required" => false,
+                "empty_data" => null,
+                "label" => "user-role",
+                "translation_domain" => "administration"
+            ]
         );
     }
 }

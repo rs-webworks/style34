@@ -3,6 +3,7 @@
 namespace EryseClient\Controller\Administration\User;
 
 use EryseClient\Controller\ControllerSettings;
+use EryseClient\Entity\Client\User\Role;
 use EryseClient\Form\Administration\User\UserSearchForm;
 use EryseClient\Form\User\UserForm;
 use EryseClient\Repository\Server\User\UserRepository;
@@ -35,7 +36,15 @@ class UserController extends AbstractController
                 if ($value === null) {
                     continue;
                 }
-                $qb->orWhere('u.' . $column . ' LIKE :val');
+
+                if ($column == "roleEntity") {
+                    /** @var $value Role */
+                    $qb->andWhere("u.role = :role");
+                    $qb->setParameter("role", $value->getName());
+                    continue;
+                }
+
+                $qb->andWhere('u.' . $column . ' LIKE :val');
                 $qb->setParameter('val', '%' . $value . '%');
             }
         }

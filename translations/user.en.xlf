@@ -184,7 +184,7 @@
     </unit>
     <unit id="_y8Pmge" name="two-step-auth-disabled">
       <notes>
-        <note category="file-source" priority="1">src/Controller/User/UserController.php:144</note>
+        <note category="file-source" priority="1">src/Controller/User/UserController.php:151</note>
       </notes>
       <segment>
         <source>two-step-auth-disabled</source>
@@ -193,7 +193,7 @@
     </unit>
     <unit id="EHvLJgU" name="two-step-auth-devices-forgoten">
       <notes>
-        <note category="file-source" priority="1">src/Controller/User/UserController.php:158</note>
+        <note category="file-source" priority="1">src/Controller/User/UserController.php:165</note>
       </notes>
       <segment>
         <source>two-step-auth-devices-forgoten</source>
@@ -202,10 +202,47 @@
     </unit>
     <unit id="I0n8Km5" name="settings-logged-out-everywhere">
       <notes>
-        <note category="file-source" priority="1">src/Controller/User/UserController.php:173</note>
+        <note category="file-source" priority="1">src/Controller/User/UserController.php:180</note>
       </notes>
       <segment>
         <source>settings-logged-out-everywhere</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="WdTGFsN" name="bef6fef">
+      <notes>
+        <note category="state" priority="1">obsolete</note>
+      </notes>
+      <segment>
+        <source>                                        {0} %count% users-zero-count|
+                                        {1} %count% users-one-count|
+                                        ]1,4[ %count% users-many-count|
+                                        ]4,Inf[ %count% users-inf-count
+                                    </source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="oLqoBri" name="567e604">
+      <notes>
+        <note category="state" priority="1">obsolete</note>
+      </notes>
+      <segment>
+        <source>                                        {0} %count% users-zero-count|
+                                        {1} %count% users-one-count|
+                                        ]2,4] %count% users-many-count|
+                                        ]5,Inf[ %count% users-inf-count
+                                    </source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="ydZTdod" name="b9dc216">
+      <notes>
+        <note category="file-source" priority="1">templates/Administration/User/Role/index.html.twig:57</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>                                        {0} %count% users-zero-count|{1} %count% users-one-count|]2,4] %count% users-many-count|]5,Inf[ %count% users-inf-count
+                                    </source>
         <target></target>
       </segment>
     </unit>

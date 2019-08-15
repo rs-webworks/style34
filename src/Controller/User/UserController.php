@@ -4,7 +4,6 @@ namespace EryseClient\Controller\User;
 
 use EryseClient\Entity\Server\User\User;
 use EryseClient\Form\User\SettingsForm;
-use EryseClient\Repository\Client\User\SettingsRepository;
 use EryseClient\Repository\Server\User\ServerSettingsRepository;
 use EryseClient\Repository\Server\User\UserRepository;
 use EryseClient\Service\UserService;
@@ -22,7 +21,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * Class UserController
  * @package EryseClient\Controller\User
- * @IsGranted(EryseClient\Entity\Client\User\Role::USER)
+ * @IsGranted(EryseClient\Entity\Client\User\Role::INACTIVE)
  */
 class UserController extends AbstractController
 {
@@ -49,7 +48,15 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/user/{id}/{username}", name="user-view")
+     * @Route("/user", name="user-view-self")
+     */
+    public function viewSelf($id, UserRepository $userRepository)
+    {
+
+    }
+
+    /**
+     * @Route("/user/{id}/{username}", name="user-view", )
      */
     public function view($id, UserRepository $userRepository)
     {

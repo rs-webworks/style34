@@ -38,8 +38,7 @@ class UserFixtures extends Fixture
             $user->setEmail($faker->email);
             $user->setCreatedAt($faker->dateTime("now"));
             $user->setPassword($this->passwordEncoder->encodePassword($user, $faker->password));
-            $user->addRole(Role::VERIFIED);
-            $user->addRole(Role::USER);
+            $user->setRole(Role::VERIFIED);
 
             $user->setLastIp($faker->ipv4);
             $user->setRegisteredAs(serialize([$user->getUsername(), $user->getEmail()]));

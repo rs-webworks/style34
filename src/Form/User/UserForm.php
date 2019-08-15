@@ -3,7 +3,10 @@
 namespace EryseClient\Form\User;
 
 use DateTime;
+use EryseClient\Entity\Client\User\Role;
 use EryseClient\Entity\Server\User\User;
+use EryseClient\Repository\Client\User\RoleRepository;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -19,8 +22,25 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class UserForm extends AbstractType
 {
 
+    /** @var RoleRepository  */
+    private $roleRepository;
+
+    public function __construct(RoleRepository $roleRepository)
+    {
+        $this->roleRepository = $roleRepository;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $builder->add(
+            'id',
+            TextType::class,
+            [
+                "label" => 'id',
+                "translation_domain" => 'global'
+            ]
+        );
+
         $builder->add(
             'username',
             TextType::class,
@@ -58,10 +78,15 @@ class UserForm extends AbstractType
         );
 
         $builder->add(
-            'roles',
-            ChoiceType::class,
+            'roleEntity',
+            EntityType::class,
             [
-                "label" => "user-roles",
+                "label" => "user-role",
+                "class" => Role::class,
+                "choice_label" => "name",
+                "choice_name" => "name",
+                "choice_value" => "name",
+                "choice_translation_domain" => "global",
                 "translation_domain" => 'administration',
             ]
         );

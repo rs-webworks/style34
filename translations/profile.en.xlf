@@ -86,7 +86,7 @@
       <notes>
         <note category="file-source" priority="1">src/Controller/User/SecurityController.php:128</note>
         <note category="file-source" priority="1">src/Service/UserService.php:103</note>
-        <note category="file-source" priority="1">src/Service/UserService.php:132</note>
+        <note category="file-source" priority="1">src/Service/UserService.php:131</note>
       </notes>
       <segment>
         <source>activation-invalid-token</source>
@@ -114,7 +114,7 @@
     <unit id="57GlP5." name="activation-expired-token">
       <notes>
         <note category="file-source" priority="1">src/Service/UserService.php:99</note>
-        <note category="file-source" priority="1">src/Service/UserService.php:128</note>
+        <note category="file-source" priority="1">src/Service/UserService.php:127</note>
       </notes>
       <segment>
         <source>activation-expired-token</source>
@@ -344,7 +344,7 @@
     </unit>
     <unit id="QnGf_HM" name="two-step-auth-enabled">
       <notes>
-        <note category="file-source" priority="1">src/Controller/User/UserController.php:116</note>
+        <note category="file-source" priority="1">src/Controller/User/UserController.php:123</note>
       </notes>
       <segment>
         <source>two-step-auth-enabled</source>
@@ -353,7 +353,7 @@
     </unit>
     <unit id="fSNFRZg" name="two-step-auth-failed">
       <notes>
-        <note category="file-source" priority="1">src/Controller/User/UserController.php:120</note>
+        <note category="file-source" priority="1">src/Controller/User/UserController.php:127</note>
       </notes>
       <segment>
         <source>two-step-auth-failed</source>

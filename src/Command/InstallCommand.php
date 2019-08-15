@@ -259,10 +259,9 @@ class InstallCommand extends Command
             [Role::MODERATOR, '#00B639'],
             [Role::MEMBER, '#1D1D1D'],
             [Role::INACTIVE, '#626262'],
-            [Role::USER, '#888888'],
             [Role::VERIFIED, '#626262'],
             [Role::BANNED, '#A2A2A2'],
-            [Role::SERVER_BANNED, '#A2A2A2']
+            [Role::DELETED, '#A2A2A2'],
         ];
 
         $this->io->progressStart(count($roles));
@@ -289,27 +288,29 @@ class InstallCommand extends Command
     {
         /** @var array $users Username, mail, password */
         $users = [
-            ['admin', 'admin@EryseClient.net', 'rootpass', [Role::ADMIN, Role::MEMBER, Role::VERIFIED]],
-            ['spravce', 'spravce@EryseClient.net', 'null', [Role::SERVER_BANNED]],
-            ['moderator', 'moderator@EryseClient.net', 'null', [Role::SERVER_BANNED]],
-            ['mod', 'mod@EryseClient.net', 'null', [Role::SERVER_BANNED]],
-            ['administrator', 'administrator@EryseClient.net', 'null', [Role::SERVER_BANNED]]
+            ['admin', 'admin@EryseClient.net', 'rootpass', Role::ADMIN],
+            ['spravce', 'spravce@EryseClient.net', 'null', Role::DELETED],
+            ['moderator', 'moderator@EryseClient.net', 'null', Role::DELETED],
+            ['mod', 'mod@EryseClient.net', 'null', Role::DELETED],
+            ['administrator', 'administrator@EryseClient.net', 'null', Role::DELETED]
         ];
 
         $this->io->progressStart(count($users));
 
         foreach ($users as $user) {
-            list($username, $email, $password, $roles) = $user;
+            list($username, $email, $password, $role) = $user;
 
             $user = new User();
             $user->setUsername($username);
             $user->setEmail($email);
             $user->setCreatedAt(new \DateTime());
-            $user->setPassword($this->passwordEncoder->encodePassword($user, $password));
 
-            foreach ($roles as $role) {
-                $user->addRole($role);
+            if ($role === Role::DELETED) {
+                $user->setDeletedAt(new \DateTime());
             }
+
+            $user->setPassword($this->passwordEncoder->encodePassword($user, $password));
+            $user->setRole($role);
             $user->setLastIp('127.0.0.1');
             $user->setRegisteredAs(serialize([$user->getUsername(), $user->getEmail()]));
 

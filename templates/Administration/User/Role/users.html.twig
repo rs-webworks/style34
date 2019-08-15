@@ -48,6 +48,11 @@
                     </thead>
 
                     <tbody>
+                    {% if users|length == 0 %}
+                        <tr class="text-center text-muted">
+                            <td colspan="99">{% trans from 'administration' %}no-results{% endtrans %}</td>
+                        </tr>
+                    {% endif %}
                     {% for user in users %}
                         <tr>
                             <td>{{ user.getId() }}</td>

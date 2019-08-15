@@ -16,6 +16,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Class User
  * @package EryseClient\Entity\Server\User
  * @ORM\Entity(repositoryClass="EryseClient\Repository\Server\User\UserRepository")
+ * @ORM\EntityListeners({"EryseClient\EntityListener\Client\User\UserListener"})
  * @ORM\Table(name="users")
  * @UniqueEntity("username", message="user.username-taken")
  * @UniqueEntity("email", message="user.email-taken")
@@ -77,10 +78,15 @@ class User implements UserInterface, TrustedDeviceInterface
     protected $activatedAt;
 
     /**
-     * @var array
-     * @ORM\Column(type="array")
+     * @var string
+     * @ORM\Column(type="string")
      */
-    protected $roles = [];
+    protected $role;
+
+    /**
+     * @var Role
+     */
+    protected $roleEntity;
 
     /**
      * @var string $lastIp
@@ -115,7 +121,7 @@ class User implements UserInterface, TrustedDeviceInterface
 
     public function __construct()
     {
-        $this->addRole(Role::USER);
+        $this->setRole(Role::INACTIVE);
         $this->trustedTokenVersion = 0;
     }
 
@@ -204,39 +210,31 @@ class User implements UserInterface, TrustedDeviceInterface
         $this->activatedAt = $activatedAt;
     }
 
-    // Roles
+    // Role
     // -----------------------------------------------------------------------------------------------------------------
-    public function getRoles(): array
+    public function getRole(): string
     {
-        return $this->roles;
+        return $this->role;
     }
 
-    public function addRole(string $role): void
+    public function setRole(string $role): void
     {
-        if (!in_array($role, $this->roles)) {
-            array_push($this->roles, $role);
-        }
+        $this->role = $role;
     }
 
-    public function hasRole(string $role): bool
+    public function getRoles()
     {
-        return in_array($role, $this->roles);
+        return [$this->getRole()];
     }
 
-    public function hasOneOfRoles(array $roles): bool
+    public function getRoleEntity(): Role
     {
-        foreach ($roles as $role) {
-            if ($this->hasRole($role)) {
-                return true;
-            }
-        }
-
-        return false;
+        return $this->roleEntity;
     }
 
-    public function removeRole(string $role): void
+    public function setRoleEntity(Role $roleEntity): void
     {
-        unset($this->roles[array_search($role, $this->roles)]);
+        $this->roleEntity = $roleEntity;
     }
 
 

@@ -10,5 +10,18 @@
         <target>Uložit jako známé zařízení (nebude již příště vyžadováno ověření)</target>
       </segment>
     </unit>
+    <unit id="Ma.ZPoQ" name="c31aa9b">
+      <notes>
+        <note category="state" priority="1">obsolete</note>
+      </notes>
+      <segment>
+        <source>                                        {0} %count% users-zero-count|
+                                        {1} %count% users-one-count|
+                                        ]1,4] %count% users-many-count|
+                                        ]4,Inf] %count% users-inf-count
+                                    </source>
+        <target></target>
+      </segment>
+    </unit>
   </file>
 </xliff>

@@ -4,7 +4,10 @@ namespace EryseClient\Controller;
 
 use EryseClient\Utility\LoggerTrait;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DependencyInjection\Container;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Role\RoleHierarchyInterface;
 
 /**
  * Class HomeController
@@ -25,9 +28,8 @@ class HomeController extends AbstractController
     /**
      * @Route("/dev", name="dev")
      */
-    public function dev()
+    public function dev(RoleHierarchyInterface $roleHierarchy)
     {
-
         return $this->render('dev.html.twig');
     }
 

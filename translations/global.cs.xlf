@@ -55,7 +55,7 @@
     </unit>
     <unit id="ft0I5O8" name="contact-support">
       <notes>
-        <note category="file-source" priority="1">src/Service/UserService.php:116</note>
+        <note category="file-source" priority="1">src/Service/UserService.php:115</note>
       </notes>
       <segment>
         <source>contact-support</source>
@@ -191,7 +191,7 @@
     </unit>
     <unit id="pWFFJwz" name="id">
       <notes>
-        <note category="file-source" priority="1">templates/Administration/User/User/index.html.twig:52</note>
+        <note category="file-source" priority="1">templates/Administration/User/User/index.html.twig:60</note>
       </notes>
       <segment>
         <source>id</source>
@@ -200,12 +200,74 @@
     </unit>
     <unit id="5mQN6DW" name="find">
       <notes>
-        <note category="file-source" priority="1">templates/Administration/User/User/index.html.twig:42</note>
-        <note category="state" priority="1">new</note>
+        <note category="file-source" priority="1">templates/Administration/User/User/index.html.twig:48</note>
       </notes>
       <segment>
         <source>find</source>
         <target>Vyhledat</target>
+      </segment>
+    </unit>
+    <unit id="718iPw6" name="ROLE_ADMIN">
+      <notes>
+        <note category="state" priority="1">obsolete</note>
+      </notes>
+      <segment>
+        <source>ROLE_ADMIN</source>
+        <target>Administrátor</target>
+      </segment>
+    </unit>
+    <unit id="1LNFU_b" name="ROLE_MODERATOR">
+      <notes>
+        <note category="state" priority="1">obsolete</note>
+      </notes>
+      <segment>
+        <source>ROLE_MODERATOR</source>
+        <target>Moderátor</target>
+      </segment>
+    </unit>
+    <unit id="9Ef68tt" name="ROLE_MEMBER">
+      <notes>
+        <note category="state" priority="1">obsolete</note>
+      </notes>
+      <segment>
+        <source>ROLE_MEMBER</source>
+        <target>Člen</target>
+      </segment>
+    </unit>
+    <unit id="zNC474o" name="ROLE_INACTIVE">
+      <notes>
+        <note category="state" priority="1">obsolete</note>
+      </notes>
+      <segment>
+        <source>ROLE_INACTIVE</source>
+        <target>Neaktivní</target>
+      </segment>
+    </unit>
+    <unit id="7FbqWRf" name="ROLE_VERIFIED">
+      <notes>
+        <note category="state" priority="1">obsolete</note>
+      </notes>
+      <segment>
+        <source>ROLE_VERIFIED</source>
+        <target>Ověřený</target>
+      </segment>
+    </unit>
+    <unit id="kRtYp3K" name="ROLE_BANNED">
+      <notes>
+        <note category="state" priority="1">obsolete</note>
+      </notes>
+      <segment>
+        <source>ROLE_BANNED</source>
+        <target>Vykopnutý</target>
+      </segment>
+    </unit>
+    <unit id="4s.a9XM" name="ROLE_DELETED">
+      <notes>
+        <note category="state" priority="1">obsolete</note>
+      </notes>
+      <segment>
+        <source>ROLE_DELETED</source>
+        <target>Smazaný</target>
       </segment>
     </unit>
   </file>

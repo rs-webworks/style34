@@ -20,15 +20,25 @@
                         {% trans from 'administration' %}dashboard{% endtrans %}
                     </a>
                 </li>
+                <li class="breadcrumb-item">
+                    <a href="{{ url('administration-users-index') }}">
+                        {% trans from 'administration' %}users{% endtrans %}
+                    </a>
+                </li>
                 <li class="breadcrumb-item active" aria-current="page">
-                    {% trans from 'administration' %}users{% endtrans %}
+                    {{ user.getUsername() }}
                 </li>
             </ol>
         </nav>
 
         <div class="row">
             <div class="col col-xs-12">
-                <h3>{{ user.getUsername() }}</h3>
+                <h3>
+                    {{ user.getUsername() }}&nbsp;
+                    <small class="badge badge-light" style="color: {{ user.getRoleEntity().getColor() }};">
+                        [{{ user.getRole()|trans({}, "global") }}]
+                    </small>
+                </h3>
 
                 {{ form(userForm) }}
             </div>

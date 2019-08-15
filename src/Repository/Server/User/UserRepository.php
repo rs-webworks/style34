@@ -69,8 +69,8 @@ class UserRepository extends ServiceEntityRepository implements UserLoaderInterf
         $qb = $this->_em->createQueryBuilder();
         $qb->select('u')
             ->from($this->_entityName, 'u')
-            ->where('u.roles LIKE :roles')
-            ->setParameter('roles', '%"' . $role . '"%');
+            ->where('u.role = :role')
+            ->setParameter('role', $role);
 
         return $qb->getQuery()
             ->getResult();

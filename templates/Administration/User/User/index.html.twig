@@ -42,6 +42,10 @@
                         <div class="col-xs-12 col-sm-3">
                             {{ form_row(searchForm.email) }}
                         </div>
+
+                        <div class="col-xs-12 col-sm-3">
+                            {{ form_row(searchForm.roleEntity) }}
+                        </div>
                     </div>
 
                     <button type="submit" class="btn btn-primary">
@@ -59,12 +63,17 @@
                     <tr>
                         <th>{% trans from 'global' %}id{% endtrans %}</th>
                         <th>{% trans from 'administration' %}user-username{% endtrans %}</th>
-                        <th>{% trans from 'administration' %}user-email{% endtrans %}</th>
                         <th>{% trans from 'administration' %}user-role{% endtrans %}</th>
+                        <th>{% trans from 'administration' %}user-email{% endtrans %}</th>
                     </tr>
                     </thead>
                     <tbody>
 
+                    {% if users|length == 0 %}
+                        <tr class="text-center text-muted">
+                            <td colspan="99">{% trans from 'administration' %}no-results{% endtrans %}</td>
+                        </tr>
+                    {% endif %}
                     {% for user in users %}
                         <tr>
                             <td>{{ user.getId() }}</td>
@@ -74,10 +83,12 @@
                                 </a>
                             </td>
                             <td>
-                                {{ user.getEmail() }}
+                                <strong style="color: {{ user.getRoleEntity().getColor() }};">
+                                    [{{ user.getRole()|trans({}, "global") }}]
+                                </strong>
                             </td>
                             <td>
-                                -
+                                {{ user.getEmail() }}
                             </td>
                         </tr>
                     {% endfor %}

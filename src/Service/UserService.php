@@ -104,9 +104,8 @@ class UserService extends AbstractService
             }
         }
 
-        if ($user->hasRole(Role::INACTIVE)) {
-            $user->addRole(Role::VERIFIED);
-            $user->removeRole(Role::INACTIVE);
+        if ($user->getRole() === Role::INACTIVE) {
+            $user->setRole(Role::VERIFIED);
             $user->setActivatedAt(new DateTime());
 
             return $user;

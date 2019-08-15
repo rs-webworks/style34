@@ -25,7 +25,6 @@ class RoleController extends AbstractController
     public function index(RoleRepository $roleRepository)
     {
         $roles = $roleRepository->findAll();
-        dump($roles);
         return $this->render('Administration/User/Role/index.html.twig', ["roles" => $roles]);
     }
 
@@ -41,9 +40,9 @@ class RoleController extends AbstractController
     ) {
         $role = $roleRepository->findOneBy(["name" => $role]);
         $qb = $userRepository->createQueryBuilder('u')
-            ->where('u.roles LIKE :role')
+            ->where('u.role = :role')
             ->orderBy("u.id")
-            ->setParameter('role', '%' . $role->getName() . '%');
+            ->setParameter('role', $role->getName());
 
         $users = $paginator->paginate(
             $qb,

@@ -125,9 +125,9 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
             throw new LoginException($this->translator->trans('login-failed', [], 'security'));
         }
 
-        if ($user->hasOneOfRoles(
+        if (in_array(
+            $user->getRole(),
             [
-                Role::SERVER_BANNED,
                 Role::BANNED,
                 Role::INACTIVE,
             ]
