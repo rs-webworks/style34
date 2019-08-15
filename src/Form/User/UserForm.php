@@ -10,6 +10,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -61,7 +62,7 @@ class UserForm extends AbstractType
 
         $builder->add(
             'createdAt',
-            TextType::class,
+            DateTimeType::class,
             [
                 "label" => "created-at",
                 "translation_domain" => 'administration'
@@ -70,7 +71,7 @@ class UserForm extends AbstractType
 
         $builder->add(
             'activatedAt',
-            TextType::class,
+            DateTimeType::class,
             [
                 "label" => "activated-at",
                 "translation_domain" => 'administration',
@@ -90,30 +91,6 @@ class UserForm extends AbstractType
                 "translation_domain" => 'administration',
             ]
         );
-
-        $builder->get('createdAt')
-            ->addModelTransformer(
-                new CallbackTransformer(
-                    function ($dateTime) {
-                        /** @var DateTime $dateTime */
-                        return $dateTime ? $dateTime->format('Y-m-d H:i:s') : null;
-                    }, function ($string) {
-                    return new DateTime($string);
-                }
-                )
-            );
-
-        $builder->get('activatedAt')
-            ->addModelTransformer(
-                new CallbackTransformer(
-                    function ($dateTime) {
-                        /** @var DateTime $dateTime */
-                        return $dateTime ? $dateTime->format('Y-m-d H:i:s') : null;
-                    }, function ($string) {
-                    return new DateTime($string);
-                }
-                )
-            );
     }
 
     public function configureOptions(OptionsResolver $resolver)
