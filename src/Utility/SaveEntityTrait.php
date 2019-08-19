@@ -14,6 +14,9 @@ trait SaveEntityTrait
     /** @var EntityManagerInterface */
     protected $_em;
 
+    /**
+     * @param mixed ...$entities
+     */
     public function save(...$entities): void
     {
         foreach ($entities as $entity) {
@@ -22,5 +25,4 @@ trait SaveEntityTrait
 
         $this->_em->flush();
     }
-
 }

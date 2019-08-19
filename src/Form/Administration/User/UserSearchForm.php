@@ -2,16 +2,22 @@
 
 namespace EryseClient\Form\Administration\User;
 
-
 use EryseClient\Entity\Client\User\Role;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
+/**
+ * Class UserSearchForm
+ * @package EryseClient\Form\Administration\User
+ */
 class UserSearchForm extends AbstractType
 {
+    /**
+     * @param FormBuilderInterface $builder
+     * @param array $options
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->setMethod('GET');

@@ -11,8 +11,6 @@ use EryseClient\Utility\EntityManager\ServerEntityManagerTrait;
  */
 trait EntityManagersTrait
 {
-
     use ClientEntityManagerTrait;
     use ServerEntityManagerTrait;
-
 }

@@ -11,9 +11,12 @@ use EryseClient\Entity\Server\User\User;
 trait FindByUserTrait
 {
 
+    /**
+     * @param User $user
+     * @return mixed
+     */
     public function findByUser(User $user)
     {
         return $this->findOneBy(["userId" => $user->getId()]);
     }
-
 }

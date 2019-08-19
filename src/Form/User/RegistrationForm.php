@@ -1,4 +1,5 @@
 <?php declare(strict_types=1);
+
 namespace EryseClient\Form\User;
 
 use EryseClient\Entity\Server\User\User;
@@ -23,32 +24,49 @@ class RegistrationForm extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('username', TextType::class, array(
-            "label" => 'username',
-            "translation_domain" => 'profile'
-        ));
-        $builder->add('email', EmailType::class, array(
-            "label" => 'email',
-            "translation_domain" => 'profile'
-        ));
-        $builder->add('plainPassword', RepeatedType::class, array(
-            'type' => PasswordType::class,
-            'invalid_message' => 'password-mismatch',
-            'first_options' => array(
-                "label" => 'password',
+        $builder->add(
+            'username',
+            TextType::class,
+            [
+                "label" => 'username',
                 "translation_domain" => 'profile'
-            ),
-            'second_options' => array(
-                "label" => 'password-again',
+            ]
+        );
+        $builder->add(
+            'email',
+            EmailType::class,
+            [
+                "label" => 'email',
                 "translation_domain" => 'profile'
-            )
-        ));
+            ]
+        );
+        $builder->add(
+            'plainPassword',
+            RepeatedType::class,
+            [
+                'type' => PasswordType::class,
+                'invalid_message' => 'password-mismatch',
+                'first_options' => [
+                    "label" => 'password',
+                    "translation_domain" => 'profile'
+                ],
+                'second_options' => [
+                    "label" => 'password-again',
+                    "translation_domain" => 'profile'
+                ]
+            ]
+        );
     }
 
+    /**
+     * @param OptionsResolver $resolver
+     */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
-            'data_class' => User::class,
-        ));
+        $resolver->setDefaults(
+            [
+                'data_class' => User::class,
+            ]
+        );
     }
 }

@@ -23,5 +23,4 @@ trait ClientEntityManagerTrait
     {
         $this->clientEm = $managerRegistry->getManager('eryseClient');
     }
-
 }

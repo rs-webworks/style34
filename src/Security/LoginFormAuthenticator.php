@@ -2,15 +2,17 @@
 
 namespace EryseClient\Security;
 
+use Doctrine\ORM\NonUniqueResultException;
 use EryseClient\Entity\Client\User\Role;
 use EryseClient\Entity\Server\User\User;
 use EryseClient\Exception\Security\LoginException;
-use EryseClient\Exception\Security\TwoStepAuthSetException;
 use EryseClient\Repository\Server\User\UserRepository;
 use EryseClient\Utility\EntityManagersTrait;
 use EryseClient\Utility\TranslatorTrait;
+use Exception;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
@@ -101,14 +103,12 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         return $credentials;
     }
 
-
     /**
      * @param mixed $credentials
      * @param UserProviderInterface $userProvider
      * @return object|UserInterface|null
      * @throws LoginException
-     * @throws TwoStepAuthSetException
-     * @throws \Doctrine\ORM\NonUniqueResultException
+     * @throws NonUniqueResultException
      */
     public function getUser($credentials, UserProviderInterface $userProvider)
     {
@@ -152,12 +152,13 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
      * @param Request $request
      * @param TokenInterface $token
      * @param string $providerKey
-     * @return RedirectResponse|\Symfony\Component\HttpFoundation\Response|null
-     * @throws \Exception
+     * @return RedirectResponse|Response|null
+     * @throws Exception
      */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
-        if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
+        $targetPath = $this->getTargetPath($request->getSession(), $providerKey);
+        if ($targetPath) {
             return new RedirectResponse($targetPath);
         }
 
@@ -171,5 +172,4 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     {
         return $this->router->generate('security-login');
     }
-
 }

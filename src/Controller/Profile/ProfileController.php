@@ -22,10 +22,10 @@ class ProfileController extends AbstractController
 
     /**
      * @Route("/profile/view/{username}", name="profile-view")
+     * @return Response
      */
-    public function view(ProfileRepository $profileRepository, $username = null)
+    public function view()
     {
-
         return $this->render("Profile/view.html.twig");
     }
 
@@ -34,7 +34,6 @@ class ProfileController extends AbstractController
      */
     public function list()
     {
-
         return $this->render("Profile/list.html.twig");
     }
 
@@ -46,5 +45,4 @@ class ProfileController extends AbstractController
     {
         return $this->render("Profile/membership.html.twig");
     }
-
 }

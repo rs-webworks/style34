@@ -9,6 +9,7 @@ use Knp\Component\Pager\PaginatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -21,6 +22,8 @@ class RoleController extends AbstractController
 
     /**
      * @Route("/administration/user/roles",name="administration-user-role-index")
+     * @param RoleRepository $roleRepository
+     * @return Response
      */
     public function index(RoleRepository $roleRepository)
     {
@@ -30,6 +33,12 @@ class RoleController extends AbstractController
 
     /**
      * @Route("/administration/user/roles/users/{role}", name="administration-user-role-users")
+     * @param string $role
+     * @param Request $request
+     * @param RoleRepository $roleRepository
+     * @param UserRepository $userRepository
+     * @param PaginatorInterface $paginator
+     * @return Response
      */
     public function roleUsers(
         string $role,
@@ -52,7 +61,4 @@ class RoleController extends AbstractController
 
         return $this->render('Administration/User/Role/users.html.twig', ["users" => $users, "role" => $role]);
     }
-
-
-
 }

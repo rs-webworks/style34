@@ -1,4 +1,5 @@
 <?php declare(strict_types=1);
+
 namespace EryseClient\Entity\Common;
 
 use DateTime;
@@ -17,14 +18,19 @@ trait ExpiresAt
      */
     private $expiresAt;
 
+    /**
+     * @return DateTime
+     */
     public function getExpiresAt(): DateTime
     {
         return $this->expiresAt;
     }
 
+    /**
+     * @param DateTime $expiresAt
+     */
     public function setExpiresAt(DateTime $expiresAt): void
     {
         $this->expiresAt = $expiresAt;
     }
-
 }

@@ -1,4 +1,5 @@
 <?php declare(strict_types=1);
+
 namespace EryseClient\Entity\Common;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -17,14 +18,19 @@ trait MasterData
      */
     private $name;
 
+    /**
+     * @return string
+     */
     public function getName(): string
     {
         return $this->name;
     }
 
+    /**
+     * @param string $name
+     */
     public function setName(string $name): void
     {
         $this->name = $name;
     }
-
 }

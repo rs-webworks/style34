@@ -4,8 +4,6 @@ namespace EryseClient\Entity\Server\User;
 
 use Doctrine\ORM\Mapping as ORM;
 use EryseClient\Entity\Common\Identifier;
-use EryseClient\Entity\Server\User\User;
-use Scheb\TwoFactorBundle\Model\Google\TwoFactorInterface;
 
 /**
  * Class ServerSettings
@@ -15,7 +13,6 @@ use Scheb\TwoFactorBundle\Model\Google\TwoFactorInterface;
  */
 class ServerSettings
 {
-
     use Identifier;
 
     /**
@@ -36,42 +33,61 @@ class ServerSettings
      */
     protected $gAuthSecret;
 
-
+    /**
+     * ServerSettings constructor.
+     * @param User|null $user
+     */
     public function __construct(User $user = null)
     {
         $this->setUserId($user->getId());
         $this->twoStepAuthEnabled = false;
     }
 
+    /**
+     * @return int
+     */
     public function getUserId(): int
     {
         return $this->userId;
     }
 
+    /**
+     * @param int $userId
+     */
     public function setUserId(int $userId): void
     {
         $this->userId = $userId;
     }
 
-
+    /**
+     * @return bool
+     */
     public function isTwoStepAuthEnabled(): bool
     {
         return $this->twoStepAuthEnabled;
     }
 
+    /**
+     * @param bool $twoStepAuthEnabled
+     */
     public function setTwoStepAuthEnabled(bool $twoStepAuthEnabled): void
     {
         $this->twoStepAuthEnabled = $twoStepAuthEnabled;
     }
 
+    /**
+     * @return string
+     */
     public function getGAuthSecret(): string
     {
         return $this->gAuthSecret;
     }
 
+    /**
+     * @param string|null $gAuthSecret
+     */
     public function setGAuthSecret(?string $gAuthSecret): void
     {
         $this->gAuthSecret = $gAuthSecret;
     }
-
 }

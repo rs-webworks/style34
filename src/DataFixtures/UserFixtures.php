@@ -22,12 +22,20 @@ class UserFixtures extends Fixture
     /** @var UserRepository */
     private $userRepository;
 
+    /**
+     * UserFixtures constructor.
+     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @param UserRepository $userRepository
+     */
     public function __construct(UserPasswordEncoderInterface $passwordEncoder, UserRepository $userRepository)
     {
         $this->passwordEncoder = $passwordEncoder;
         $this->userRepository = $userRepository;
     }
 
+    /**
+     * @param ObjectManager $manager
+     */
     public function load(ObjectManager $manager): void
     {
         $faker = Factory::create();

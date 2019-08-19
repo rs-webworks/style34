@@ -1,4 +1,5 @@
 <?php declare(strict_types=1);
+
 namespace EryseClient\Form\Security;
 
 use Symfony\Component\Form\AbstractType;
@@ -21,20 +22,31 @@ class LoginForm extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
 
-        $builder->add('username', TextType::class, array(
-            "label" => 'username-or-mail',
-            "translation_domain" => 'security'
-        ));
+        $builder->add(
+            'username',
+            TextType::class,
+            [
+                "label" => 'username-or-mail',
+                "translation_domain" => 'security'
+            ]
+        );
 
-        $builder->add('password', PasswordType::class, array(
-            'label' => 'password',
-            'translation_domain' => 'security'
-        ));
+        $builder->add(
+            'password',
+            PasswordType::class,
+            [
+                'label' => 'password',
+                'translation_domain' => 'security'
+            ]
+        );
 
-        $builder->add('remember-me', CheckboxType::class, array(
-           'label' => 'remember-me',
-           'translation_domain' => 'security'
-        ));
+        $builder->add(
+            'remember-me',
+            CheckboxType::class,
+            [
+                'label' => 'remember-me',
+                'translation_domain' => 'security'
+            ]
+        );
     }
-
 }

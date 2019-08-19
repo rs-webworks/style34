@@ -13,7 +13,9 @@ use EryseClient\Utility\TranslatorTrait;
 use Scheb\TwoFactorBundle\Security\TwoFactor\Provider\Google\GoogleAuthenticatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -29,14 +31,12 @@ class UserController extends AbstractController
     use LoggerTrait;
     use EntityManagersTrait;
 
-
     /**
      * @Route("/user/edit/{id}/{username}", name="user-edit")
      * @param null $username
      */
     public function edit($username = null)
     {
-
     }
 
     /**
@@ -44,30 +44,31 @@ class UserController extends AbstractController
      */
     public function list()
     {
-
     }
 
     /**
      * @Route("/user", name="user-view-self")
+     * @param $id
+     * @param UserRepository $userRepository
      */
     public function viewSelf($id, UserRepository $userRepository)
     {
-
     }
 
     /**
      * @Route("/user/{id}/{username}", name="user-view", )
+     * @param $id
+     * @param UserRepository $userRepository
      */
     public function view($id, UserRepository $userRepository)
     {
-
     }
-
 
     /**
      * @Route("/user/settings", name="user-settings")
      * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @param ServerSettingsRepository $serverSettingsRepository
+     * @return Response
      */
     public function settings(Request $request, ServerSettingsRepository $serverSettingsRepository)
     {
@@ -77,8 +78,9 @@ class UserController extends AbstractController
         $form = $this->createForm(SettingsForm::class);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-        }
+//        if ($form->isSubmitted() && $form->isValid()) {
+//            //TODO: implement settings saving
+//        }
 
         return $this->render(
             'User/settings.html.twig',
@@ -96,7 +98,9 @@ class UserController extends AbstractController
      * @param SessionInterface $session
      * @param Request $request
      * @param UserService $userService
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @param UserRepository $userRepository
+     * @param ServerSettingsRepository $serverSettingsRepository
+     * @return Response
      */
     public function enableTwoStepAuth(
         GoogleAuthenticatorInterface $authService,
@@ -141,7 +145,7 @@ class UserController extends AbstractController
      * @Route("/user/settings/disableTwoStepAuth", name="user-settings-disable-two-step-auth")
      * @param UserService $userService
      * @param UserInterface|User $user
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return RedirectResponse
      */
     public function disableTwoStepAuth(UserService $userService, UserInterface $user)
     {
@@ -157,12 +161,12 @@ class UserController extends AbstractController
      * @Route("/user/settings/forgetDevices", name="user-settings-forget-devices")
      * @param UserService $userService
      * @param UserInterface|User $user
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return RedirectResponse
      */
     public function forgetDevices(UserService $userService, UserInterface $user)
     {
         $userService->forgetDevices($user);
-        $this->addFlash('success', $this->translator->trans('two-step-auth-devices-forgoten', [], 'user'));
+        $this->addFlash('success', $this->translator->trans('two-step-auth-devices-forgotten', [], 'user'));
 
         return $this->redirectToRoute('user-settings');
     }
@@ -171,7 +175,7 @@ class UserController extends AbstractController
      * @Route("/user/settings/logoutEverywhere", name="user-settings-logout-everywhere")
      * @param UserService $userService
      * @param UserInterface|User $user
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return RedirectResponse
      */
     public function logoutEverywhere(UserService $userService, UserInterface $user)
     {
@@ -189,6 +193,4 @@ class UserController extends AbstractController
     {
         return $this->render('User/delete.html.twig');
     }
-
-
 }

@@ -1,6 +1,8 @@
 <?php declare(strict_types=1);
+
 namespace EryseClient\Service;
 
+use DateInterval;
 use DateTime;
 use EryseClient\Entity\Client\Token\Token;
 use EryseClient\Entity\Client\Token\TokenType;
@@ -70,7 +72,7 @@ class TokenService extends AbstractService
         $expiresAt = new DateTime();
         $token->setCreatedAt($createdAt);
         $token->setExpiresAt($this->createExpirationDateTime($expiresAt, Token::EXPIRY_HOUR * 2));
-        $token->setType($this->tokenTypeRepository->findOneBy(array('name' => TokenType::USER['ACTIVATION'])));
+        $token->setType($this->tokenTypeRepository->findOneBy(['name' => TokenType::USER['ACTIVATION']]));
 
         return $token;
     }
@@ -92,7 +94,7 @@ class TokenService extends AbstractService
      */
     public function createExpirationDateTime(DateTime $start, int $expiryInSeconds): DateTime
     {
-        return $start->add(new \DateInterval('PT' . $expiryInSeconds . 'S'));
+        return $start->add(new DateInterval('PT' . $expiryInSeconds . 'S'));
     }
 
     /**
@@ -110,9 +112,13 @@ class TokenService extends AbstractService
         $token->setUserId($user->getId());
         $token->setCreatedAt($createdAt);
         $token->setExpiresAt($this->createExpirationDateTime($expiresAt, Token::EXPIRY_HOUR * 2));
-        $token->setType($this->tokenTypeRepository->findOneBy(array(
-            'name' => TokenType::USER['REQUEST_RESET_PASSWORD']
-        )));
+        $token->setType(
+            $this->tokenTypeRepository->findOneBy(
+                [
+                    'name' => TokenType::USER['REQUEST_RESET_PASSWORD']
+                ]
+            )
+        );
 
         return $token;
     }

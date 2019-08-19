@@ -1,4 +1,5 @@
 <?php declare(strict_types=1);
+
 namespace EryseClient\Repository\Client\Token;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -28,6 +29,6 @@ class TokenTypeRepository extends ServiceEntityRepository implements ServiceEnti
      */
     public function findType(string $type): ?TokenType
     {
-        return $this->findOneBy(array('name' => $type));
+        return $this->findOneBy(['name' => $type]);
     }
 }

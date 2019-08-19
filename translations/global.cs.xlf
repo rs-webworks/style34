@@ -59,7 +59,7 @@
       </notes>
       <segment>
         <source>contact-support</source>
-        <target>Prosím kontaktuj nás skrze mail contactmail</target>
+        <target>Prosím kontaktuj nás skrze mail contact-mail</target>
       </segment>
     </unit>
     <unit id="TrQaKp3" name="forum">

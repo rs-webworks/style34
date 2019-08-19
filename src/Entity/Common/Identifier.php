@@ -1,4 +1,5 @@
 <?php declare(strict_types=1);
+
 namespace EryseClient\Entity\Common;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -17,19 +18,27 @@ trait Identifier
      */
     protected $id;
 
+    /**
+     * @return int
+     */
     final public function getId(): int
     {
         return $this->id;
     }
 
+    /**
+     * @param int $id
+     */
     public function setId(int $id): void
     {
         $this->id = $id;
     }
 
+    /**
+     *
+     */
     public function __clone()
     {
         $this->id = null;
     }
-
 }

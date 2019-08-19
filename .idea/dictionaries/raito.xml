@@ -2,12 +2,15 @@
   <dictionary name="raito">
     <words>
       <w>birthdate</w>
+      <w>browscap</w>
       <w>browsercap</w>
       <w>cachekey</w>
       <w>csrf</w>
       <w>eryse</w>
       <w>exts</w>
       <w>pgsql</w>
+      <w>rootpass</w>
+      <w>spravce</w>
     </words>
   </dictionary>
 </component>

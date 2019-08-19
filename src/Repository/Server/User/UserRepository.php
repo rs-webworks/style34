@@ -9,7 +9,6 @@ use EryseClient\Entity\Server\User\GoogleAuth;
 use EryseClient\Entity\Server\User\ServerSettings;
 use EryseClient\Entity\Server\User\User;
 use EryseClient\Repository\Client\User\ClientSettingsRepository;
-use EryseClient\Repository\Client\User\SettingsRepository;
 use EryseClient\Utility\SaveEntityTrait;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
@@ -31,6 +30,12 @@ class UserRepository extends ServiceEntityRepository implements UserLoaderInterf
     /** @var ClientSettingsRepository */
     private $clientSettingsRepository;
 
+    /**
+     * UserRepository constructor.
+     * @param RegistryInterface $registry
+     * @param ServerSettingsRepository $serverSettingsRepository
+     * @param ClientSettingsRepository $clientSettingsRepository
+     */
     public function __construct(
         RegistryInterface $registry,
         ServerSettingsRepository $serverSettingsRepository,
@@ -41,7 +46,9 @@ class UserRepository extends ServiceEntityRepository implements UserLoaderInterf
         $this->clientSettingsRepository = $clientSettingsRepository;
     }
 
-
+    /**
+     * @param User $user
+     */
     public function saveNew(User $user): void
     {
         $this->save($user);
@@ -64,6 +71,10 @@ class UserRepository extends ServiceEntityRepository implements UserLoaderInterf
             ->getOneOrNullResult();
     }
 
+    /**
+     * @param string $role
+     * @return array|null
+     */
     public function findByRole(string $role): ?array
     {
         $qb = $this->_em->createQueryBuilder();
@@ -76,6 +87,9 @@ class UserRepository extends ServiceEntityRepository implements UserLoaderInterf
             ->getResult();
     }
 
+    /**
+     * @param array $users
+     */
     public function removeUsers(array $users): void
     {
         foreach ($users as $user) {
@@ -85,11 +99,14 @@ class UserRepository extends ServiceEntityRepository implements UserLoaderInterf
         $this->_em->flush();
     }
 
+    /**
+     * @param User $user
+     * @return GoogleAuth|null
+     */
     public function getGoogleAuthEntity(User $user): ?GoogleAuth
     {
         $settings = $this->serverSettingsRepository->findByUser($user);
 
         return new GoogleAuth($user, $settings);
     }
-
 }

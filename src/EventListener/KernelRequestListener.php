@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
+
 namespace EryseClient\EventListener;
 
 use EryseClient\Service\ProfileService;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\Routing\Router;
 use Symfony\Component\Routing\RouterInterface;
@@ -50,13 +50,4 @@ class KernelRequestListener
         $this->profileService = $profileService;
         $this->authorizationChecker = $authorizationChecker;
     }
-
-    /**
-     * @param GetResponseEvent $event
-     */
-    public function onKernelRequest(GetResponseEvent $event)
-    {
-
-    }
-
 }

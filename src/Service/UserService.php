@@ -19,6 +19,7 @@ use EryseClient\Repository\Server\User\UserRepository;
 use EryseClient\Utility\EntityManagersTrait;
 use EryseClient\Utility\LoggerTrait;
 use EryseClient\Utility\TranslatorTrait;
+use Exception;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
@@ -55,6 +56,17 @@ class UserService extends AbstractService
     /** @var RememberMeTokenRepository */
     private $rememberMeTokenRepository;
 
+    /**
+     * UserService constructor.
+     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @param TokenService $tokenService
+     * @param MailService $mailService
+     * @param TokenTypeRepository $tokenTypeRepository
+     * @param TokenRepository $tokenRepository
+     * @param ServerSettingsRepository $serverSettingsRepository
+     * @param UserRepository $userRepository
+     * @param RememberMeTokenRepository $rememberMeTokenRepository
+     */
     public function __construct(
         UserPasswordEncoderInterface $passwordEncoder,
         TokenService $tokenService,
@@ -75,10 +87,16 @@ class UserService extends AbstractService
         $this->rememberMeTokenRepository = $rememberMeTokenRepository;
     }
 
+    /**
+     * @param User $user
+     * @param string $lastIp
+     * @return User
+     * @throws Exception
+     */
     public function prepareNewUser(User $user, string $lastIp = '127.0.0.1'): User
     {
         // Get default user role
-        $user->addRole(Role::INACTIVE);
+        $user->setRole(Role::INACTIVE);
 
         // Encode password
         $password = $this->passwordEncoder->encodePassword($user, $user->getPlainPassword());
@@ -87,11 +105,19 @@ class UserService extends AbstractService
         // Set defaults
         $user->setCreatedAt(new DateTime());
         $user->setLastIp($lastIp);
-        $user->setRegisteredAs(serialize(array($user->getUsername(), $user->getEmail())));
+        $user->setRegisteredAs(serialize([$user->getUsername(), $user->getEmail()]));
 
         return $user;
     }
 
+    /**
+     * @param User $user
+     * @param Token|null $token
+     * @return User|null
+     * @throws ActivationException
+     * @throws ExpiredTokenException
+     * @throws InvalidTokenException
+     */
     public function activateUser(User $user, Token $token = null): ?User
     {
         if ($token) {
@@ -114,12 +140,20 @@ class UserService extends AbstractService
         throw new ActivationException(
             $this->translator->trans(
                 'contact-support',
-                ['contactmail' => Kernel::CONTACT_MAIL],
+                ['contact-mail' => Kernel::CONTACT_MAIL],
                 'global'
             )
         );
     }
 
+    /**
+     * @param string $newPassword
+     * @param User $user
+     * @param Token|null $token
+     * @return User|null
+     * @throws ExpiredTokenException
+     * @throws InvalidTokenException
+     */
     public function updatePassword(string $newPassword, User $user, Token $token = null): ?User
     {
         if ($token) {
@@ -138,16 +172,19 @@ class UserService extends AbstractService
         return $user;
     }
 
+    /**
+     * @return array|null
+     */
     public function getExpiredRegistrations(): ?array
     {
         try {
-            $users = array();
+            $users = [];
 
             /** @var TokenType $tokenType */
             $tokenType = $this->tokenTypeRepository->findOneBy(
-                array(
+                [
                     'name' => TokenType::USER['ACTIVATION']
-                )
+                ]
             );
 
             $expiredTokens = $this->tokenRepository->findExpiredTokens($tokenType);
@@ -157,13 +194,17 @@ class UserService extends AbstractService
             }
 
             return $users;
-        } catch (\Exception $ex) {
+        } catch (Exception $ex) {
             $this->logger->error('user.expired-registration-purge-failed', [$ex]);
         }
 
         return null;
     }
 
+    /**
+     * @param User $user
+     * @param string $secret
+     */
     public function enableTwoStepAuth(User $user, string $secret): void
     {
         $settings = $this->serverSettingsRepository->findByUser($user);
@@ -173,6 +214,9 @@ class UserService extends AbstractService
         $this->serverSettingsRepository->save($settings);
     }
 
+    /**
+     * @param User $user
+     */
     public function disableTwoStepAuth(User $user): void
     {
         $settings = $this->serverSettingsRepository->findByUser($user);
@@ -185,24 +229,32 @@ class UserService extends AbstractService
         $this->userRepository->save($user);
     }
 
-    public function forgetDevices(User $user)
+    /**
+     * @param User $user
+     */
+    public function forgetDevices(User $user): void
     {
         $user->setTrustedTokenVersion($user->getTrustedTokenVersion() + 1);
         $this->userRepository->save($user);
     }
 
-    public function hasRememberMeToken(User $user)
+    /**
+     * @param User $user
+     * @return bool
+     */
+    public function hasRememberMeToken(User $user): bool
     {
         $token = $this->rememberMeTokenRepository->findByUser($user);
 
         return $token ? true : false;
     }
 
-    public function logoutEverywhere(User $user)
+    /**
+     * @param User $user
+     */
+    public function logoutEverywhere(User $user): void
     {
-        $user->setTrustedTokenVersion($user->getTrustedTokenVersion()+1);
+        $user->setTrustedTokenVersion($user->getTrustedTokenVersion() + 1);
         $this->userRepository->save($user);
-
     }
-
 }

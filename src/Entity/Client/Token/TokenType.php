@@ -13,10 +13,10 @@ use EryseClient\Entity\Common\MasterData;
  */
 class TokenType
 {
-    const USER = array(
+    const USER = [
         'ACTIVATION' => 'profile.activation',
         'REQUEST_RESET_PASSWORD' => 'profile.request-reset-password'
-    );
+    ];
 
     use MasterData;
 

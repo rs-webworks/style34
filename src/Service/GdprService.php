@@ -1,7 +1,6 @@
 <?php declare(strict_types=1);
-namespace EryseClient\Service;
 
-use OpenCrypt\OpenCrypt;
+namespace EryseClient\Service;
 
 /**
  * Class GdprService
@@ -9,5 +8,4 @@ use OpenCrypt\OpenCrypt;
  */
 final class GdprService extends AbstractService
 {
-
 }

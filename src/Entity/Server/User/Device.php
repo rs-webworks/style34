@@ -16,7 +16,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Device
 {
-
     use Identifier;
 
     /**
@@ -38,35 +37,51 @@ class Device
      */
     protected $user;
 
+    /**
+     * @return string
+     */
     public function getName(): string
     {
         return $this->name;
     }
 
+    /**
+     * @param string $name
+     */
     public function setName(string $name): void
     {
         $this->name = $name;
     }
 
+    /**
+     * @return string
+     */
     public function getCookieName(): string
     {
         return $this->cookieName;
     }
 
+    /**
+     * @param string $cookieName
+     */
     public function setCookieName(string $cookieName): void
     {
         $this->cookieName = $cookieName;
     }
 
+    /**
+     * @return User
+     */
     public function getUser(): User
     {
         return $this->user;
     }
 
+    /**
+     * @param User $user
+     */
     public function setUser(User $user): void
     {
         $this->user = $user;
     }
-
-
 }

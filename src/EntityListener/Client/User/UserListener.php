@@ -2,23 +2,32 @@
 
 namespace EryseClient\EntityListener\Client\User;
 
-use Doctrine\ORM\Event\LifecycleEventArgs;
 use EryseClient\Entity\Server\User\User;
 use EryseClient\Repository\Client\User\RoleRepository;
 
+/**
+ * Class UserListener
+ * @package EryseClient\EntityListener\Client\User
+ */
 class UserListener
 {
     /** @var RoleRepository */
     private $roleRepository;
 
+    /**
+     * UserListener constructor.
+     * @param RoleRepository $roleRepository
+     */
     public function __construct(RoleRepository $roleRepository)
     {
         $this->roleRepository = $roleRepository;
     }
 
-    public function postLoad(User $user, LifecycleEventArgs $args)
+    /**
+     * @param User $user
+     */
+    public function postLoad(User $user)
     {
         $user->setRoleEntity($this->roleRepository->findOneBy(["name" => $user->getRole()]));
     }
-
 }

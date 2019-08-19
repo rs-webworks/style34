@@ -2,9 +2,9 @@
 
 namespace EryseClient\Security;
 
-use EryseClient\Entity\Client\User\Role;
 use EryseClient\Entity\Server\User\User;
 use EryseClient\Repository\Server\User\UserRepository;
+use Exception;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
@@ -33,7 +33,7 @@ class UserProvider implements UserProviderInterface
     /**
      * @param string $username
      * @return UserInterface
-     * @throws \Exception
+     * @throws Exception
      */
     public function loadUserByUsername($username)
     {

@@ -23,7 +23,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class User implements UserInterface, TrustedDeviceInterface
 {
-
     use CreatedAt;
     use DeletedAt;
 
@@ -48,7 +47,6 @@ class User implements UserInterface, TrustedDeviceInterface
      * )
      */
     protected $username;
-
 
     /**
      * @ORM\Column(type="string", unique=true)
@@ -119,12 +117,18 @@ class User implements UserInterface, TrustedDeviceInterface
      */
     protected $profileId;
 
+    /**
+     * User constructor.
+     */
     public function __construct()
     {
         $this->setRole(Role::INACTIVE);
         $this->trustedTokenVersion = 0;
     }
 
+    /**
+     *
+     */
     public function eraseCredentials(): void
     {
         // TODO: Implement eraseCredentials() method.
@@ -132,11 +136,17 @@ class User implements UserInterface, TrustedDeviceInterface
 
     // ID
     // -----------------------------------------------------------------------------------------------------------------
+    /**
+     * @return int
+     */
     final public function getId(): int
     {
         return $this->id;
     }
 
+    /**
+     * @param int $id
+     */
     public function setId(int $id): void
     {
         $this->id = $id;
@@ -145,11 +155,17 @@ class User implements UserInterface, TrustedDeviceInterface
 
     // Username
     // -----------------------------------------------------------------------------------------------------------------
+    /**
+     * @return string|null
+     */
     public function getUsername(): ?string
     {
         return $this->username;
     }
 
+    /**
+     * @param string $username
+     */
     public function setUsername(string $username): void
     {
         $this->username = $username;
@@ -158,11 +174,17 @@ class User implements UserInterface, TrustedDeviceInterface
 
     // Email
     // -----------------------------------------------------------------------------------------------------------------
+    /**
+     * @return string|null
+     */
     public function getEmail(): ?string
     {
         return $this->email;
     }
 
+    /**
+     * @param string $email
+     */
     public function setEmail(string $email): void
     {
         $this->email = $email;
@@ -171,26 +193,41 @@ class User implements UserInterface, TrustedDeviceInterface
 
     // Password
     // -----------------------------------------------------------------------------------------------------------------
+    /**
+     * @return string|null
+     */
     public function getPassword(): ?string
     {
         return $this->password;
     }
 
+    /**
+     * @param string $password
+     */
     public function setPassword(string $password): void
     {
         $this->password = $password;
     }
 
+    /**
+     * @return string|null
+     */
     public function getPlainPassword(): ?string
     {
         return $this->plainPassword;
     }
 
+    /**
+     * @param string $plainPassword
+     */
     public function setPlainPassword(string $plainPassword): void
     {
         $this->plainPassword = $plainPassword;
     }
 
+    /**
+     * @return string|null
+     */
     public function getSalt(): ?string
     {
         // TODO: Implement getSalt() method.
@@ -200,11 +237,17 @@ class User implements UserInterface, TrustedDeviceInterface
 
     // Activated At
     // -----------------------------------------------------------------------------------------------------------------
+    /**
+     * @return DateTime|null
+     */
     public function getActivatedAt(): ?DateTime
     {
         return $this->activatedAt;
     }
 
+    /**
+     * @param DateTime $activatedAt
+     */
     public function setActivatedAt(DateTime $activatedAt): void
     {
         $this->activatedAt = $activatedAt;
@@ -212,26 +255,41 @@ class User implements UserInterface, TrustedDeviceInterface
 
     // Role
     // -----------------------------------------------------------------------------------------------------------------
+    /**
+     * @return string
+     */
     public function getRole(): string
     {
         return $this->role;
     }
 
+    /**
+     * @param string $role
+     */
     public function setRole(string $role): void
     {
         $this->role = $role;
     }
 
+    /**
+     * @return array
+     */
     public function getRoles()
     {
         return [$this->getRole()];
     }
 
+    /**
+     * @return Role
+     */
     public function getRoleEntity(): Role
     {
         return $this->roleEntity;
     }
 
+    /**
+     * @param Role $roleEntity
+     */
     public function setRoleEntity(Role $roleEntity): void
     {
         $this->roleEntity = $roleEntity;
@@ -240,11 +298,17 @@ class User implements UserInterface, TrustedDeviceInterface
 
     // Last Ip
     // -----------------------------------------------------------------------------------------------------------------
+    /**
+     * @return string
+     */
     public function getLastIp(): string
     {
         return $this->lastIp;
     }
 
+    /**
+     * @param string $lastIp
+     */
     public function setLastIp(string $lastIp): void
     {
         $this->lastIp = $lastIp;
@@ -253,11 +317,17 @@ class User implements UserInterface, TrustedDeviceInterface
 
     // Registered as
     // -----------------------------------------------------------------------------------------------------------------
+    /**
+     * @return string
+     */
     public function getRegisteredAs(): string
     {
         return $this->registeredAs;
     }
 
+    /**
+     * @param string $registeredAs
+     */
     public function setRegisteredAs(string $registeredAs): void
     {
         $this->registeredAs = $registeredAs;
@@ -265,16 +335,25 @@ class User implements UserInterface, TrustedDeviceInterface
 
     // Devices
     // -----------------------------------------------------------------------------------------------------------------
+    /**
+     * @return array
+     */
     public function getDevices(): array
     {
         return $this->devices;
     }
 
+    /**
+     * @param array $devices
+     */
     public function setDevices(array $devices): void
     {
         $this->devices = $devices;
     }
 
+    /**
+     * @param Device $device
+     */
     public function addDevice(Device $device): void
     {
         if (!in_array($device, $this->devices)) {
@@ -282,16 +361,25 @@ class User implements UserInterface, TrustedDeviceInterface
         }
     }
 
+    /**
+     * @param Device $device
+     */
     public function removeDevice(Device $device): void
     {
         unset($this->devices[array_search($device, $this->devices)]);
     }
 
+    /**
+     * @return int
+     */
     public function getTrustedTokenVersion(): int
     {
         return $this->trustedTokenVersion;
     }
 
+    /**
+     * @param int $version
+     */
     public function setTrustedTokenVersion(int $version): void
     {
         $this->trustedTokenVersion = $version;
@@ -299,15 +387,19 @@ class User implements UserInterface, TrustedDeviceInterface
 
     // Profile
     // -----------------------------------------------------------------------------------------------------------------
-    public function getProfileId(): Int
+    /**
+     * @return Int
+     */
+    public function getProfileId(): int
     {
         return $this->profileId;
     }
 
+    /**
+     * @param int $profileId
+     */
     public function setProfileId(int $profileId): void
     {
         $this->profileId = $profileId;
     }
-
-
 }

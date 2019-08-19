@@ -6,8 +6,6 @@ use Doctrine\ORM\Mapping as ORM;
 use EryseClient\Entity\Common\CreatedAt;
 use EryseClient\Entity\Common\ExpiresAt;
 use EryseClient\Entity\Common\Identifier;
-use EryseClient\Entity\Server\User\User;
-
 
 /**
  * Class Token
@@ -51,45 +49,67 @@ class Token
      */
     protected $invalid = false;
 
+    /**
+     * @return string
+     */
     public function getHash(): string
     {
         return $this->hash;
     }
 
+    /**
+     * @param string $hash
+     */
     public function setHash(string $hash): void
     {
         $this->hash = $hash;
     }
 
+    /**
+     * @return TokenType
+     */
     public function getType(): TokenType
     {
         return $this->type;
     }
 
+    /**
+     * @param TokenType $type
+     */
     public function setType(TokenType $type): void
     {
         $this->type = $type;
     }
 
+    /**
+     * @return int
+     */
     public function getUserId(): int
     {
         return $this->userId;
     }
 
+    /**
+     * @param int $userId
+     */
     public function setUserId(int $userId): void
     {
         $this->userId = $userId;
     }
 
+    /**
+     * @return bool
+     */
     public function isInvalid(): bool
     {
         return $this->invalid;
     }
 
+    /**
+     * @param bool $invalid
+     */
     public function setInvalid(bool $invalid): void
     {
         $this->invalid = $invalid;
     }
-
-
 }

@@ -11,6 +11,7 @@ use Knp\Component\Pager\PaginatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -23,6 +24,10 @@ class UserController extends AbstractController
 
     /**
      * @Route("/administration/users",name="administration-users-index")
+     * @param Request $request
+     * @param UserRepository $userRepository
+     * @param PaginatorInterface $paginator
+     * @return Response
      */
     public function index(Request $request, UserRepository $userRepository, PaginatorInterface $paginator)
     {
@@ -38,7 +43,7 @@ class UserController extends AbstractController
                 }
 
                 if ($column == "roleEntity") {
-                    /** @var $value Role */
+                    /** @var Role $value */
                     $qb->andWhere("u.role = :role");
                     $qb->setParameter("role", $value->getName());
                     continue;
@@ -63,6 +68,9 @@ class UserController extends AbstractController
 
     /**
      * @Route("/administration/user/{id}/{username}", name="administration-user-view")
+     * @param $id
+     * @param UserRepository $userRepository
+     * @return Response
      */
     public function view($id, UserRepository $userRepository)
     {
@@ -75,6 +83,4 @@ class UserController extends AbstractController
             ["user" => $user, "userForm" => $userForm->createView()]
         );
     }
-
-
 }

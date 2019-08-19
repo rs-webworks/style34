@@ -47,36 +47,51 @@ class Role
      */
     protected $users;
 
+    /**
+     * @return string
+     */
     public function getName(): string
     {
         return $this->name;
     }
 
+    /**
+     * @param string $name
+     */
     public function setName(string $name): void
     {
         $this->name = $name;
     }
 
+    /**
+     * @return string
+     */
     public function getColor(): string
     {
         return $this->color;
     }
 
+    /**
+     * @param string $color
+     */
     public function setColor(string $color): void
     {
         $this->color = $color;
     }
 
+    /**
+     * @return array
+     */
     public function getUsers(): array
     {
         return $this->users;
     }
 
+    /**
+     * @param array $users
+     */
     public function setUsers(array $users): void
     {
         $this->users = $users;
     }
-
-
-
 }

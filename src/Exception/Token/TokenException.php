@@ -1,13 +1,14 @@
 <?php declare(strict_types=1);
+
 namespace EryseClient\Exception\Token;
 
 use EryseClient\Exception\Exception;
+use Throwable;
 
 /**
  * Class TokenException
  * @package EryseClient\Exception\Profile
  */
-class TokenException extends Exception implements \Throwable
+class TokenException extends Exception implements Throwable
 {
-
 }

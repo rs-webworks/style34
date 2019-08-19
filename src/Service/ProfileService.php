@@ -7,6 +7,4 @@ namespace EryseClient\Service;
  */
 class ProfileService extends AbstractService
 {
-
-
 }

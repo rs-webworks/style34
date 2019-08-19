@@ -3,6 +3,8 @@
 namespace EryseClient\Command;
 
 use BrowscapPHP\BrowscapUpdater;
+use BrowscapPHP\Helper\IniLoader;
+use DateTime;
 use Doctrine\Bundle\MigrationsBundle\Command\MigrationsMigrateDoctrineCommand;
 use EryseClient\Entity\Client\Token\TokenType;
 use EryseClient\Entity\Client\User\Role;
@@ -32,7 +34,6 @@ class InstallCommand extends Command
     use EntityManagersTrait;
     use LoggerTrait;
 
-
     /** @var SymfonyStyle $io */
     protected $io;
 
@@ -55,6 +56,7 @@ class InstallCommand extends Command
      * InstallBaseCommand constructor
      * @param CacheInterface $cache
      * @param UserPasswordEncoderInterface $passwordEncoder
+     * @param UserRepository $userRepository
      */
     public function __construct(
         CacheInterface $cache,
@@ -90,7 +92,6 @@ class InstallCommand extends Command
      * @param InputInterface $input
      * @param OutputInterface $output
      * @return int|null|void
-     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
@@ -142,7 +143,6 @@ class InstallCommand extends Command
             $io->newLine();
             $io->text('    <info>app:install --drop</info> to clear database (you will loose all data)');
         }
-
     }
 
     /**
@@ -209,7 +209,6 @@ class InstallCommand extends Command
         $this->io->progressAdvance(1);
         $this->io->progressFinish();
     }
-
 
     /**
      * @throws Exception
@@ -303,10 +302,10 @@ class InstallCommand extends Command
             $user = new User();
             $user->setUsername($username);
             $user->setEmail($email);
-            $user->setCreatedAt(new \DateTime());
+            $user->setCreatedAt(new DateTime());
 
             if ($role === Role::DELETED) {
-                $user->setDeletedAt(new \DateTime());
+                $user->setDeletedAt(new DateTime());
             }
 
             $user->setPassword($this->passwordEncoder->encodePassword($user, $password));
@@ -353,7 +352,7 @@ class InstallCommand extends Command
         $this->io->progressStart(2);
         $browscap_updater = new BrowscapUpdater($this->cacheInterface, $this->logger);
         $this->io->progressAdvance(1);
-        $browscap_updater->update(\BrowscapPHP\Helper\IniLoader::PHP_INI_FULL);
+        $browscap_updater->update(IniLoader::PHP_INI_FULL);
         $this->io->progressFinish();
     }
 
@@ -372,5 +371,4 @@ class InstallCommand extends Command
         $this->io->progressAdvance(1);
         $this->io->progressFinish();
     }
-
 }

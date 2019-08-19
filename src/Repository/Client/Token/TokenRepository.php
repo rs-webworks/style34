@@ -2,6 +2,7 @@
 
 namespace EryseClient\Repository\Client\Token;
 
+use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use EryseClient\Entity\Client\Token\Token;
 use EryseClient\Entity\Client\Token\TokenType;
@@ -39,11 +40,13 @@ class TokenRepository extends ServiceEntityRepository
             ->where('t.type = :tokenType')
             ->andWhere('t.expiresAt < :datetimeNow')
             ->andWhere('t.invalid = :invalid')
-            ->setParameters(array(
-                'tokenType' => $tokenType,
-                'datetimeNow' => new \DateTime(),
-                'invalid' => false
-            ))
+            ->setParameters(
+                [
+                    'tokenType' => $tokenType,
+                    'datetimeNow' => new DateTime(),
+                    'invalid' => false
+                ]
+            )
             ->getQuery()
             ->getResult();
     }
@@ -73,12 +76,14 @@ class TokenRepository extends ServiceEntityRepository
             ->andWhere('t.invalid = :invalid')
             ->andWhere('t.expiresAt > :datetimeNow')
             ->andWhere('t.userId = :userId')
-            ->setParameters(array(
-                'tokenType' => $tokenType,
-                'datetimeNow' => new \DateTime(),
-                'invalid' => false,
-                'userId' => $user->getId()
-            ))
+            ->setParameters(
+                [
+                    'tokenType' => $tokenType,
+                    'datetimeNow' => new DateTime(),
+                    'invalid' => false,
+                    'userId' => $user->getId()
+                ]
+            )
             ->getQuery()
             ->getResult();
     }

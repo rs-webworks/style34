@@ -2,14 +2,11 @@
 
 namespace EryseClient\Form\User;
 
-use DateTime;
 use EryseClient\Entity\Client\User\Role;
 use EryseClient\Entity\Server\User\User;
 use EryseClient\Repository\Client\User\RoleRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\CallbackTransformer;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -23,14 +20,22 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class UserForm extends AbstractType
 {
 
-    /** @var RoleRepository  */
+    /** @var RoleRepository */
     private $roleRepository;
 
+    /**
+     * UserForm constructor.
+     * @param RoleRepository $roleRepository
+     */
     public function __construct(RoleRepository $roleRepository)
     {
         $this->roleRepository = $roleRepository;
     }
 
+    /**
+     * @param FormBuilderInterface $builder
+     * @param array $options
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add(
@@ -93,13 +98,15 @@ class UserForm extends AbstractType
         );
     }
 
+    /**
+     * @param OptionsResolver $resolver
+     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
-            array(
+            [
                 'data_class' => User::class,
-            )
+            ]
         );
     }
-
 }

@@ -23,5 +23,4 @@ trait ServerEntityManagerTrait
     {
         $this->serverEm = $managerRegistry->getManager('eryseServer');
     }
-
 }

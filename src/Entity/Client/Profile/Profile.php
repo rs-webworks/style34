@@ -2,6 +2,7 @@
 
 namespace EryseClient\Entity\Client\Profile;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use EryseClient\Entity\Common\Identifier;
 use EryseClient\Entity\Server\User\User;
@@ -36,41 +37,45 @@ class Profile
     protected $city;
 
     /**
-     * @var \DateTime $birthdate
+     * @var DateTime $birthdate
      * @ORM\Column(nullable=true, type="datetime")
      */
     protected $birthdate;
 
-
     // Methods
     // -----------------------------------------------------------------------------------------------------------------
 
-
     // Birthdate
     // -----------------------------------------------------------------------------------------------------------------
-
-    public function getBirthdate(): \DateTime
+    /**
+     * @return DateTime
+     */
+    public function getBirthdate(): DateTime
     {
         return $this->birthdate;
     }
 
-    public function setBirthdate(\DateTime $birthdate): void
+    /**
+     * @param DateTime $birthdate
+     */
+    public function setBirthdate(DateTime $birthdate): void
     {
         $this->birthdate = $birthdate;
     }
 
-
-
-
-
     // State
     // -----------------------------------------------------------------------------------------------------------------
-
+    /**
+     * @return string|null
+     */
     public function getState(): ?string
     {
         return $this->state;
     }
 
+    /**
+     * @param string $state
+     */
     public function setState(string $state): void
     {
         $this->state = $state;
@@ -79,16 +84,19 @@ class Profile
 
     // City
     // -----------------------------------------------------------------------------------------------------------------
-
+    /**
+     * @return mixed
+     */
     public function getCity()
     {
         return $this->city;
     }
 
+    /**
+     * @param $city
+     */
     public function setCity($city): void
     {
         $this->city = $city;
     }
-
-
 }

@@ -2,7 +2,6 @@
 
 namespace EryseClient\Controller\Administration;
 
-use EryseClient\Utility\ApiClientTrait;
 use EryseClient\Utility\EntityManagersTrait;
 use EryseClient\Utility\LoggerTrait;
 use EryseClient\Utility\TranslatorTrait;
@@ -31,6 +30,4 @@ class ApplicationController extends AbstractController
 
         return $this->render('Administration/dashboard.html.twig');
     }
-
-
 }
