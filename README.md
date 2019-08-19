@@ -1,4 +1,7 @@
 # eRyse Client 
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/01967488cc49481687af144087326bfd)](https://www.codacy.com?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=raitocz/eryse-client&amp;utm_campaign=Badge_Grade)
+
 Community portal interface application to connect at serve content from eRyse CDS. Currently in development. The aim is to provide hub for car owners to quickly 
 organize their cars, parts, sales, car history, events and other stuff.
 
