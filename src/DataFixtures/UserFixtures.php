@@ -4,6 +4,8 @@ namespace EryseClient\DataFixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use EryseClient\Entity\Client\User\Role;
 use EryseClient\Entity\Server\User\User;
 use EryseClient\Repository\Server\User\UserRepository;
@@ -35,6 +37,8 @@ class UserFixtures extends Fixture
 
     /**
      * @param ObjectManager $manager
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function load(ObjectManager $manager): void
     {
@@ -54,5 +58,4 @@ class UserFixtures extends Fixture
             $this->userRepository->saveNew($user);
         }
     }
-
 }

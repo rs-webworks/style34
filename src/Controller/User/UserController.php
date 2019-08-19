@@ -2,6 +2,8 @@
 
 namespace EryseClient\Controller\User;
 
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use EryseClient\Entity\Server\User\User;
 use EryseClient\Form\User\SettingsForm;
 use EryseClient\Repository\Server\User\ServerSettingsRepository;
@@ -101,6 +103,8 @@ class UserController extends AbstractController
      * @param UserRepository $userRepository
      * @param ServerSettingsRepository $serverSettingsRepository
      * @return Response
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function enableTwoStepAuth(
         GoogleAuthenticatorInterface $authService,
@@ -146,6 +150,8 @@ class UserController extends AbstractController
      * @param UserService $userService
      * @param UserInterface|User $user
      * @return RedirectResponse
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function disableTwoStepAuth(UserService $userService, UserInterface $user)
     {
@@ -162,6 +168,8 @@ class UserController extends AbstractController
      * @param UserService $userService
      * @param UserInterface|User $user
      * @return RedirectResponse
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function forgetDevices(UserService $userService, UserInterface $user)
     {
@@ -176,6 +184,8 @@ class UserController extends AbstractController
      * @param UserService $userService
      * @param UserInterface|User $user
      * @return RedirectResponse
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function logoutEverywhere(UserService $userService, UserInterface $user)
     {

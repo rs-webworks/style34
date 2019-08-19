@@ -2,7 +2,6 @@
 
 namespace EryseClient\EntityListener\Client\User;
 
-use Doctrine\ORM\Event\LifecycleEventArgs;
 use EryseClient\Entity\Client\User\Role;
 use EryseClient\Repository\Server\User\UserRepository;
 

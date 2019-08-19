@@ -2,6 +2,8 @@
 
 namespace EryseClient\Controller\User;
 
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use EryseClient\Entity\Client\Token\TokenType;
 use EryseClient\Entity\Server\User\User;
 use EryseClient\Exception\Security\ResetPasswordException;
@@ -72,6 +74,8 @@ class SecurityController extends AbstractController
      * @param TokenRepository $tokenRepository
      * @param UserRepository $userRepository
      * @return RedirectResponse|Response
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function registration(
         Request $request,
@@ -315,10 +319,12 @@ class SecurityController extends AbstractController
                 }
                 $userRepository->save($user);
             } catch (Exception $ex) {
+                $message = $this->translator->trans('reset-password-failed', [], 'profile');
+                $message .= $ex->getMessage() ?? ' - ' . $ex->getMessage();
+
                 $this->addFlash(
                     'danger',
-                    $this->translator->trans('reset-password-failed', [], 'profile') . ($ex->getMessage(
-                        ) ?? ' - ' . $ex->getMessage())
+                    $message
                 );
                 $this->logger->error('controller.user.security.resetPassword: reset failed', [$ex, $tokenHash]);
 

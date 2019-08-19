@@ -3,6 +3,8 @@
 namespace EryseClient\Repository\Client\Token;
 
 use DateTime;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use EryseClient\Entity\Client\Token\Token;
 use EryseClient\Entity\Client\Token\TokenType;
 use EryseClient\Entity\Server\User\User;
@@ -51,6 +53,8 @@ class TokenRepository extends AbstractRepository
 
     /**
      * @param Token[] $tokens
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function invalidateTokens(array $tokens)
     {

@@ -191,12 +191,12 @@
         <target>Dvou-fázové ověření bylo vypnuto.</target>
       </segment>
     </unit>
-    <unit id="EHvLJgU" name="two-step-auth-devices-forgoten">
+    <unit id="EHvLJgU" name="two-step-auth-devices-forgotten">
       <notes>
         <note category="file-source" priority="1">src/Controller/User/UserController.php:165</note>
       </notes>
       <segment>
-        <source>two-step-auth-devices-forgoten</source>
+        <source>two-step-auth-devices-forgotten</source>
         <target>Na všech ostatních zařízeních bude nově potřeba dvou-fázové ověření.</target>
       </segment>
     </unit>

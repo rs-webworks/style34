@@ -1,4 +1,5 @@
-<?php declare(strict_types=1);
+<?php /** @noinspection PhpIncludeInspection */
+declare(strict_types=1);
 
 namespace EryseClient;
 
@@ -20,10 +21,6 @@ use Symfony\Component\Routing\RouteCollectionBuilder;
 class Kernel extends BaseKernel
 {
     use MicroKernelTrait;
-
-    const SITE_NAME = "Style34";
-    const CONTACT_MAIL = "admin@EryseClient.net";
-    const INFO_MAIL = "info@EryseClient.net";
 
     const CONFIG_EXTS = '.{php,xml,yaml,yml}';
 

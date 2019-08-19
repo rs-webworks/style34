@@ -2,7 +2,6 @@
 
 namespace EryseClient\Controller\Profile;
 
-use EryseClient\Repository\Client\Profile\ProfileRepository;
 use EryseClient\Utility\EntityManagersTrait;
 use EryseClient\Utility\LoggerTrait;
 use EryseClient\Utility\TranslatorTrait;
@@ -36,7 +35,6 @@ class ProfileController extends AbstractController
     {
         return $this->render("Profile/list.html.twig");
     }
-
 
     /**
      * @Route("/profile/membership", name="profile-membership")

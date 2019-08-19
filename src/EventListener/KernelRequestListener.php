@@ -3,7 +3,6 @@
 namespace EryseClient\EventListener;
 
 use EryseClient\Service\ProfileService;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\Routing\Router;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;

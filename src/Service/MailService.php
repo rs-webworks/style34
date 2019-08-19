@@ -4,10 +4,10 @@ namespace EryseClient\Service;
 
 use EryseClient\Entity\Client\Token\Token;
 use EryseClient\Entity\Server\User\User;
-use EryseClient\Kernel;
 use EryseClient\Utility\TranslatorTrait;
 use Swift_Mailer;
 use Swift_Message;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
 use Twig\Error\LoaderError;
@@ -29,15 +29,20 @@ class MailService extends AbstractService
     /** @var Response $renderer */
     protected $renderer;
 
+    /** @var ParameterBagInterface */
+    private $parameterBag;
+
     /**
      * MailService constructor.
      * @param Swift_Mailer $mailer
      * @param Environment $renderer
+     * @param ParameterBagInterface $parameterBag
      */
-    public function __construct(Swift_Mailer $mailer, Environment $renderer)
+    public function __construct(Swift_Mailer $mailer, Environment $renderer, ParameterBagInterface $parameterBag)
     {
         $this->mailer = $mailer;
         $this->renderer = $renderer;
+        $this->parameterBag = $parameterBag;
     }
 
     /**
@@ -50,8 +55,12 @@ class MailService extends AbstractService
     public function sendActivationMail(User $user, Token $token): void
     {
         $message = (new Swift_Message(
-            Kernel::SITE_NAME . ' - ' . $this->translator->trans('email-activation-title', [], 'profile')
-        ))->setFrom(Kernel::INFO_MAIL)
+            $this->parameterBag->get("eryseClient.name") . ' - ' . $this->translator->trans(
+                'email-activation-title',
+                [],
+                'profile'
+            )
+        ))->setFrom($this->parameterBag->get("eryseClient.emails.info"))
             ->setTo($user->getEmail())
             ->setBody(
                 $this->renderer->render(
@@ -77,8 +86,12 @@ class MailService extends AbstractService
     public function sendRequestResetPasswordMail(User $user, Token $token)
     {
         $message = (new Swift_Message(
-            Kernel::SITE_NAME . ' - ' . $this->translator->trans('email-request-reset-password-title', [], 'profile')
-        ))->setFrom(Kernel::INFO_MAIL)
+            $this->parameterBag->get("eryseClient.name") . ' - ' . $this->translator->trans(
+                'email-request-reset-password-title',
+                [],
+                'profile'
+            )
+        ))->setFrom($this->parameterBag->get("eryseClient.emails.info"))
             ->setTo($user->getEmail())
             ->setBody(
                 $this->renderer->render(

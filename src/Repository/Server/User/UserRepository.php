@@ -91,6 +91,8 @@ class UserRepository extends AbstractRepository implements UserLoaderInterface
 
     /**
      * @param array $users
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function removeUsers(array $users): void
     {

@@ -3,6 +3,8 @@
 namespace EryseClient\Service;
 
 use DateTime;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use EryseClient\Entity\Client\Token\Token;
 use EryseClient\Entity\Client\Token\TokenType;
 use EryseClient\Entity\Client\User\Role;
@@ -10,7 +12,6 @@ use EryseClient\Entity\Server\User\User;
 use EryseClient\Exception\Token\ExpiredTokenException;
 use EryseClient\Exception\Token\InvalidTokenException;
 use EryseClient\Exception\User\ActivationException;
-use EryseClient\Kernel;
 use EryseClient\Repository\Client\Token\RememberMeTokenRepository;
 use EryseClient\Repository\Client\Token\TokenRepository;
 use EryseClient\Repository\Client\Token\TokenTypeRepository;
@@ -20,6 +21,7 @@ use EryseClient\Utility\EntityManagersTrait;
 use EryseClient\Utility\LoggerTrait;
 use EryseClient\Utility\TranslatorTrait;
 use Exception;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
@@ -56,6 +58,9 @@ class UserService extends AbstractService
     /** @var RememberMeTokenRepository */
     private $rememberMeTokenRepository;
 
+    /** @var ParameterBagInterface */
+    private $parameterBag;
+
     /**
      * UserService constructor.
      * @param UserPasswordEncoderInterface $passwordEncoder
@@ -66,6 +71,7 @@ class UserService extends AbstractService
      * @param ServerSettingsRepository $serverSettingsRepository
      * @param UserRepository $userRepository
      * @param RememberMeTokenRepository $rememberMeTokenRepository
+     * @param ParameterBagInterface $parameterBag
      */
     public function __construct(
         UserPasswordEncoderInterface $passwordEncoder,
@@ -75,7 +81,8 @@ class UserService extends AbstractService
         TokenRepository $tokenRepository,
         ServerSettingsRepository $serverSettingsRepository,
         UserRepository $userRepository,
-        RememberMeTokenRepository $rememberMeTokenRepository
+        RememberMeTokenRepository $rememberMeTokenRepository,
+        ParameterBagInterface $parameterBag
     ) {
         $this->passwordEncoder = $passwordEncoder;
         $this->tokenService = $tokenService;
@@ -85,6 +92,7 @@ class UserService extends AbstractService
         $this->serverSettingsRepository = $serverSettingsRepository;
         $this->userRepository = $userRepository;
         $this->rememberMeTokenRepository = $rememberMeTokenRepository;
+        $this->parameterBag = $parameterBag;
     }
 
     /**
@@ -140,7 +148,7 @@ class UserService extends AbstractService
         throw new ActivationException(
             $this->translator->trans(
                 'contact-support',
-                ['contact-mail' => Kernel::CONTACT_MAIL],
+                ['contact-mail' => $this->parameterBag->get("eryseClient.emails.admin")],
                 'global'
             )
         );
@@ -204,6 +212,8 @@ class UserService extends AbstractService
     /**
      * @param User $user
      * @param string $secret
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function enableTwoStepAuth(User $user, string $secret): void
     {
@@ -216,6 +226,8 @@ class UserService extends AbstractService
 
     /**
      * @param User $user
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function disableTwoStepAuth(User $user): void
     {
@@ -231,6 +243,8 @@ class UserService extends AbstractService
 
     /**
      * @param User $user
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function forgetDevices(User $user): void
     {
@@ -251,6 +265,8 @@ class UserService extends AbstractService
 
     /**
      * @param User $user
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function logoutEverywhere(User $user): void
     {
