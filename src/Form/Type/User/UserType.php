@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace EryseClient\Form\Typ\User;
+namespace EryseClient\Form\Type\User;
 
 use EryseClient\Entity\Client\User\Role;
 use EryseClient\Entity\Server\User\User;
