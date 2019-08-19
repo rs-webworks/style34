@@ -272,6 +272,7 @@ class User implements UserInterface, TrustedDeviceInterface
     }
 
     /**
+     * This is used internally in Symfony security
      * @return array
      */
     public function getRoles()
