@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace EryseClient\Form\User;
+namespace EryseClient\Form\Type\User;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -10,7 +10,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  * Class SettingsForm
  * @package EryseClient\Form\Profile
  */
-class SettingsForm extends AbstractType
+class SettingsType extends AbstractType
 {
 
     /**

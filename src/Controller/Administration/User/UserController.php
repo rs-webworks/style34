@@ -4,8 +4,8 @@ namespace EryseClient\Controller\Administration\User;
 
 use EryseClient\Controller\ControllerSettings;
 use EryseClient\Entity\Client\User\Role;
-use EryseClient\Form\Administration\User\UserSearchForm;
-use EryseClient\Form\User\UserForm;
+use EryseClient\Form\Type\Administration\User\UserSearchType;
+use EryseClient\Form\Type\User\UserType;
 use EryseClient\Repository\Server\User\UserRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -31,7 +31,7 @@ class UserController extends AbstractController
      */
     public function index(Request $request, UserRepository $userRepository, PaginatorInterface $paginator)
     {
-        $searchForm = $this->createForm(UserSearchForm::class);
+        $searchForm = $this->createForm(UserSearchType::class);
         $qb = $userRepository->createQueryBuilder('u')
             ->orderBy("u.id");
         $searchForm->handleRequest($request);
@@ -75,7 +75,7 @@ class UserController extends AbstractController
     public function view($id, UserRepository $userRepository)
     {
         $user = $userRepository->find($id);
-        $userForm = $this->createForm(UserForm::class, $user);
+        $userForm = $this->createForm(UserType::class, $user);
         $userForm->remove("username");
 
         return $this->render(

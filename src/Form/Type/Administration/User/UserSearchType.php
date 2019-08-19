@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace EryseClient\Form\Administration\User;
+namespace EryseClient\Form\Type\Administration\User;
 
 use EryseClient\Entity\Client\User\Role;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -9,10 +9,10 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Class UserSearchForm
- * @package EryseClient\Form\Administration\User
+ * Class UserSearchType
+ * @package EryseClient\Form\Type\Administration\User
  */
-class UserSearchForm extends AbstractType
+class UserSearchType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder

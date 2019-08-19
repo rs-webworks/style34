@@ -5,7 +5,7 @@ namespace EryseClient\Controller\User;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use EryseClient\Entity\Server\User\User;
-use EryseClient\Form\User\SettingsForm;
+use EryseClient\Form\Type\User\SettingsType;
 use EryseClient\Repository\Server\User\ServerSettingsRepository;
 use EryseClient\Repository\Server\User\UserRepository;
 use EryseClient\Service\UserService;
@@ -77,7 +77,7 @@ class UserController extends AbstractController
         /** @var User $user */
         $user = $this->getUser();
 
-        $form = $this->createForm(SettingsForm::class);
+        $form = $this->createForm(SettingsType::class);
         $form->handleRequest($request);
 
 //        if ($form->isSubmitted() && $form->isValid()) {

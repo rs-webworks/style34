@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace EryseClient\Form\User;
+namespace EryseClient\Form\Typ\User;
 
 use EryseClient\Entity\Client\User\Role;
 use EryseClient\Entity\Server\User\User;
@@ -17,7 +17,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  * Class UserForm
  * @package EryseClient\Form\User
  */
-class UserForm extends AbstractType
+class UserType extends AbstractType
 {
 
     /** @var RoleRepository */

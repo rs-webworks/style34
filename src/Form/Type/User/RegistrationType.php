@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace EryseClient\Form\User;
+namespace EryseClient\Form\Type\User;
 
 use EryseClient\Entity\Server\User\User;
 use Symfony\Component\Form\AbstractType;
@@ -15,7 +15,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  * Class RegistrationForm
  * @package EryseClient\Form
  */
-class RegistrationForm extends AbstractType
+class RegistrationType extends AbstractType
 {
 
     /**

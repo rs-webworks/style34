@@ -8,7 +8,7 @@ use EryseClient\Entity\Client\Token\TokenType;
 use EryseClient\Entity\Server\User\User;
 use EryseClient\Exception\Security\ResetPasswordException;
 use EryseClient\Exception\User\ActivationException;
-use EryseClient\Form\User\RegistrationForm;
+use EryseClient\Form\Type\User\RegistrationType;
 use EryseClient\Repository\Client\Token\TokenRepository;
 use EryseClient\Repository\Client\Token\TokenTypeRepository;
 use EryseClient\Repository\Server\User\UserRepository;
@@ -93,7 +93,7 @@ class SecurityController extends AbstractController
 
         // Load form data
         $user = new User();
-        $form = $this->createForm(RegistrationForm::class, $user);
+        $form = $this->createForm(RegistrationType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
