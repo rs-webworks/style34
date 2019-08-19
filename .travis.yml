@@ -38,8 +38,11 @@ matrix:
 
 before_install:
   - '[[ "$TRAVIS_PHP_VERSION" == "7.4snapshot" ]] || phpenv config-rm xdebug.ini'
+  - sudo apt update
+  - sudo apt install -y php-curl php-iconv php-json php-ctype
+  - echo "extension = <php_http>.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+  - echo "extension = <php_openssl>.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
   - composer self-update
-  - sudo apt install -y php-http php-curl php-iconv php-json php-openssl php-ctype
   # Set memory to max (memory fail)
   - '[[ "$ACTION" == "install" ]] || echo "memory_limit=-1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini'
   # Install before update because of memory usage
