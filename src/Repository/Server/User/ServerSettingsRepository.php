@@ -2,11 +2,10 @@
 
 namespace EryseClient\Repository\Server\User;
 
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use EryseClient\Entity\Server\User\ServerSettings;
 use EryseClient\Entity\Server\User\User;
+use EryseClient\Repository\AbstractRepository;
 use EryseClient\Utility\FindByUserTrait;
-use EryseClient\Utility\SaveEntityTrait;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -15,9 +14,8 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  * @method ServerSettings|null find($id, $lockMode = null, $lockVersion = null)
  * @method ServerSettings|null findByUser(User $user)
  */
-class ServerSettingsRepository extends ServiceEntityRepository
+class ServerSettingsRepository extends AbstractRepository
 {
-    use SaveEntityTrait;
     use FindByUserTrait;
 
     /**

@@ -2,9 +2,8 @@
 
 namespace EryseClient\Repository\Client\Profile;
 
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use EryseClient\Entity\Client\Profile\Profile;
-use EryseClient\Utility\SaveEntityTrait;
+use EryseClient\Repository\AbstractRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -13,10 +12,8 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  * @method Profile|null findOneBy(array $criteria, array $orderBy = null)
  * @method Profile|null find($id, $lockMode = null, $lockVersion = null)
  */
-class ProfileRepository extends ServiceEntityRepository
+class ProfileRepository extends AbstractRepository
 {
-    use SaveEntityTrait;
-
     /**
      * ProfileRepository constructor
      * @param RegistryInterface $registry

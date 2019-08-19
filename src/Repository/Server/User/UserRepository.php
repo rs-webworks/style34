@@ -2,14 +2,15 @@
 
 namespace EryseClient\Repository\Server\User;
 
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use EryseClient\Entity\Client\User\ClientSettings;
 use EryseClient\Entity\Server\User\GoogleAuth;
 use EryseClient\Entity\Server\User\ServerSettings;
 use EryseClient\Entity\Server\User\User;
+use EryseClient\Repository\AbstractRepository;
 use EryseClient\Repository\Client\User\ClientSettingsRepository;
-use EryseClient\Utility\SaveEntityTrait;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -20,9 +21,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * @method User|null findOneBy(array $criteria, array $orderBy = null)
  * @method User|null find($id, $lockMode = null, $lockVersion = null)
  */
-class UserRepository extends ServiceEntityRepository implements UserLoaderInterface
+class UserRepository extends AbstractRepository implements UserLoaderInterface
 {
-    use SaveEntityTrait;
 
     /** @var ServerSettingsRepository */
     private $serverSettingsRepository;
@@ -48,6 +48,8 @@ class UserRepository extends ServiceEntityRepository implements UserLoaderInterf
 
     /**
      * @param User $user
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function saveNew(User $user): void
     {

@@ -2,9 +2,8 @@
 
 namespace EryseClient\Repository\Client\User;
 
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use EryseClient\Entity\Client\User\Role;
-use EryseClient\Utility\SaveEntityTrait;
+use EryseClient\Repository\AbstractRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -13,9 +12,8 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  * @method Role|null findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  * @method Role|null findOneBy(array $criteria, array $orderBy = null)
  */
-class RoleRepository extends ServiceEntityRepository
+class RoleRepository extends AbstractRepository
 {
-    use SaveEntityTrait;
 
     /**
      * RoleRepository constructor

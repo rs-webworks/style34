@@ -2,20 +2,17 @@
 
 namespace EryseClient\Repository\Client\Token;
 
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use EryseClient\Entity\Client\Token\RememberMeToken;
 use EryseClient\Entity\Server\User\User;
-use EryseClient\Utility\SaveEntityTrait;
+use EryseClient\Repository\AbstractRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
  * Class RememberMeTokenRepository
  * @method RememberMeToken|null findOneBy(array $criteria, array $orderBy = null)
  */
-class RememberMeTokenRepository extends ServiceEntityRepository
+class RememberMeTokenRepository extends AbstractRepository
 {
-    use SaveEntityTrait;
-
     /**
      * RememberMeTokenRepository constructor.
      * @param RegistryInterface $registry

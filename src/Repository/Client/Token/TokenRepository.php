@@ -3,11 +3,10 @@
 namespace EryseClient\Repository\Client\Token;
 
 use DateTime;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use EryseClient\Entity\Client\Token\Token;
 use EryseClient\Entity\Client\Token\TokenType;
 use EryseClient\Entity\Server\User\User;
-use EryseClient\Utility\SaveEntityTrait;
+use EryseClient\Repository\AbstractRepository;
 use Exception;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -16,9 +15,8 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  * @package EryseClient\Repository\Token
  * @method Token|null findOneBy(array $criteria, array $orderBy = null)
  */
-class TokenRepository extends ServiceEntityRepository
+class TokenRepository extends AbstractRepository
 {
-    use SaveEntityTrait;
 
     /**
      * TokenRepository constructor.
