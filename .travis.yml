@@ -16,7 +16,6 @@ env:
 matrix:
   fast_finish: true
   include:
-    - php: 7.1.18
     - php: 7.2
     - php: 7.3
     # 'php: nightly' is PHP 8.0
@@ -28,6 +27,7 @@ matrix:
       env: SYMFONY="5.0.*"
         ACTION="update"
   allow_failures:
+    - php: 7.1.18
     - php: 7.4snapshot
     - php: 7.3
       env: SYMFONY="4.4.*"
@@ -39,6 +39,7 @@ matrix:
 before_install:
   - '[[ "$TRAVIS_PHP_VERSION" == "7.4snapshot" ]] || phpenv config-rm xdebug.ini'
   - composer self-update
+  - sudo apt install -y php-http php-curl php-iconv php-json php-openssl php-ctype
   # Set memory to max (memory fail)
   - '[[ "$ACTION" == "install" ]] || echo "memory_limit=-1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini'
   # Install before update because of memory usage
