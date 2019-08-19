@@ -1,9 +1,15 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace EryseClient\Tests\Service;
 
+use DateInterval;
+use DateTime;
 use EryseClient\Entity\Client\Profile\Profile;
+use EryseClient\Entity\Client\Token\Token;
+use EryseClient\Entity\Client\Token\TokenType;
+use EryseClient\Entity\Server\User\User;
 use EryseClient\Service\TokenService;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 /**
@@ -28,7 +34,7 @@ class TokenServiceTest extends WebTestCase
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      * @covers \EryseClient\Service\TokenService::generateActivationToken
      */
     public function testGetActivationToken()
@@ -36,24 +42,33 @@ class TokenServiceTest extends WebTestCase
         $tokenHashes = [];
 
         for ($i = 0; $i <= 10; $i++) {
-            $token = $this->tokenService->getActivationToken(new Profile());
+            $user = new User();
+            $user->setId(1);
+            $token = $this->tokenService->getActivationToken($user);
 
             $ca = $token->getCreatedAt();
             $ea = $token->getExpiresAt();
 
-            $this->assertEquals('000200', $ca->diff($ea)->format('%y%m%a%h%i%s'));
-            $this->assertEquals(TokenType::PROFILE['ACTIVATION'], $token->getType()->getName());
+            $this->assertEquals(
+                '000200',
+                $ca->diff($ea)
+                    ->format('%y%m%a%h%i%s')
+            );
+            $this->assertEquals(
+                TokenType::USER['ACTIVATION'],
+                $token->getType()
+                    ->getName()
+            );
             $this->assertEquals(40, strlen($token->getHash()));
             $this->assertFalse(array_key_exists($token->getHash(), $tokenHashes));
 
             $tokenHashes[] = $token->getHash();
         }
-
     }
 
     /**
      * @dataProvider provideExpirationTokens
-     * @throws \Exception
+     * @throws Exception
      * @covers       \EryseClient\Service\TokenService::isExpired
      */
     public function testIsExpired($expired, $token)
@@ -80,15 +95,14 @@ class TokenServiceTest extends WebTestCase
         $this->assertFalse($this->tokenService->isValid($invalidToken));
     }
 
-
     /**
-     * @throws \Exception
+     * @throws Exception
      * @covers \EryseClient\Service\TokenService::createExpirationDateTime
      */
     public function testCreateExpiraitonDateTime()
     {
-        $startTime = new \DateTime('2018-01-01 00:00:00');
-        $expectedExpiryTime = new \DateTime('2018-01-02 00:00:00');
+        $startTime = new DateTime('2018-01-01 00:00:00');
+        $expectedExpiryTime = new DateTime('2018-01-02 00:00:00');
 
         $reultTime = $this->tokenService->createExpirationDateTime($startTime, Token::EXPIRY_DAY);
 
@@ -97,32 +111,32 @@ class TokenServiceTest extends WebTestCase
 
     /**
      * @return array
-     * @throws \Exception
+     * @throws Exception
      */
     public function provideExpirationTokens()
     {
         $tokens = [];
 
         $token = new Token();
-        $token->setCreatedAt(new \DateTime('2018-01-01 00:00:00'));
-        $token->setExpiresAt(new \DateTime('2012-01-01 00:00:00'));
+        $token->setCreatedAt(new DateTime('2018-01-01 00:00:00'));
+        $token->setExpiresAt(new DateTime('2012-01-01 00:00:00'));
         $token->setType(new TokenType());
         $token->setHash(sha1(random_bytes(4)));
         $token->setInvalid(false);
-        $token->setProfile(new Profile());
+        $token->setUserId(1);
 
-        $tokens['expired token'] = array(true, $token);
+        $tokens['expired token'] = [true, $token];
 
         $token = new Token();
-        $token->setCreatedAt(new \DateTime('2018-01-01 00:00:00'));
-        $expires = new \DateTime();
-        $token->setExpiresAt($expires->add(new \DateInterval("PT1H")));
+        $token->setCreatedAt(new DateTime('2018-01-01 00:00:00'));
+        $expires = new DateTime();
+        $token->setExpiresAt($expires->add(new DateInterval("PT1H")));
         $token->setType(new TokenType());
         $token->setHash(sha1(random_bytes(4)));
         $token->setInvalid(false);
-        $token->setProfile(new Profile());
+        $token->setUserId(1);
 
-        $tokens['un-exired token'] = array(false, $token);
+        $tokens['un-exired token'] = [false, $token];
 
         return $tokens;
 
