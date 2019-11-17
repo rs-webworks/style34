@@ -6,6 +6,7 @@ use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use EryseClient\Entity\Common\Identifier;
 use EryseClient\Entity\Server\User\User;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -14,16 +15,27 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="profiles")
  * @ORM\Entity(repositoryClass="EryseClient\Repository\Client\Profile\ProfileRepository")
  */
-class Profile
+class Profile implements UserInterface
 {
 
     use Identifier;
 
     /**
-     * @var User
+     * @var int
      * @ORM\Column(type="integer", nullable=false)
      */
+    protected $userId;
+
+    /**
+     * @var User
+     */
     protected $user;
+
+    /**
+     * @var Role
+     * @ORM\ManyToOne(targetEntity="EryseClient\Entity\Client\Profile\Role", inversedBy="profiles")
+     */
+    protected $role;
 
     /**
      * @ORM\Column(type="string", nullable=true)
@@ -42,8 +54,89 @@ class Profile
      */
     protected $birthdate;
 
-    // Methods
+    /**
+     * This is used only internally by symfony/security. Use $this->getRole() in order to get user role directly.
+     * @inheritDoc
+     */
+    public function getRoles()
+    {
+        return [$this->role->getName()];
+    }
+
+    /**
+     * @inheritDoc
+     * @return string|void
+     */
+    public function getPassword()
+    {
+        $this->getUser()
+            ->getPassword();
+    }
+
+    /**
+     * @inheritDoc
+     * @return string|void|null
+     */
+    public function getSalt()
+    {
+        $this->getUser()
+            ->getSalt();
+    }
+
+    /**
+     * @inheritDoc
+     * @return string|void
+     */
+    public function getUsername()
+    {
+        $this->getUser()
+            ->getUsername();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function eraseCredentials()
+    {
+        $this->user->eraseCredentials();
+    }
+
+
+
+    // User
     // -----------------------------------------------------------------------------------------------------------------
+    /**
+     * @return int
+     */
+    public function getUserId(): int
+    {
+        return $this->userId;
+    }
+
+    /**
+     * @param int $userId
+     */
+    public function setUserId(int $userId): void
+    {
+        $this->userId = $userId;
+    }
+
+    /**
+     * @return User
+     */
+    public function getUser(): User
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param User $user
+     */
+    public function setUser(User $user): void
+    {
+        $this->user = $user;
+    }
+
 
     // Birthdate
     // -----------------------------------------------------------------------------------------------------------------
@@ -98,5 +191,23 @@ class Profile
     public function setCity($city): void
     {
         $this->city = $city;
+    }
+
+    // City
+    // -----------------------------------------------------------------------------------------------------------------
+    /**
+     * @return Role
+     */
+    public function getRole(): Role
+    {
+        return $this->role;
+    }
+
+    /**
+     * @param Role $role
+     */
+    public function setRole(Role $role): void
+    {
+        $this->role = $role;
     }
 }

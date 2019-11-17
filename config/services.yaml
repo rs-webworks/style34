@@ -67,9 +67,9 @@ services:
         public: false
 
     # Event listeners
-    EryseClient\EventListener\KernelRequestListener:
-        tags:
-            - { name: kernel.event_listener, event: kernel.request }
+#    EryseClient\EventListener\KernelRequestListener:
+#        tags:
+#            - { name: kernel.event_listener, event: kernel.request }
 
 
 imports:

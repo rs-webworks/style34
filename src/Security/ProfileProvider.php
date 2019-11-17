@@ -2,8 +2,9 @@
 
 namespace EryseClient\Security;
 
+use EryseClient\Entity\Client\Profile\Profile;
 use EryseClient\Entity\Server\User\User;
-use EryseClient\Repository\Server\User\UserRepository;
+use EryseClient\Repository\Client\Profile\ProfileRepository;
 use Exception;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
@@ -15,19 +16,19 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
  * Class UserProvider
  * @package EryseClient\Security
  */
-class UserProvider implements UserProviderInterface
+class ProfileProvider implements UserProviderInterface
 {
-    /** @var UserRepository */
-    private $userRepository;
+    /** @var ProfileRepository */
+    private $profileRepository;
 
     /**
      * UserProvider constructor.
-     * @param UserRepository $userRepository
+     * @param ProfileRepository $profileRepository
      */
     public function __construct(
-        UserRepository $userRepository
+        ProfileRepository $profileRepository
     ) {
-        $this->userRepository = $userRepository;
+        $this->profileRepository = $profileRepository;
     }
 
     /**
@@ -37,12 +38,12 @@ class UserProvider implements UserProviderInterface
      */
     public function loadUserByUsername($username)
     {
-        $user = $this->userRepository->loadUserByUsername($username) ?? false;
-        if (!$user) {
+        $profile = $this->profileRepository->loadUserByUsername($username) ?? false;
+        if (!$profile) {
             throw new UsernameNotFoundException();
         }
 
-        return $user;
+        return $profile;
     }
 
     /**
@@ -56,18 +57,20 @@ class UserProvider implements UserProviderInterface
      * @param UserInterface $user
      * @return UserInterface
      */
-    public function refreshUser(UserInterface $user)
+    public function refreshUser(UserInterface $profile)
     {
-        if (!$user instanceof User) {
-            throw new UnsupportedUserException(sprintf('Invalid user class "%s".', get_class($user)));
+        if (!$profile instanceof Profile) {
+            throw new UnsupportedUserException(sprintf('Invalid user class "%s".', get_class($profile)));
         }
 
-        $refreshedUser = $this->userRepository->find($user->getId());
-        if ($refreshedUser->getTrustedTokenVersion() !== $user->getTrustedTokenVersion()) {
+        $refreshedProfile = $this->profileRepository->find($profile->id);
+        if ($refreshedProfile->getUser()
+                ->getTrustedTokenVersion() !== $profile->getUser()
+                ->getTrustedTokenVersion()) {
             throw new AuthenticationException();
         }
 
-        return $refreshedUser;
+        return $refreshedProfile;
     }
 
     /**

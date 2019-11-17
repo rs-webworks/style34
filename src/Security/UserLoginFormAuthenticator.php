@@ -3,7 +3,7 @@
 namespace EryseClient\Security;
 
 use Doctrine\ORM\NonUniqueResultException;
-use EryseClient\Entity\Client\User\Role;
+use EryseClient\Entity\Server\User\Role;
 use EryseClient\Entity\Server\User\User;
 use EryseClient\Exception\Security\LoginException;
 use EryseClient\Repository\Server\User\UserRepository;
@@ -30,7 +30,7 @@ use Symfony\Component\Security\Http\Util\TargetPathTrait;
  * Class LoginFormAuthenticator
  * @package EryseClient\Security
  */
-class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
+class UserLoginFormAuthenticator extends AbstractFormLoginAuthenticator
 {
     use TargetPathTrait;
     use TranslatorTrait;

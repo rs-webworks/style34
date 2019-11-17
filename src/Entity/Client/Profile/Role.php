@@ -1,10 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace EryseClient\Entity\Client\User;
+namespace EryseClient\Entity\Client\Profile;
 
 use Doctrine\ORM\Mapping as ORM;
 use EryseClient\Entity\Common\Identifier;
-use EryseClient\Entity\Server\User\User;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -43,9 +42,10 @@ class Role
     protected $color;
 
     /**
-     * @var User[]
+     * @var Profile[]
+     * @ORM\OneToMany(targetEntity="EryseClient\Entity\Client\Profile\Profile", mappedBy="role")
      */
-    protected $users;
+    protected $profiles;
 
     /**
      * @return string
@@ -80,18 +80,20 @@ class Role
     }
 
     /**
-     * @return array
+     * @return Profile[]
      */
-    public function getUsers(): array
+    public function getProfiles(): array
     {
-        return $this->users;
+        return $this->profiles;
     }
 
     /**
-     * @param array $users
+     * @param Profile[] $profiles
      */
-    public function setUsers(array $users): void
+    public function setProfiles(array $profiles): void
     {
-        $this->users = $users;
+        $this->profiles = $profiles;
     }
+
+
 }

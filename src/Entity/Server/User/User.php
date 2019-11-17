@@ -4,7 +4,6 @@ namespace EryseClient\Entity\Server\User;
 
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
-use EryseClient\Entity\Client\User\Role;
 use EryseClient\Entity\Common\CreatedAt;
 use EryseClient\Entity\Common\DeletedAt;
 use Scheb\TwoFactorBundle\Model\TrustedDeviceInterface;
@@ -80,11 +79,6 @@ class User implements UserInterface, TrustedDeviceInterface
      * @ORM\Column(type="string")
      */
     protected $role;
-
-    /**
-     * @var Role
-     */
-    protected $roleEntity;
 
     /**
      * @var string $lastIp
@@ -279,23 +273,6 @@ class User implements UserInterface, TrustedDeviceInterface
     {
         return [$this->getRole()];
     }
-
-    /**
-     * @return Role
-     */
-    public function getRoleEntity(): Role
-    {
-        return $this->roleEntity;
-    }
-
-    /**
-     * @param Role $roleEntity
-     */
-    public function setRoleEntity(Role $roleEntity): void
-    {
-        $this->roleEntity = $roleEntity;
-    }
-
 
     // Last Ip
     // -----------------------------------------------------------------------------------------------------------------
