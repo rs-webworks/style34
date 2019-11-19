@@ -4,8 +4,8 @@ namespace EryseClient\Repository\Client\Token;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use EryseClient\Entity\Client\Token\TokenType;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
  * Class TokenTypeRepository
@@ -16,9 +16,9 @@ class TokenTypeRepository extends ServiceEntityRepository implements ServiceEnti
 {
     /**
      * TokenRepository constructor.
-     * @param RegistryInterface $registry
+     * @param ManagerRegistry $registry
      */
-    public function __construct(RegistryInterface $registry)
+    public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, TokenType::class);
     }

@@ -3,7 +3,7 @@
 namespace EryseClient\Controller\Administration\User;
 
 use EryseClient\Controller\ControllerSettings;
-use EryseClient\Entity\Client\User\Role;
+use EryseClient\Entity\Client\Profile\Role;
 use EryseClient\Form\Type\Administration\User\UserSearchType;
 use EryseClient\Form\Type\User\UserType;
 use EryseClient\Repository\Server\User\UserRepository;
@@ -17,7 +17,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * Class RoleController
  * @package EryseClient\Controller\Administration\User
- * @IsGranted(EryseClient\Entity\Client\User\Role::ADMIN)
+ * @IsGranted(EryseClient\Entity\Client\Profile\Role::ADMIN)
  */
 class UserController extends AbstractController
 {

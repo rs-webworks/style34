@@ -25,7 +25,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * Class UserController
  * @package EryseClient\Controller\User
- * @IsGranted(EryseClient\Entity\Client\User\Role::INACTIVE)
+ * @IsGranted(EryseClient\Entity\Client\Profile\Role::INACTIVE)
  */
 class UserController extends AbstractController
 {

@@ -2,7 +2,7 @@
 
 namespace EryseClient\Form\Type\Administration\User;
 
-use EryseClient\Entity\Client\User\Role;
+use EryseClient\Entity\Server\User\Role;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;

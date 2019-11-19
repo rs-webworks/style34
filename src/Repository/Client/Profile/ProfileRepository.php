@@ -2,12 +2,12 @@
 
 namespace EryseClient\Repository\Client\Profile;
 
+use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\NonUniqueResultException;
 use EryseClient\Entity\Client\Profile\Profile;
 use EryseClient\Entity\Server\User\User;
 use EryseClient\Repository\AbstractRepository;
 use EryseClient\Repository\Server\User\UserRepository;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -26,10 +26,10 @@ class ProfileRepository extends AbstractRepository implements UserLoaderInterfac
 
     /**
      * ProfileRepository constructor
-     * @param RegistryInterface $registry
+     * @param ManagerRegistry $registry
      * @param UserRepository $userRepository
      */
-    public function __construct(RegistryInterface $registry, UserRepository $userRepository)
+    public function __construct(ManagerRegistry $registry, UserRepository $userRepository)
     {
         parent::__construct($registry, Profile::class);
         $this->userRepository = $userRepository;

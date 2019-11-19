@@ -2,9 +2,9 @@
 
 namespace EryseClient\Repository\Client\User;
 
-use EryseClient\Entity\Client\User\Role;
+use Doctrine\Common\Persistence\ManagerRegistry;
+use EryseClient\Entity\Client\Profile\Role;
 use EryseClient\Repository\AbstractRepository;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
  * Class RoleRepository
@@ -17,9 +17,9 @@ class RoleRepository extends AbstractRepository
 
     /**
      * RoleRepository constructor
-     * @param RegistryInterface $registry
+     * @param ManagerRegistry $registry
      */
-    public function __construct(RegistryInterface $registry)
+    public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Role::class);
     }

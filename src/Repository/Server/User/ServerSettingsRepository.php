@@ -2,11 +2,11 @@
 
 namespace EryseClient\Repository\Server\User;
 
+use Doctrine\Common\Persistence\ManagerRegistry;
 use EryseClient\Entity\Server\User\ServerSettings;
 use EryseClient\Entity\Server\User\User;
 use EryseClient\Repository\AbstractRepository;
 use EryseClient\Utility\FindByUserTrait;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
  * Class ServiceSettingsRepository
@@ -20,9 +20,9 @@ class ServerSettingsRepository extends AbstractRepository
 
     /**
      * ServerSettingsRepository constructor.
-     * @param RegistryInterface $registry
+     * @param ManagerRegistry $registry
      */
-    public function __construct(RegistryInterface $registry)
+    public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, ServerSettings::class);
     }

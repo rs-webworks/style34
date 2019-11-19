@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * Class ApplicationController
  * @package EryseClient\Controller\Administration\Application
- * @IsGranted(EryseClient\Entity\Client\User\Role::ADMIN)
+ * @IsGranted(EryseClient\Entity\Client\Profile\Role::ADMIN)
  */
 class ApplicationController extends AbstractController
 {

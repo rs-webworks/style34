@@ -54,7 +54,7 @@ class ProfileProvider implements UserProviderInterface
      * for example, re-querying for fresh User data.
      * If your firewall is "stateless: true" (for a pure API), this
      * method is not called.
-     * @param UserInterface $user
+     * @param UserInterface $profile
      * @return UserInterface
      */
     public function refreshUser(UserInterface $profile)

@@ -3,8 +3,8 @@
 namespace EryseClient\Repository\Server\User;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use EryseClient\Entity\Server\User\Device;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
  * Class DeviceRepository
@@ -15,9 +15,9 @@ class DeviceRepository extends ServiceEntityRepository
 
     /**
      * DeviceRepository constructor.
-     * @param RegistryInterface $registry
+     * @param ManagerRegistry $registry
      */
-    public function __construct(RegistryInterface $registry)
+    public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Device::class);
     }

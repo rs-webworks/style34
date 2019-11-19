@@ -2,10 +2,10 @@
 
 namespace EryseClient\Repository\Client\Token;
 
+use Doctrine\Common\Persistence\ManagerRegistry;
 use EryseClient\Entity\Client\Token\RememberMeToken;
 use EryseClient\Entity\Server\User\User;
 use EryseClient\Repository\AbstractRepository;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
  * Class RememberMeTokenRepository
@@ -15,9 +15,9 @@ class RememberMeTokenRepository extends AbstractRepository
 {
     /**
      * RememberMeTokenRepository constructor.
-     * @param RegistryInterface $registry
+     * @param ManagerRegistry $registry
      */
-    public function __construct(RegistryInterface $registry)
+    public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, RememberMeToken::class);
     }

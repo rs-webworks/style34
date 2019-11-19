@@ -3,6 +3,7 @@
 namespace EryseClient\Repository\Client\Token;
 
 use DateTime;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use EryseClient\Entity\Client\Token\Token;
@@ -10,7 +11,6 @@ use EryseClient\Entity\Client\Token\TokenType;
 use EryseClient\Entity\Server\User\User;
 use EryseClient\Repository\AbstractRepository;
 use Exception;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
  * Class TokenRepository
@@ -22,9 +22,9 @@ class TokenRepository extends AbstractRepository
 
     /**
      * TokenRepository constructor.
-     * @param RegistryInterface $registry
+     * @param ManagerRegistry $registry
      */
-    public function __construct(RegistryInterface $registry)
+    public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Token::class);
     }

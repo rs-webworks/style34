@@ -7,7 +7,7 @@ use BrowscapPHP\Helper\IniLoader;
 use DateTime;
 use Doctrine\Bundle\MigrationsBundle\Command\MigrationsMigrateDoctrineCommand;
 use EryseClient\Entity\Client\Token\TokenType;
-use EryseClient\Entity\Client\User\Role;
+use EryseClient\Entity\Client\Profile\Role;
 use EryseClient\Entity\Server\User\User;
 use EryseClient\Repository\Server\User\UserRepository;
 use EryseClient\Service\UserService;

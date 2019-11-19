@@ -2,6 +2,7 @@
 
 namespace EryseClient\Repository\Server\User;
 
+use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
@@ -11,7 +12,6 @@ use EryseClient\Entity\Server\User\ServerSettings;
 use EryseClient\Entity\Server\User\User;
 use EryseClient\Repository\AbstractRepository;
 use EryseClient\Repository\Client\User\ClientSettingsRepository;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -32,12 +32,12 @@ class UserRepository extends AbstractRepository implements UserLoaderInterface
 
     /**
      * UserRepository constructor.
-     * @param RegistryInterface $registry
+     * @param ManagerRegistry $registry
      * @param ServerSettingsRepository $serverSettingsRepository
      * @param ClientSettingsRepository $clientSettingsRepository
      */
     public function __construct(
-        RegistryInterface $registry,
+        ManagerRegistry $registry,
         ServerSettingsRepository $serverSettingsRepository,
         ClientSettingsRepository $clientSettingsRepository
     ) {
