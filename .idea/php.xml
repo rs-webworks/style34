@@ -2,7 +2,7 @@
 <project version="4">
   <component name="PhpCSFixer">
     <phpcsfixer_settings>
-      <PhpCSFixerConfiguration tool_path="$USER_HOME$/.config/composer/vendor/friendsofphp/php-cs-fixer/php-cs-fixer" />
+      <PhpCSFixerConfiguration tool_path="$USER_HOME$/.composer/vendor/bin/php-cs-fixer" />
     </phpcsfixer_settings>
   </component>
   <component name="PhpCodeSniffer">
@@ -163,7 +163,7 @@
       <server host="localhost" id="7e4a7ecb-4908-4e8d-9621-ff5dc386a3cf" name="docker" port="8989" />
     </servers>
   </component>
-  <component name="PhpProjectSharedConfiguration" php_language_level="7.4" />
+  <component name="PhpProjectSharedConfiguration" php_language_level="7.3" />
   <component name="PhpUnit">
     <phpunit_settings>
       <PhpUnitSettings configuration_file_path="$PROJECT_DIR$/phpunit.xml.dist" custom_loader_path="$PROJECT_DIR$/vendor/autoload.php" use_configuration_file="true" />
