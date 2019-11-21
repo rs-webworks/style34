@@ -23,21 +23,16 @@ services:
         resource: '../src/*'
         exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
 
-    # controllers are imported separately to make sure services can be injected
-    # as action arguments even if you don't extend any base controller class
-    EryseClient\Controller\:
-        resource: '../src/Controller'
-        tags: ['controller.service_arguments']
 
 
     # Entity listeners
     roleListener:
-        class: EryseClient\EntityListener\Client\User\RoleListener
+        class: EryseClient\Server\UserRole\EntityListener\RoleListener
         tags:
             - { name: doctrine.orm.entity_listener, entity_manager: eryseClient, event: postLoad, lazy: true }
 
     userListener:
-        class: EryseClient\EntityListener\Client\User\UserListener
+        class: EryseClient\Server\User\EntityListener\UserListener
         tags:
             - { name: doctrine.orm.entity_listener, entity_manager: eryseServer, event: postLoad, lazy: true }
 
@@ -47,7 +42,7 @@ services:
     # Manually defined services
     # ------------------------------------------------------------------------------------------------------------------
     eryseclient.services.trusted_device_service:
-        class: EryseClient\Service\TrustedDeviceService
+        class: EryseClient\Common\Service\TrustedDeviceService
 #
 #    EryseClient.services.browscap_service:
 #        class: EryseClient\Service\BrowscapService

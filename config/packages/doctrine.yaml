@@ -29,8 +29,8 @@ doctrine:
                     Client:
                         is_bundle: false
                         type: annotation
-                        dir: '%kernel.project_dir%/src/Entity/Client'
-                        prefix: 'EryseClient\Entity\Client'
+                        dir: '%kernel.project_dir%/src/Client'
+                        prefix: 'EryseClient\Client'
                         alias: EryseClient
             eryseServer:
                 connection: eryseServer
@@ -39,6 +39,6 @@ doctrine:
                     Server:
                         is_bundle: false
                         type: annotation
-                        dir: '%kernel.project_dir%/src/Entity/Server'
-                        prefix: 'EryseClient\Entity\Server'
+                        dir: '%kernel.project_dir%/src/Server'
+                        prefix: 'EryseClient\Server'
                         alias: EryseServer

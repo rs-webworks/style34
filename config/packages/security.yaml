@@ -12,7 +12,7 @@ security:
         in_memory: { memory: ~ }
 
         profile-provider:
-            id: EryseClient\Security\ProfileProvider
+            id: EryseClient\Client\ProfileSecurity\Provider\ProfileProvider
 
     encoders:
         EryseClient\Entity\Server\User\User:
@@ -34,7 +34,7 @@ security:
             anonymous: true
             guard:
                 authenticators:
-                    - EryseClient\Security\ProfileLoginFormAuthenticator
+                    - EryseClient\Client\ProfileSecurity\Authenticator\ProfileLoginFormAuthenticator
                 provider: profile-provider
 
             form_login:
