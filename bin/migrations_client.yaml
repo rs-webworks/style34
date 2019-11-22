@@ -1,4 +1,4 @@
-migrations_directory: './src/Model/Client/Migrations'
-migrations_namespace: EryseClient\Migrations
+migrations_directory: './src/Model/Client/Migration'
+migrations_namespace: EryseClient\Model\Client\Migration
 table_name: migration_versions
 name: Application_Migrations_EryseClient

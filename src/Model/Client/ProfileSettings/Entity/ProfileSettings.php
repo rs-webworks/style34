@@ -10,7 +10,7 @@ use EryseClient\Model\Server\User\Entity\User;
  * Class Settings
  * @package EryseClient\Entity\Client\User
  * @ORM\Table(name="user_settings")
- * @ORM\Entity(repositoryClass="EryseClient\Client\ProfileSettings\Repository\ProfileSettingsRepository")
+ * @ORM\Entity(repositoryClass="EryseClient\Model\Client\ProfileSettings\Repository\ProfileSettingsRepository")
  */
 class ProfileSettings
 {

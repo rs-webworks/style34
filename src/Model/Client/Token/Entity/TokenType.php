@@ -9,7 +9,7 @@ use EryseClient\Model\Common\Entity\MasterData;
  * Class TokenType
  * @package EryseClient\Entity\Client\Token
  * @ORM\Table(name="token_types")
- * @ORM\Entity(repositoryClass="EryseClient\Client\Token\Repository\TokenTypeRepository")
+ * @ORM\Entity(repositoryClass="EryseClient\Model\Client\Token\Repository\TokenTypeRepository")
  */
 class TokenType
 {
@@ -22,7 +22,7 @@ class TokenType
 
     /**
      * @var Token[] $tokens
-     * @ORM\OneToMany(targetEntity="EryseClient\Client\Token\Entity\Token", mappedBy="type")
+     * @ORM\OneToMany(targetEntity="EryseClient\Model\Client\Token\Entity\Token", mappedBy="type")
      */
     protected $tokens;
 }

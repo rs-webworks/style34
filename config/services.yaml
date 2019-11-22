@@ -27,12 +27,12 @@ services:
 
     # Entity listeners
     roleListener:
-        class: EryseClient\Server\UserRole\EntityListener\RoleListener
+        class: EryseClient\Model\Client\ProfileRole\EntityListener\RoleListener
         tags:
             - { name: doctrine.orm.entity_listener, entity_manager: eryseClient, event: postLoad, lazy: true }
 
-    userListener:
-        class: EryseClient\Server\User\EntityListener\UserListener
+    profileListener:
+        class: EryseClient\Model\Client\Profile\EntityListener\ProfileListener
         tags:
             - { name: doctrine.orm.entity_listener, entity_manager: eryseServer, event: postLoad, lazy: true }
 
@@ -41,9 +41,7 @@ services:
 
     # Manually defined services
     # ------------------------------------------------------------------------------------------------------------------
-    eryseclient.services.trusted_device_service:
-        class: EryseClient\Common\Service\TrustedDeviceService
-#
+#    eryseclient.services.trusted_device_service:
 #    EryseClient.services.browscap_service:
 #        class: EryseClient\Service\BrowscapService
 #        arguments: ['@utils.browscap']
@@ -55,8 +53,8 @@ services:
 
     # Not shared services
     # ------------------------------------------------------------------------------------------------------------------
-    BrowscapPHP\Browscap:
-        public: false
+#    BrowscapPHP\Browscap:
+#        public: false
 
     phpseclib\Crypt\RSA:
         public: false

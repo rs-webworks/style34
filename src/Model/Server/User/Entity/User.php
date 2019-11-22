@@ -16,8 +16,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Class User
  * @package EryseClient\Entity\Server\User
- * @ORM\Entity(repositoryClass="EryseClient\Repository\Server\User\UserRepository")
- * @ORM\EntityListeners({"EryseClient\EntityListener\Client\User\UserListener"})
+ * @ORM\Entity(repositoryClass="EryseClient\Model\Server\User\Repository\UserRepository")
  * @ORM\Table(name="users")
  * @UniqueEntity("username", message="user.username-taken")
  * @UniqueEntity("email", message="user.email-taken")
@@ -83,6 +82,11 @@ class User implements UserInterface, TrustedDeviceInterface
     protected $role;
 
     /**
+     * @var UserRole
+     */
+    protected $roleEntity;
+
+    /**
      * @var string $lastIp
      * @ORM\Column(type="string", nullable=false)
      * @Assert\Ip(message="user.ip-expected")
@@ -103,7 +107,11 @@ class User implements UserInterface, TrustedDeviceInterface
 
     /**
      * @var UserDevice[]
-     * @ORM\OneToMany(targetEntity="UserDevice", mappedBy="user",  cascade={"persist"})
+     * @ORM\OneToMany(
+     *     targetEntity="EryseClient\Model\Server\UserDevice\Entity\UserDevice",
+     *     mappedBy="user",
+     *     cascade={"persist"}
+     * )
      */
     protected $devices;
 
@@ -276,6 +284,14 @@ class User implements UserInterface, TrustedDeviceInterface
         return [$this->getRole()];
     }
 
+    /**
+     * @return UserRole
+     */
+    public function getRoleEntity(): UserRole
+    {
+        return $this->roleEntity;
+    }
+
     // Last Ip
     // -----------------------------------------------------------------------------------------------------------------
     /**
@@ -370,7 +386,7 @@ class User implements UserInterface, TrustedDeviceInterface
     /**
      * @return Int
      */
-    public function getProfileId(): int
+    public function getProfileId(): ?int
     {
         return $this->profileId;
     }

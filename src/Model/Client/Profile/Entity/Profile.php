@@ -14,7 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Class Profile
  * @package EryseClient\Entity\Client\Profile
  * @ORM\Table(name="profiles")
- * @ORM\Entity(repositoryClass="EryseClient\Client\Profile\Repository\ProfileRepository")
+ * @ORM\Entity(repositoryClass="EryseClient\Model\Client\Profile\Repository\ProfileRepository")
  */
 class Profile implements UserInterface
 {
@@ -34,7 +34,7 @@ class Profile implements UserInterface
 
     /**
      * @var ProfileRole
-     * @ORM\ManyToOne(targetEntity="EryseClient\Client\ProfileRole\Entity\ProfileRole", inversedBy="profiles")
+     * @ORM\ManyToOne(targetEntity="EryseClient\Model\Client\ProfileRole\Entity\ProfileRole", inversedBy="profiles")
      */
     protected $role;
 

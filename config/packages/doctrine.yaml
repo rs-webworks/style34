@@ -5,7 +5,7 @@ doctrine:
             eryseClient:
                 url: '%env(resolve:ERYSE_CLIENT_DATABASE_URL)%'
                 driver: 'pdo_pgsql'
-                server_version: '9.6.11'
+                server_version: '12.0'
                 charset: utf8
                 default_table_options:
                     charset: utf8mb4
@@ -13,7 +13,7 @@ doctrine:
             eryseServer:
                 url: '%env(ERYSE_SERVER_DATABASE_URL)%'
                 driver: 'pdo_pgsql'
-                server_version: '9.6.11'
+                server_version: '12.0'
                 charset: utf8
                 default_table_options:
                     charset: utf8mb4
@@ -29,8 +29,8 @@ doctrine:
                     Client:
                         is_bundle: false
                         type: annotation
-                        dir: '%kernel.project_dir%/src/Client'
-                        prefix: 'EryseClient\Client'
+                        dir: '%kernel.project_dir%/src/Model/Client'
+                        prefix: 'EryseClient\Model\Client'
                         alias: EryseClient
             eryseServer:
                 connection: eryseServer
@@ -39,6 +39,6 @@ doctrine:
                     Server:
                         is_bundle: false
                         type: annotation
-                        dir: '%kernel.project_dir%/src/Server'
-                        prefix: 'EryseClient\Server'
+                        dir: '%kernel.project_dir%/src/Model/Server'
+                        prefix: 'EryseClient\Model\Server'
                         alias: EryseServer

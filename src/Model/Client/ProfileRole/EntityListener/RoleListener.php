@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace EryseClient\Model\Server\UserRole\EntityListener;
+namespace EryseClient\Model\Client\ProfileRole\EntityListener;
 
-use EryseClient\Entity\Client\User\Role;
+use EryseClient\Model\Client\ProfileRole\Entity\ProfileRole;
 use EryseClient\Model\Server\User\Repository\UserRepository;
 
 /**
@@ -25,10 +25,10 @@ class RoleListener
     }
 
     /**
-     * @param Role $role
+     * @param ProfileRole $role
      */
-    public function postLoad(Role $role)
+    public function postLoad(ProfileRole $role)
     {
-        $role->setUsers($this->userRepository->findByRole($role->getName()));
+        $role->setProfiles($this->userRepository->findByRole($role->getName()));
     }
 }

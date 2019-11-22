@@ -12,7 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Class Device
  * @package EryseClient\Entity\Server\User
  * @ORM\Table(name="user_devices")
- * @ORM\Entity(repositoryClass="UserDeviceRepository")
+ * @ORM\Entity(repositoryClass="EryseClient\Model\Server\UserDevice\Repository\UserDeviceRepository")
  * @UniqueEntity("name")
  */
 class UserDevice
@@ -34,7 +34,7 @@ class UserDevice
 
     /**
      * @var User $user
-     * @ORM\ManyToOne(targetEntity="EryseClient\Entity\Server\User\User", inversedBy="devices")
+     * @ORM\ManyToOne(targetEntity="EryseClient\Model\Server\User\Entity\User", inversedBy="devices")
      */
     protected $user;
 

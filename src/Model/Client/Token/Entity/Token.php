@@ -11,7 +11,7 @@ use EryseClient\Model\Common\Entity\Identifier;
  * Class Token
  * @package EryseClient\Entity\Client\Token
  * @ORM\Table(name="tokens")
- * @ORM\Entity(repositoryClass="EryseClient\Client\Token\Repository\TokenRepository")
+ * @ORM\Entity(repositoryClass="EryseClient\Model\Client\Token\Repository\TokenRepository")
  */
 class Token
 {
@@ -33,7 +33,7 @@ class Token
 
     /**
      * @var TokenType $type
-     * @ORM\ManyToOne(targetEntity="EryseClient\Client\Token\Entity\TokenType", inversedBy="tokens")
+     * @ORM\ManyToOne(targetEntity="EryseClient\Model\Client\Token\Entity\TokenType", inversedBy="tokens")
      */
     protected $type;
 

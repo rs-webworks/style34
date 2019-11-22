@@ -3,16 +3,17 @@
 namespace EryseClient\Model\Client\ProfileRole\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use EryseClient\Model\Client\Profile\Entity\Profile;
 use EryseClient\Model\Common\Entity\Identifier;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class Role
- * @package EryseClient\Client\Profile\Entity
+ * @package EryseClient\Model\Client\Profile\Entity
  * @ORM\Table(name="user_roles")
- * @ORM\Entity(repositoryClass="EryseClient\Client\ProfileRole\Repository\ProfileRoleRepository")
- * @ORM\EntityListeners({ůEryseClient\Client\ProfileRole\EntityListener\RoleListener"})
+ * @ORM\Entity(repositoryClass="EryseClient\Model\Client\ProfileRole\Repository\ProfileRoleRepository")
+ * @ORM\EntityListeners({"EryseClient\Model\Client\ProfileRole\EntityListener\RoleListener"})
  * @UniqueEntity("name")
  */
 class ProfileRole
@@ -43,7 +44,7 @@ class ProfileRole
 
     /**
      * @var Profile[]
-     * @ORM\OneToMany(targetEntity="EryseClient\Entity\Client\Profile\Profile", mappedBy="role")
+     * @ORM\OneToMany(targetEntity="EryseClient\Model\Client\Profile\Entity\Profile", mappedBy="role")
      */
     protected $profiles;
 

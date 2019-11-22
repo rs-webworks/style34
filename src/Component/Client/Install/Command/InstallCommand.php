@@ -2,11 +2,10 @@
 
 namespace EryseClient\Component\Client\Install\Command;
 
-use BrowscapPHP\BrowscapUpdater;
-use BrowscapPHP\Helper\IniLoader;
 use DateTime;
 use Doctrine\Bundle\MigrationsBundle\Command\MigrationsMigrateDoctrineCommand;
 use EryseClient\Component\Common\Utility\LoggerTrait;
+use EryseClient\Model\Client\Profile\Entity\Profile;
 use EryseClient\Model\Client\Token\Entity\TokenType;
 use EryseClient\Model\Client\Token\Repository\TokenTypeRepository;
 use EryseClient\Model\Server\User\Entity\User;
@@ -14,7 +13,6 @@ use EryseClient\Model\Server\User\Repository\UserRepository;
 use EryseClient\Model\Server\User\Service\UserService;
 use EryseClient\Model\Server\UserRole\Entity\UserRole;
 use Exception;
-use Psr\SimpleCache\CacheInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;
@@ -23,6 +21,7 @@ use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Contracts\Cache\CacheInterface;
 
 /**
  * Class InstallCommand.
@@ -98,7 +97,7 @@ class InstallCommand extends Command
      * @param OutputInterface $output
      * @return int|null|void
      */
-    protected function execute(InputInterface $input, OutputInterface $output): void
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->output = $output;
         $this->io = $io = new SymfonyStyle($input, $output);
@@ -131,9 +130,9 @@ class InstallCommand extends Command
             $io->section('Creating token types...');
             $this->createTokenTypes();
 
-            // Build browsercap cache
-            $io->section('Installing browsercap (this takes long...)');
-            $this->fetchBrowsercap();
+//            // Build browsercap cache
+//            $io->section('Installing browsercap (this takes long...)');
+//            $this->fetchBrowsercap();
 
             // Build browsercap cache
             $io->section('Clearing cache...');
@@ -147,7 +146,11 @@ class InstallCommand extends Command
             $io->text('Maybe you are trying to do reinstall? Then use:');
             $io->newLine();
             $io->text('    <info>app:install --drop</info> to clear database (you will loose all data)');
+
+            return 1;
         }
+
+        return 0;
     }
 
     /**
@@ -319,6 +322,10 @@ class InstallCommand extends Command
             $user->setRegisteredAs(serialize([$user->getUsername(), $user->getEmail()]));
 
             $this->userRepository->saveNew($user);
+
+            $profile = new Profile();
+            $profile->setUserId($user->getId());
+
             $this->io->progressAdvance(1);
         }
 
@@ -350,14 +357,14 @@ class InstallCommand extends Command
         $this->io->progressFinish();
     }
 
-    protected function fetchBrowsercap(): void
-    {
-        $this->io->progressStart(2);
-        $browscap_updater = new BrowscapUpdater($this->cacheInterface, $this->logger);
-        $this->io->progressAdvance(1);
-        $browscap_updater->update(IniLoader::PHP_INI_FULL);
-        $this->io->progressFinish();
-    }
+//    protected function fetchBrowsercap(): void
+//    {
+//        $this->io->progressStart(2);
+//        $browscap_updater = new BrowscapUpdater($this->cacheInterface, $this->logger);
+//        $this->io->progressAdvance(1);
+//        $browscap_updater->update(IniLoader::PHP_INI_FULL);
+//        $this->io->progressFinish();
+//    }
 
     /**
      * @throws Exception
