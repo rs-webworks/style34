@@ -1,4 +1,4 @@
-{% extends 'layout-frontend.html.twig' %}
+{% extends '_layout/layout-frontend.html.twig' %}
 
 {% block title %}Home{% endblock %}
 {% block bodyClass %}bg-primary{% endblock %}
@@ -18,7 +18,7 @@
                         </div>
                     {% endif %}
 
-                    {% include '_partials/login-form.html.twig' %}
+                    {% include '_partial/login-form.html.twig' %}
                 </div>
             </div>
 

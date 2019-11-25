@@ -113,7 +113,7 @@ class UserLoginFormAuthenticator extends AbstractFormLoginAuthenticator
             self::CSRF_TOKEN => $request->request->get(self::CSRF_TOKEN),
         ];
 
-        $request->getSession()->set(Security::LAST_USERNAME, $credentials['auth']);
+        $request->getSession()->set(Security::LAST_USERNAME, $credentials[self::USER_AUTH]);
 
         return $credentials;
     }
@@ -181,7 +181,7 @@ class UserLoginFormAuthenticator extends AbstractFormLoginAuthenticator
      */
     protected function getLoginUrl()
     {
-        return $this->router->generate('security-login');
+        return $this->router->generate(self::ROUTE);
     }
 
 }
