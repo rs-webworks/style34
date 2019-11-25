@@ -1,0 +1,14 @@
+{% block header %}
+    {% if showHeader is defined %}
+        <header>
+            <div class="container">
+                <img src="{{ asset('images/header.png') }}" alt="" class="bg-img">
+
+                <a id="logo" href="{{ url('home-index') }}">
+                    <div id="top">STYL<span class="highlight">E34</span></div>
+                    <div id="bottom">BMW <span class="highlight">E34</span> Enthusiasts</div>
+                </a>
+            </div>
+        </header>
+    {% endif %}
+{% endblock %}

@@ -4,28 +4,28 @@
 
 {% block body %}
 
-	<div class="container">
+    <div class="container">
 
-		<h2>{{ app.user.getUsername() }}</h2>
-		<hr>
-		<nav aria-label="breadcrumb">
-			<ol class="breadcrumb">
-				<li class="breadcrumb-item">
-					<a href="{{ url('home-index') }}">{{ eryseClient.name }}</a>
-				</li>
-				<li class="breadcrumb-item">
-					<a href="{{ url('profile-list') }}">{% trans from 'global' %}profiles{% endtrans %}</a>
-				</li>
-				<li class="breadcrumb-item active" aria-current="page">
-					{{ app.user.getUsername() }}
-				</li>
-			</ol>
-		</nav>
+        <h2>{{ app.user.getUsername() }}</h2>
+        <hr>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="{{ url('home-index') }}">{{ eryseClient.name }}</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="{{ url('profile-list') }}">{% trans from 'global' %}profiles{% endtrans %}</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">
+                    {{ app.user.getUsername() }}
+                </li>
+            </ol>
+        </nav>
 
-		<div class="row">
-			<p></p>
-		</div>
-	</div>
+        <div class="row">
+            <p></p>
+        </div>
+    </div>
 
 
 {% endblock %}

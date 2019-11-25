@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="cs-CZ">
+<head>
+    {# META Tags #}
+    {# --------------------------------------------------------------------------------------------------------------------------------------------------------- #}
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content=""/>
+    {# --------------------------------------------------------------------------------------------------------------------------------------------------------- #}
+    {# // META Tags #}
+
+    <title>{% block title %}Home{% endblock %} - {{ eryseClient.name }}</title>
+    <link rel="canonical" href="{{ url(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) }}"/>
+    <link rel="icon" type="image/x-icon" href="{#{{ asset('favicon.ico') }}#}"/>
+    <link rel="icon" sizes="192x192" href="{#{{ asset('bigicon.png') }}#}"/>
+    <link rel="manifest" href="{#{{ asset('manifest.json') }}#}"/>
+
+    {# CSS Loading #}
+    {# --------------------------------------------------------------------------------------------------------------------------------------------------------- #}
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('libraries/@fortawesome/fontawesome-free/css/all.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    {% endblock %}
+    {# --------------------------------------------------------------------------------------------------------------------------------------------------------- #}
+    {# // CSS Loading #}
+</head>

@@ -4,84 +4,84 @@
 
 {% block body %}
 
-	<div class="container" id="profile-registration-membership">
+    <div class="container" id="profile-registration-membership">
 
-		<h2>Výhody člena klubu</h2>
+        <h2>Výhody člena klubu</h2>
 
-		<nav aria-label="breadcrumb">
-			<ol class="breadcrumb">
-				<li class="breadcrumb-item">
-					<a href="{{ url('home-index') }}">{{ eryseClient.name }}</a></li>
-				<li class="breadcrumb-item"><a href="{{ url('profile-list') }}">Profily</a></li>
-				<li class="breadcrumb-item"><a href="{{ url('user-registration') }}">Registrace</a></li>
-				<li class="breadcrumb-item active" aria-current="page">Členství v klubu</li>
-			</ol>
-		</nav>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="{{ url('home-index') }}">{{ eryseClient.name }}</a></li>
+                <li class="breadcrumb-item"><a href="{{ url('profile-list') }}">Profily</a></li>
+                <li class="breadcrumb-item"><a href="{{ url('user-registration') }}">Registrace</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Členství v klubu</li>
+            </ol>
+        </nav>
 
-		<div class="row">
-			{% if false %}
-				{% block perkStart %}
-					<div class="col col-md-6 d-flex align-items-stretch">
-					<div class="card text-white bg-primary perk">
-					<div class="card-body">
-				{% endblock %}
+        <div class="row">
+            {% if false %}
+                {% block perkStart %}
+                    <div class="col col-md-6 d-flex align-items-stretch">
+                    <div class="card text-white bg-primary perk">
+                    <div class="card-body">
+                {% endblock %}
 
-				{% block perkEnd %}
-					</div>
-					</div>
-					</div>
-				{% endblock %}
-			{% endif %}
+                {% block perkEnd %}
+                    </div>
+                    </div>
+                    </div>
+                {% endblock %}
+            {% endif %}
 
-			{{ block('perkStart') }}
-			<h4 class="card-title"><i class="fa fa-fw fa-user"></i> Tvůj profil</h4>
-			<p class="card-text">
-				Tvůj profil je tvoje tvář v klubu. Spravuj auta pod svým profilem, přidávej
-				fotky, provedené opravy, postupy při renovaci, pochlub se interaktivním
-				seznamem jakou máš v autě výbavu, veď si knihu jízd, servisní knihu...
-			</p>
-			{{ block('perkEnd') }}
+            {{ block('perkStart') }}
+            <h4 class="card-title"><i class="fa fa-fw fa-user"></i> Tvůj profil</h4>
+            <p class="card-text">
+                Tvůj profil je tvoje tvář v klubu. Spravuj auta pod svým profilem, přidávej
+                fotky, provedené opravy, postupy při renovaci, pochlub se interaktivním
+                seznamem jakou máš v autě výbavu, veď si knihu jízd, servisní knihu...
+            </p>
+            {{ block('perkEnd') }}
 
-			{{ block('perkStart') }}
-			<h4 class="card-title"><i class="fa fa-fw fa-comments"></i> Komunita</h4>
-			<p class="card-text">
-				Ty i ostatní můžete navzájem komentovat svoje profily, konkrétní akce, psát
-				články a postupy,
-				zakládat vlastní diskuzní kouty, řešit přímo pod danou problematikou své
-				poznatky, stejně tak jako se můžeš dočíst cenné rady a zkušenosti
-				ostatních.
-			</p>
-			{{ block('perkEnd') }}
+            {{ block('perkStart') }}
+            <h4 class="card-title"><i class="fa fa-fw fa-comments"></i> Komunita</h4>
+            <p class="card-text">
+                Ty i ostatní můžete navzájem komentovat svoje profily, konkrétní akce, psát
+                články a postupy,
+                zakládat vlastní diskuzní kouty, řešit přímo pod danou problematikou své
+                poznatky, stejně tak jako se můžeš dočíst cenné rady a zkušenosti
+                ostatních.
+            </p>
+            {{ block('perkEnd') }}
 
-			{{ block('perkStart') }}
-			<h4 class="card-title"><i class="fa fa-fw fa-calendar"></i> Kalendář událostí</h4>
-			<p class="card-text">
-				Získej kompletní a jednoduchý přehled o tom, co se kde chystá, jaké se kde pořádají nejbližší srazy nebo
-				dokonce naplánůj a zorganizuj svůj vlastní sraz! Nejedná se přitom pouze o události čistě ohledně
-				jediného typu aut ale například dny otevřených dveří na autodromu a podobné.
-			</p>
-			{{ block('perkEnd') }}
+            {{ block('perkStart') }}
+            <h4 class="card-title"><i class="fa fa-fw fa-calendar"></i> Kalendář událostí</h4>
+            <p class="card-text">
+                Získej kompletní a jednoduchý přehled o tom, co se kde chystá, jaké se kde pořádají nejbližší srazy nebo
+                dokonce naplánůj a zorganizuj svůj vlastní sraz! Nejedná se přitom pouze o události čistě ohledně
+                jediného typu aut ale například dny otevřených dveří na autodromu a podobné.
+            </p>
+            {{ block('perkEnd') }}
 
-			{{ block('perkStart') }}
-			<h4 class="card-title"><i class="fa fa-fw fa-dollar-sign"></i> Market</h4>
-			<p class="card-text">
-				Přidávej inzeráty které jsou určené přímo pro tvojí cílovku. Kde jinde nejlépe udat věci než mezi partou
-				lidí vlastnících právě takové auto? Navíc všechny tvoje inzeráty jsou automaticky sdíleny na facebook do
-				skupiny. A pokud chceš tak můžeš použít vygenerovaný okdaz pro ruční sdílení. Můžeš si též nastavit
-				hlídacího psa pokud hledáš něco konkrétního a chceš vědět hned jak se takový inzerát objeví.
-			</p>
-			{{ block('perkEnd') }}
-		</div>
+            {{ block('perkStart') }}
+            <h4 class="card-title"><i class="fa fa-fw fa-dollar-sign"></i> Market</h4>
+            <p class="card-text">
+                Přidávej inzeráty které jsou určené přímo pro tvojí cílovku. Kde jinde nejlépe udat věci než mezi partou
+                lidí vlastnících právě takové auto? Navíc všechny tvoje inzeráty jsou automaticky sdíleny na facebook do
+                skupiny. A pokud chceš tak můžeš použít vygenerovaný okdaz pro ruční sdílení. Můžeš si též nastavit
+                hlídacího psa pokud hledáš něco konkrétního a chceš vědět hned jak se takový inzerát objeví.
+            </p>
+            {{ block('perkEnd') }}
+        </div>
 
-		<div class="row">
-			<div class="col col-xs-12">
-				<a href="{{ url('profile-registration') }}" class="btn btn-success btn-block">
-					<i class="fa fa-fw fa-user-plus"></i> Stát se členem!
-				</a>
-			</div>
-		</div>
+        <div class="row">
+            <div class="col col-xs-12">
+                <a href="{{ url('profile-registration') }}" class="btn btn-success btn-block">
+                    <i class="fa fa-fw fa-user-plus"></i> Stát se členem!
+                </a>
+            </div>
+        </div>
 
-	</div>
+    </div>
 
 
 {% endblock %}

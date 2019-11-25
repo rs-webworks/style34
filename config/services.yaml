@@ -27,12 +27,12 @@ services:
 
     # Entity listeners
     roleListener:
-        class: EryseClient\Model\Client\ProfileRole\EntityListener\RoleListener
+        class: EryseClient\Client\ProfileRole\EntityListener\RoleListener
         tags:
             - { name: doctrine.orm.entity_listener, entity_manager: eryseClient, event: postLoad, lazy: true }
 
     profileListener:
-        class: EryseClient\Model\Client\Profile\EntityListener\ProfileListener
+        class: EryseClient\Client\Profile\EntityListener\ProfileListener
         tags:
             - { name: doctrine.orm.entity_listener, entity_manager: eryseServer, event: postLoad, lazy: true }
 

@@ -6,8 +6,8 @@ ARG DEBIAN_FRONTEND=noninteractive
 
 # Proxy config
 #COPY 99HttpProxy /etc/apt/apt.conf.d/
-#ENV HTTP_PROXY "http://proxy.intr.cortex.cz:3128"
-#ENV HTTPS_PROXY "http://proxy.intr.cortex.cz:3128"
+ENV HTTP_PROXY "http://proxy.intr.cortex.cz:3128"
+ENV HTTPS_PROXY "http://proxy.intr.cortex.cz:3128"
 
 # Install selected extensions and other stuff
 RUN apt-get update \
@@ -19,11 +19,11 @@ RUN apt-get update \
 RUN apt-get -y install git nano mc
 
 # Install Composer
-RUN curl -sS https://getcomposer.org/installer |\
-    php -- --install-dir=/usr/local/bin --filename=composer
-
-#RUN curl --proxy http://proxy.intr.cortex.cz:3128 -sS https://getcomposer.org/installer |\
+#RUN curl -sS https://getcomposer.org/installer |\
 #    php -- --install-dir=/usr/local/bin --filename=composer
+
+RUN curl --proxy http://proxy.intr.cortex.cz:3128 -sS https://getcomposer.org/installer |\
+    php -- --install-dir=/usr/local/bin --filename=composer
 
 
 # Make translations directory writtable from web

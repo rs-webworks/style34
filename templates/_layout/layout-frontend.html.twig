@@ -1,0 +1,29 @@
+{{ include("_layout/_partial/head_styled.html.twig") }}
+
+<body class="{% block bodyClass %}{% endblock %}">
+
+{{ include("_layout/block/frontend/header.html.twig") }}
+
+{{ include("_layout/_partial/navigation-top-frontend.html.twig") }}
+
+<div class="container" id="flash-messages">
+
+	{% if app.request.hasPreviousSession %}
+		{% for label, messages in app.flashes %}
+			{% for message in messages %}
+				<div class="alert alert-{{ label }}">
+					{{ message }}
+				</div>
+			{% endfor %}
+		{% endfor %}
+	{% endif %}
+</div>
+
+{% block body %}{% endblock %}
+
+<footer class="container">
+	<p></p>
+</footer>
+
+{{ include("_layout/_partial/js.html.twig") }}
+</body>

@@ -12,10 +12,13 @@ security:
         in_memory: { memory: ~ }
 
         profile-provider:
-            id: EryseClient\Model\Client\ProfileSecurity\Provider\ProfileProvider
+            id: EryseClient\Client\ProfileSecurity\Provider\ProfileProvider
+
+        user-provider:
+            id: EryseClient\Server\UserSecurity\Provider\UserProvider
 
     encoders:
-        EryseClient\Model\Server\User\Entity\User:
+        EryseClient\Server\User\Entity\User:
             algorithm: auto
             cost: 12
 
@@ -33,13 +36,13 @@ security:
             anonymous: true
             guard:
                 authenticators:
-                    - EryseClient\Model\Server\UserSecurity\Authenticator\UserLoginFormAuthenticator
+                    - EryseClient\Server\UserSecurity\Authenticator\UserLoginFormAuthenticator
                 provider: user-provider
 
             form_login:
                 provider: user-provider
-                login_path: EryseClient\Model\Server\UserSecurity\Authenticator\UserLoginFormAuthenticator::ROUTE
-                check_path: EryseClient\Model\Server\UserSecurity\Authenticator\UserLoginFormAuthenticator::ROUTE
+                login_path: EryseClient\Server\UserSecurity\Authenticator\UserLoginFormAuthenticator::ROUTE
+                check_path: EryseClient\Server\UserSecurity\Authenticator\UserLoginFormAuthenticator::ROUTE
                 username_parameter: _auth
                 csrf_token_generator: security.csrf.token_manager
                 #default_target_path: after_login_route_name
