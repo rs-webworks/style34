@@ -4,6 +4,7 @@ namespace EryseClient\Model\Server\User\Repository;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use EryseClient\Model\Client\ProfileSettings\Entity\ProfileSettings;
@@ -63,6 +64,7 @@ class UserRepository extends AbstractRepository implements UserLoaderInterface
      * @param string $username
      * @return mixed|null|UserInterface
      * @throws NonUniqueResultException
+     * @throws NoResultException
      */
     public function loadUserByUsername($username)
     {
@@ -71,7 +73,7 @@ class UserRepository extends AbstractRepository implements UserLoaderInterface
             ->setParameter('username', $username)
             ->setParameter('email', $username)
             ->getQuery()
-            ->getOneOrNullResult();
+            ->getSingleResult();
     }
 
     /**

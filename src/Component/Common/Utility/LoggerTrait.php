@@ -6,6 +6,7 @@ use Psr\Log\LoggerInterface;
 /**
  * Trait LoggerTrait
  * @package EryseClient\Service\Utility
+ * @deprecated Use \Psr\Log\LoggerAwareTrait
  */
 trait LoggerTrait
 {
