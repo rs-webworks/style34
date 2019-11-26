@@ -2,7 +2,7 @@
 
 namespace EryseClient\Client\Administration\User\Controller;
 
-use EryseClient\Client\Profile\Entity\Entity\Role;
+use EryseClient\Client\Profile\Entity\Role;
 use EryseClient\Common\Controller\ControllerSettings;
 use EryseClient\Server\User\Form\Type\UserSearchType;
 use EryseClient\Server\User\Form\Type\UserType;

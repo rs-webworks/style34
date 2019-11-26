@@ -3,7 +3,7 @@
 namespace EryseClient\Client\ProfileRole\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use EryseClient\Client\Profile\Entity\Entity\Profile;
+use EryseClient\Client\Profile\Entity\Profile;
 use EryseClient\Common\Entity\ClientEntity;
 use EryseClient\Common\Entity\Identifier;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -12,9 +12,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Class Role
  * @package EryseClient\Client\Profile\Entity
- * @ORM\Table(name="user_roles")
+ * @ORM\Table(name="profile_roles")
  * @ORM\Entity(repositoryClass="EryseClient\Client\ProfileRole\Repository\ProfileRoleRepository")
- * @ORM\EntityListeners({"EryseClient\Client\ProfileRole\EntityListener\RoleListener"})
  * @UniqueEntity("name")
  */
 class ProfileRole implements ClientEntity

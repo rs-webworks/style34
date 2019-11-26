@@ -7,6 +7,7 @@ use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
+use EryseClient\Client\Profile\Repository\ProfileRepository;
 use EryseClient\Client\ProfileSettings\Entity\ProfileSettings;
 use EryseClient\Client\ProfileSettings\Repository\ProfileSettingsRepository;
 use EryseClient\Common\Repository\AbstractRepository;
@@ -19,6 +20,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Class UserRepository
+ *
  * @package EryseClient\Repository\Server\User
  * @method User|null findOneBy(array $criteria, array $orderBy = null)
  * @method User|null find($id, $lockMode = null, $lockVersion = null)
@@ -32,8 +34,10 @@ class UserRepository extends AbstractRepository implements UserLoaderInterface
     /** @var ProfileSettingsRepository */
     private $clientSettingsRepository;
 
+
     /**
      * UserRepository constructor.
+     *
      * @param ManagerRegistry $registry
      * @param UserSettingsRepository $serverSettingsRepository
      * @param ProfileSettingsRepository $clientSettingsRepository
@@ -50,6 +54,7 @@ class UserRepository extends AbstractRepository implements UserLoaderInterface
 
     /**
      * @param User $user
+     *
      * @throws ORMException
      * @throws OptimisticLockException
      */
@@ -61,10 +66,16 @@ class UserRepository extends AbstractRepository implements UserLoaderInterface
     }
 
     /**
+     * This metod just implements interface, in order to obtain fully loaded user with all its entities call
+     * loadUserById
+     *
      * @param string $username
+     *
      * @return mixed|null|UserInterface
      * @throws NonUniqueResultException
      * @throws NoResultException
+     * @see loadUserById
+     *
      */
     public function loadUserByUsername($username)
     {
@@ -78,6 +89,7 @@ class UserRepository extends AbstractRepository implements UserLoaderInterface
 
     /**
      * @param string $role
+     *
      * @return array|null
      */
     public function findByRole(string $role): ?array
@@ -94,6 +106,7 @@ class UserRepository extends AbstractRepository implements UserLoaderInterface
 
     /**
      * @param array $users
+     *
      * @throws ORMException
      * @throws OptimisticLockException
      */
@@ -108,6 +121,7 @@ class UserRepository extends AbstractRepository implements UserLoaderInterface
 
     /**
      * @param User $user
+     *
      * @return GoogleAuth|null
      */
     public function getGoogleAuthEntity(User $user): ?GoogleAuth

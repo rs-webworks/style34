@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace EryseClient\Server\User\Controller;
+namespace EryseClient\Server\UserSecurity\Controller;
 
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
@@ -16,8 +16,9 @@ use EryseClient\Server\User\Exception\ActivationException;
 use EryseClient\Server\User\Form\Type\RegistrationType;
 use EryseClient\Server\User\Repository\UserRepository;
 use EryseClient\Server\User\Service\UserService;
+use EryseClient\Server\UserSecurity\Form\Type\LoginType;
 use Exception;
-use Psr\Log\LoggerAwareTrait;
+use EryseClient\Common\Utility\LoggerAwareTrait;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -39,7 +40,7 @@ class SecurityController extends AbstractController
     use TranslatorAwareTrait;
 
     /**
-     * @Route("/login", name="user-security-login")
+     * @Route("/user-security-login", name="user-security-login")
      * @param AuthenticationUtils $authenticationUtils
      *
      * @return Response
@@ -51,13 +52,26 @@ class SecurityController extends AbstractController
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
+        $loginForm = $this->createForm(LoginType::class);
+
         return $this->render(
             'User/Login/login.html.twig',
             [
                 'last_username' => $lastUsername,
                 'error' => $error,
+                'loginForm' => $loginForm->createView(),
             ]
         );
+    }
+
+    /**
+     * @return Response
+     */
+    public function navbarLoginForm(): Response
+    {
+        $loginForm = $this->createForm(LoginType::class, null, ["attr" => ["id" => "login"]]);
+
+        return $this->render('_partial/login-form.html.twig', ['loginForm' => $loginForm->createView()]);
     }
 
     /**

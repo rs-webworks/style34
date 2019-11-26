@@ -2,11 +2,13 @@
 
 namespace EryseClient\Server\UserSecurity\Authenticator;
 
+use EryseClient\Client\Profile\Repository\ProfileRepository;
 use EryseClient\Client\ProfileSecurity\Exception\LoginException;
 use EryseClient\Common\Utility\TranslatorAwareTrait;
 use EryseClient\Server\User\Entity\User;
 use EryseClient\Server\User\Repository\UserRepository;
 use EryseClient\Server\UserRole\Service\UserRoleService;
+use EryseClient\Server\UserSecurity\Form\Type\LoginType;
 use Exception;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,11 +17,9 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
-use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticator;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
@@ -35,23 +35,12 @@ class UserLoginFormAuthenticator extends AbstractFormLoginAuthenticator
     use TranslatorAwareTrait;
 
     public const ROUTE = "user-security-login";
-    public const METHOD = "POST";
-
-    /** Credentials */
-    public const USER_AUTH = 'user_auth';
-    public const USER_PASSWORD = 'user_password';
-    public const TFA_CODE = 'tfa_code';
-    public const TFA_METHOD = 'tfa_method';
-    public const CSRF_TOKEN = 'csrf_token';
 
     /** @var UserRepository $userRepository */
     private $userRepository;
 
     /** @var RouterInterface */
     private $router;
-
-    /** @var CsrfTokenManagerInterface */
-    private $csrfTokenManager;
 
     /** @var UserPasswordEncoderInterface */
     private $passwordEncoder;
@@ -62,30 +51,33 @@ class UserLoginFormAuthenticator extends AbstractFormLoginAuthenticator
     /** @var UserRoleService */
     private $userRoleService;
 
+    /** @var ProfileRepository  */
+    private $profileRepository;
+
     /**
      * LoginFormAuthenticator constructor.
      *
      * @param UserRoleService $userRoleService
+     * @param ProfileRepository $profileRepository
      * @param RouterInterface $router
-     * @param CsrfTokenManagerInterface $csrfTokenManager
      * @param UserPasswordEncoderInterface $passwordEncoder
      * @param UserRepository $userRepository
      * @param SessionInterface $session
      */
     public function __construct(
         UserRoleService $userRoleService,
+        ProfileRepository $profileRepository,
         RouterInterface $router,
-        CsrfTokenManagerInterface $csrfTokenManager,
         UserPasswordEncoderInterface $passwordEncoder,
         UserRepository $userRepository,
         SessionInterface $session
     ) {
         $this->router = $router;
-        $this->csrfTokenManager = $csrfTokenManager;
         $this->passwordEncoder = $passwordEncoder;
         $this->userRepository = $userRepository;
         $this->session = $session;
         $this->userRoleService = $userRoleService;
+        $this->profileRepository = $profileRepository;
     }
 
     /**
@@ -95,7 +87,7 @@ class UserLoginFormAuthenticator extends AbstractFormLoginAuthenticator
      */
     public function supports(Request $request)
     {
-        return $request->attributes->get('_route') === self::ROUTE && $request->isMethod(self::METHOD);
+        return $request->attributes->get('_route') === self::ROUTE && $request->isMethod(LoginType::METHOD);
     }
 
     /**
@@ -105,15 +97,16 @@ class UserLoginFormAuthenticator extends AbstractFormLoginAuthenticator
      */
     public function getCredentials(Request $request)
     {
+        $params = $request->request->get(LoginType::PREFIX);
+
         $credentials = [
-            self::USER_AUTH => $request->request->get(self::USER_AUTH),
-            self::USER_PASSWORD => $request->request->get(self::USER_PASSWORD),
-            self::TFA_CODE => $request->request->get(self::TFA_CODE),
-            self::TFA_METHOD => $request->request->get(self::TFA_METHOD),
-            self::CSRF_TOKEN => $request->request->get(self::CSRF_TOKEN),
+            LoginType::USER_AUTH => $params[LoginType::USER_AUTH],
+            LoginType::USER_PASSWORD => $params[LoginType::USER_PASSWORD],
+//            LoginType::TFA_CODE => $params[LoginType::TFA_CODE],
+//            LoginType::TFA_TYPE => $params[LoginType::TFA_TYPE],
         ];
 
-        $request->getSession()->set(Security::LAST_USERNAME, $credentials[self::USER_AUTH]);
+        $request->getSession()->set(Security::LAST_USERNAME, $credentials[LoginType::USER_AUTH]);
 
         return $credentials;
     }
@@ -127,14 +120,8 @@ class UserLoginFormAuthenticator extends AbstractFormLoginAuthenticator
      */
     public function getUser($credentials, UserProviderInterface $userProvider)
     {
-        $token = new CsrfToken('authenticate', $credentials[self::CSRF_TOKEN]);
-
-        if (!$this->csrfTokenManager->isTokenValid($token)) {
-            throw new InvalidCsrfTokenException();
-        }
-
         /** @var User $user */
-        $user = $userProvider->loadUserByUsername($credentials[self::USER_AUTH]);
+        $user = $userProvider->loadUserByUsername($credentials[LoginType::USER_AUTH]);
 
         if (!$user) {
             throw new LoginException($this->translator->trans('login-failed', [], 'security'));
@@ -155,7 +142,7 @@ class UserLoginFormAuthenticator extends AbstractFormLoginAuthenticator
      */
     public function checkCredentials($credentials, UserInterface $user)
     {
-        return $this->passwordEncoder->isPasswordValid($user, $credentials[self::USER_PASSWORD]);
+        return $this->passwordEncoder->isPasswordValid($user, $credentials[LoginType::USER_PASSWORD]);
     }
 
     /**

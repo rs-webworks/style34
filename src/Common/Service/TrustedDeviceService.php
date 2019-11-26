@@ -3,7 +3,7 @@
 namespace EryseClient\Common\Service;
 
 use BrowscapPHP\Browscap;
-use Psr\Log\LoggerAwareTrait;
+use EryseClient\Common\Utility\LoggerAwareTrait;
 use Scheb\TwoFactorBundle\Security\TwoFactor\Trusted\TrustedDeviceManagerInterface;
 
 /**

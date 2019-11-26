@@ -10,11 +10,15 @@
         <div class="row justify-content-center">
             <div class="card col-xs-12 col-sm-6 col-md-5">
                 <div class="card-body">
-                    <h5 class="card-title">{% trans from 'global' %}login{% endtrans %}</h5>
+                    <h5 class="card-title">
+                        <i class="fa fa-sign-in"></i>
+                        {% trans from 'global' %}login{% endtrans %}
+                    </h5>
 
                     {% if error %}
-                        <div class="alert alert-danger"><i
-                                    class="fa fa-fw fa-ban"></i> {{ error.messageKey|trans(error.messageData, 'security') }}
+                        <div class="alert alert-danger">
+                            <i class="fa fa-fw fa-ban"></i>
+                            {{ error.messageKey|trans(error.messageData, 'security') }}
                         </div>
                     {% endif %}
 

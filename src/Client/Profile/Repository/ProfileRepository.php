@@ -4,7 +4,8 @@ namespace EryseClient\Client\Profile\Repository;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\NonUniqueResultException;
-use EryseClient\Client\Profile\Entity\Entity\Profile;
+use Doctrine\ORM\NoResultException;
+use EryseClient\Client\Profile\Entity\Profile;
 use EryseClient\Common\Repository\AbstractRepository;
 use EryseClient\Server\User\Entity\User;
 use EryseClient\Server\User\Repository\UserRepository;
@@ -17,7 +18,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * @method Profile|null findOneBy(array $criteria, array $orderBy = null)
  * @method Profile|null find($id, $lockMode = null, $lockVersion = null)
  */
-class ProfileRepository extends AbstractRepository implements UserLoaderInterface
+class ProfileRepository extends AbstractRepository
 {
     /**
      * @var UserRepository
@@ -36,14 +37,12 @@ class ProfileRepository extends AbstractRepository implements UserLoaderInterfac
     }
 
     /**
-     * @param string $username
-     * @return UserInterface|void|null
-     * @throws NonUniqueResultException
+     * @param int $userId
+     *
+     * @return Profile
      */
-    public function loadUserByUsername($username)
+    public function findOneByUserId(int $userId): Profile
     {
-        /** @var User $user */
-        $user = $this->userRepository->loadUserByUsername($username);
-        return $this->find($user->getProfileId());
+        return $this->findOneBy(["userId" => $userId]);
     }
 }

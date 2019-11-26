@@ -1,4 +1,5 @@
 <?php declare(strict_types=1);
+
 namespace EryseClient\Common\Utility;
 
 use Symfony\Contracts\Translation\TranslatorInterface;

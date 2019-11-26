@@ -3,7 +3,7 @@
 namespace EryseClient\Client\Administration\Client\Controller;
 
 use EryseClient\Common\Utility\TranslatorAwareTrait;
-use Psr\Log\LoggerAwareTrait;
+use EryseClient\Common\Utility\LoggerAwareTrait;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;

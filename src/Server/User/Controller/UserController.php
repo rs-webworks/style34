@@ -2,7 +2,24 @@
 
 namespace EryseClient\Server\User\Controller;
 
-use Doctrine\ORM\OptimisticLockException;use Doctrine\ORM\ORMException;use EryseClient\Client\ProfileSettings\Form\Type\SettingsType;use EryseClient\Common\Utility\TranslatorAwareTrait;use EryseClient\Server\User\Entity\User;use EryseClient\Server\User\Repository\UserRepository;use EryseClient\Server\User\Service\UserService;use EryseClient\Server\UserSettings\Repository\UserSettingsRepository;use Psr\Log\LoggerAwareTrait;use Scheb\TwoFactorBundle\Security\TwoFactor\Provider\Google\GoogleAuthenticatorInterface;use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;use Symfony\Component\HttpFoundation\RedirectResponse;use Symfony\Component\HttpFoundation\Request;use Symfony\Component\HttpFoundation\Response;use Symfony\Component\HttpFoundation\Session\SessionInterface;use Symfony\Component\Routing\Annotation\Route;use Symfony\Component\Security\Core\User\UserInterface;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
+use EryseClient\Client\ProfileSettings\Form\Type\SettingsType;
+use EryseClient\Common\Utility\TranslatorAwareTrait;
+use EryseClient\Server\User\Entity\User;
+use EryseClient\Server\User\Repository\UserRepository;
+use EryseClient\Server\User\Service\UserService;
+use EryseClient\Server\UserSettings\Repository\UserSettingsRepository;
+use EryseClient\Common\Utility\LoggerAwareTrait;
+use Scheb\TwoFactorBundle\Security\TwoFactor\Provider\Google\GoogleAuthenticatorInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Class UserController

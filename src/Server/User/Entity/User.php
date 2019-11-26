@@ -4,6 +4,7 @@ namespace EryseClient\Server\User\Entity;
 
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use EryseClient\Client\Profile\Entity\Profile;
 use EryseClient\Common\Entity\CreatedAt;
 use EryseClient\Common\Entity\DeletedAt;
 use EryseClient\Common\Entity\ServerEntity;
@@ -117,10 +118,9 @@ class User implements UserInterface, TrustedDeviceInterface, ServerEntity
     protected $devices;
 
     /**
-     * @var int
-     * @ORM\Column(type="integer", nullable=true)
+     * @var Profile
      */
-    protected $profileId;
+    protected $profile;
 
     /**
      * User constructor.
@@ -385,18 +385,18 @@ class User implements UserInterface, TrustedDeviceInterface, ServerEntity
     // Profile
     // -----------------------------------------------------------------------------------------------------------------
     /**
-     * @return Int
+     * @return Profile
      */
-    public function getProfileId(): ?int
+    public function getProfile(): Profile
     {
-        return $this->profileId;
+        return $this->profile;
     }
 
     /**
-     * @param int $profileId
+     * @param Profile $profile
      */
-    public function setProfileId(int $profileId): void
+    public function setProfile(Profile $profile): void
     {
-        $this->profileId = $profileId;
+        $this->profile = $profile;
     }
 }

@@ -13,6 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class Profile
+ *
  * @package EryseClient\Entity\Client\Profile
  * @ORM\Table(name="profiles")
  * @ORM\Entity(repositoryClass="EryseClient\Client\Profile\Repository\ProfileRepository")
@@ -35,7 +36,8 @@ class Profile implements UserInterface, ClientEntity
 
     /**
      * @var ProfileRole
-     * @ORM\ManyToOne(targetEntity="EryseClient\Client\ProfileRole\Entity\ProfileRole", inversedBy="profiles")
+     * @ORM\ManyToOne(targetEntity="EryseClient\Client\ProfileRole\Entity\ProfileRole", inversedBy="profiles",
+     *     fetch="EAGER")
      */
     protected $role;
 
@@ -58,6 +60,7 @@ class Profile implements UserInterface, ClientEntity
 
     /**
      * This is used only internally by symfony/security. Use $this->getRole() in order to get user role directly.
+     *
      * @inheritDoc
      */
     public function getRoles()

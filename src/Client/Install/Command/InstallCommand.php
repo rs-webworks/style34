@@ -4,15 +4,18 @@ namespace EryseClient\Client\Install\Command;
 
 use DateTime;
 use Doctrine\Bundle\MigrationsBundle\Command\MigrationsMigrateDoctrineCommand;
-use EryseClient\Client\Profile\Entity\Entity\Profile;
+use EryseClient\Client\Profile\Entity\Profile;
+use EryseClient\Client\Profile\Repository\ProfileRepository;
+use EryseClient\Client\ProfileRole\Entity\ProfileRole;
+use EryseClient\Client\ProfileRole\Repository\ProfileRoleRepository;
 use EryseClient\Client\Token\Entity\TokenType;
 use EryseClient\Client\Token\Repository\TokenTypeRepository;
+use EryseClient\Common\Utility\LoggerAwareTrait;
 use EryseClient\Server\User\Entity\User;
 use EryseClient\Server\User\Repository\UserRepository;
 use EryseClient\Server\User\Service\UserService;
 use EryseClient\Server\UserRole\Entity\UserRole;
 use Exception;
-use Psr\Log\LoggerAwareTrait;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;
@@ -54,6 +57,12 @@ class InstallCommand extends Command
     /** @var TokenTypeRepository */
     private $tokenTypeRepository;
 
+    /** @var ProfileRoleRepository */
+    private $profileRoleRepository;
+
+    /** @var ProfileRepository */
+    private $profileRepository;
+
     /**
      * InstallBaseCommand constructor
      *
@@ -61,17 +70,23 @@ class InstallCommand extends Command
      * @param UserPasswordEncoderInterface $passwordEncoder
      * @param UserRepository $userRepository
      * @param TokenTypeRepository $tokenTypeRepository
+     * @param ProfileRoleRepository $profileRoleRepository
+     * @param ProfileRepository $profileRepository
      */
     public function __construct(
         CacheInterface $cache,
         UserPasswordEncoderInterface $passwordEncoder,
         UserRepository $userRepository,
-        TokenTypeRepository $tokenTypeRepository
+        TokenTypeRepository $tokenTypeRepository,
+        ProfileRoleRepository $profileRoleRepository,
+        ProfileRepository $profileRepository
     ) {
         $this->cacheInterface = $cache;
         $this->passwordEncoder = $passwordEncoder;
         $this->userRepository = $userRepository;
         $this->tokenTypeRepository = $tokenTypeRepository;
+        $this->profileRoleRepository = $profileRoleRepository;
+        $this->profileRepository = $profileRepository;
         parent::__construct();
     }
 
@@ -123,7 +138,7 @@ class InstallCommand extends Command
 
             // Create roles
             $io->section('Creating roles...');
-//            $this->createRoles();
+            $this->createRoles();
 
             // Create users
             $io->section('Creating users...');
@@ -260,36 +275,36 @@ class InstallCommand extends Command
     }
 
     /**
-     * TODO: Save profile roles, not user roles
+     *
      */
-//    protected function createRoles(): void
-//    {
-//        $roles = [
-//            [UserRole::ADMIN, '#CB2910'],
-//            [UserRole::MODERATOR, '#00B639'],
-//            [UserRole::MEMBER, '#1D1D1D'],
-//            [UserRole::INACTIVE, '#626262'],
-//            [UserRole::VERIFIED, '#626262'],
-//            [UserRole::BANNED, '#A2A2A2'],
-//            [UserRole::DELETED, '#A2A2A2'],
-//        ];
-//
-//        $this->io->progressStart(count($roles));
-//
-//        foreach ($roles as $role) {
-//            list($name, $color) = $role;
-//
-//            $r = new UserRole();
-//            $r->setName($name);
-//            $r->setColor($color);
-//
-//            $this->clientEm->persist($r);
-//            $this->io->progressAdvance(1);
-//        }
-//
-//        $this->clientEm->flush();
-//        $this->io->progressFinish();
-//    }
+    protected function createRoles(): void
+    {
+        $roles = [
+            [ProfileRole::ADMIN, '#CB2910'],
+            [ProfileRole::MODERATOR, '#00B639'],
+            [ProfileRole::MEMBER, '#1D1D1D'],
+            [ProfileRole::INACTIVE, '#626262'],
+            [ProfileRole::VERIFIED, '#626262'],
+            [ProfileRole::BANNED, '#A2A2A2'],
+            [ProfileRole::DELETED, '#A2A2A2'],
+        ];
+
+        $this->io->progressStart(count($roles));
+
+        foreach ($roles as $role) {
+            [$name, $color] = $role;
+
+            $r = new ProfileRole();
+            $r->setName($name);
+            $r->setColor($color);
+
+            $this->profileRoleRepository->save($r);
+
+            $this->io->progressAdvance(1);
+        }
+
+        $this->io->progressFinish();
+    }
 
     /**
      * @throws Exception
@@ -298,29 +313,29 @@ class InstallCommand extends Command
     {
         /** @var array $users Username, mail, password */
         $users = [
-            ['admin', 'admin@EryseClient.net', 'rootpass', UserRole::ADMIN],
-            ['spravce', 'spravce@EryseClient.net', 'null', UserRole::DELETED],
-            ['moderator', 'moderator@EryseClient.net', 'null', UserRole::DELETED],
-            ['mod', 'mod@EryseClient.net', 'null', UserRole::DELETED],
-            ['administrator', 'administrator@EryseClient.net', 'null', UserRole::DELETED],
+            ['admin', 'admin@EryseClient.net', 'rootpass', UserRole::ADMIN, ProfileRole::ADMIN],
+            ['spravce', 'spravce@EryseClient.net', 'null', UserRole::DELETED, ProfileRole::DELETED],
+            ['moderator', 'moderator@EryseClient.net', 'null', UserRole::DELETED, ProfileRole::DELETED],
+            ['mod', 'mod@EryseClient.net', 'null', UserRole::DELETED, ProfileRole::DELETED],
+            ['administrator', 'administrator@EryseClient.net', 'null', UserRole::DELETED, ProfileRole::DELETED],
         ];
 
         $this->io->progressStart(count($users));
 
         foreach ($users as $user) {
-            [$username, $email, $password, $role] = $user;
+            [$username, $email, $password, $userRole, $profileRole] = $user;
 
             $user = new User();
             $user->setUsername($username);
             $user->setEmail($email);
             $user->setCreatedAt(new DateTime());
 
-            if ($role === UserRole::DELETED) {
+            if ($userRole === UserRole::DELETED) {
                 $user->setDeletedAt(new DateTime());
             }
 
             $user->setPassword($this->passwordEncoder->encodePassword($user, $password));
-            $user->setRole($role);
+            $user->setRole($userRole);
             $user->setLastIp('127.0.0.1');
             $user->setRegisteredAs(serialize([$user->getUsername(), $user->getEmail()]));
 
@@ -328,6 +343,9 @@ class InstallCommand extends Command
 
             $profile = new Profile();
             $profile->setUserId($user->getId());
+            $profile->setRole($this->profileRoleRepository->findByName($profileRole));
+
+            $this->profileRepository->save($profile);
 
             $this->io->progressAdvance(1);
         }

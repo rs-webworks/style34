@@ -11,9 +11,6 @@ security:
     providers:
         in_memory: { memory: ~ }
 
-        profile-provider:
-            id: EryseClient\Client\ProfileSecurity\Provider\ProfileProvider
-
         user-provider:
             id: EryseClient\Server\UserSecurity\Provider\UserProvider
 
@@ -30,7 +27,7 @@ security:
             two_factor:
                 auth_form_path: 2fa_login    # The route name you have used in the routes.yaml
                 check_path: 2fa_login_check  # The route name you have used in the routes.yaml
-                provider: profile-provider
+                provider: user-provider
 
             provider: user-provider
             anonymous: true
@@ -48,7 +45,7 @@ security:
                 #default_target_path: after_login_route_name
 
             logout:
-                path:   security-logout
+                path:   user-security-logout
 
             remember_me:
                 secret:   '%kernel.secret%'

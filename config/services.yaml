@@ -24,18 +24,6 @@ services:
         exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
 
 
-
-    # Entity listeners
-    roleListener:
-        class: EryseClient\Client\ProfileRole\EntityListener\RoleListener
-        tags:
-            - { name: doctrine.orm.entity_listener, entity_manager: eryseClient, event: postLoad, lazy: true }
-
-    profileListener:
-        class: EryseClient\Client\Profile\EntityListener\ProfileListener
-        tags:
-            - { name: doctrine.orm.entity_listener, entity_manager: eryseServer, event: postLoad, lazy: true }
-
     # Shared services via packages:
 
 
@@ -64,6 +52,16 @@ services:
 #        tags:
 #            - { name: kernel.event_listener, event: kernel.request }
 
+    EryseClient\Server\User\DataCollector\UserDataCollector:
+        tags:
+            -
+                name:     data_collector
+                template: '_profiler/DataCollector/user.html.twig'
+                # must match the value returned by the getName() method
+                id:       'eryseServer.user'
+                # optional priority
+                # priority: 300
+        public: false
 
 imports:
     - { resource: 'orm.yaml' }

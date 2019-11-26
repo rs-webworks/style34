@@ -5,6 +5,8 @@ namespace EryseClient\Server\User\Service;
 use DateTime;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
+use EryseClient\Client\Profile\Repository\ProfileRepository;
+use EryseClient\Client\ProfileRole\Repository\ProfileRoleRepository;
 use EryseClient\Client\Token\Entity\Token;
 use EryseClient\Client\Token\Entity\TokenType;
 use EryseClient\Client\Token\Exception\ExpiredTokenException;
@@ -15,6 +17,7 @@ use EryseClient\Client\Token\Repository\TokenTypeRepository;
 use EryseClient\Client\Token\Service\TokenService;
 use EryseClient\Common\Service\AbstractService;
 use EryseClient\Common\Service\MailService;
+use EryseClient\Common\Utility\LoggerAwareTrait;
 use EryseClient\Common\Utility\TranslatorAwareTrait;
 use EryseClient\Server\User\Entity\User;
 use EryseClient\Server\User\Exception\ActivationException;
@@ -22,9 +25,9 @@ use EryseClient\Server\User\Repository\UserRepository;
 use EryseClient\Server\UserRole\Entity\UserRole;
 use EryseClient\Server\UserSettings\Repository\UserSettingsRepository;
 use Exception;
-use Psr\Log\LoggerAwareTrait;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Class UserService
@@ -36,14 +39,8 @@ class UserService extends AbstractService
     use LoggerAwareTrait;
     use TranslatorAwareTrait;
 
-    /** @var UserPasswordEncoderInterface $passwordEncoder */
-    protected $passwordEncoder;
-
-    /** @var TokenService $tokenService */
-    protected $tokenService;
-
-    /** @var MailService $mailService */
-    protected $mailService;
+    /** @var UserRepository */
+    protected $userRepository;
 
     /** @var TokenTypeRepository $tokenTypeRepository */
     private $tokenTypeRepository;
@@ -51,51 +48,51 @@ class UserService extends AbstractService
     /** @var TokenRepository $tokenRepository */
     private $tokenRepository;
 
-    /** @var UserSettingsRepository */
-    private $serverSettingsRepository;
-
-    /** @var UserRepository */
-    private $userRepository;
-
     /** @var RememberMeTokenRepository */
     private $rememberMeTokenRepository;
 
     /** @var ParameterBagInterface */
     private $parameterBag;
 
+    /** @var ProfileRepository */
+    private $profileRepository;
+
+    /** @var TokenService */
+    private $tokenService;
+
+    /** @var PasswordService  */
+    private $passwordService;
+
     /**
      * UserService constructor.
      *
-     * @param UserPasswordEncoderInterface $passwordEncoder
-     * @param TokenService $tokenService
-     * @param MailService $mailService
      * @param TokenTypeRepository $tokenTypeRepository
      * @param TokenRepository $tokenRepository
-     * @param UserSettingsRepository $serverSettingsRepository
      * @param UserRepository $userRepository
      * @param RememberMeTokenRepository $rememberMeTokenRepository
      * @param ParameterBagInterface $parameterBag
+     * @param ProfileRepository $profileRepository
+     * @param TokenService $tokenService
+     * @param PasswordService $passwordService
      */
     public function __construct(
-        UserPasswordEncoderInterface $passwordEncoder,
-        TokenService $tokenService,
-        MailService $mailService,
         TokenTypeRepository $tokenTypeRepository,
         TokenRepository $tokenRepository,
-        UserSettingsRepository $serverSettingsRepository,
         UserRepository $userRepository,
         RememberMeTokenRepository $rememberMeTokenRepository,
-        ParameterBagInterface $parameterBag
+        ParameterBagInterface $parameterBag,
+        ProfileRepository $profileRepository,
+        TokenService $tokenService,
+        PasswordService $passwordService
     ) {
-        $this->passwordEncoder = $passwordEncoder;
-        $this->tokenService = $tokenService;
-        $this->mailService = $mailService;
         $this->tokenTypeRepository = $tokenTypeRepository;
         $this->tokenRepository = $tokenRepository;
-        $this->serverSettingsRepository = $serverSettingsRepository;
-        $this->userRepository = $userRepository;
         $this->rememberMeTokenRepository = $rememberMeTokenRepository;
         $this->parameterBag = $parameterBag;
+        $this->profileRepository = $profileRepository;
+        $this->userRepository = $userRepository;
+        $this->tokenService = $tokenService;
+        $this->passwordService = $passwordService;
     }
 
     /**
@@ -111,7 +108,7 @@ class UserService extends AbstractService
         $user->setRole(UserRole::INACTIVE);
 
         // Encode password
-        $password = $this->passwordEncoder->encodePassword($user, $user->getPlainPassword());
+        $password = $this->passwordService->encodePassword($user, $user->getPlainPassword());
         $user->setPassword($password);
 
         // Set defaults
@@ -143,8 +140,8 @@ class UserService extends AbstractService
             }
         }
 
-        if ($user->getRole() === Role::INACTIVE) {
-            $user->setRole(Role::VERIFIED);
+        if ($user->getRole() === UserRole::INACTIVE) {
+            $user->setRole(UserRole::VERIFIED);
             $user->setActivatedAt(new DateTime());
 
             return $user;
@@ -159,34 +156,9 @@ class UserService extends AbstractService
         );
     }
 
-    /**
-     * @param string $newPassword
-     * @param User $user
-     * @param Token|null $token
-     *
-     * @return User|null
-     * @throws ExpiredTokenException
-     * @throws InvalidTokenException
-     */
-    public function updatePassword(string $newPassword, User $user, Token $token = null): ?User
-    {
-        if ($token) {
-            if ($this->tokenService->isExpired($token)) {
-                throw new ExpiredTokenException($this->translator->trans('activation-expired-token', [], 'profile'));
-            }
-
-            if ($token->isInvalid()) {
-                throw new InvalidTokenException($this->translator->trans('activation-invalid-token', [], 'profile'));
-            }
-        }
-
-        $password = $this->passwordEncoder->encodePassword($user, $newPassword);
-        $user->setPassword($password);
-
-        return $user;
-    }
 
     /**
+     * TODO: Move this to rabbitMq probably?
      * @return array|null
      */
     public function getExpiredRegistrations(): ?array
@@ -217,52 +189,6 @@ class UserService extends AbstractService
 
     /**
      * @param User $user
-     * @param string $secret
-     *
-     * @throws ORMException
-     * @throws OptimisticLockException
-     */
-    public function enableTwoStepAuth(User $user, string $secret): void
-    {
-        $settings = $this->serverSettingsRepository->findByUser($user);
-        $settings->setGAuthSecret($secret);
-        $settings->setTwoStepAuthEnabled(true);
-
-        $this->serverSettingsRepository->save($settings);
-    }
-
-    /**
-     * @param User $user
-     *
-     * @throws ORMException
-     * @throws OptimisticLockException
-     */
-    public function disableTwoStepAuth(User $user): void
-    {
-        $settings = $this->serverSettingsRepository->findByUser($user);
-        $settings->setGAuthSecret(null);
-        $settings->setTwoStepAuthEnabled(false);
-
-        $this->serverSettingsRepository->save($settings);
-
-        $user->setTrustedTokenVersion($user->getTrustedTokenVersion() + 1);
-        $this->userRepository->save($user);
-    }
-
-    /**
-     * @param User $user
-     *
-     * @throws ORMException
-     * @throws OptimisticLockException
-     */
-    public function forgetDevices(User $user): void
-    {
-        $user->setTrustedTokenVersion($user->getTrustedTokenVersion() + 1);
-        $this->userRepository->save($user);
-    }
-
-    /**
-     * @param User $user
      *
      * @return bool
      */
@@ -273,15 +199,18 @@ class UserService extends AbstractService
         return $token ? true : false;
     }
 
+
     /**
      * @param User $user
      *
-     * @throws ORMException
-     * @throws OptimisticLockException
+     * @return UserInterface
      */
-    public function logoutEverywhere(User $user): void
+    public function initUser(User $user): UserInterface
     {
-        $user->setTrustedTokenVersion($user->getTrustedTokenVersion() + 1);
-        $this->userRepository->save($user);
+        $profile = $this->profileRepository->findOneByUserId($user->getId());
+        $profile->setUser($user);
+        $user->setProfile($profile);
+
+        return $user;
     }
 }

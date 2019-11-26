@@ -75,12 +75,12 @@
                         </button>
                         <ul class="dropdown-menu dropdown-menu-right mt-2">
                             <li class="px-3 py-0">
-                                <a href="{{ url('profile-view') }}" class="btn btn-default">
+                                <a href="{{ url('profile-view', {"username": app.user.username}) }}" class="btn btn-default">
                                     <i class="fa fa-fw fa-user"></i> {% trans from 'global' %}my-profile{% endtrans %}
                                 </a>
                             </li>
 
-                            {% if is_granted(constant("EryseClient\\Entity\\Client\\User\\Role::ADMIN")) %}
+                            {% if is_granted(constant("EryseClient\\Server\\UserRole\\Entity\\UserRole::ADMIN")) %}
                                 <li class="px-3 py-0">
                                     <a href="{{ url('administration-dashboard') }}" class="btn btn-default">
                                         <i class="fa fa-fw fa-user-cog"></i> {% trans from 'global' %}administration{% endtrans %}
@@ -119,7 +119,7 @@
 
                                 <div class="dropdown-divider"></div>
 
-                                {{ include("_partial/login-form.html.twig") }}
+                                {{ render(controller("EryseClient\\Server\\UserSecurity\\Controller\\SecurityController::navbarLoginForm")) }}
                             </li>
                         </ul>
                     </li>

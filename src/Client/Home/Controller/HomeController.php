@@ -2,7 +2,7 @@
 
 namespace EryseClient\Client\Home\Controller;
 
-use Psr\Log\LoggerAwareTrait;
+use EryseClient\Common\Utility\LoggerAwareTrait;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;

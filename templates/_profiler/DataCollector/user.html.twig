@@ -1,0 +1,47 @@
+{% extends '@WebProfiler/Profiler/layout.html.twig' %}
+
+{% block toolbar %}
+    {% set icon %}
+        <i class="fa fa-users"></i>
+        <span class="sf-toolbar-value">Eryse user</span>
+    {% endset %}
+
+    {% set text %}
+
+        {% if collector.user %}
+            <div class="sf-toolbar-info-piece">
+                <b>user:</b>
+            </div>
+            <div class="sf-toolbar-info-piece">
+                <b>id</b> {{ collector.user.id }}
+            </div>
+
+            <div class="sf-toolbar-info-piece">
+                <b>username</b> {{ collector.user.username }}
+            </div>
+
+            <div class="sf-toolbar-info-piece">
+                <b>role</b> {{ collector.user.role }}
+            </div>
+
+            <hr>
+            <div class="sf-toolbar-info-piece">
+                <b>profile:</b>
+            </div>
+            <div class="sf-toolbar-info-piece">
+                <b>id</b> {{ collector.user.profile.id }}
+            </div>
+
+            <div class="sf-toolbar-info-piece">
+                <b>role</b> {{ collector.user.profile.role.name }}
+            </div>
+        {% else %}
+            <div class="sf-toolbar-info-piece">
+                <b>-no user-</b>
+            </div>
+        {% endif %}
+
+    {% endset %}
+
+    {{ include('@WebProfiler/Profiler/toolbar_item.html.twig', { link: false }) }}
+{% endblock %}
