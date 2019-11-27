@@ -56,7 +56,7 @@ services:
         tags:
             -
                 name:     data_collector
-                template: '_profiler/DataCollector/user.html.twig'
+                template: '_profiler/DataCollector/eryse.html.twig'
                 # must match the value returned by the getName() method
                 id:       'eryse.app'
                 # optional priority
