@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace EryseClient\Server\User\DataCollector;
+namespace EryseClient\Common\DataCollector;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,9 +13,9 @@ use Symfony\Component\Security\Core\User\UserInterface;
  *
  * @package EryseClient\Server\User\DataCollector
  */
-class UserDataCollector extends DataCollector
+class EryseDataCollector extends DataCollector
 {
-    private const COLLECTOR_NAME = "eryseServer.user";
+    private const COLLECTOR_NAME = "eryse.app";
 
     /**
      * @var UserInterface

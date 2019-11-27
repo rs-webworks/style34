@@ -9,4 +9,4 @@ twig:
     exception_controller: null
 
     globals:
-        eryseClient: '%eryseClient%'
+        eryse: '%eryse%'

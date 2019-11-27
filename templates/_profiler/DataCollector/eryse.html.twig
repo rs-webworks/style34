@@ -2,11 +2,17 @@
 
 {% block toolbar %}
     {% set icon %}
-        <i class="fa fa-users"></i>
-        <span class="sf-toolbar-value">Eryse user</span>
+        <i class="fa fa-fist-raised"></i>
+        <span class="sf-toolbar-value">Eryse App</span>
     {% endset %}
 
     {% set text %}
+
+        <div class="sf-toolbar-info-piece">
+            <b>client:</b> {{ eryse.client.name }}
+            <b>server:</b> {{ eryse.server.name }}
+        </div>
+
 
         {% if collector.user %}
             <div class="sf-toolbar-info-piece">

@@ -10,194 +10,36 @@ use EryseClient\Client\Token\Repository\TokenRepository;
 use EryseClient\Client\Token\Repository\TokenTypeRepository;
 use EryseClient\Client\Token\Service\TokenService;
 use EryseClient\Common\Service\MailService;
-use EryseClient\Common\Utility\TranslatorAwareTrait;
-use EryseClient\Server\User\Entity\User;
-use EryseClient\Server\User\Exception\ActivationException;
-use EryseClient\Server\User\Form\Type\RegistrationType;
-use EryseClient\Server\User\Repository\UserRepository;
-use EryseClient\Server\User\Service\UserService;
-use EryseClient\Server\UserSecurity\Form\Type\LoginType;
-use Exception;
 use EryseClient\Common\Utility\LoggerAwareTrait;
+use EryseClient\Common\Utility\TranslatorAwareTrait;
+use EryseClient\Server\User\Repository\UserRepository;
+use EryseClient\Server\User\Service\PasswordService;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Security\Core\Security;
-use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Validator\ConstraintViolation;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * Class SecurityController
+ * Class UserPasswordController
  *
- * @package EryseClient\Controller\User
+ * @package EryseClient\Server\UserSecurity\Controller
  */
-class SecurityController extends AbstractController
+class UserPasswordController extends AbstractController
 {
-    use LoggerAwareTrait;
     use TranslatorAwareTrait;
+    use LoggerAwareTrait;
 
     /**
-     * @Route("/user-security-login", name="user-security-login")
-     * @param AuthenticationUtils $authenticationUtils
-     *
-     * @return Response
-     */
-    public function login(AuthenticationUtils $authenticationUtils): Response
-    {
-        // get the login error if there is one
-        $error = $authenticationUtils->getLastAuthenticationError();
-        // last username entered by the user
-        $lastUsername = $authenticationUtils->getLastUsername();
-
-        $loginForm = $this->createForm(LoginType::class);
-
-        return $this->render(
-            'User/Login/login.html.twig',
-            [
-                'last_username' => $lastUsername,
-                'error' => $error,
-                'loginForm' => $loginForm->createView(),
-            ]
-        );
-    }
-
-    /**
-     * @return Response
-     */
-    public function navbarLoginForm(): Response
-    {
-        $loginForm = $this->createForm(LoginType::class, null, ["attr" => ["id" => "login"]]);
-
-        return $this->render('_partial/login-form.html.twig', ['loginForm' => $loginForm->createView()]);
-    }
-
-    /**
-     * @Route("/logout", name="user-security-logout")
-     */
-    public function logout(): void
-    {
-    }
-
-    /**
-     * @Route("/user/registration", name="user-registration")
-     * @param Request $request
-     * @param UserService $userService
-     * @param MailService $mailService
-     * @param TokenService $tokenService
-     * @param TokenRepository $tokenRepository
-     * @param UserRepository $userRepository
-     *
-     * @return RedirectResponse|Response
-     * @throws ORMException
-     * @throws OptimisticLockException
-     * @throws \Symfony\Component\Mailer\Exception\TransportExceptionInterface
-     */
-    public function registration(
-        Request $request,
-        UserService $userService,
-        MailService $mailService,
-        TokenService $tokenService,
-        TokenRepository $tokenRepository,
-        UserRepository $userRepository
-    ): Response {
-        // Purge all expired & invalid requests for registration
-        $expiredRegistrations = $userService->getExpiredRegistrations();
-        if ($expiredRegistrations) {
-            $userRepository->removeUsers($expiredRegistrations);
-        }
-
-        // Load form data
-        $user = new User();
-        $form = $this->createForm(RegistrationType::class, $user);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            try {
-                // Prepare user & token
-                $thisIp = $request->getClientIp();
-                $user = $userService->prepareNewUser($user, $thisIp);
-                $userRepository->saveNew($user);
-
-                $token = $tokenService->getActivationToken($user);
-
-                // Send registration email
-                $mailService->sendActivationMail($user, $token);
-                $tokenRepository->save($token);
-
-                // Flash & redirect
-                $this->addFlash('success', $this->translator->trans('registration-success', [], 'profile'));
-
-                return $this->redirectToRoute("user-registration-success");
-            } catch (Exception $ex) {
-                $this->addFlash('danger', $this->translator->trans('registration-failed', [], 'profile'));
-                $this->logger->error(
-                    'controller.user.security.registration: registration failed',
-                    [$ex, $user]
-                );
-            }
-        }
-
-        return $this->render(
-            'User/Security/registration.html.twig',
-            ['form' => $form->createView()]
-        );
-    }
-
-    /**
-     * @Route("/user/registration/activate/{tokenHash}", name="user-registration-activate")
-     * @param UserService $userService
-     * @param UserRepository $userRepository
-     * @param TokenRepository $tokenRepository
-     * @param $tokenHash
-     *
-     * @return Response
-     */
-    public function activate(
-        UserService $userService,
-        UserRepository $userRepository,
-        TokenRepository $tokenRepository,
-        $tokenHash
-    ): Response {
-        try {
-            $token = $tokenRepository->findOneBy(['hash' => $tokenHash]);
-
-            if (!$token) {
-                throw new ActivationException($this->translator->trans('activation-invalid-token', [], 'profile'));
-            }
-
-            $user = $userRepository->find($token->getUserId());
-            $user = $userService->activateUser($user, $token);
-            $token->setInvalid(true);
-
-            $userRepository->save($user);
-            $tokenRepository->save($token);
-
-            $this->addFlash('success', $this->translator->trans('activation-success', [], 'profile'));
-        } catch (Exception $ex) {
-            $this->addFlash(
-                'danger',
-                $this->translator->trans('activation-failed', [], 'profile') . ' - ' . $ex->getMessage()
-            );
-            $this->logger->error('controller.user.security.activate: activation failed', [$ex, $tokenHash]);
-        }
-
-        return $this->render('User/Security/activation.html.twig');
-    }
-
-    /**
-     * @Route("/user/registration/success", name="user-registration-success")
-     * @return Response
-     */
-    public function success(): Response
-    {
-        return $this->render("User/Security/success.html.twig");
-    }
-
-    /**
-     * @Route("/user/request-reset-password", name="user-request-reset-password")
+     * @Route("/user/password/reset", name="user-password-request-reset")
      * @param Request $request
      * @param UserRepository $userRepository
      * @param TokenService $tokenService
@@ -206,7 +48,12 @@ class SecurityController extends AbstractController
      * @param TokenTypeRepository $tokenTypeRepository
      *
      * @return RedirectResponse|Response
-     * @throws Exception
+     * @throws ORMException
+     * @throws OptimisticLockException
+     * @throws TransportExceptionInterface
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
      */
     public function requestResetPassword(
         Request $request,
@@ -260,9 +107,10 @@ class SecurityController extends AbstractController
     }
 
     /**
-     * @Route("/user/reset-password/{tokenHash}", name="user-reset-password")
+     * TODO: refactor to facade
+     * @Route("/user/password/reset/{tokenHash}", name="user-password-reset")
      * @param Request $request
-     * @param UserService $userService
+     * @param PasswordService $passwordService
      * @param UserRepository $userRepository
      * @param TokenService $tokenService
      * @param TokenRepository $tokenRepository
@@ -275,7 +123,7 @@ class SecurityController extends AbstractController
      */
     public function resetPassword(
         Request $request,
-        UserService $userService,
+        PasswordService $passwordService,
         UserRepository $userRepository,
         TokenService $tokenService,
         TokenRepository $tokenRepository,
@@ -332,7 +180,7 @@ class SecurityController extends AbstractController
                 }
 
                 // Make password update
-                $user = $userService->updatePassword($newPassword, $user, $token);
+                $user = $passwordService->updatePassword($newPassword, $user, $token);
 
                 if ($token) {
                     $token->setInvalid(true);

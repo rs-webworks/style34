@@ -11,7 +11,7 @@
 		<nav aria-label="breadcrumb">
 			<ol class="breadcrumb">
 				<li class="breadcrumb-item">
-					<a href="{{ url('home-index') }}">{{ eryseClient.name }}</a>
+					<a href="{{ url('home-index') }}">{{ eryse.client.name }}</a>
 				</li>
 				<li class="breadcrumb-item">
 					<a href="{{ url('profile-list') }}">{% trans from 'global' %}profiles{% endtrans %}</a>
@@ -34,7 +34,7 @@
 					<i class="fa fa-fw fa-trophy"></i> {% trans from 'profile' %}membership-traits{% endtrans %}</a>
 				<div class="btn btn-light">
 					{% trans from 'profile' %}membership-price{% endtrans %}:
-					<strong>{{ eryseClient.membership.price }} Kč </strong>
+					<strong>{{ eryse.client.membership.price }} Kč </strong>
 				</div>
 			</div>
 
