@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace EryseClient\Client\Token\Repository;
+namespace EryseClient\Server\Token\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface;
 use Doctrine\Common\Persistence\ManagerRegistry;
-use EryseClient\Client\Token\Entity\TokenType;
+use EryseClient\Server\Token\Entity\TokenType;
 use EryseClient\Common\Repository\AbstractRepository;
 
 /**

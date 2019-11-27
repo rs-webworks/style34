@@ -32,7 +32,6 @@ class LoginType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->setMethod(self::METHOD);
-        $builder->setAction(UserLoginFormAuthenticator::ROUTE);
 
         $builder->add(
             self::USER_AUTH,

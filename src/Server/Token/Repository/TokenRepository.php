@@ -1,13 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace EryseClient\Client\Token\Repository;
+namespace EryseClient\Server\Token\Repository;
 
 use DateTime;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
-use EryseClient\Client\Token\Entity\Token;
-use EryseClient\Client\Token\Entity\TokenType;
+use EryseClient\Server\Token\Entity\Token;
+use EryseClient\Server\Token\Entity\TokenType;
 use EryseClient\Common\Repository\AbstractRepository;
 use EryseClient\Server\User\Entity\User;
 use Exception;

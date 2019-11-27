@@ -2,12 +2,12 @@
 
 namespace EryseClient\Server\User\Service;
 
-use EryseClient\Client\Token\Entity\Token;
-use EryseClient\Client\Token\Exception\ExpiredTokenException;
-use EryseClient\Client\Token\Exception\InvalidTokenException;
-use EryseClient\Client\Token\Service\TokenService;
+use EryseClient\Server\Token\Entity\Token;
 use EryseClient\Common\Service\AbstractService;
 use EryseClient\Common\Utility\TranslatorAwareTrait;
+use EryseClient\Server\Token\Exception\ExpiredTokenException;
+use EryseClient\Server\Token\Exception\InvalidTokenException;
+use EryseClient\Server\Token\Service\TokenService;
 use EryseClient\Server\User\Entity\User;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 

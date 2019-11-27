@@ -3,30 +3,24 @@
 namespace EryseClient\Server\User\Service;
 
 use DateTime;
-use Doctrine\ORM\OptimisticLockException;
-use Doctrine\ORM\ORMException;
 use EryseClient\Client\Profile\Repository\ProfileRepository;
-use EryseClient\Client\ProfileRole\Repository\ProfileRoleRepository;
-use EryseClient\Client\Token\Entity\Token;
-use EryseClient\Client\Token\Entity\TokenType;
-use EryseClient\Client\Token\Exception\ExpiredTokenException;
-use EryseClient\Client\Token\Exception\InvalidTokenException;
-use EryseClient\Client\Token\Repository\RememberMeTokenRepository;
-use EryseClient\Client\Token\Repository\TokenRepository;
-use EryseClient\Client\Token\Repository\TokenTypeRepository;
-use EryseClient\Client\Token\Service\TokenService;
+use EryseClient\Server\Token\Entity\Token;
+use EryseClient\Server\Token\Entity\TokenType;
 use EryseClient\Common\Service\AbstractService;
-use EryseClient\Common\Service\MailService;
 use EryseClient\Common\Utility\LoggerAwareTrait;
 use EryseClient\Common\Utility\TranslatorAwareTrait;
+use EryseClient\Server\Token\Exception\ExpiredTokenException;
+use EryseClient\Server\Token\Exception\InvalidTokenException;
+use EryseClient\Server\Token\Repository\RememberMeTokenRepository;
+use EryseClient\Server\Token\Repository\TokenRepository;
+use EryseClient\Server\Token\Repository\TokenTypeRepository;
+use EryseClient\Server\Token\Service\TokenService;
 use EryseClient\Server\User\Entity\User;
 use EryseClient\Server\User\Exception\ActivationException;
 use EryseClient\Server\User\Repository\UserRepository;
 use EryseClient\Server\UserRole\Entity\UserRole;
-use EryseClient\Server\UserSettings\Repository\UserSettingsRepository;
 use Exception;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
@@ -176,7 +170,7 @@ class UserService extends AbstractService
             $expiredTokens = $this->tokenRepository->findExpiredTokens($tokenType);
 
             foreach ($expiredTokens as $token) {
-                $users[] = $this->userRepository->find($token->getUserId());
+                $users[] = $token->getUser();
             }
 
             return $users;

@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace EryseClient\Client\Token\Entity;
+namespace EryseClient\Server\Token\Entity;
 
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;

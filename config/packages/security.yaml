@@ -1,7 +1,8 @@
 security:
     role_hierarchy:
-        ROLE_SERVER_BANNED: ROLE_BANNED
+        ROLE_BANNED: ROLE_USER
 
+        ROLE_INACTIVE: ROLE_USER
         ROLE_VERIFIED: ROLE_INACTIVE
         ROLE_MEMBER: ROLE_VERIFIED
 

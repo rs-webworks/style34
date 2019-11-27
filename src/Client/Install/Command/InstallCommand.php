@@ -9,8 +9,8 @@ use EryseClient\Client\Profile\Repository\ProfileRepository;
 use EryseClient\Client\ProfileRole\Entity\ProfileRole;
 use EryseClient\Client\ProfileRole\Repository\ProfileRoleRepository;
 use EryseClient\Client\Token\Entity\TokenType;
-use EryseClient\Client\Token\Repository\TokenTypeRepository;
 use EryseClient\Common\Utility\LoggerAwareTrait;
+use EryseClient\Server\Token\Repository\TokenTypeRepository;
 use EryseClient\Server\User\Entity\User;
 use EryseClient\Server\User\Repository\UserRepository;
 use EryseClient\Server\User\Service\UserService;
@@ -284,7 +284,6 @@ class InstallCommand extends Command
             [ProfileRole::MODERATOR, '#00B639'],
             [ProfileRole::MEMBER, '#1D1D1D'],
             [ProfileRole::INACTIVE, '#626262'],
-            [ProfileRole::VERIFIED, '#626262'],
             [ProfileRole::BANNED, '#A2A2A2'],
             [ProfileRole::DELETED, '#A2A2A2'],
         ];

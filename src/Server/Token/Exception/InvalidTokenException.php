@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace EryseClient\Client\Token\Exception;
+namespace EryseClient\Server\Token\Exception;
 
 use Throwable;
 

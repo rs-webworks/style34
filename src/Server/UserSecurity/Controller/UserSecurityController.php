@@ -4,6 +4,7 @@ namespace EryseClient\Server\UserSecurity\Controller;
 
 use EryseClient\Common\Utility\LoggerAwareTrait;
 use EryseClient\Common\Utility\TranslatorAwareTrait;
+use EryseClient\Server\UserSecurity\Authenticator\UserLoginFormAuthenticator;
 use EryseClient\Server\UserSecurity\Form\Type\LoginType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -33,7 +34,11 @@ class UserSecurityController extends AbstractController
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        $loginForm = $this->createForm(LoginType::class);
+        $loginForm = $this->createForm(
+            LoginType::class,
+            null,
+            ["action" => $this->generateUrl(UserLoginFormAuthenticator::ROUTE)]
+        );
 
         return $this->render(
             'User/Login/login.html.twig',
@@ -50,7 +55,11 @@ class UserSecurityController extends AbstractController
      */
     public function navbarLoginForm(): Response
     {
-        $loginForm = $this->createForm(LoginType::class, null, ["attr" => ["id" => "login"]]);
+        $loginForm = $this->createForm(
+            LoginType::class,
+            null,
+            ["attr" => ["id" => "login"], "action" => $this->generateUrl(UserLoginFormAuthenticator::ROUTE)]
+        );
 
         return $this->render('_partial/login-form.html.twig', ['loginForm' => $loginForm->createView()]);
     }

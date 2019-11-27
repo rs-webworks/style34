@@ -4,11 +4,11 @@ namespace EryseClient\Server\UserSecurity\Controller;
 
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
-use EryseClient\Client\Token\Repository\TokenRepository;
-use EryseClient\Client\Token\Service\TokenService;
 use EryseClient\Common\Service\MailService;
 use EryseClient\Common\Utility\LoggerAwareTrait;
 use EryseClient\Common\Utility\TranslatorAwareTrait;
+use EryseClient\Server\Token\Repository\TokenRepository;
+use EryseClient\Server\Token\Service\TokenService;
 use EryseClient\Server\User\Entity\User;
 use EryseClient\Server\User\Exception\ActivationException;
 use EryseClient\Server\User\Form\Type\RegistrationType;

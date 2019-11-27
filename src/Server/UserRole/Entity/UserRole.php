@@ -8,6 +8,7 @@ namespace EryseClient\Server\UserRole\Entity;
  */
 class UserRole
 {
+    public const USER = 'ROLE_USER';
     public const DELETED = 'ROLE_DELETED';
     public const BANNED = 'ROLE_BANNED';
     public const INACTIVE = 'ROLE_INACTIVE';

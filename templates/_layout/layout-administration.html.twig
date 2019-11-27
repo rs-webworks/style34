@@ -1,8 +1,8 @@
-{% include "_partial/head_styled.html.twig" %}
+{{ include("_layout/_partial/head_styled.html.twig") }}
 
 <body class="{% block bodyClass %}{% endblock %}">
 
-{% include "_partial/navigation-top-frontend.html.twig" %}
+{{ include("_layout/_partial/navigation-top-frontend.html.twig") }}
 
 <div class="container" id="flash-messages">
 
@@ -23,5 +23,5 @@
 	<p></p>
 </footer>
 
-{% include "_partial/js.html.twig" %}
+{{ include("_layout/_partial/js.html.twig") }}
 </body>

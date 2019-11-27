@@ -1,4 +1,4 @@
-{% extends 'layout-frontend.html.twig' %}
+{% extends '_layout/layout-frontend.html.twig' %}
 
 {% block title %}Home{% endblock %}
 
@@ -75,7 +75,7 @@
 
         <div class="row">
             <div class="col col-xs-12">
-                <a href="{{ url('profile-registration') }}" class="btn btn-success btn-block">
+                <a href="{{ url('user-registration') }}" class="btn btn-success btn-block">
                     <i class="fa fa-fw fa-user-plus"></i> Stát se členem!
                 </a>
             </div>

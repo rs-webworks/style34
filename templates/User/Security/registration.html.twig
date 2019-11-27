@@ -1,4 +1,4 @@
-{% extends 'layout-frontend.html.twig' %}
+{% extends '_layout/layout-frontend.html.twig' %}
 
 {% block title %}Home{% endblock %}
 
@@ -26,7 +26,7 @@
 			<div class="col-md-5">
 				<h3>{% trans from 'profile' %}registration-fee{% endtrans %}</h3>
 				<p>
-					{% trans with {'%appname%': constant('EryseClient\\Kernel::SITE_NAME')} from 'global' %}registration-fee-desc{% endtrans %}
+					{% trans with {'%appname%': eryse.client.name} from 'global' %}registration-fee-desc{% endtrans %}
 				</p>
 
 

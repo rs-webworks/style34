@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace EryseClient\Client\Token\Repository;
+namespace EryseClient\Server\Token\Repository;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
-use EryseClient\Client\Token\Entity\RememberMeToken;
+use EryseClient\Server\Token\Entity\RememberMeToken;
 use EryseClient\Common\Repository\AbstractRepository;
 use EryseClient\Server\User\Entity\User;
 

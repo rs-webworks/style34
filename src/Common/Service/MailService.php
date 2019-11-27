@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace EryseClient\Common\Service;
 
-use EryseClient\Client\Token\Entity\Token;
+use EryseClient\Server\Token\Entity\Token;
 use EryseClient\Common\Utility\TranslatorAwareTrait;
 use EryseClient\Server\User\Entity\User;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;

@@ -6,7 +6,7 @@ use DateInterval;
 use DateTime;
 use EryseClient\Client\Token\Entity\Token;
 use EryseClient\Client\Token\Entity\TokenType;
-use EryseClient\Client\Token\Service\TokenService;
+use EryseClient\Server\Token\Service\TokenService;
 use EryseClient\Server\User\Entity\User;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
@@ -15,7 +15,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
  * Class TokenServiceTest
  *
  * @package EryseClient\Tests\Service
- * @covers \EryseClient\Client\Token\Service\TokenService
+ * @covers \EryseClient\Server\Token\Service\TokenService
  */
 class TokenServiceTest extends WebTestCase
 {
@@ -35,7 +35,7 @@ class TokenServiceTest extends WebTestCase
 
     /**
      * @throws Exception
-     * @covers \EryseClient\Client\Token\Service\TokenService::generateActivationToken
+     * @covers \EryseClient\Server\Token\Service\TokenService::generateActivationToken
      */
     public function testGetActivationToken()
     {
@@ -69,7 +69,7 @@ class TokenServiceTest extends WebTestCase
     /**
      * @dataProvider provideExpirationTokens
      * @throws Exception
-     * @covers       \EryseClient\Client\Token\Service\TokenService::isExpired
+     * @covers       \EryseClient\Server\Token\Service\TokenService::isExpired
      */
     public function testIsExpired($expired, $token)
     {
@@ -81,7 +81,7 @@ class TokenServiceTest extends WebTestCase
     }
 
     /**
-     * @covers \EryseClient\Client\Token\Service\TokenService::isValid
+     * @covers \EryseClient\Server\Token\Service\TokenService::isValid
      */
     public function testIsValid()
     {
@@ -97,7 +97,7 @@ class TokenServiceTest extends WebTestCase
 
     /**
      * @throws Exception
-     * @covers \EryseClient\Client\Token\Service\TokenService::createExpirationDateTime
+     * @covers \EryseClient\Server\Token\Service\TokenService::createExpirationDateTime
      */
     public function testCreateExpiraitonDateTime()
     {

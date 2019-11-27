@@ -5,14 +5,16 @@ namespace EryseClient\Server\UserSecurity\Controller;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use EryseClient\Client\ProfileSecurity\Exception\ResetPasswordException;
-use EryseClient\Client\Token\Entity\TokenType;
-use EryseClient\Client\Token\Repository\TokenRepository;
-use EryseClient\Client\Token\Repository\TokenTypeRepository;
-use EryseClient\Client\Token\Service\TokenService;
 use EryseClient\Common\Entity\FlashType;
 use EryseClient\Common\Service\MailService;
 use EryseClient\Common\Utility\LoggerAwareTrait;
 use EryseClient\Common\Utility\TranslatorAwareTrait;
+use EryseClient\Server\Token\Entity\Token;
+use EryseClient\Server\Token\Entity\TokenType;
+use EryseClient\Server\Token\Exception\TokenException;
+use EryseClient\Server\Token\Repository\TokenRepository;
+use EryseClient\Server\Token\Repository\TokenTypeRepository;
+use EryseClient\Server\Token\Service\TokenService;
 use EryseClient\Server\User\Repository\UserRepository;
 use EryseClient\Server\User\Service\PasswordService;
 use Exception;
@@ -21,9 +23,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Security;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\ConstraintViolation;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Twig\Error\LoaderError;
@@ -39,6 +42,8 @@ class UserPasswordController extends AbstractController
 {
     use TranslatorAwareTrait;
     use LoggerAwareTrait;
+
+    protected const SESSION_RESET_TOKEN = "reset-password-token";
 
     /**
      * @Route("/user/password/request-reset", name="user-password-request-reset")
@@ -128,31 +133,30 @@ class UserPasswordController extends AbstractController
      * @param UserRepository $userRepository
      * @param TokenService $tokenService
      * @param TokenRepository $tokenRepository
-     * @param Security $security
+     * @param Session $session
      * @param null $tokenHash
      *
      * @return RedirectResponse|Response
-     * @throws Exception
      */
     public function resetPasswordViaToken(
         UserRepository $userRepository,
         TokenService $tokenService,
         TokenRepository $tokenRepository,
-        Security $security,
+        Session $session,
         $tokenHash = null
     ) {
         $token = $tokenRepository->findOneBy(['hash' => $tokenHash]);
-        $user = null;
 
-        if (!$token || $token->getType() !== TokenType::USER['REQUEST_RESET_PASSWORD'] || !$tokenService->isValid($token) || $tokenService->isExpired($token)) {
+        try {
+            $tokenService->verifyToken($token, TokenType::USER["REQUEST_RESET_PASSWORD"]);
+        } catch (TokenException $exception) {
+            $this->logger->info("Token verification failed", [$exception]);
             $this->addFlash(FlashType::DANGER, $this->translator->trans('reset-password-invalid-token', [], 'profile'));
 
             return $this->redirectToRoute('user-request-reset-password');
         }
 
-        // Load user, prepare pass
-        $user = $userRepository->find($token->getUserId());
-
+        $session->set(self::SESSION_RESET_TOKEN, $token);
 
         return $this->render('User/Security/reset-password.html.twig');
     }
@@ -163,7 +167,10 @@ class UserPasswordController extends AbstractController
      *
      * @param ValidatorInterface $validator
      * @param TokenRepository $tokenRepository
+     * @param TokenService $tokenService
+     * @param UserRepository $userRepository
      * @param PasswordService $passwordService
+     * @param Session $session
      *
      * @return RedirectResponse|Response
      */
@@ -171,59 +178,78 @@ class UserPasswordController extends AbstractController
         Request $request,
         ValidatorInterface $validator,
         TokenRepository $tokenRepository,
-        PasswordService $passwordService
+        TokenService $tokenService,
+        UserRepository $userRepository,
+        PasswordService $passwordService,
+        Session $session
     ) {
-        if ($request->isMethod('post')) {
-            try {
-                $newPassword = $request->get('new-password');
-                $newPasswordCheck = $request->get('new-password-check');
+        if (!$request->isMethod('post')) {
+            return $this->redirectToRoute('user-request-reset-password');
+        }
 
-                // Check if password & password check are the same
-                if ($newPassword !== $newPasswordCheck) {
-                    throw new ResetPasswordException(
-                        $this->translator->trans(
-                            'reset-password-new-password-mismatch',
-                            [],
-                            'profile'
-                        )
-                    );
-                }
+        try {
+            /** @var Token $token */
+            $token = $session->get(self::SESSION_RESET_TOKEN);
 
-                // Validate new password
-                $errors = $validator->validatePropertyValue($user, 'plainPassword', $newPassword);
-                if (count($errors)) {
-                    /** @var ConstraintViolation $error */
-                    foreach ($errors as $error) {
-                        $this->addFlash('danger', $error->getMessage());
-                    }
-
-                    throw new ResetPasswordException();
-                }
-
-                // Make password update
-                $user = $passwordService->updatePassword($newPassword, $user, $token);
-
-                if ($token) {
-                    $token->setInvalid(true);
-                    $tokenRepository->save($token);
-                }
-                $userRepository->save($user);
-            } catch (Exception $ex) {
-                $message = $this->translator->trans('reset-password-failed', [], 'profile');
-                $message .= $ex->getMessage() ?? ' - ' . $ex->getMessage();
-
-                $this->addFlash(
-                    'danger',
-                    $message
-                );
-                $this->logger->error('controller.user.security.resetPassword: reset failed', [$ex, $tokenHash]);
-
-                return $this->render('User/Security/reset-password.html.twig');
+            if (!$token) {
+                throw new TokenException();
             }
 
-            $this->addFlash('success', $this->translator->trans('reset-password-success', [], 'profile'));
+            $user = $userRepository->find($token->getUser());
 
-            return $this->redirectToRoute('home-index');
+            $newPassword = $request->get('new-password');
+            $newPasswordCheck = $request->get('new-password-check');
+
+            $this->validateNewPassword($validator, $user, $newPassword, $newPasswordCheck);
+
+            // Make password update
+            $user = $passwordService->updatePassword($newPassword, $user, $token);
+
+            $tokenRepository->save($tokenService->invalidate($token));
+            $userRepository->save($user);
+        } catch (Exception $ex) {
+            $message = $this->translator->trans('reset-password-failed', [], 'profile');
+            $message .= $ex->getMessage() ?? ' - ' . $ex->getMessage();
+
+            $this->addFlash('danger', $message);
+            $this->logger->error('User password reset failed', [$ex, $token, $user]);
+
+            return $this->render('User/Security/reset-password.html.twig');
+        }
+
+        $this->addFlash('success', $this->translator->trans('reset-password-success', [], 'profile'));
+
+        return $this->redirectToRoute('home-index');
+    }
+
+    /**
+     * @param ValidatorInterface $validator
+     * @param UserInterface $user
+     * @param string $newPassword
+     * @param string $verify
+     *
+     * @throws ResetPasswordException
+     */
+    private function validateNewPassword(
+        ValidatorInterface $validator,
+        UserInterface $user,
+        string $newPassword,
+        string $verify
+    ): void {
+        if ($newPassword !== $verify) {
+            throw new ResetPasswordException(
+                $this->translator->trans('reset-password-new-password-mismatch', [], 'profile')
+            );
+        }
+
+        $errors = $validator->validatePropertyValue($user, 'plainPassword', $newPassword);
+        if (count($errors)) {
+            /** @var ConstraintViolation $error */
+            foreach ($errors as $error) {
+                $this->addFlash('danger', $error->getMessage());
+            }
+
+            throw new ResetPasswordException();
         }
     }
 }

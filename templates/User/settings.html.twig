@@ -1,4 +1,4 @@
-{% extends 'layout-frontend.html.twig' %}
+{% extends '_layout/layout-frontend.html.twig' %}
 
 {% block title %}Home{% endblock %}
 
@@ -102,7 +102,7 @@
 							</label>
 							<div class="col-sm-5">
 
-								<a href="{{ url('user-reset-password') }}" class="btn btn-outline-primary float-right">
+								<a href="{{ url('user-password-reset') }}" class="btn btn-outline-primary float-right">
 									<i class="fa fa-fw fa-edit"></i> {% trans from 'user' %}change-password{% endtrans %}
 								</a>
 							</div>

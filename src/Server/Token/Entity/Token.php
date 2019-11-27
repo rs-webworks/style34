@@ -1,27 +1,24 @@
 <?php declare(strict_types=1);
 
-namespace EryseClient\Client\Token\Entity;
+namespace EryseClient\Server\Token\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use EryseClient\Common\Entity\ClientEntity;
 use EryseClient\Common\Entity\CreatedAt;
 use EryseClient\Common\Entity\ExpiresAt;
 use EryseClient\Common\Entity\Identifier;
+use EryseClient\Common\Token\TokenInterface;
+use EryseClient\Common\Token\TokenTypeInterfance;
+use EryseClient\Server\User\Entity\User;
 
 /**
  * Class Token
  * @package EryseClient\Entity\Client\Token
  * @ORM\Table(name="tokens")
- * @ORM\Entity(repositoryClass="EryseClient\Client\Token\Repository\TokenRepository")
+ * @ORM\Entity(repositoryClass="EryseClient\Server\Token\Repository\TokenRepository")
  */
-class Token implements ClientEntity
+class Token implements ClientEntity, TokenInterface
 {
-    const EXPIRY_MINUTE = 60;
-    const EXPIRY_HOUR = self::EXPIRY_MINUTE * 60;
-    const EXPIRY_DAY = self::EXPIRY_HOUR * 24;
-    const EXPIRY_WEEK = self::EXPIRY_DAY * 7;
-    const EXPIRY_MONTH = self::EXPIRY_DAY * 30;
-
     use Identifier;
     use CreatedAt;
     use ExpiresAt;
@@ -33,16 +30,16 @@ class Token implements ClientEntity
     protected $hash;
 
     /**
-     * @var TokenType $type
-     * @ORM\ManyToOne(targetEntity="EryseClient\Client\Token\Entity\TokenType", inversedBy="tokens")
+     * @var TokenTypeInterfance $type
+     * @ORM\ManyToOne(targetEntity="EryseClient\Server\Token\Entity\TokenType", inversedBy="tokens")
      */
     protected $type;
 
     /**
-     * @var int
-     * @ORM\Column(type="integer", nullable=false)
+     * @var User
+     * @ORM\ManyToOne(targetEntity="EryseClient\Server\User\Entity\User")
      */
-    protected $userId;
+    protected $user;
 
     /**
      * @var bool
@@ -67,9 +64,9 @@ class Token implements ClientEntity
     }
 
     /**
-     * @return TokenType
+     * @return TokenTypeInterfance
      */
-    public function getType(): TokenType
+    public function getType(): TokenTypeInterfance
     {
         return $this->type;
     }
@@ -83,19 +80,19 @@ class Token implements ClientEntity
     }
 
     /**
-     * @return int
+     * @return User
      */
-    public function getUserId(): int
+    public function getUser(): User
     {
-        return $this->userId;
+        return $this->user;
     }
 
     /**
-     * @param int $userId
+     * @param User $user
      */
-    public function setUserId(int $userId): void
+    public function setUser(User $user): void
     {
-        $this->userId = $userId;
+        $this->user = $user;
     }
 
     /**
@@ -113,4 +110,14 @@ class Token implements ClientEntity
     {
         $this->invalid = $invalid;
     }
+
+    /**
+     * @return bool
+     */
+    public function isValid(): bool
+    {
+        return !$this->isInvalid();
+    }
+
+
 }
