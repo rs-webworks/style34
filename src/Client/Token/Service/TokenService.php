@@ -100,7 +100,7 @@ class TokenService extends AbstractService
      * @return Token
      * @throws Exception
      */
-    public function getResetPasswordToken(User $user): Token
+    public function generateResetPasswordToken(User $user): Token
     {
         $createdAt = new DateTime();
         $expiresAt = new DateTime();

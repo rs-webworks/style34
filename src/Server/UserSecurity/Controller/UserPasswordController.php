@@ -9,24 +9,26 @@ use EryseClient\Client\Token\Entity\TokenType;
 use EryseClient\Client\Token\Repository\TokenRepository;
 use EryseClient\Client\Token\Repository\TokenTypeRepository;
 use EryseClient\Client\Token\Service\TokenService;
+use EryseClient\Common\Entity\FlashType;
 use EryseClient\Common\Service\MailService;
 use EryseClient\Common\Utility\LoggerAwareTrait;
 use EryseClient\Common\Utility\TranslatorAwareTrait;
 use EryseClient\Server\User\Repository\UserRepository;
 use EryseClient\Server\User\Service\PasswordService;
 use Exception;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Validator\ConstraintViolation;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
-use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Class UserPasswordController
@@ -39,7 +41,7 @@ class UserPasswordController extends AbstractController
     use LoggerAwareTrait;
 
     /**
-     * @Route("/user/password/reset", name="user-password-request-reset")
+     * @Route("/user/password/request-reset", name="user-password-request-reset")
      * @param Request $request
      * @param UserRepository $userRepository
      * @param TokenService $tokenService
@@ -93,7 +95,7 @@ class UserPasswordController extends AbstractController
             }
 
             // Generate reset token
-            $token = $tokenService->getResetPasswordToken($user);
+            $token = $tokenService->generateResetPasswordToken($user);
             $tokenRepository->save($token);
 
             // Send email & flash info
@@ -106,52 +108,71 @@ class UserPasswordController extends AbstractController
         return $this->render('User/Security/request-reset-password.html.twig');
     }
 
+
     /**
-     * TODO: refactor to facade
-     * @Route("/user/password/reset/{tokenHash}", name="user-password-reset")
-     * @param Request $request
-     * @param PasswordService $passwordService
+     * @IsGranted(EryseClient\Server\UserRole\Entity\UserRole::USER)
+     * @Route("/user/password/reset", name="user-password-reset")
+     */
+    public function resetPasswordViaUser()
+    {
+        if (!$this->getUser()) {
+            throw $this->createAccessDeniedException();
+        }
+
+        return $this->render('User/Security/reset-password.html.twig');
+    }
+
+    /**
+     * @Route("/user/password/reset/{tokenHash}", name="user-password-reset-token")
+     *
      * @param UserRepository $userRepository
      * @param TokenService $tokenService
      * @param TokenRepository $tokenRepository
-     * @param ValidatorInterface $validator
      * @param Security $security
      * @param null $tokenHash
      *
      * @return RedirectResponse|Response
      * @throws Exception
      */
-    public function resetPassword(
-        Request $request,
-        PasswordService $passwordService,
+    public function resetPasswordViaToken(
         UserRepository $userRepository,
         TokenService $tokenService,
         TokenRepository $tokenRepository,
-        ValidatorInterface $validator,
         Security $security,
         $tokenHash = null
     ) {
         $token = $tokenRepository->findOneBy(['hash' => $tokenHash]);
         $user = null;
 
-        if (!$token && !$security->getUser()) {
-            // No token && nobody logged in
+        if (!$token || $token->getType() !== TokenType::USER['REQUEST_RESET_PASSWORD'] || !$tokenService->isValid($token) || $tokenService->isExpired($token)) {
+            $this->addFlash(FlashType::DANGER, $this->translator->trans('reset-password-invalid-token', [], 'profile'));
+
             return $this->redirectToRoute('user-request-reset-password');
-        } elseif (!$token) {
-            // No token but user is logged in
-            $user = $security->getUser();
-        } elseif ($token) {
-            // Token available
-            if (!$tokenService->isValid($token) || $tokenService->isExpired($token)) {
-                $this->addFlash('danger', $this->translator->trans('reset-password-invalid-token', [], 'profile'));
-
-                return $this->redirectToRoute('user-request-reset-password');
-            }
-
-            // Load user, prepare pass
-            $user = $userRepository->find($token->getUserId());
         }
 
+        // Load user, prepare pass
+        $user = $userRepository->find($token->getUserId());
+
+
+        return $this->render('User/Security/reset-password.html.twig');
+    }
+
+    /**
+     * @Route("/user/password/reset/set-new-password", name="user-password-set-new")
+     * @param Request $request
+     *
+     * @param ValidatorInterface $validator
+     * @param TokenRepository $tokenRepository
+     * @param PasswordService $passwordService
+     *
+     * @return RedirectResponse|Response
+     */
+    public function setNewPassword(
+        Request $request,
+        ValidatorInterface $validator,
+        TokenRepository $tokenRepository,
+        PasswordService $passwordService
+    ) {
         if ($request->isMethod('post')) {
             try {
                 $newPassword = $request->get('new-password');
@@ -204,7 +225,5 @@ class UserPasswordController extends AbstractController
 
             return $this->redirectToRoute('home-index');
         }
-
-        return $this->render('User/Security/reset-password.html.twig');
     }
 }
