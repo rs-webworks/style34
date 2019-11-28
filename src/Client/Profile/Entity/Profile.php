@@ -25,7 +25,7 @@ class Profile implements UserInterface, ClientEntity
 
     /**
      * @var int
-     * @ORM\Column(type="integer", nullable=false)
+     * @ORM\Column(type="integer", nullable=false, unique=true)
      */
     protected $userId;
 
@@ -57,6 +57,12 @@ class Profile implements UserInterface, ClientEntity
      * @ORM\Column(nullable=true, type="datetime")
      */
     protected $birthdate;
+
+    /**
+     * @var string|null
+     * @ORM\Column(nullable=true, type="string")
+     */
+    protected $occupation;
 
     /**
      * This is used only internally by symfony/security. Use $this->getRole() in order to get user role directly.
@@ -198,7 +204,7 @@ class Profile implements UserInterface, ClientEntity
         $this->city = $city;
     }
 
-    // City
+    // ProfileRole
     // -----------------------------------------------------------------------------------------------------------------
     /**
      * @return ProfileRole
@@ -215,4 +221,27 @@ class Profile implements UserInterface, ClientEntity
     {
         $this->role = $role;
     }
+
+    // Occupation
+    // -----------------------------------------------------------------------------------------------------------------
+    /**
+     * @return string
+     */
+    public function getOccupation(): ?string
+    {
+        return $this->occupation;
+    }
+
+    /**
+     * @param string $occupation
+     *
+     * @return Profile
+     */
+    public function setOccupation(?string $occupation): Profile
+    {
+        $this->occupation = $occupation;
+
+        return $this;
+    }
+
 }

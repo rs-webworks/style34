@@ -3,17 +3,13 @@
 namespace EryseClient\Client\Profile\Repository;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
-use Doctrine\ORM\NonUniqueResultException;
-use Doctrine\ORM\NoResultException;
 use EryseClient\Client\Profile\Entity\Profile;
 use EryseClient\Common\Repository\AbstractRepository;
-use EryseClient\Server\User\Entity\User;
 use EryseClient\Server\User\Repository\UserRepository;
-use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Class ProfileRepository
+ *
  * @package EryseClient\Repository\Profile
  * @method Profile|null findOneBy(array $criteria, array $orderBy = null)
  * @method Profile|null find($id, $lockMode = null, $lockVersion = null)
@@ -27,6 +23,7 @@ class ProfileRepository extends AbstractRepository
 
     /**
      * ProfileRepository constructor
+     *
      * @param ManagerRegistry $registry
      * @param UserRepository $userRepository
      */
@@ -44,5 +41,19 @@ class ProfileRepository extends AbstractRepository
     public function findOneByUserId(int $userId): Profile
     {
         return $this->findOneBy(["userId" => $userId]);
+    }
+
+    /**
+     * @param string $username
+     *
+     * @return Profile
+     */
+    public function findOneByUsername(string $username): Profile
+    {
+        $user = $this->userRepository->findOneByUsername($username);
+        $profile = $this->findOneByUserId($user->getId());
+        $profile->setUser($user);
+
+        return $profile;
     }
 }

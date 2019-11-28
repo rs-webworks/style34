@@ -20,7 +20,6 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
-use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticator;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
 
@@ -51,7 +50,7 @@ class UserLoginFormAuthenticator extends AbstractFormLoginAuthenticator
     /** @var UserRoleService */
     private $userRoleService;
 
-    /** @var ProfileRepository  */
+    /** @var ProfileRepository */
     private $profileRepository;
 
     /**
@@ -102,8 +101,6 @@ class UserLoginFormAuthenticator extends AbstractFormLoginAuthenticator
         $credentials = [
             LoginType::USER_AUTH => $params[LoginType::USER_AUTH],
             LoginType::USER_PASSWORD => $params[LoginType::USER_PASSWORD],
-//            LoginType::TFA_CODE => $params[LoginType::TFA_CODE],
-//            LoginType::TFA_TYPE => $params[LoginType::TFA_TYPE],
         ];
 
         $request->getSession()->set(Security::LAST_USERNAME, $credentials[LoginType::USER_AUTH]);

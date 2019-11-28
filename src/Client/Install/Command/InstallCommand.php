@@ -8,7 +8,7 @@ use EryseClient\Client\Profile\Entity\Profile;
 use EryseClient\Client\Profile\Repository\ProfileRepository;
 use EryseClient\Client\ProfileRole\Entity\ProfileRole;
 use EryseClient\Client\ProfileRole\Repository\ProfileRoleRepository;
-use EryseClient\Client\Token\Entity\TokenType;
+use EryseClient\Server\Token\Entity\TokenType;
 use EryseClient\Common\Utility\LoggerAwareTrait;
 use EryseClient\Server\Token\Repository\TokenTypeRepository;
 use EryseClient\Server\User\Entity\User;

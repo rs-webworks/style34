@@ -1,116 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xliff xmlns="urn:oasis:names:tc:xliff:document:2.0" version="2.0" srcLang="en" trgLang="cs">
-  <file id="email.cs">
-    <unit id="d2wyez_" name="profile-activation-preheader">
-      <notes>
-        <note category="file-source" priority="1">templates/_emails/user-activation.html.twig:4</note>
-      </notes>
-      <segment>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="cs" target-language="cs" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="d2wyez_" resname="profile-activation-preheader">
         <source>profile-activation-preheader</source>
         <target>Tvůj aktivační email pro potvrzení účtu</target>
-      </segment>
-    </unit>
-    <unit id="yBlC9yd" name="profile-activation-heading">
-      <notes>
-        <note category="file-source" priority="1">templates/_emails/user-activation.html.twig:9</note>
-      </notes>
-      <segment>
+        <note priority="1">templates/_emails/user-activation.html.twig:4</note>
+      </trans-unit>
+      <trans-unit id="yBlC9yd" resname="profile-activation-heading">
         <source>profile-activation-heading</source>
         <target>Tento email ti byl poslán, protože jsi si zažádal o registraci na webu %site%. Kliknutím na
                     odkaz níže potvrdíš, že jsi tedy majitelem této emailové adresy a že jsi si opravdu o registraci
                     zažádal ty.
                 </target>
-      </segment>
-    </unit>
-    <unit id="_iA4f.k" name="profile-activation-button">
-      <notes>
-        <note category="file-source" priority="1">templates/_emails/user-activation.html.twig:18</note>
-      </notes>
-      <segment>
+        <note priority="1">templates/_emails/user-activation.html.twig:9</note>
+      </trans-unit>
+      <trans-unit id="_iA4f.k" resname="profile-activation-button">
         <source>profile-activation-button</source>
         <target>Aktivovat profil</target>
-      </segment>
-    </unit>
-    <unit id="AwGETM2" name="footer">
-      <notes>
-        <note category="file-source" priority="1">templates/_emails/layout/email-layout.html.twig:359</note>
-      </notes>
-      <segment>
+        <note priority="1">templates/_emails/user-activation.html.twig:18</note>
+      </trans-unit>
+      <trans-unit id="AwGETM2" resname="footer">
         <source>footer</source>
         <target>Pokud máš nějaký dotaz tak nás kontaktuj na adrese %contactmail%.</target>
-      </segment>
-    </unit>
-    <unit id="otYMw2_" name="unsuscribe-desc">
-      <notes>
-        <note category="file-source" priority="1">templates/_emails/layout/email-layout.html.twig:360</note>
-      </notes>
-      <segment>
+        <note priority="1">templates/_emails/layout/email-layout.html.twig:359</note>
+      </trans-unit>
+      <trans-unit id="otYMw2_" resname="unsuscribe-desc">
         <source>unsuscribe-desc</source>
         <target>Nechceš od nás už nikdy žádné automatické zprávy?</target>
-      </segment>
-    </unit>
-    <unit id="gz5x90A" name="unsuscribe">
-      <notes>
-        <note category="file-source" priority="1">templates/_emails/layout/email-layout.html.twig:360</note>
-      </notes>
-      <segment>
+        <note priority="1">templates/_emails/layout/email-layout.html.twig:360</note>
+      </trans-unit>
+      <trans-unit id="gz5x90A" resname="unsuscribe">
         <source>unsuscribe</source>
         <target>Zrušit odběr</target>
-      </segment>
-    </unit>
-    <unit id="qQjt7Mu" name="profile-activation-title">
-      <notes>
-        <note category="file-source" priority="1">templates/_emails/user-activation.html.twig:8</note>
-      </notes>
-      <segment>
+        <note priority="1">templates/_emails/layout/email-layout.html.twig:360</note>
+      </trans-unit>
+      <trans-unit id="qQjt7Mu" resname="profile-activation-title">
         <source>profile-activation-title</source>
         <target>Aktivace profilu</target>
-      </segment>
-    </unit>
-    <unit id="D9579qE" name="profile-request-reset-password-preheader">
-      <notes>
-        <note category="file-source" priority="1">templates/_emails/user-request-reset-password.twig:4</note>
-      </notes>
-      <segment>
+        <note priority="1">templates/_emails/user-activation.html.twig:8</note>
+      </trans-unit>
+      <trans-unit id="D9579qE" resname="profile-request-reset-password-preheader">
         <source>profile-request-reset-password-preheader</source>
         <target>Žádost o změnu hesla</target>
-      </segment>
-    </unit>
-    <unit id="x4pV46p" name="profile-request-reset-password-title">
-      <notes>
-        <note category="file-source" priority="1">templates/_emails/user-request-reset-password.twig:8</note>
-      </notes>
-      <segment>
+        <note priority="1">templates/_emails/user-request-reset-password.twig:4</note>
+      </trans-unit>
+      <trans-unit id="x4pV46p" resname="profile-request-reset-password-title">
         <source>profile-request-reset-password-title</source>
         <target>Změna hesla</target>
-      </segment>
-    </unit>
-    <unit id="WCwhBxq" name="profile-request-reset-password-heading">
-      <notes>
-        <note category="file-source" priority="1">templates/_emails/user-request-reset-password.twig:9</note>
-      </notes>
-      <segment>
+        <note priority="1">templates/_emails/user-request-reset-password.twig:8</note>
+      </trans-unit>
+      <trans-unit id="WCwhBxq" resname="profile-request-reset-password-heading">
         <source>profile-request-reset-password-heading</source>
         <target>Na tvém profilu byla vytvořena žádost o změnu hesla, ať už z důvodu zapomenutí nebo jiných. Pokud si přeješ tedy nastavit jiné heslo tak pokračuj následujícím tlačítkem na formulář pro změnu.</target>
-      </segment>
-    </unit>
-    <unit id="KKQdw2n" name="profile-request-reset-password-button">
-      <notes>
-        <note category="file-source" priority="1">templates/_emails/user-request-reset-password.twig:18</note>
-      </notes>
-      <segment>
+        <note priority="1">templates/_emails/user-request-reset-password.twig:9</note>
+      </trans-unit>
+      <trans-unit id="KKQdw2n" resname="profile-request-reset-password-button">
         <source>profile-request-reset-password-button</source>
         <target>Změnit heslo</target>
-      </segment>
-    </unit>
-    <unit id="8jsJszU" name="profile-request-reset-password-bottom">
-      <notes>
-        <note category="file-source" priority="1">templates/_emails/user-request-reset-password.twig:27</note>
-      </notes>
-      <segment>
+        <note priority="1">templates/_emails/user-request-reset-password.twig:18</note>
+      </trans-unit>
+      <trans-unit id="8jsJszU" resname="profile-request-reset-password-bottom">
         <source>profile-request-reset-password-bottom</source>
         <target>Nežádal jsi o změnu hesla? Může se jednat o pokus o útok na tvůj účet. Pokud máš strach o zabezpečení svého účtu tak nás prosím kontaktuj.</target>
-      </segment>
-    </unit>
+        <note priority="1">templates/_emails/user-request-reset-password.twig:27</note>
+      </trans-unit>
+    </body>
   </file>
 </xliff>

@@ -30,8 +30,6 @@ security:
             guard:
                 authenticators:
                     - EryseClient\Server\UserSecurity\Authenticator\UserLoginFormAuthenticator
-                    - EryseClient\Server\UserSecurity\Authenticator\GoogleTwoFactorAuthenticator
-                entry_point: EryseClient\Server\UserSecurity\Authenticator\UserLoginFormAuthenticator
                 provider: user-provider
 
             form_login:

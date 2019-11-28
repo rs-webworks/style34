@@ -1,27 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xliff xmlns="urn:oasis:names:tc:xliff:document:2.0" version="2.0" srcLang="cs" trgLang="en">
-  <file id="messages.en">
-    <unit id="J.vze.2" name="scheb_two_factor.trusted">
-      <notes>
-        <note category="file-source" priority="1">templates/User/Login/two-step-auth.html.twig:34</note>
-      </notes>
-      <segment>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="cs" target-language="en" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="J.vze.2" resname="scheb_two_factor.trusted">
         <source>scheb_two_factor.trusted</source>
         <target></target>
-      </segment>
-    </unit>
-    <unit id="Ma.ZPoQ" name="c31aa9b">
-      <notes>
-        <note category="state" priority="1">obsolete</note>
-      </notes>
-      <segment>
+        <note priority="1">templates/User/Login/two-step-auth.html.twig:34</note>
+      </trans-unit>
+      <trans-unit id="Ma.ZPoQ" resname="                                        {0} %count% users-zero-count|&#10;                                        {1} %count% users-one-count|&#10;                                        ]1,4] %count% users-many-count|&#10;                                        ]4,Inf] %count% users-inf-count&#10;                                    ">
         <source>                                        {0} %count% users-zero-count|
                                         {1} %count% users-one-count|
                                         ]1,4] %count% users-many-count|
                                         ]4,Inf] %count% users-inf-count
                                     </source>
         <target></target>
-      </segment>
-    </unit>
+        <note priority="1">obsolete</note>
+      </trans-unit>
+    </body>
   </file>
 </xliff>

@@ -51,7 +51,10 @@
         "symfony/twig-pack": "1.0.0",
         "symfony/validator": "5.0.*",
         "symfony/web-link": "5.0.*",
-        "symfony/yaml": "5.0.*"
+        "symfony/yaml": "5.0.*",
+        "twig/cssinliner-extra": "3.x-dev",
+        "twig/inky-extra": "3.x-dev",
+        "twig/markdown-extra": "3.x-dev"
     },
     "require-dev": {
         "fzaninotto/faker": "^1.8",

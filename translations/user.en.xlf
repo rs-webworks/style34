@@ -1,250 +1,151 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xliff xmlns="urn:oasis:names:tc:xliff:document:2.0" version="2.0" srcLang="cs" trgLang="en">
-  <file id="user.en">
-    <unit id="zeD7Dew" name="settings">
-      <notes>
-        <note category="file-source" priority="1">templates/User/settings.html.twig:9</note>
-        <note category="file-source" priority="1">templates/User/settings.html.twig:20</note>
-      </notes>
-      <segment>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="cs" target-language="en" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="zeD7Dew" resname="settings">
         <source>settings</source>
         <target></target>
-      </segment>
-    </unit>
-    <unit id="XS0863q" name="security">
-      <notes>
-        <note category="file-source" priority="1">templates/User/settings.html.twig:39</note>
-      </notes>
-      <segment>
+        <note priority="1">templates/User/settings.html.twig:9</note>
+        <note priority="1">templates/User/settings.html.twig:20</note>
+      </trans-unit>
+      <trans-unit id="XS0863q" resname="security">
         <source>security</source>
         <target></target>
-      </segment>
-    </unit>
-    <unit id="DMbpYop" name="security-desc">
-      <notes>
-        <note category="file-source" priority="1">templates/User/settings.html.twig:42</note>
-      </notes>
-      <segment>
+        <note priority="1">templates/User/settings.html.twig:39</note>
+      </trans-unit>
+      <trans-unit id="DMbpYop" resname="security-desc">
         <source>security-desc</source>
         <target></target>
-      </segment>
-    </unit>
-    <unit id="ErXb3q4" name="settings-two-step-auth">
-      <notes>
-        <note category="file-source" priority="1">templates/User/settings.html.twig:51</note>
-      </notes>
-      <segment>
+        <note priority="1">templates/User/settings.html.twig:42</note>
+      </trans-unit>
+      <trans-unit id="ErXb3q4" resname="settings-two-step-auth">
         <source>settings-two-step-auth</source>
         <target></target>
-      </segment>
-    </unit>
-    <unit id="GCj52nT" name="settings-forget-devices">
-      <notes>
-        <note category="file-source" priority="1">templates/User/settings.html.twig:70</note>
-      </notes>
-      <segment>
+        <note priority="1">templates/User/settings.html.twig:51</note>
+      </trans-unit>
+      <trans-unit id="GCj52nT" resname="settings-forget-devices">
         <source>settings-forget-devices</source>
         <target>Forget devices</target>
-      </segment>
-    </unit>
-    <unit id="si2Mj8V" name="settings-forget-devices-help">
-      <notes>
-        <note category="file-source" priority="1">templates/User/settings.html.twig:71</note>
-      </notes>
-      <segment>
+        <note priority="1">templates/User/settings.html.twig:70</note>
+      </trans-unit>
+      <trans-unit id="si2Mj8V" resname="settings-forget-devices-help">
         <source>settings-forget-devices-help</source>
         <target></target>
-      </segment>
-    </unit>
-    <unit id="LAs_e.0" name="settings-forget-devices-button">
-      <notes>
-        <note category="file-source" priority="1">templates/User/settings.html.twig:75</note>
-      </notes>
-      <segment>
+        <note priority="1">templates/User/settings.html.twig:71</note>
+      </trans-unit>
+      <trans-unit id="LAs_e.0" resname="settings-forget-devices-button">
         <source>settings-forget-devices-button</source>
         <target></target>
-      </segment>
-    </unit>
-    <unit id="QBEkcRT" name="settings-logout-everywhere">
-      <notes>
-        <note category="file-source" priority="1">templates/User/settings.html.twig:86</note>
-      </notes>
-      <segment>
+        <note priority="1">templates/User/settings.html.twig:75</note>
+      </trans-unit>
+      <trans-unit id="QBEkcRT" resname="settings-logout-everywhere">
         <source>settings-logout-everywhere</source>
         <target></target>
-      </segment>
-    </unit>
-    <unit id="fmpOkOd" name="settings-logout-everywhere-help">
-      <notes>
-        <note category="file-source" priority="1">templates/User/settings.html.twig:87</note>
-      </notes>
-      <segment>
+        <note priority="1">templates/User/settings.html.twig:86</note>
+      </trans-unit>
+      <trans-unit id="fmpOkOd" resname="settings-logout-everywhere-help">
         <source>settings-logout-everywhere-help</source>
         <target></target>
-      </segment>
-    </unit>
-    <unit id="RF7y7_8" name="settings-logout-everywhere-button">
-      <notes>
-        <note category="file-source" priority="1">templates/User/settings.html.twig:92</note>
-      </notes>
-      <segment>
+        <note priority="1">templates/User/settings.html.twig:87</note>
+      </trans-unit>
+      <trans-unit id="RF7y7_8" resname="settings-logout-everywhere-button">
         <source>settings-logout-everywhere-button</source>
         <target></target>
-      </segment>
-    </unit>
-    <unit id="4jqMFec" name="settings-change-password">
-      <notes>
-        <note category="file-source" priority="1">templates/User/settings.html.twig:101</note>
-      </notes>
-      <segment>
+        <note priority="1">templates/User/settings.html.twig:92</note>
+      </trans-unit>
+      <trans-unit id="4jqMFec" resname="settings-change-password">
         <source>settings-change-password</source>
         <target></target>
-      </segment>
-    </unit>
-    <unit id="ziubWKT" name="change-password">
-      <notes>
-        <note category="file-source" priority="1">templates/User/settings.html.twig:106</note>
-      </notes>
-      <segment>
+        <note priority="1">templates/User/settings.html.twig:101</note>
+      </trans-unit>
+      <trans-unit id="ziubWKT" resname="change-password">
         <source>change-password</source>
         <target></target>
-      </segment>
-    </unit>
-    <unit id=".vHdpUx" name="settings-delete-user">
-      <notes>
-        <note category="file-source" priority="1">templates/User/settings.html.twig:117</note>
-      </notes>
-      <segment>
+        <note priority="1">templates/User/settings.html.twig:106</note>
+      </trans-unit>
+      <trans-unit id=".vHdpUx" resname="settings-delete-user">
         <source>settings-delete-user</source>
         <target></target>
-      </segment>
-    </unit>
-    <unit id="BD1LOZu" name="delete-user">
-      <notes>
-        <note category="file-source" priority="1">templates/User/settings.html.twig:122</note>
-      </notes>
-      <segment>
+        <note priority="1">templates/User/settings.html.twig:117</note>
+      </trans-unit>
+      <trans-unit id="BD1LOZu" resname="delete-user">
         <source>delete-user</source>
         <target></target>
-      </segment>
-    </unit>
-    <unit id="3W9GX2g" name="newsletter">
-      <notes>
-        <note category="file-source" priority="1">templates/User/settings.html.twig:140</note>
-      </notes>
-      <segment>
+        <note priority="1">templates/User/settings.html.twig:122</note>
+      </trans-unit>
+      <trans-unit id="3W9GX2g" resname="newsletter">
         <source>newsletter</source>
         <target></target>
-      </segment>
-    </unit>
-    <unit id="hSBFe8E" name="newsletter-desc">
-      <notes>
-        <note category="file-source" priority="1">templates/User/settings.html.twig:143</note>
-      </notes>
-      <segment>
+        <note priority="1">templates/User/settings.html.twig:140</note>
+      </trans-unit>
+      <trans-unit id="hSBFe8E" resname="newsletter-desc">
         <source>newsletter-desc</source>
         <target></target>
-      </segment>
-    </unit>
-    <unit id="JXCvcyd" name="newsletter-overall-desc">
-      <notes>
-        <note category="file-source" priority="1">templates/User/settings.html.twig:149</note>
-      </notes>
-      <segment>
+        <note priority="1">templates/User/settings.html.twig:143</note>
+      </trans-unit>
+      <trans-unit id="JXCvcyd" resname="newsletter-overall-desc">
         <source>newsletter-overall-desc</source>
         <target></target>
-      </segment>
-    </unit>
-    <unit id="xN3wMsj" name="newsletter-weekly">
-      <notes>
-        <note category="file-source" priority="1">templates/User/settings.html.twig:157</note>
-      </notes>
-      <segment>
+        <note priority="1">templates/User/settings.html.twig:149</note>
+      </trans-unit>
+      <trans-unit id="xN3wMsj" resname="newsletter-weekly">
         <source>newsletter-weekly</source>
         <target></target>
-      </segment>
-    </unit>
-    <unit id="2KG6zz7" name="newsletter-monthly">
-      <notes>
-        <note category="file-source" priority="1">templates/User/settings.html.twig:163</note>
-      </notes>
-      <segment>
+        <note priority="1">templates/User/settings.html.twig:157</note>
+      </trans-unit>
+      <trans-unit id="2KG6zz7" resname="newsletter-monthly">
         <source>newsletter-monthly</source>
         <target></target>
-      </segment>
-    </unit>
-    <unit id="7AjSSvv" name="newsletter-yearl">
-      <notes>
-        <note category="file-source" priority="1">templates/User/settings.html.twig:169</note>
-      </notes>
-      <segment>
+        <note priority="1">templates/User/settings.html.twig:163</note>
+      </trans-unit>
+      <trans-unit id="7AjSSvv" resname="newsletter-yearl">
         <source>newsletter-yearl</source>
         <target></target>
-      </segment>
-    </unit>
-    <unit id="_y8Pmge" name="two-step-auth-disabled">
-      <notes>
-        <note category="file-source" priority="1">src/Controller/User/UserController.php:151</note>
-      </notes>
-      <segment>
+        <note priority="1">templates/User/settings.html.twig:169</note>
+      </trans-unit>
+      <trans-unit id="_y8Pmge" resname="two-step-auth-disabled">
         <source>two-step-auth-disabled</source>
         <target></target>
-      </segment>
-    </unit>
-    <unit id="EHvLJgU" name="two-step-auth-devices-forgotten">
-      <notes>
-        <note category="file-source" priority="1">src/Controller/User/UserController.php:165</note>
-      </notes>
-      <segment>
+        <note priority="1">src/Controller/User/UserController.php:151</note>
+      </trans-unit>
+      <trans-unit id="bZLo3U6" resname="two-step-auth-devices-forgotten">
         <source>two-step-auth-devices-forgotten</source>
         <target></target>
-      </segment>
-    </unit>
-    <unit id="I0n8Km5" name="settings-logged-out-everywhere">
-      <notes>
-        <note category="file-source" priority="1">src/Controller/User/UserController.php:180</note>
-      </notes>
-      <segment>
+        <note priority="1">src/Controller/User/UserController.php:165</note>
+      </trans-unit>
+      <trans-unit id="I0n8Km5" resname="settings-logged-out-everywhere">
         <source>settings-logged-out-everywhere</source>
         <target></target>
-      </segment>
-    </unit>
-    <unit id="WdTGFsN" name="bef6fef">
-      <notes>
-        <note category="state" priority="1">obsolete</note>
-      </notes>
-      <segment>
+        <note priority="1">src/Controller/User/UserController.php:180</note>
+      </trans-unit>
+      <trans-unit id="WdTGFsN" resname="                                        {0} %count% users-zero-count|&#10;                                        {1} %count% users-one-count|&#10;                                        ]1,4[ %count% users-many-count|&#10;                                        ]4,Inf[ %count% users-inf-count&#10;                                    ">
         <source>                                        {0} %count% users-zero-count|
                                         {1} %count% users-one-count|
                                         ]1,4[ %count% users-many-count|
                                         ]4,Inf[ %count% users-inf-count
                                     </source>
         <target></target>
-      </segment>
-    </unit>
-    <unit id="oLqoBri" name="567e604">
-      <notes>
-        <note category="state" priority="1">obsolete</note>
-      </notes>
-      <segment>
+        <note priority="1">obsolete</note>
+      </trans-unit>
+      <trans-unit id="oLqoBri" resname="                                        {0} %count% users-zero-count|&#10;                                        {1} %count% users-one-count|&#10;                                        ]2,4] %count% users-many-count|&#10;                                        ]5,Inf[ %count% users-inf-count&#10;                                    ">
         <source>                                        {0} %count% users-zero-count|
                                         {1} %count% users-one-count|
                                         ]2,4] %count% users-many-count|
                                         ]5,Inf[ %count% users-inf-count
                                     </source>
         <target></target>
-      </segment>
-    </unit>
-    <unit id="ydZTdod" name="b9dc216">
-      <notes>
-        <note category="file-source" priority="1">templates/Administration/User/Role/index.html.twig:57</note>
-        <note category="state" priority="1">new</note>
-      </notes>
-      <segment>
+        <note priority="1">obsolete</note>
+      </trans-unit>
+      <trans-unit id="ydZTdod" resname="                                        {0} %count% users-zero-count|{1} %count% users-one-count|]2,4] %count% users-many-count|]5,Inf[ %count% users-inf-count&#10;                                    ">
         <source>                                        {0} %count% users-zero-count|{1} %count% users-one-count|]2,4] %count% users-many-count|]5,Inf[ %count% users-inf-count
                                     </source>
         <target></target>
-      </segment>
-    </unit>
+        <note priority="1">templates/Administration/User/Role/index.html.twig:57</note>
+        <note priority="1">new</note>
+      </trans-unit>
+    </body>
   </file>
 </xliff>

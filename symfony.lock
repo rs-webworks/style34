@@ -110,6 +110,9 @@
     "lcobucci/jwt": {
         "version": "3.2.5"
     },
+    "lorenzo/pinky": {
+        "version": "1.0.5"
+    },
     "martinusso/opencrypt": {
         "version": "3.1.0"
     },
@@ -491,7 +494,19 @@
     "symfony/yaml": {
         "version": "v4.0.11"
     },
+    "tijsverkoyen/css-to-inline-styles": {
+        "version": "2.2.x-dev"
+    },
+    "twig/cssinliner-extra": {
+        "version": "3.x-dev"
+    },
     "twig/extra-bundle": {
+        "version": "3.x-dev"
+    },
+    "twig/inky-extra": {
+        "version": "3.x-dev"
+    },
+    "twig/markdown-extra": {
         "version": "3.x-dev"
     },
     "twig/twig": {

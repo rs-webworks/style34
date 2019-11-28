@@ -6,7 +6,17 @@
 
     <div class="container">
 
-        <h2>{{ app.user.getUsername() }}</h2>
+        <div id="header">
+            <h2>
+                {{ detail.profile.user.username }}
+
+                <a href="" class="float-right btn btn-sm btn-outline-primary">
+                        <i class="fa fa-pencil-alt"></i>
+                        {% trans from 'global' %}edit{% endtrans %}
+                </a>
+            </h2>
+        </div>
+
         <hr>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
@@ -17,15 +27,48 @@
                     <a href="{{ url('profile-list') }}">{% trans from 'global' %}profiles{% endtrans %}</a>
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">
-                    {{ app.user.getUsername() }}
+                    {{ detail.profile.user.username }}
                 </li>
             </ol>
         </nav>
 
-        <div class="row">
-            <p></p>
+        <div class="row text-muted text-uppercase">
+            <div class="col-xs-12 col-md-6 col-lg-4">
+                <dl class="row">
+                    <dt class="col-sm-4">
+                        {% trans from 'profile' %}role{% endtrans %}
+                    </dt>
+                    <dd class="col-sm-8" style="color: {{ detail.profile.role.color }};">
+                        {{ detail.profile.role.name|trans({}, 'profile') }}
+                    </dd>
+
+                    <dt class="col-sm-4">
+                        {% trans from 'profile' %}occupation{% endtrans %}
+                    </dt>
+                    <dd class="col-sm-8">
+                        {{ detail.profile.occupation ?? "---" }}
+                    </dd>
+                </dl>
+            </div>
+
+            <div class="col-xs-12 col-md-6 col-lg-4">
+                <dl class="row">
+                    <dt class="col-sm-4">
+                        {% trans from 'profile' %}state{% endtrans %}
+                    </dt>
+                    <dd class="col-sm-8">
+                        {{ detail.profile.state ?? "---" }}
+                    </dd>
+
+                    <dt class="col-sm-4">
+                        {% trans from 'profile' %}city{% endtrans %}
+                    </dt>
+                    <dd class="col-sm-8">
+                        {{ detail.profile.city ?? "---" }}
+                    </dd>
+                </dl>
+            </div>
         </div>
     </div>
-
 
 {% endblock %}

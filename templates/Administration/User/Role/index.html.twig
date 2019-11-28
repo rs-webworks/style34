@@ -54,9 +54,9 @@
                                     </strong>
                                 </td>
                                 <td>
-                                    {% transchoice role.getUsers()|length from "user" %}
-                                        {0} %count% users-zero-count|{1} %count% users-one-count|]2,4] %count% users-many-count|]5,Inf[ %count% users-inf-count
-                                    {% endtranschoice %}
+{#                                    {% transchoice role.getUsers()|length from "user" %}#}
+{#                                        {0} %count% users-zero-count|{1} %count% users-one-count|]2,4] %count% users-many-count|]5,Inf[ %count% users-inf-count#}
+{#                                    {% endtranschoice %}#}
                                 </td>
                                 <td>
                                     <span class="badge" style="background-color: {{ role.getColor() }}">&nbsp;</span>

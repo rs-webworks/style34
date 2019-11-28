@@ -7,6 +7,7 @@ use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
+use EryseClient\Client\Profile\Entity\Profile;
 use EryseClient\Client\Profile\Repository\ProfileRepository;
 use EryseClient\Client\ProfileSettings\Entity\ProfileSettings;
 use EryseClient\Client\ProfileSettings\Repository\ProfileSettingsRepository;
@@ -85,6 +86,16 @@ class UserRepository extends AbstractRepository implements UserLoaderInterface
             ->setParameter('email', $username)
             ->getQuery()
             ->getSingleResult();
+    }
+
+    /**
+     * @param string $username
+     *
+     * @return User
+     */
+    public function findOneByUsername(string $username): User
+    {
+        return $this->findOneBy(["username" => $username]);
     }
 
     /**

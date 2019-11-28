@@ -1,209 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xliff xmlns="urn:oasis:names:tc:xliff:document:2.0" version="2.0" srcLang="cs" trgLang="en">
-  <file id="global.en">
-    <unit id="1S.TN.A" name="profiles">
-      <notes>
-        <note category="file-source" priority="1">templates/User/Security/activation.html.twig:17</note>
-        <note category="file-source" priority="1">templates/User/Security/registration.html.twig:17</note>
-        <note category="file-source" priority="1">templates/Profile/view.html.twig:17</note>
-        <note category="file-source" priority="1">templates/_partials/navigation-top-frontend.html.twig:21</note>
-      </notes>
-      <segment>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="cs" target-language="en" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="1S.TN.A" resname="profiles">
         <source>profiles</source>
         <target></target>
-      </segment>
-    </unit>
-    <unit id="KcnDDgY" name="registration">
-      <notes>
-        <note category="file-source" priority="1">templates/User/Security/activation.html.twig:20</note>
-        <note category="file-source" priority="1">templates/User/Security/success.html.twig:17</note>
-        <note category="file-source" priority="1">templates/User/Security/registration.html.twig:20</note>
-      </notes>
-      <segment>
+        <note priority="1">templates/User/Security/activation.html.twig:17</note>
+        <note priority="1">templates/User/Security/registration.html.twig:17</note>
+        <note priority="1">templates/Profile/view.html.twig:17</note>
+        <note priority="1">templates/_partials/navigation-top-frontend.html.twig:21</note>
+      </trans-unit>
+      <trans-unit id="KcnDDgY" resname="registration">
         <source>registration</source>
         <target></target>
-      </segment>
-    </unit>
-    <unit id="h1Dnr0R" name="registration-fee-desc">
-      <notes>
-        <note category="file-source" priority="1">templates/User/Security/registration.html.twig:29</note>
-      </notes>
-      <segment>
+        <note priority="1">templates/User/Security/activation.html.twig:20</note>
+        <note priority="1">templates/User/Security/success.html.twig:17</note>
+        <note priority="1">templates/User/Security/registration.html.twig:20</note>
+      </trans-unit>
+      <trans-unit id="h1Dnr0R" resname="registration-fee-desc">
         <source>registration-fee-desc</source>
         <target></target>
-      </segment>
-    </unit>
-    <unit id="ruQIhH0" name="success">
-      <notes>
-        <note category="file-source" priority="1">templates/User/Security/success.html.twig:20</note>
-      </notes>
-      <segment>
+        <note priority="1">templates/User/Security/registration.html.twig:29</note>
+      </trans-unit>
+      <trans-unit id="ruQIhH0" resname="success">
         <source>success</source>
         <target></target>
-      </segment>
-    </unit>
-    <unit id="sVUmycD" name="activation">
-      <notes>
-        <note category="file-source" priority="1">templates/User/Security/activation.html.twig:23</note>
-      </notes>
-      <segment>
+        <note priority="1">templates/User/Security/success.html.twig:20</note>
+      </trans-unit>
+      <trans-unit id="sVUmycD" resname="activation">
         <source>activation</source>
         <target></target>
-      </segment>
-    </unit>
-    <unit id="ft0I5O8" name="contact-support">
-      <notes>
-        <note category="file-source" priority="1">src/Service/UserService.php:115</note>
-      </notes>
-      <segment>
+        <note priority="1">templates/User/Security/activation.html.twig:23</note>
+      </trans-unit>
+      <trans-unit id="ft0I5O8" resname="contact-support">
         <source>contact-support</source>
         <target></target>
-      </segment>
-    </unit>
-    <unit id="6XFmtUU" name="enable">
-      <notes>
-        <note category="file-source" priority="1">templates/User/two-step-auth.html.twig:71</note>
-        <note category="file-source" priority="1">templates/User/settings.html.twig:61</note>
-      </notes>
-      <segment>
+        <note priority="1">src/Service/UserService.php:115</note>
+      </trans-unit>
+      <trans-unit id="6XFmtUU" resname="enable">
         <source>enable</source>
         <target></target>
-      </segment>
-    </unit>
-    <unit id="QoghNQ6" name="login">
-      <notes>
-        <note category="file-source" priority="1">templates/User/Login/login.html.twig:13</note>
-      </notes>
-      <segment>
+        <note priority="1">templates/User/two-step-auth.html.twig:71</note>
+        <note priority="1">templates/User/settings.html.twig:61</note>
+      </trans-unit>
+      <trans-unit id="QoghNQ6" resname="login">
         <source>login</source>
         <target></target>
-      </segment>
-    </unit>
-    <unit id="6diZLzS" name="disable">
-      <notes>
-        <note category="file-source" priority="1">templates/User/settings.html.twig:57</note>
-      </notes>
-      <segment>
+        <note priority="1">templates/User/Login/login.html.twig:13</note>
+      </trans-unit>
+      <trans-unit id="6diZLzS" resname="disable">
         <source>disable</source>
         <target></target>
-      </segment>
-    </unit>
-    <unit id="FX3KkuQ" name="save">
-      <notes>
-        <note category="file-source" priority="1">templates/User/settings.html.twig:181</note>
-      </notes>
-      <segment>
+        <note priority="1">templates/User/settings.html.twig:57</note>
+      </trans-unit>
+      <trans-unit id="FX3KkuQ" resname="save">
         <source>save</source>
         <target></target>
-      </segment>
-    </unit>
-    <unit id="3eyLYwu" name="return-back">
-      <notes>
-        <note category="file-source" priority="1">templates/User/delete.html.twig:46</note>
-      </notes>
-      <segment>
+        <note priority="1">templates/User/settings.html.twig:181</note>
+      </trans-unit>
+      <trans-unit id="3eyLYwu" resname="return-back">
         <source>return-back</source>
         <target></target>
-      </segment>
-    </unit>
-    <unit id="TrQaKp3" name="forum">
-      <notes>
-        <note category="file-source" priority="1">templates/_partials/navigation-top-frontend.html.twig:30</note>
-      </notes>
-      <segment>
+        <note priority="1">templates/User/delete.html.twig:46</note>
+      </trans-unit>
+      <trans-unit id="TrQaKp3" resname="forum">
         <source>forum</source>
         <target></target>
-      </segment>
-    </unit>
-    <unit id="zjh9Xgo" name="gallery">
-      <notes>
-        <note category="file-source" priority="1">templates/_partials/navigation-top-frontend.html.twig:38</note>
-      </notes>
-      <segment>
+        <note priority="1">templates/_partials/navigation-top-frontend.html.twig:30</note>
+      </trans-unit>
+      <trans-unit id="zjh9Xgo" resname="gallery">
         <source>gallery</source>
         <target></target>
-      </segment>
-    </unit>
-    <unit id="5NaT0k5" name="market">
-      <notes>
-        <note category="file-source" priority="1">templates/_partials/navigation-top-frontend.html.twig:46</note>
-      </notes>
-      <segment>
+        <note priority="1">templates/_partials/navigation-top-frontend.html.twig:38</note>
+      </trans-unit>
+      <trans-unit id="5NaT0k5" resname="market">
         <source>market</source>
         <target></target>
-      </segment>
-    </unit>
-    <unit id="jZAB0yx" name="shop">
-      <notes>
-        <note category="file-source" priority="1">templates/_partials/navigation-top-frontend.html.twig:54</note>
-      </notes>
-      <segment>
+        <note priority="1">templates/_partials/navigation-top-frontend.html.twig:46</note>
+      </trans-unit>
+      <trans-unit id="jZAB0yx" resname="shop">
         <source>shop</source>
         <target></target>
-      </segment>
-    </unit>
-    <unit id="BuGiovx" name="profile-settings">
-      <notes>
-        <note category="file-source" priority="1">templates/_partials/navigation-top-frontend.html.twig:67</note>
-      </notes>
-      <segment>
+        <note priority="1">templates/_partials/navigation-top-frontend.html.twig:54</note>
+      </trans-unit>
+      <trans-unit id="BuGiovx" resname="profile-settings">
         <source>profile-settings</source>
         <target></target>
-      </segment>
-    </unit>
-    <unit id="7MFicpE" name="my-profile">
-      <notes>
-        <note category="file-source" priority="1">templates/_partials/navigation-top-frontend.html.twig:77</note>
-      </notes>
-      <segment>
+        <note priority="1">templates/_partials/navigation-top-frontend.html.twig:67</note>
+      </trans-unit>
+      <trans-unit id="7MFicpE" resname="my-profile">
         <source>my-profile</source>
         <target></target>
-      </segment>
-    </unit>
-    <unit id="ACcM9j_" name="logout">
-      <notes>
-        <note category="file-source" priority="1">templates/_partials/navigation-top-frontend.html.twig:95</note>
-      </notes>
-      <segment>
+        <note priority="1">templates/_partials/navigation-top-frontend.html.twig:77</note>
+      </trans-unit>
+      <trans-unit id="ACcM9j_" resname="logout">
         <source>logout</source>
         <target></target>
-      </segment>
-    </unit>
-    <unit id="fftM9nd" name="users">
-      <notes>
-        <note category="state" priority="1">obsolete</note>
-      </notes>
-      <segment>
+        <note priority="1">templates/_partials/navigation-top-frontend.html.twig:95</note>
+      </trans-unit>
+      <trans-unit id="fftM9nd" resname="users">
         <source>users</source>
         <target></target>
-      </segment>
-    </unit>
-    <unit id="USr7bHY" name="administration">
-      <notes>
-        <note category="file-source" priority="1">templates/_partials/navigation-top-frontend.html.twig:84</note>
-      </notes>
-      <segment>
+        <note priority="1">obsolete</note>
+      </trans-unit>
+      <trans-unit id="USr7bHY" resname="administration">
         <source>administration</source>
         <target></target>
-      </segment>
-    </unit>
-    <unit id="pWFFJwz" name="id">
-      <notes>
-        <note category="file-source" priority="1">templates/Administration/User/User/index.html.twig:60</note>
-      </notes>
-      <segment>
+        <note priority="1">templates/_partials/navigation-top-frontend.html.twig:84</note>
+      </trans-unit>
+      <trans-unit id="pWFFJwz" resname="id">
         <source>id</source>
         <target></target>
-      </segment>
-    </unit>
-    <unit id="5mQN6DW" name="find">
-      <notes>
-        <note category="file-source" priority="1">templates/Administration/User/User/index.html.twig:48</note>
-      </notes>
-      <segment>
+        <note priority="1">templates/Administration/User/User/index.html.twig:60</note>
+      </trans-unit>
+      <trans-unit id="5mQN6DW" resname="find">
         <source>find</source>
         <target></target>
-      </segment>
-    </unit>
+        <note priority="1">templates/Administration/User/User/index.html.twig:48</note>
+      </trans-unit>
+    </body>
   </file>
 </xliff>

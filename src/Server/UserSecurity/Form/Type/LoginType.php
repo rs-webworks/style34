@@ -2,7 +2,6 @@
 
 namespace EryseClient\Server\UserSecurity\Form\Type;
 
-use EryseClient\Server\UserSecurity\Authenticator\UserLoginFormAuthenticator;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
@@ -22,8 +21,6 @@ class LoginType extends AbstractType
     public const USER_PASSWORD = 'userPassword';
     public const REMEMBER_ME = 'rememberMe';
     public const BUTTON_SUBMIT = 'submit';
-    public const TFA_CODE = 'tfaCode';
-    public const TFA_TYPE = 'tfaType';
 
     /**
      * @param FormBuilderInterface $builder

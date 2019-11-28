@@ -1,19 +1,21 @@
 <?php declare(strict_types=1);
 
-namespace EryseClient\Server\UserRole\Service;
+namespace EryseClient\Client\ProfileRole\Service;
 
+use EryseClient\Client\ProfileRole\Entity\ProfileRole;
 use EryseClient\Common\Service\AbstractService;
 use EryseClient\Server\UserRole\Entity\UserRole;
 
 /**
- * Class UserRoleService
- * @package EryseClient\Server\UserRole\Service
+ * Class ProfileRoleService
+ *
+ * @package EryseClient\Client\ProfileRole\Service
  */
-class UserRoleService extends AbstractService
+class ProfileRoleService extends AbstractService
 {
     private const BLOCKED_ROLES = [
-        UserRole::BANNED,
-        UserRole::DELETED
+        ProfileRole::BANNED,
+        ProfileRole::DELETED
     ];
 
     /**
@@ -26,4 +28,3 @@ class UserRoleService extends AbstractService
     }
 
 }
-
