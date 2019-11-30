@@ -11,7 +11,7 @@ use EryseClient\Common\Utility\TranslatorAwareTrait;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 /**
  * Class UserController
  *
@@ -24,6 +24,7 @@ class ProfileController extends AbstractController
     use EryseUserAwareTrait;
 
     /**
+     * @IsGranted(EryseClient\Server\UserRole\Entity\UserRole::USER)
      * @Route("/profile/view/{username}", name="profile-view")
      * @param ProfileRepository $profileRepository
      * @param ProfileService $profileService

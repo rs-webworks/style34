@@ -1,12 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace EryseClient\Client\Administration\User\Controller;
+namespace EryseClient\Client\Administration\Profile\Controller;
 
 use EryseClient\Client\ProfileRole\Repository\ProfileRoleRepository;
 use EryseClient\Common\Controller\ControllerSettings;
 use EryseClient\Server\User\Repository\UserRepository;
 use Knp\Component\Pager\PaginatorInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,24 +14,23 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * Class RoleController
  * @package EryseClient\Controller\Administration\User
- * @IsGranted(EryseClient\Server\UserRole\Entity\UserRole::ADMIN)
  */
-class RoleController extends AbstractController
+class ProfileRoleController extends AbstractController
 {
 
     /**
-     * @Route("/administration/user/roles",name="administration-user-role-index")
+     * @Route("/administration/profile/roles",name="administration-profile-role-index")
      * @param ProfileRoleRepository $roleRepository
      * @return Response
      */
     public function index(ProfileRoleRepository $roleRepository)
     {
         $roles = $roleRepository->findAll();
-        return $this->render('Administration/User/Role/index.html.twig', ["roles" => $roles]);
+        return $this->render('Administration/Profile/Role/index.html.twig', ["roles" => $roles]);
     }
 
     /**
-     * @Route("/administration/user/roles/users/{role}", name="administration-user-role-users")
+     * @Route("/administration/profile/roles/profiles/{role}", name="administration-profile-role-users")
      * @param string $role
      * @param Request $request
      * @param ProfileRoleRepository $roleRepository
@@ -48,9 +46,9 @@ class RoleController extends AbstractController
         PaginatorInterface $paginator
     ) {
         $role = $roleRepository->findOneBy(["name" => $role]);
-        $qb = $userRepository->createQueryBuilder('u')
-            ->where('u.role = :role')
-            ->orderBy("u.id")
+        $qb = $userRepository->createQueryBuilder('p')
+            ->where('p.role = :role')
+            ->orderBy("p.id")
             ->setParameter('role', $role->getName());
 
         $users = $paginator->paginate(
@@ -59,6 +57,6 @@ class RoleController extends AbstractController
             ControllerSettings::PAGINATOR_DEFAULT_IPP
         );
 
-        return $this->render('Administration/User/Role/users.html.twig', ["users" => $users, "role" => $role]);
+        return $this->render('Administration/Profile/Role/profiles.html.twig', ["users" => $users, "role" => $role]);
     }
 }

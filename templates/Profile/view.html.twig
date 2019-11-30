@@ -10,10 +10,12 @@
             <h2>
                 {{ detail.profile.user.username }}
 
+                {% if detail.ownProfile %}
                 <a href="" class="float-right btn btn-sm btn-outline-primary">
                         <i class="fa fa-pencil-alt"></i>
                         {% trans from 'global' %}edit{% endtrans %}
                 </a>
+                {% endif %}
             </h2>
         </div>
 

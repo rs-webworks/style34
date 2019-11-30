@@ -5,7 +5,6 @@ namespace EryseClient\Common\Utility;
 use EryseClient\Server\User\Entity\User;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Security;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Trait UserAwareTrait
@@ -27,7 +26,7 @@ trait EryseUserAwareTrait
     {
         $user = $security->getUser();
 
-        if(!$user){
+        if (!$user) {
             return;
         }
 

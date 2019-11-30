@@ -3,8 +3,7 @@
 namespace EryseClient\Common\Entity;
 
 /**
- * Interface OrmEntity
- *
+ * Interface ServerEntity
  * @package EryseClient\Common\Entity
  */
 interface ServerEntity extends OrmEntity

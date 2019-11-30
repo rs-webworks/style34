@@ -118,7 +118,7 @@ class User implements UserInterface, TrustedDeviceInterface, ServerEntity
     protected $devices;
 
     /**
-     * @var Profile
+     * @var ?Profile
      */
     protected $profile;
 
@@ -385,9 +385,9 @@ class User implements UserInterface, TrustedDeviceInterface, ServerEntity
     // Profile
     // -----------------------------------------------------------------------------------------------------------------
     /**
-     * @return Profile
+     * @return Profile|null
      */
-    public function getProfile(): Profile
+    public function getProfile(): ?Profile
     {
         return $this->profile;
     }

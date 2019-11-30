@@ -62,10 +62,6 @@ class ProfileService extends AbstractService
             $displayable = false;
         }
 
-        if ($this->security->isGranted(UserRole::ADMIN)) {
-            $displayable = true;
-        }
-
         return $displayable;
     }
 }

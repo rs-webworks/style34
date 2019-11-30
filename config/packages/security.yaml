@@ -1,4 +1,9 @@
 security:
+
+    access_decision_manager:
+        strategy: unanimous
+        allow_if_all_abstain: false
+
     role_hierarchy:
         ROLE_BANNED: ROLE_USER
 
@@ -34,8 +39,8 @@ security:
 
             form_login:
                 provider: user-provider
-                login_path: EryseClient\Server\UserSecurity\Authenticator\UserLoginFormAuthenticator::ROUTE
-                check_path: EryseClient\Server\UserSecurity\Authenticator\UserLoginFormAuthenticator::ROUTE
+                login_path: user-security-login
+                check_path: user-security-login
                 username_parameter: _auth
                 csrf_token_generator: security.csrf.token_manager
                 #default_target_path: after_login_route_name

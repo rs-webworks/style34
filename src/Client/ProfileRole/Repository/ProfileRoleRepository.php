@@ -10,7 +10,7 @@ use EryseClient\Common\Repository\AbstractRepository;
  * Class RoleRepository
  *
  * @package EryseClient\Repository\Client\User
- * @method ProfileRole|null findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method ProfileRole[]|null findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  * @method ProfileRole|null findOneBy(array $criteria, array $orderBy = null)
  * @method ProfileRole|null find($id, $lockMode = null, $lockVersion = null)
  */
@@ -32,8 +32,18 @@ class ProfileRoleRepository extends AbstractRepository
      *
      * @return ProfileRole
      */
-    public function findByName(string $name): ProfileRole
+    public function findOneByName(string $name): ProfileRole
     {
         return $this->findOneBy(["name" => $name]);
+    }
+
+    /**
+     * @param array $listOfNames
+     *
+     * @return array
+     */
+    public function findByName(array $listOfNames): array
+    {
+        return $this->findBy(["name" => $listOfNames]);
     }
 }

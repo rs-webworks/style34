@@ -8,8 +8,8 @@ use EryseClient\Client\Profile\Entity\Profile;
 use EryseClient\Client\Profile\Repository\ProfileRepository;
 use EryseClient\Client\ProfileRole\Entity\ProfileRole;
 use EryseClient\Client\ProfileRole\Repository\ProfileRoleRepository;
-use EryseClient\Server\Token\Entity\TokenType;
 use EryseClient\Common\Utility\LoggerAwareTrait;
+use EryseClient\Server\Token\Entity\TokenType;
 use EryseClient\Server\Token\Repository\TokenTypeRepository;
 use EryseClient\Server\User\Entity\User;
 use EryseClient\Server\User\Repository\UserRepository;
@@ -106,6 +106,12 @@ class InstallCommand extends Command
                 'd',
                 InputOption::VALUE_NONE,
                 'Reinstall option, this will drop schema instead of creating database. You will lost any DB data.'
+            )
+            ->addOption(
+                'force',
+                'f',
+                InputOption::VALUE_NONE,
+                'Force option will recreate database from new. All data will be lost!'
             );
     }
 
@@ -127,6 +133,12 @@ class InstallCommand extends Command
             if ($input->getOption('drop')) {
                 $io->section('Clearing databases...');
                 $this->dropSchema();
+            } elseif ($input->getOption('force')) {
+                $io->section('Forcing new database...');
+                $this->recreateDatabase();
+
+                $io->section('Creating databases...');
+                $this->createDatabase();
             } else {
                 $io->section('Creating databases...');
                 $this->createDatabase();
@@ -237,6 +249,36 @@ class InstallCommand extends Command
     }
 
     /**
+     *
+     */
+    protected function recreateDatabase(): void
+    {
+        $this->io->progressStart(1);
+
+        $command = $this->getApplication()
+            ->find('doctrine:database:drop');
+
+        $options = [
+            "command" => "doctrine:database:drop",
+            "--connection" => "eryseClient",
+        ];
+
+        $arguments = new ArrayInput($options);
+        $command->run($arguments, new NullOutput());
+
+        $options = [
+            "command" => "doctrine:database:drop",
+            "--connection" => "eryseServer",
+        ];
+
+        $arguments = new ArrayInput($options);
+        $command->run($arguments, new NullOutput());
+
+        $this->io->progressAdvance(1);
+        $this->io->progressFinish();
+    }
+
+    /**
      * @throws Exception
      */
     protected function runMigrations(): void
@@ -324,6 +366,9 @@ class InstallCommand extends Command
         foreach ($users as $user) {
             [$username, $email, $password, $userRole, $profileRole] = $user;
 
+            /**
+             * TODO: server user should be created in server app
+             */
             $user = new User();
             $user->setUsername($username);
             $user->setEmail($email);
@@ -342,7 +387,7 @@ class InstallCommand extends Command
 
             $profile = new Profile();
             $profile->setUserId($user->getId());
-            $profile->setRole($this->profileRoleRepository->findByName($profileRole));
+            $profile->setRole($this->profileRoleRepository->findOneByName($profileRole));
 
             $this->profileRepository->save($profile);
 

@@ -1,0 +1,121 @@
+{% extends '_layout/layout-administration.html.twig' %}
+
+{% block title %}{% trans from 'administration' %}profiles{% endtrans %}{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+
+        <h2>{% trans from 'administration' %}profiles{% endtrans %}</h2>
+
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="{{ url('administration-dashboard') }}">
+                        {{ eryse.client.name }}
+                    </a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="{{ url('administration-dashboard') }}">
+                        {% trans from 'administration' %}dashboard{% endtrans %}
+                    </a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">
+                    {% trans from 'administration' %}profiles{% endtrans %}
+                </li>
+            </ol>
+        </nav>
+
+        <div class="row">
+            <div class="col col-xs-12">
+
+                <a href="#searchForm" data-toggle="collapse">
+                    <i class="fa fa-fw fa-search"></i>
+                    {% trans from 'administration' %}toggle-search-form{% endtrans %}
+                </a>
+
+                {# Search form #}
+                {# -------------------------------------------------------------------------------------------------- #}
+                <div id="searchForm" class="collapse {% if searchForm.vars.submitted %}show{% endif %}">
+                {{ form_start(searchForm)}}
+                    {{ form_errors(searchForm) }}
+
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-3">
+                            {{ form_row(searchForm.id) }}
+                        </div>
+
+                        <div class="col-xs-12 col-sm-3">
+                            {{ form_row(searchForm.role) }}
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">
+                        {% trans from 'global' %}find{% endtrans %}
+                    </button>
+
+                    <a href="{{ url('administration-profiles-list') }}" class="btn btn-outline-primary">
+                        {% trans from 'global' %}reset{% endtrans %}
+                    </a>
+                {{ form_end(searchForm) }}
+                </div>
+
+                {# Table list #}
+                {# -------------------------------------------------------------------------------------------------- #}
+                <hr>
+                <h3>{% trans from 'administration' %}profiles-list{% endtrans %}</h3>
+
+                <table class="table table-sm table-hover table-striped">
+                    <thead>
+                    <tr>
+                        <th>{% trans from 'global' %}id{% endtrans %}</th>
+                        <th>{% trans from 'administration' %}profile-role{% endtrans %}</th>
+                        <th class="text-right">{% trans from 'administration' %}profile-actions{% endtrans %}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    {% if profiles|length == 0 %}
+                        <tr class="text-center text-muted">
+                            <td colspan="99">{% trans from 'administration' %}no-results{% endtrans %}</td>
+                        </tr>
+                    {% endif %}
+                    {% for profile in profiles %}
+                        <tr>
+                            <td>{{ profile.getId() }}</td>
+                            <td>
+                                <strong style="color: {{ profile.role.color }};">
+                                    [{{ profile.role.name|trans({}, "global") }}]
+                                </strong>
+                            </td>
+                            <td class="text-right">
+                                <ul class="list-inline mb-0">
+                                    <li class="list-inline-item">
+                                        <a href="{{ url('administration-profile-view', {"id": profile.id()}) }}">
+                                            <i class="fa fa-fw fa-eye"></i>
+                                            {% trans from 'administration' %}view{% endtrans %}
+                                        </a>
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <a href="{{ url('administration-profile-view', {"id": profile.id()}) }}">
+                                            <i class="fa fa-fw fa-user"></i>
+                                            {% trans from 'administration' %}view-user{% endtrans %}
+                                        </a>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+
+                {{ knp_pagination_render(profiles) }}
+
+            </div>
+        </div>
+
+    </div>
+
+
+{% endblock %}
