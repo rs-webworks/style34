@@ -8,23 +8,27 @@
 
         <h2>{% trans from 'administration' %}profiles{% endtrans %}</h2>
 
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item">
-                    <a href="{{ url('administration-dashboard') }}">
-                        {{ eryse.client.name }}
-                    </a>
-                </li>
-                <li class="breadcrumb-item">
-                    <a href="{{ url('administration-dashboard') }}">
-                        {% trans from 'administration' %}dashboard{% endtrans %}
-                    </a>
-                </li>
-                <li class="breadcrumb-item active" aria-current="page">
-                    {% trans from 'administration' %}profiles{% endtrans %}
-                </li>
-            </ol>
-        </nav>
+        <hr>
+
+        {{ renderBreadcrumbs(breadcrumb) }}
+
+{#        <nav aria-label="breadcrumb">#}
+{#            <ol class="breadcrumb">#}
+{#                <li class="breadcrumb-item">#}
+{#                    <a href="{{ url('administration-dashboard') }}">#}
+{#                        {{ eryse.client.name }}#}
+{#                    </a>#}
+{#                </li>#}
+{#                <li class="breadcrumb-item">#}
+{#                    <a href="{{ url('administration-dashboard') }}">#}
+{#                        {% trans from 'administration' %}dashboard{% endtrans %}#}
+{#                    </a>#}
+{#                </li>#}
+{#                <li class="breadcrumb-item active" aria-current="page">#}
+{#                    {% trans from 'administration' %}profiles{% endtrans %}#}
+{#                </li>#}
+{#            </ol>#}
+{#        </nav>#}
 
         <div class="row">
             <div class="col col-xs-12">
@@ -71,6 +75,7 @@
                     <thead>
                     <tr>
                         <th>{% trans from 'global' %}id{% endtrans %}</th>
+                        <th>{% trans from 'administration' %}profile.list.user.username{% endtrans %}</th>
                         <th>{% trans from 'administration' %}profile-role{% endtrans %}</th>
                         <th class="text-right">{% trans from 'administration' %}profile-actions{% endtrans %}</th>
                     </tr>
@@ -85,6 +90,7 @@
                     {% for profile in profiles %}
                         <tr>
                             <td>{{ profile.getId() }}</td>
+                            <td>{{ userRepository.find(profile.userId).username }}</td>
                             <td>
                                 <strong style="color: {{ profile.role.color }};">
                                     [{{ profile.role.name|trans({}, "global") }}]
@@ -96,6 +102,12 @@
                                         <a href="{{ url('administration-profiles-list', {"id": profile.id()}) }}">
                                             <i class="fa fa-fw fa-user"></i>
                                             {% trans from 'administration' %}view-user{% endtrans %}
+                                        </a>
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <a href="{{ url('administration-profile-edit', {"id": profile.id()}) }}">
+                                            <i class="fa fa-fw fa-edit"></i>
+                                            {% trans from 'administration' %}profile.list.edit-profile{% endtrans %}
                                         </a>
                                     </li>
                                 </ul>

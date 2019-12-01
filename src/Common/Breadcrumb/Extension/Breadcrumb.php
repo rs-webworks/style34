@@ -1,0 +1,47 @@
+<?php declare(strict_types=1);
+
+namespace EryseClient\Common\Breadcrumb\Extension;
+
+use EryseClient\Common\Breadcrumb\Entity\Breadcrumb as BreadcrumbEntity;
+use Twig\Environment;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
+
+/**
+ * Class Breadcrumb
+ *
+ * @package EryseClient\Common\Breadcrumb\Extension
+ */
+class Breadcrumb extends AbstractExtension
+{
+
+    /**
+     * @return array|TwigFunction[]
+     */
+    public function getFunctions()
+    {
+        return [
+            new TwigFunction(
+                "renderBreadcrumbs", [$this, "renderBreadcrumbs"], ["needs_environment" => true, 'is_safe' => ['html']]
+            )
+        ];
+    }
+
+    /**
+     * @param BreadcrumbEntity $breadcrumb
+     * @param Environment $environment
+     *
+     * @return string
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
+     */
+    public function renderBreadcrumbs(Environment $environment, BreadcrumbEntity $breadcrumb)
+    {
+        dump($breadcrumb);
+        return $environment->render("_extension/Breadcrumb.html.twig", ["breadcrumbs" => $breadcrumb]);
+    }
+}

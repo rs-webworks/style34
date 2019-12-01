@@ -76,7 +76,7 @@ class ProfileFacade
 
                 if ($column == "id") {
                     $qb->andWhere('p.id = :val');
-                    $qb->setParameter('val', $value);
+                    $qb->setParameter('val', (int) $value);
                     continue;
                 }
 

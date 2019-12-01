@@ -9,6 +9,7 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 /**
  * Class AdminProfileVoter
+ *
  * @package EryseClient\Client\Administration\Profile\Voter
  */
 class AdminProfileVoter extends CrudVoter
@@ -16,6 +17,7 @@ class AdminProfileVoter extends CrudVoter
     /**
      * @param string $attribute
      * @param mixed $subject
+     *
      * @return bool
      */
     protected function supports(string $attribute, $subject)
@@ -35,6 +37,7 @@ class AdminProfileVoter extends CrudVoter
      * @param string $attribute
      * @param mixed $subject
      * @param TokenInterface $token
+     *
      * @return bool
      */
     protected function voteOnAttribute(string $attribute, $subject, TokenInterface $token)
@@ -50,6 +53,8 @@ class AdminProfileVoter extends CrudVoter
         switch ($attribute) {
             case self::VIEW:
                 return $this->canView($user, $userProfile);
+            case self::EDIT:
+                return $this->canEdit($user, $userProfile);
         }
     }
 
@@ -60,6 +65,29 @@ class AdminProfileVoter extends CrudVoter
      * @return bool
      */
     protected function canView(User $user, Profile $userProfile): bool
+    {
+        if ($this->userRoleService->isRoleAdmin($user)) {
+            return true;
+        }
+
+        if ($this->profileRoleService->isRoleAdmin($userProfile)) {
+            return true;
+        }
+
+        if ($this->profileRoleService->isRoleModerator($userProfile)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * @param User $user
+     * @param Profile $userProfile
+     *
+     * @return bool
+     */
+    protected function canEdit(User $user, Profile $userProfile): bool
     {
         if ($this->userRoleService->isRoleAdmin($user)) {
             return true;

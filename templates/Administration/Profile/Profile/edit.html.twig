@@ -1,0 +1,50 @@
+{% extends '_layout/layout-administration.html.twig' %}
+
+{% block title %}{% trans from 'administration' %}profile{% endtrans %} - {{ profileUser.username }}{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+
+        <h2>
+            {{ profileUser.username }}
+            <i class="fa fa-fw fa-pencil-alt text-muted"></i>
+        </h2>
+
+        <hr>
+
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="{{ url('administration-dashboard') }}">
+                        {{ eryse.client.name }}
+                    </a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="{{ url('administration-dashboard') }}">
+                        {% trans from 'administration' %}dashboard{% endtrans %}
+                    </a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="{{ url('administration-profiles-list') }}">
+                        {% trans from 'administration' %}profiles{% endtrans %}
+                    </a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">
+                    {{ profileUser.username }}
+                </li>
+            </ol>
+        </nav>
+
+        <div class="row">
+            <div class="col col-xs-12">
+
+
+
+            </div>
+        </div>
+
+    </div>
+
+
+{% endblock %}
