@@ -24,17 +24,17 @@
                 <div class="card-body">
 
                     <h5 class="card-title">
-                        <i class="fa fa-fw fa-users"></i>
-                        {% trans from 'administration' %}users{% endtrans %}
+                        <i class="fa fa-fw fa-address-card"></i>
+                        {% trans from 'administration' %}profiles{% endtrans %}
                     </h5>
 					<hr>
 
 					<div class="list-group">
-						<a href="{{ url("administration-profiles-index") }}" class="list-group-item list-group-item-action">
+						<a href="{{ url("administration-profiles-list") }}" class="list-group-item list-group-item-action">
                             <i class="fa fa-fw fa-chevron-right"></i>
 							{% trans from 'administration' %}profiles{% endtrans %}
 						</a>
-						<a href="{{ url("administration-user-role-index") }}" class="list-group-item list-group-item-action">
+						<a href="{{ url("administration-profile-role-list") }}" class="list-group-item list-group-item-action">
                             <i class="fa fa-fw fa-chevron-right"></i>
 							{% trans from 'administration' %}roles{% endtrans %}
 						</a>

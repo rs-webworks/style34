@@ -53,13 +53,13 @@ class ProfileFacade
     /**
      * @param FormInterface $searchForm
      * @param int $page
+     * @param string|null $role
      *
      * @return mixed
      */
-    public function getProfilesPaginated(FormInterface $searchForm, ?int $page = 1)
+    public function getProfilesPaginated(FormInterface $searchForm, ?int $page = 1, ?string $role = null)
     {
         $qb = $this->profileRepository->createQueryBuilder('p')->orderBy("p.id");
-        $disableDefaultRoleFilter = false;
 
         if ($searchForm->isSubmitted() && $searchForm->isValid()) {
             foreach ($searchForm->getData() as $column => $value) {
@@ -84,11 +84,18 @@ class ProfileFacade
                 $qb->setParameter('val', '%' . $value . '%');
             }
         } else {
-            $qb->andWhere("p.role IN (:defaultRoles)");
-            $qb->setParameter(
-                "defaultRoles",
-                $this->profileRoleRepository->findByName($this->profileRoleService->getAllowedRolesList())
-            );
+            if ($role) {
+                $role = $this->profileRoleRepository->findOneByName($role);
+                $qb->andWhere("p.role = :role");
+                $qb->setParameter("role", $role);
+            } else {
+                $qb->andWhere("p.role IN (:defaultRoles)");
+                $qb->setParameter(
+                    "defaultRoles",
+                    $this->profileRoleRepository->findByName($this->profileRoleService->getAllowedRolesList())
+                );
+            }
+
         }
 
         return $this->paginator->paginate(

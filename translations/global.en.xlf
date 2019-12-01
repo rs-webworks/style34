@@ -121,6 +121,14 @@
         <target></target>
         <note priority="1">templates/Administration/User/User/index.html.twig:48</note>
       </trans-unit>
+      <trans-unit id="Ab4wu0o" resname="reset">
+        <source>reset</source>
+        <target>__reset</target>
+      </trans-unit>
+      <trans-unit id="JiEhxTc" resname="edit">
+        <source>edit</source>
+        <target>__edit</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

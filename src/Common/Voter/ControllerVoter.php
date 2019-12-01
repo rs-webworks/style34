@@ -11,18 +11,12 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
  *
  * @package EryseClient\Common\Voter
  */
-abstract class CrudVoter extends Voter
+abstract class ControllerVoter extends Voter
 {
     public const VIEW = "view";
-    public const CREATE = "create";
-    public const EDIT = "edit";
-    public const DELETE = "delete";
 
     public const ACTIONS = [
-        self::VIEW,
-        self::CREATE,
-        self::EDIT,
-        self::DELETE
+        self::VIEW
     ];
 
     /** @var UserRoleService */

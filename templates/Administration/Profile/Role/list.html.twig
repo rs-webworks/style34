@@ -1,0 +1,80 @@
+{% extends '_layout/layout-administration.html.twig' %}
+
+{% block title %}{% trans from 'administration' %}roles{% endtrans %}{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+
+        <h2>{% trans from 'administration' %}dashboard{% endtrans %}</h2>
+
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="{{ url('administration-dashboard') }}">
+                        {{ eryse.client.name }}
+                    </a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="{{ url('administration-dashboard') }}">
+                        {% trans from 'administration' %}dashboard{% endtrans %}
+                    </a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">
+                    {% trans from 'administration' %}roles{% endtrans %}
+                </li>
+            </ol>
+        </nav>
+
+        <div class="row">
+            <div class="col col-xs-12">
+                <h3>{% trans from 'administration' %}roles{% endtrans %}</h3>
+
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>{% trans from 'administration' %}role-name{% endtrans %}</th>
+                        <th>{% trans from 'administration' %}role-name-translated{% endtrans %}</th>
+                        <th>{% trans from 'administration' %}role-color{% endtrans %}</th>
+                        <th>{% trans from 'administration' %}profile.roles.list.actions{% endtrans %}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    {% for role in roles %}
+                        <tr>
+                            <td>
+                                {{ role.getName() }}
+                            </td>
+                            <td>
+                                <strong style="color: {{ role.color }};">
+                                    [{{ role.name()|trans({}, "global") }}]
+                                </strong>
+                            </td>
+                            <td>
+                                <span class="badge" style="background-color: {{ role.color }}">&nbsp;</span>
+                                <span style="color:{{ role.color }};">{{ role.color }}</span>
+                            </td>
+                            <td class="text-right">
+                                <ul class="list-inline mb-0">
+                                    <li class="list-inline-item">
+                                        <a href="{{ url('administration-profiles-list', {"role": role.name}) }}">
+                                            <i class="fa fa-fw fa-user"></i>
+                                            {% trans from 'administration' %}profile.roles.list.view-users{% endtrans %}
+                                        </a>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+
+    </div>
+
+
+{% endblock %}

@@ -185,6 +185,46 @@
         <target>Název dle locale</target>
         <note priority="1">templates/Administration/User/Role/index.html.twig:37</note>
       </trans-unit>
+      <trans-unit id="1S.TN.A" resname="profiles">
+        <source>profiles</source>
+        <target>Profily</target>
+      </trans-unit>
+      <trans-unit id="Xt25RRX" resname="toggle-search-form">
+        <source>toggle-search-form</source>
+        <target>Vyhledávání</target>
+      </trans-unit>
+      <trans-unit id="Vohl8TP" resname="profiles-list">
+        <source>profiles-list</source>
+        <target>Profily</target>
+      </trans-unit>
+      <trans-unit id="l4KLkSv" resname="profile-role">
+        <source>profile-role</source>
+        <target>Role</target>
+      </trans-unit>
+      <trans-unit id="iccdymO" resname="profile-actions">
+        <source>profile-actions</source>
+        <target>Akce</target>
+      </trans-unit>
+      <trans-unit id="bIDKTdN" resname="view-user">
+        <source>view-user</source>
+        <target>Uživatel</target>
+      </trans-unit>
+      <trans-unit id="uJ4Al8B" resname="profile-roles-list-actions">
+        <source>profile-roles-list-actions</source>
+        <target>Akce</target>
+      </trans-unit>
+      <trans-unit id="mIRM0E4" resname="profile.roles.list.view-users">
+        <source>profile.roles.list.view-users</source>
+        <target>Profily</target>
+      </trans-unit>
+      <trans-unit id="r3v67my" resname="profile.roles.list.actions">
+        <source>profile.roles.list.actions</source>
+        <target>Akce</target>
+      </trans-unit>
+      <trans-unit id="profile-id" resname="profile-id">
+        <source>profile-id</source>
+        <target>ID</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

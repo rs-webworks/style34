@@ -479,33 +479,33 @@
         <target>Město</target>
       </trans-unit>
       <trans-unit id="718iPw6" resname="ROLE_ADMIN">
-          <source>ROLE_ADMIN</source>
-          <target>Administrátor</target>
-        </trans-unit>
-        <trans-unit id="1LNFU_b" resname="ROLE_MODERATOR">
-          <source>ROLE_MODERATOR</source>
-          <target>Moderátor</target>
-        </trans-unit>
-        <trans-unit id="9Ef68tt" resname="ROLE_MEMBER">
-          <source>ROLE_MEMBER</source>
-          <target>Člen</target>
-        </trans-unit>
-        <trans-unit id="zNC474o" resname="ROLE_INACTIVE">
-          <source>ROLE_INACTIVE</source>
-          <target>Neaktivní</target>
-        </trans-unit>
-        <trans-unit id="7FbqWRf" resname="ROLE_VERIFIED">
-          <source>ROLE_VERIFIED</source>
-          <target>Ověřený</target>
-        </trans-unit>
-        <trans-unit id="kRtYp3K" resname="ROLE_BANNED">
-          <source>ROLE_BANNED</source>
-          <target>Vykopnutý</target>
-        </trans-unit>
-        <trans-unit id="4s.a9XM" resname="ROLE_DELETED">
-          <source>ROLE_DELETED</source>
-          <target>Smazaný</target>
-        </trans-unit>
+        <source>ROLE_ADMIN</source>
+        <target>Administrátor</target>
+      </trans-unit>
+      <trans-unit id="1LNFU_b" resname="ROLE_MODERATOR">
+        <source>ROLE_MODERATOR</source>
+        <target>Moderátor</target>
+      </trans-unit>
+      <trans-unit id="9Ef68tt" resname="ROLE_MEMBER">
+        <source>ROLE_MEMBER</source>
+        <target>Člen</target>
+      </trans-unit>
+      <trans-unit id="zNC474o" resname="ROLE_INACTIVE">
+        <source>ROLE_INACTIVE</source>
+        <target>Neaktivní</target>
+      </trans-unit>
+      <trans-unit id="7FbqWRf" resname="ROLE_VERIFIED">
+        <source>ROLE_VERIFIED</source>
+        <target>Ověřený</target>
+      </trans-unit>
+      <trans-unit id="kRtYp3K" resname="ROLE_BANNED">
+        <source>ROLE_BANNED</source>
+        <target>Vykopnutý</target>
+      </trans-unit>
+      <trans-unit id="4s.a9XM" resname="ROLE_DELETED">
+        <source>ROLE_DELETED</source>
+        <target>Smazaný</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

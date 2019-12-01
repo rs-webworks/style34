@@ -8,7 +8,6 @@ use EryseClient\Client\ProfileRole\Entity\ProfileRole;
 use EryseClient\Common\Entity\ClientEntity;
 use EryseClient\Common\Entity\Identifier;
 use EryseClient\Server\User\Entity\User;
-use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -18,7 +17,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="profiles")
  * @ORM\Entity(repositoryClass="EryseClient\Client\Profile\Repository\ProfileRepository")
  */
-class Profile implements UserInterface, ClientEntity
+class Profile implements ClientEntity
 {
 
     use Identifier;
@@ -64,55 +63,6 @@ class Profile implements UserInterface, ClientEntity
      */
     protected $occupation;
 
-    /**
-     * This is used only internally by symfony/security. Use $this->getRole() in order to get user role directly.
-     *
-     * @inheritDoc
-     */
-    public function getRoles()
-    {
-        return [$this->role->getName()];
-    }
-
-    /**
-     * @inheritDoc
-     * @return string|void
-     */
-    public function getPassword()
-    {
-        $this->getUser()
-            ->getPassword();
-    }
-
-    /**
-     * @inheritDoc
-     * @return string|void|null
-     */
-    public function getSalt()
-    {
-        $this->getUser()
-            ->getSalt();
-    }
-
-    /**
-     * @inheritDoc
-     * @return string|void
-     */
-    public function getUsername()
-    {
-        $this->getUser()
-            ->getUsername();
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function eraseCredentials()
-    {
-        $this->user->eraseCredentials();
-    }
-
-
 
     // User
     // -----------------------------------------------------------------------------------------------------------------
@@ -133,9 +83,9 @@ class Profile implements UserInterface, ClientEntity
     }
 
     /**
-     * @return User
+     * @return User|null
      */
-    public function getUser(): User
+    public function getUser(): ?User
     {
         return $this->user;
     }

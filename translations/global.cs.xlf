@@ -162,6 +162,10 @@
         <source>edit</source>
         <target>Upravit</target>
       </trans-unit>
+      <trans-unit id="Ab4wu0o" resname="reset">
+        <source>reset</source>
+        <target>Zrušit</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

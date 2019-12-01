@@ -6,8 +6,6 @@ use EryseClient\Client\Administration\Profile\Voter\AdminProfileVoter;
 use EryseClient\Client\Profile\Facade\ProfileFacade;
 use EryseClient\Client\Profile\Form\Type\ProfileSearchType;
 use EryseClient\Common\Controller\AbstractController;
-use EryseClient\Server\User\Form\Type\UserType;
-use EryseClient\Server\User\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -35,30 +33,15 @@ class ProfileController extends AbstractController
         $searchForm = $this->createForm(ProfileSearchType::class);
         $searchForm->handleRequest($request);
 
-        $profiles = $profileFacade->getProfilesPaginated($searchForm, $this->getPageParam($request));
-
-        return $this->render(
-            'Administration/Profile/Profile/index.html.twig',
-            ["profiles" => $profiles, "searchForm" => $searchForm->createView()]
+        $profiles = $profileFacade->getProfilesPaginated(
+            $searchForm,
+            $this->getPageParam($request),
+            $request->get("role")
         );
-    }
-
-    /**
-     * @Route("/administration/profile/{id}", name="administration-profile-view")
-     * @param $id
-     * @param UserRepository $userRepository
-     *
-     * @return Response
-     */
-    public function view($id, UserRepository $userRepository)
-    {
-        $user = $userRepository->find($id);
-        $userForm = $this->createForm(UserType::class, $user);
-        $userForm->remove("username");
 
         return $this->render(
-            'Administration/User/User/view.html.twig',
-            ["user" => $user, "userForm" => $userForm->createView()]
+            'Administration/Profile/Profile/list.html.twig',
+            ["profiles" => $profiles, "searchForm" => $searchForm->createView()]
         );
     }
 }

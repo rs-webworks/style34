@@ -1,22 +1,26 @@
 <?php declare(strict_types=1);
 
-namespace EryseClient\Client\Administration\Profile\Voter;
+namespace EryseClient\Client\Administration\Voter;
 
 use EryseClient\Client\Profile\Entity\Profile;
-use EryseClient\Common\Voter\CrudVoter;
+use EryseClient\Common\Voter\ControllerVoter;
 use EryseClient\Server\User\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 /**
- * Class AdminProfileVoter
- * @package EryseClient\Client\Administration\Profile\Voter
+ * Class AdminControllerVoter
+ *
+ * @package EryseClient\Client\Administration\Voter
  */
-class AdminProfileVoter extends CrudVoter
+abstract class AdminControllerVoter extends ControllerVoter
 {
+    const TARGETS = [];
+
     /**
      * @param string $attribute
      * @param mixed $subject
-     * @return bool
+     *
+     * @return bool|void
      */
     protected function supports(string $attribute, $subject)
     {
@@ -24,7 +28,7 @@ class AdminProfileVoter extends CrudVoter
             return false;
         }
 
-        if ($subject !== null && !$subject instanceof Profile) {
+        if (!in_array($subject, static::TARGETS)) {
             return false;
         }
 
@@ -35,7 +39,8 @@ class AdminProfileVoter extends CrudVoter
      * @param string $attribute
      * @param mixed $subject
      * @param TokenInterface $token
-     * @return bool
+     *
+     * @return bool|void
      */
     protected function voteOnAttribute(string $attribute, $subject, TokenInterface $token)
     {
@@ -45,31 +50,25 @@ class AdminProfileVoter extends CrudVoter
             return false;
         }
 
-        $userProfile = $user->getProfile();
-
         switch ($attribute) {
             case self::VIEW:
-                return $this->canView($user, $userProfile);
+                return $this->canView($user, $user->getProfile());
         }
     }
 
     /**
      * @param User $user
-     * @param Profile $userProfile
+     * @param Profile $profile
      *
      * @return bool
      */
-    protected function canView(User $user, Profile $userProfile): bool
+    protected function canView(User $user, Profile $profile): bool
     {
         if ($this->userRoleService->isRoleAdmin($user)) {
             return true;
         }
 
-        if ($this->profileRoleService->isRoleAdmin($userProfile)) {
-            return true;
-        }
-
-        if ($this->profileRoleService->isRoleModerator($userProfile)) {
+        if ($this->profileRoleService->isRoleAdmin($profile) || $this->profileRoleService->isRoleModerator($profile)) {
             return true;
         }
 

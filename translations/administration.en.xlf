@@ -175,6 +175,38 @@
         <target></target>
         <note priority="1">templates/Administration/User/Role/index.html.twig:37</note>
       </trans-unit>
+      <trans-unit id="1S.TN.A" resname="profiles">
+        <source>profiles</source>
+        <target>__profiles</target>
+      </trans-unit>
+      <trans-unit id="Xt25RRX" resname="toggle-search-form">
+        <source>toggle-search-form</source>
+        <target>__toggle-search-form</target>
+      </trans-unit>
+      <trans-unit id="Vohl8TP" resname="profiles-list">
+        <source>profiles-list</source>
+        <target>__profiles-list</target>
+      </trans-unit>
+      <trans-unit id="l4KLkSv" resname="profile-role">
+        <source>profile-role</source>
+        <target>__profile-role</target>
+      </trans-unit>
+      <trans-unit id="iccdymO" resname="profile-actions">
+        <source>profile-actions</source>
+        <target>__profile-actions</target>
+      </trans-unit>
+      <trans-unit id="bIDKTdN" resname="view-user">
+        <source>view-user</source>
+        <target>__view-user</target>
+      </trans-unit>
+      <trans-unit id="r3v67my" resname="profile.roles.list.actions">
+        <source>profile.roles.list.actions</source>
+        <target>__profile.roles.list.actions</target>
+      </trans-unit>
+      <trans-unit id="mIRM0E4" resname="profile.roles.list.view-users">
+        <source>profile.roles.list.view-users</source>
+        <target>__profile.roles.list.view-users</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
