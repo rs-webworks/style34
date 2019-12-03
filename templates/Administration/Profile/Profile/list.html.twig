@@ -10,38 +10,40 @@
 
         <hr>
 
-        {{ renderBreadcrumbs(breadcrumb) }}
-
-{#        <nav aria-label="breadcrumb">#}
-{#            <ol class="breadcrumb">#}
-{#                <li class="breadcrumb-item">#}
-{#                    <a href="{{ url('administration-dashboard') }}">#}
-{#                        {{ eryse.client.name }}#}
-{#                    </a>#}
-{#                </li>#}
-{#                <li class="breadcrumb-item">#}
-{#                    <a href="{{ url('administration-dashboard') }}">#}
-{#                        {% trans from 'administration' %}dashboard{% endtrans %}#}
-{#                    </a>#}
-{#                </li>#}
-{#                <li class="breadcrumb-item active" aria-current="page">#}
-{#                    {% trans from 'administration' %}profiles{% endtrans %}#}
-{#                </li>#}
-{#            </ol>#}
-{#        </nav>#}
+        {{ renderBreadcrumbs(bcs) }}
 
         <div class="row">
             <div class="col col-xs-12">
 
-                <a href="#searchForm" data-toggle="collapse">
-                    <i class="fa fa-fw fa-search"></i>
-                    {% trans from 'administration' %}toggle-search-form{% endtrans %}
-                </a>
+                <ul class="list-inline mb-0">
+                    <li class="list-inline-item">
+                        <a href="#searchForm" data-toggle="collapse">
+                            <i class="fa fa-fw fa-search"></i>
+                            {% trans from 'administration' %}profile.list.toggle-search{% endtrans %}
+                        </a>
+                    </li>
+
+                    <li class="list-inline-item">
+                        {% if not searchForm.vars.submitted %}
+                            {% if displayHidden %}
+                                <a href="{{ url("administration-profiles-list") }}">
+                                    <i class="fa fa-fw fa-user-check"></i>
+                                    {% trans from 'administration' %}profile.list.hide-hidden{% endtrans %}
+                                </a>
+                            {% else %}
+                                <a href="{{ url("administration-profiles-list", {"displayHidden": true}) }}">
+                                    <i class="fa fa-fw fa-user-check"></i>
+                                    {% trans from 'administration' %}profile.list.display-hidden{% endtrans %}
+                                </a>
+                            {% endif %}
+                        {% endif %}
+                    </li>
+                </ul>
 
                 {# Search form #}
                 {# -------------------------------------------------------------------------------------------------- #}
                 <div id="searchForm" class="collapse {% if searchForm.vars.submitted %}show{% endif %}">
-                {{ form_start(searchForm)}}
+                    {{ form_start(searchForm) }}
                     {{ form_errors(searchForm) }}
 
                     <div class="row">
@@ -63,7 +65,7 @@
                         <i class="fa fa-fw fa-times"></i>
                         {% trans from 'global' %}reset{% endtrans %}
                     </a>
-                {{ form_end(searchForm) }}
+                    {{ form_end(searchForm) }}
                 </div>
 
                 {# Table list #}

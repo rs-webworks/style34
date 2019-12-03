@@ -13,33 +13,12 @@
 
         <hr>
 
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item">
-                    <a href="{{ url('administration-dashboard') }}">
-                        {{ eryse.client.name }}
-                    </a>
-                </li>
-                <li class="breadcrumb-item">
-                    <a href="{{ url('administration-dashboard') }}">
-                        {% trans from 'administration' %}dashboard{% endtrans %}
-                    </a>
-                </li>
-                <li class="breadcrumb-item">
-                    <a href="{{ url('administration-profiles-list') }}">
-                        {% trans from 'administration' %}profiles{% endtrans %}
-                    </a>
-                </li>
-                <li class="breadcrumb-item active" aria-current="page">
-                    {{ profileUser.username }}
-                </li>
-            </ol>
-        </nav>
+        {{ renderBreadcrumbs(bcs) }}
 
         <div class="row">
             <div class="col col-xs-12">
 
-
+            {{ form(profileForm) }}
 
             </div>
         </div>

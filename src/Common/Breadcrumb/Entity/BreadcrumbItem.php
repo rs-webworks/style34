@@ -18,27 +18,27 @@ class BreadcrumbItem
     /**
      * BreadcrumbItem constructor.
      *
-     * @param string $route
      * @param string $name
+     * @param string|null $route
      */
-    public function __construct(string $route, string $name)
+    public function __construct(string $name, ?string $route = null)
     {
         $this->route = $route;
         $this->name = $name;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getRoute(): string
+    public function getRoute(): ?string
     {
         return $this->route;
     }
 
     /**
-     * @param string $route
+     * @param string|null $route
      */
-    public function setRoute(string $route): void
+    public function setRoute(?string $route): void
     {
         $this->route = $route;
     }

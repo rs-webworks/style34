@@ -9,6 +9,9 @@ namespace EryseClient\Common\Breadcrumb\Entity;
  */
 class Breadcrumb
 {
+    public const ROUTE = "route";
+    public const NAME = "name";
+
     /** @var BreadcrumbItem[] */
     protected $items;
 
@@ -36,5 +39,31 @@ class Breadcrumb
     public function setItems(array $items): void
     {
         $this->items = $items;
+    }
+
+    /**
+     * @param array $array
+     *
+     * @return $this
+     */
+    public function createFromArray(array $array): self
+    {
+        foreach ($array as $item) {
+            $this->addItem(new BreadcrumbItem($item[self::NAME], $item[self::ROUTE]));
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param string $route
+     * @param string $name
+     *
+     * @return Breadcrumb
+     */
+    public function addNewItem(string $name, ?string $route = null): self
+    {
+        $this->addItem(new BreadcrumbItem($name, $route));
+        return $this;
     }
 }

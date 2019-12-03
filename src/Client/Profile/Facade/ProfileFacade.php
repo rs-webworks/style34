@@ -2,7 +2,10 @@
 
 namespace EryseClient\Client\Profile\Facade;
 
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use EryseClient\Client\Profile\Repository\ProfileRepository;
+use EryseClient\Client\Profile\Service\ProfileService;
 use EryseClient\Client\ProfileRole\Entity\ProfileRole;
 use EryseClient\Client\ProfileRole\Repository\ProfileRoleRepository;
 use EryseClient\Client\ProfileRole\Service\ProfileRoleService;
@@ -17,36 +20,41 @@ use Symfony\Component\Form\FormInterface;
  */
 class ProfileFacade
 {
+    /** @var ProfileService */
+    private $profileService;
+
     /** @var ProfileRepository */
     protected $profileRepository;
+
+    /** @var ProfileRoleService */
+    private $profileRoleService;
 
     /** @var ProfileRoleRepository */
     protected $profileRoleRepository;
 
     /** @var PaginatorInterface */
     private $paginator;
-    /**
-     * @var ProfileRoleService
-     */
-    private $profileRoleService;
 
     /**
      * ProfileFacade constructor.
      *
+     * @param ProfileService $profileService
      * @param ProfileRepository $profileRepository
-     * @param ProfileRoleRepository $profileRoleRepository
      * @param ProfileRoleService $profileRoleService
+     * @param ProfileRoleRepository $profileRoleRepository
      * @param PaginatorInterface $paginator
      */
     public function __construct(
+        ProfileService $profileService,
         ProfileRepository $profileRepository,
-        ProfileRoleRepository $profileRoleRepository,
         ProfileRoleService $profileRoleService,
+        ProfileRoleRepository $profileRoleRepository,
         PaginatorInterface $paginator
     ) {
+        $this->profileService = $profileService;
         $this->profileRepository = $profileRepository;
-        $this->profileRoleRepository = $profileRoleRepository;
         $this->profileRoleService = $profileRoleService;
+        $this->profileRoleRepository = $profileRoleRepository;
         $this->paginator = $paginator;
     }
 
@@ -54,11 +62,16 @@ class ProfileFacade
      * @param FormInterface $searchForm
      * @param int $page
      * @param string|null $role
+     * @param bool|null $displayHidden
      *
      * @return mixed
      */
-    public function getProfilesPaginated(FormInterface $searchForm, ?int $page = 1, ?string $role = null)
-    {
+    public function getProfilesPaginated(
+        FormInterface $searchForm,
+        ?int $page = 1,
+        ?string $role = null,
+        ?bool $displayHidden = false
+    ) {
         $qb = $this->profileRepository->createQueryBuilder('p')->orderBy("p.id");
 
         if ($searchForm->isSubmitted() && $searchForm->isValid()) {
@@ -88,7 +101,7 @@ class ProfileFacade
                 $role = $this->profileRoleRepository->findOneByName($role);
                 $qb->andWhere("p.role = :role");
                 $qb->setParameter("role", $role);
-            } else {
+            } elseif (!$displayHidden) {
                 $qb->andWhere("p.role IN (:defaultRoles)");
                 $qb->setParameter(
                     "defaultRoles",
@@ -103,5 +116,19 @@ class ProfileFacade
             $page ?? 1,
             ControllerSettings::PAGINATOR_DEFAULT_IPP
         );
+    }
+
+    /**
+     * @param FormInterface $profileForm
+     *
+     * @throws ORMException
+     * @throws OptimisticLockException
+     */
+    public function saveProfile(FormInterface $profileForm)
+    {
+        if ($profileForm->isSubmitted() && $profileForm->isValid()) {
+            $profile = $profileForm->getData();
+            $this->profileRepository->save($profile);
+        }
     }
 }

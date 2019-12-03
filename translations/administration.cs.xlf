@@ -221,9 +221,33 @@
         <source>profile.roles.list.actions</source>
         <target>Akce</target>
       </trans-unit>
-      <trans-unit id="profile-id" resname="profile-id">
+      <trans-unit id="8ASqlAe" resname="profile-id">
         <source>profile-id</source>
         <target>ID</target>
+      </trans-unit>
+      <trans-unit id="TQM.CEY" resname="breadcrumb.profile.list">
+        <source>breadcrumb.profile.list</source>
+        <target>Profily</target>
+      </trans-unit>
+      <trans-unit id="EQi1ltJ" resname="profile.list.user.username">
+        <source>profile.list.user.username</source>
+        <target>Uživatel</target>
+      </trans-unit>
+      <trans-unit id=".gaW7_X" resname="profile.list.edit-profile">
+        <source>profile.list.edit-profile</source>
+        <target>Upravit profil</target>
+      </trans-unit>
+      <trans-unit id="GQDqtsA" resname="profile">
+        <source>profile</source>
+        <target>Profil</target>
+      </trans-unit>
+      <trans-unit id="10JuMd2" resname="profile.list.toggle-search">
+        <source>profile.list.toggle-search</source>
+        <target>Vyhledávání</target>
+      </trans-unit>
+      <trans-unit id="j1ZjkdV" resname="profile.list.toggle-hidden">
+        <source>profile.list.toggle-hidden</source>
+        <target>Zobrazit skryté</target>
       </trans-unit>
     </body>
   </file>
