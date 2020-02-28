@@ -2,14 +2,14 @@
 
 namespace EryseClient\Common\Voter;
 
-use EryseClient\Client\ProfileRole\Service\ProfileRoleService;
-use EryseClient\Server\UserRole\Service\UserRoleService;
+use EryseClient\Client\Profile\Role\Service\RoleService as ProfileRoleService;
+use EryseClient\Server\User\Role\Service\RoleService as UserRoleService;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
 /**
  * Class CrudVoter
  *
- * @package EryseClient\Common\Voter
+ *
  */
 abstract class ControllerVoter extends Voter
 {

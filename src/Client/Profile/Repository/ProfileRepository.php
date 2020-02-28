@@ -3,16 +3,16 @@
 namespace EryseClient\Client\Profile\Repository;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
-use EryseClient\Client\Profile\Entity\Profile;
+use EryseClient\Client\Profile\Entity\ProfileEntity;
 use EryseClient\Common\Repository\AbstractRepository;
 use EryseClient\Server\User\Repository\UserRepository;
 
 /**
  * Class ProfileRepository
  *
- * @package EryseClient\Repository\Profile
- * @method Profile|null findOneBy(array $criteria, array $orderBy = null)
- * @method Profile|null find($id, $lockMode = null, $lockVersion = null)
+ *
+ * @method ProfileEntity|null findOneBy(array $criteria, array $orderBy = null)
+ * @method ProfileEntity|null find($id, $lockMode = null, $lockVersion = null)
  */
 class ProfileRepository extends AbstractRepository
 {
@@ -29,16 +29,16 @@ class ProfileRepository extends AbstractRepository
      */
     public function __construct(ManagerRegistry $registry, UserRepository $userRepository)
     {
-        parent::__construct($registry, Profile::class);
+        parent::__construct($registry, ProfileEntity::class);
         $this->userRepository = $userRepository;
     }
 
     /**
      * @param int $userId
      *
-     * @return Profile
+     * @return ProfileEntity
      */
-    public function findOneByUserId(int $userId): Profile
+    public function findOneByUserId(int $userId): ProfileEntity
     {
         return $this->findOneBy(["userId" => $userId]);
     }
@@ -46,9 +46,9 @@ class ProfileRepository extends AbstractRepository
     /**
      * @param string $username
      *
-     * @return Profile
+     * @return ProfileEntity
      */
-    public function findOneByUsername(string $username): Profile
+    public function findOneByUsername(string $username): ProfileEntity
     {
         $user = $this->userRepository->findOneByUsername($username);
         $profile = $this->findOneByUserId($user->getId());

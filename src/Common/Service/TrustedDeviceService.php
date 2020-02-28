@@ -9,7 +9,7 @@ use Scheb\TwoFactorBundle\Security\TwoFactor\Trusted\TrustedDeviceManagerInterfa
 /**
  * Class TrustedDeviceService
  *
- * @package EryseClient\Service
+ *
  */
 final class TrustedDeviceService extends AbstractService implements TrustedDeviceManagerInterface
 {

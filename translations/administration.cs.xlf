@@ -245,8 +245,12 @@
         <source>profile.list.toggle-search</source>
         <target>Vyhledávání</target>
       </trans-unit>
-      <trans-unit id="j1ZjkdV" resname="profile.list.toggle-hidden">
-        <source>profile.list.toggle-hidden</source>
+      <trans-unit id="bakvh7w" resname="profile.list.hide-hidden">
+        <source>profile.list.hide-hidden</source>
+        <target>Vypnout skryté</target>
+      </trans-unit>
+      <trans-unit id="mLxYjA." resname="profile.list.display-hidden">
+        <source>profile.list.display-hidden</source>
         <target>Zobrazit skryté</target>
       </trans-unit>
     </body>

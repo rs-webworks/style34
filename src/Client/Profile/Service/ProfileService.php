@@ -2,18 +2,15 @@
 
 namespace EryseClient\Client\Profile\Service;
 
-use EryseClient\Client\Profile\Entity\Profile;
-use EryseClient\Client\ProfileRole\Service\ProfileRoleService;
+use EryseClient\Client\Profile\Entity\ProfileEntity;
+use EryseClient\Client\Profile\Role\Service\RoleService;
 use EryseClient\Common\Service\AbstractService;
 use EryseClient\Common\Utility\EryseUserAwareTrait;
-use EryseClient\Server\UserRole\Entity\UserRole;
-use EryseClient\Server\UserRole\Service\UserRoleService;
+use EryseClient\Server\User\Role\Service\RoleService as UserRoleService;
 use Symfony\Component\Security\Core\Security;
 
 /**
  * Class ProfileService
- *
- * @package EryseClient\Client\Profile\Service
  */
 class ProfileService extends AbstractService
 {
@@ -25,19 +22,19 @@ class ProfileService extends AbstractService
     /** @var Security */
     private $security;
 
-    /** @var ProfileRoleService */
+    /** @var RoleService */
     private $profileService;
 
     /**
      * ProfileService constructor.
      *
      * @param UserRoleService $userRoleService
-     * @param ProfileRoleService $profileRoleService
+     * @param RoleService $profileRoleService
      * @param Security $security
      */
     public function __construct(
         UserRoleService $userRoleService,
-        ProfileRoleService $profileRoleService,
+        RoleService $profileRoleService,
         Security $security
     ) {
         $this->userRoleService = $userRoleService;
@@ -46,11 +43,11 @@ class ProfileService extends AbstractService
     }
 
     /**
-     * @param Profile $profile
+     * @param ProfileEntity $profile
      *
      * @return bool
      */
-    public function isDisplayable(Profile $profile): bool
+    public function isDisplayable(ProfileEntity $profile): bool
     {
         $displayable = true;
 

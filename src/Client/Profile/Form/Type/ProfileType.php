@@ -2,8 +2,8 @@
 
 namespace EryseClient\Client\Profile\Form\Type;
 
-use EryseClient\Client\Profile\Entity\Profile;
-use EryseClient\Client\ProfileRole\Entity\ProfileRole;
+use EryseClient\Client\Profile\Entity\ProfileEntity;
+use EryseClient\Client\Profile\Role\Entity\RoleEntity;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -14,7 +14,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * Class ProfileType
  *
- * @package EryseClient\Client\Profile\Form\Type
+ *
  */
 class ProfileType extends AbstractType
 {
@@ -25,7 +25,7 @@ class ProfileType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add("role", EntityType::class, [
-            "class" => ProfileRole::class,
+            "class" => RoleEntity::class,
             "choice_label" => "name",
             "choice_translation_domain" => "administration"
         ]);
@@ -41,7 +41,7 @@ class ProfileType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(["data_class" => Profile::class]);
+        $resolver->setDefaults(["data_class" => ProfileEntity::class]);
     }
 
 }

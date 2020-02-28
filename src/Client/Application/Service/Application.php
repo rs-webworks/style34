@@ -8,7 +8,7 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 /**
  * Class Application
  *
- * @package EryseClient\Client\Application\Service
+ *
  */
 class Application extends AbstractService
 {

@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Trait CreatedAt
- * @package EryseClient\Entity
+ *
  */
 trait CreatedAt
 {

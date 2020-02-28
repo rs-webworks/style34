@@ -6,7 +6,7 @@ use Throwable;
 
 /**
  * Class Exception
- * @package EryseClient\Exception
+ *
  */
 class Exception extends \Exception implements Throwable
 {

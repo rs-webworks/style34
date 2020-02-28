@@ -13,7 +13,7 @@ use Twig\TwigFunction;
 /**
  * Class Breadcrumb
  *
- * @package EryseClient\Common\Breadcrumb\Extension
+ *
  */
 class Breadcrumb extends AbstractExtension
 {

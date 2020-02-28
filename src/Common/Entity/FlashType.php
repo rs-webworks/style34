@@ -5,7 +5,7 @@ namespace EryseClient\Common\Entity;
 /**
  * Interface FlashType
  *
- * @package EryseClient\Common\Entity
+ *
  */
 interface FlashType
 {

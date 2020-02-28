@@ -23,6 +23,15 @@ services:
         resource: '../src/*'
         exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
 
+#    src:
+#        namespace: EryseClient\
+#        resource: '../src/*/{Entity,Tests,Kernel.php}'
+#        tags: [src]
+#
+#    controllers:
+#        namespace: EryseClient\
+#        resource: '../src/*/Controller'
+#        tags: [controller]
 
     # Shared services via packages:
 

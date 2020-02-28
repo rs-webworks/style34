@@ -4,17 +4,17 @@ namespace EryseClient\Client\Install\Command;
 
 use DateTime;
 use Doctrine\Bundle\MigrationsBundle\Command\MigrationsMigrateDoctrineCommand;
-use EryseClient\Client\Profile\Entity\Profile;
+use EryseClient\Client\Profile\Entity\ProfileEntity;
 use EryseClient\Client\Profile\Repository\ProfileRepository;
-use EryseClient\Client\ProfileRole\Entity\ProfileRole;
-use EryseClient\Client\ProfileRole\Repository\ProfileRoleRepository;
+use EryseClient\Client\Profile\Role\Entity\RoleEntity;
+use EryseClient\Client\Profile\Role\Repository\RoleRepository;
 use EryseClient\Common\Utility\LoggerAwareTrait;
-use EryseClient\Server\Token\Entity\TokenType;
-use EryseClient\Server\Token\Repository\TokenTypeRepository;
-use EryseClient\Server\User\Entity\User;
+use EryseClient\Server\Token\Type\Entity\TypeEntity;
+use EryseClient\Server\Token\Type\Repository\TypeRepository;
+use EryseClient\Server\User\Entity\UserEntity;
 use EryseClient\Server\User\Repository\UserRepository;
 use EryseClient\Server\User\Service\UserService;
-use EryseClient\Server\UserRole\Entity\UserRole;
+use EryseClient\Server\User\Role\Entity\RoleEntity as UserRole;
 use Exception;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\ArrayInput;
@@ -30,7 +30,7 @@ use Symfony\Contracts\Cache\CacheInterface;
  * Class InstallCommand.
  * Install only app-required data, not testing fixtures! For dev/test data use fixtures in DataFixtures.
  *
- * @package EryseClient\Command
+ *
  */
 class InstallCommand extends Command
 {
@@ -54,10 +54,10 @@ class InstallCommand extends Command
     /** @var UserRepository */
     private $userRepository;
 
-    /** @var TokenTypeRepository */
+    /** @var TypeRepository */
     private $tokenTypeRepository;
 
-    /** @var ProfileRoleRepository */
+    /** @var RoleRepository */
     private $profileRoleRepository;
 
     /** @var ProfileRepository */
@@ -69,16 +69,16 @@ class InstallCommand extends Command
      * @param CacheInterface $cache
      * @param UserPasswordEncoderInterface $passwordEncoder
      * @param UserRepository $userRepository
-     * @param TokenTypeRepository $tokenTypeRepository
-     * @param ProfileRoleRepository $profileRoleRepository
+     * @param TypeRepository $tokenTypeRepository
+     * @param RoleRepository $profileRoleRepository
      * @param ProfileRepository $profileRepository
      */
     public function __construct(
         CacheInterface $cache,
         UserPasswordEncoderInterface $passwordEncoder,
         UserRepository $userRepository,
-        TokenTypeRepository $tokenTypeRepository,
-        ProfileRoleRepository $profileRoleRepository,
+        TypeRepository $tokenTypeRepository,
+        RoleRepository $profileRoleRepository,
         ProfileRepository $profileRepository
     ) {
         $this->cacheInterface = $cache;
@@ -322,12 +322,12 @@ class InstallCommand extends Command
     protected function createRoles(): void
     {
         $roles = [
-            [ProfileRole::ADMIN, '#CB2910'],
-            [ProfileRole::MODERATOR, '#00B639'],
-            [ProfileRole::MEMBER, '#1D1D1D'],
-            [ProfileRole::INACTIVE, '#626262'],
-            [ProfileRole::BANNED, '#A2A2A2'],
-            [ProfileRole::DELETED, '#A2A2A2'],
+            [RoleEntity::ADMIN, '#CB2910'],
+            [RoleEntity::MODERATOR, '#00B639'],
+            [RoleEntity::MEMBER, '#1D1D1D'],
+            [RoleEntity::INACTIVE, '#626262'],
+            [RoleEntity::BANNED, '#A2A2A2'],
+            [RoleEntity::DELETED, '#A2A2A2'],
         ];
 
         $this->io->progressStart(count($roles));
@@ -335,7 +335,7 @@ class InstallCommand extends Command
         foreach ($roles as $role) {
             [$name, $color] = $role;
 
-            $r = new ProfileRole();
+            $r = new RoleEntity();
             $r->setName($name);
             $r->setColor($color);
 
@@ -354,11 +354,11 @@ class InstallCommand extends Command
     {
         /** @var array $users Username, mail, password */
         $users = [
-            ['admin', 'admin@EryseClient.net', 'rootpass', UserRole::ADMIN, ProfileRole::ADMIN],
-            ['spravce', 'spravce@EryseClient.net', 'null', UserRole::DELETED, ProfileRole::DELETED],
-            ['moderator', 'moderator@EryseClient.net', 'null', UserRole::DELETED, ProfileRole::DELETED],
-            ['mod', 'mod@EryseClient.net', 'null', UserRole::DELETED, ProfileRole::DELETED],
-            ['administrator', 'administrator@EryseClient.net', 'null', UserRole::DELETED, ProfileRole::DELETED],
+            ['admin', 'admin@EryseClient.net', 'rootpass', UserRole::ADMIN, RoleEntity::ADMIN],
+            ['spravce', 'spravce@EryseClient.net', 'null', UserRole::DELETED, RoleEntity::DELETED],
+            ['moderator', 'moderator@EryseClient.net', 'null', UserRole::DELETED, RoleEntity::DELETED],
+            ['mod', 'mod@EryseClient.net', 'null', UserRole::DELETED, RoleEntity::DELETED],
+            ['administrator', 'administrator@EryseClient.net', 'null', UserRole::DELETED, RoleEntity::DELETED],
         ];
 
         $this->io->progressStart(count($users));
@@ -369,7 +369,7 @@ class InstallCommand extends Command
             /**
              * TODO: server user should be created in server app
              */
-            $user = new User();
+            $user = new UserEntity();
             $user->setUsername($username);
             $user->setEmail($email);
             $user->setCreatedAt(new DateTime());
@@ -385,7 +385,7 @@ class InstallCommand extends Command
 
             $this->userRepository->saveNew($user);
 
-            $profile = new Profile();
+            $profile = new ProfileEntity();
             $profile->setUserId($user->getId());
             $profile->setRole($this->profileRoleRepository->findOneByName($profileRole));
 
@@ -403,8 +403,8 @@ class InstallCommand extends Command
     protected function createTokenTypes(): void
     {
         $types = [
-            [TokenType::USER['ACTIVATION']],
-            [TokenType::USER['REQUEST_RESET_PASSWORD']],
+            [TypeEntity::USER['ACTIVATION']],
+            [TypeEntity::USER['REQUEST_RESET_PASSWORD']],
         ];
 
         $this->io->progressStart(count($types));
@@ -412,7 +412,7 @@ class InstallCommand extends Command
         foreach ($types as $type) {
             [$name] = $type;
 
-            $tt = new TokenType();
+            $tt = new TypeEntity();
             $tt->setName($name);
 
             $this->tokenTypeRepository->save($tt);

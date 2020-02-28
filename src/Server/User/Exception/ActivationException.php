@@ -6,7 +6,7 @@ use Throwable;
 
 /**
  * Class ActivationException
- * @package EryseClient\Exception\Profile
+ *
  */
 class ActivationException extends UserException implements Throwable
 {

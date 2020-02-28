@@ -6,20 +6,20 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
-use EryseClient\Client\Profile\Entity\Profile;
+use EryseClient\Client\Profile\Entity\ProfileEntity;
 use EryseClient\Client\Profile\Repository\ProfileRepository;
-use EryseClient\Client\ProfileRole\Entity\ProfileRole;
-use EryseClient\Client\ProfileRole\Repository\ProfileRoleRepository;
-use EryseClient\Server\User\Entity\User;
+use EryseClient\Client\Profile\Role\Entity\RoleEntity as ProfileRole;
+use EryseClient\Client\Profile\Role\Repository\RoleRepository;
+use EryseClient\Server\User\Entity\UserEntity;
 use EryseClient\Server\User\Repository\UserRepository;
-use EryseClient\Server\UserRole\Entity\UserRole;
+use EryseClient\Server\User\Role\Entity\RoleEntity as UserRole;
 use Faker\Factory;
 use Faker\Generator;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
  * Class ProfileFixtures
- * @package EryseClient\DataFixtures
+ *
  */
 class UserFixtures extends Fixture
 {
@@ -32,7 +32,7 @@ class UserFixtures extends Fixture
     /** @var ProfileRepository */
     private $profileRepository;
 
-    /** @var ProfileRoleRepository */
+    /** @var RoleRepository */
     private $profileRoleRepository;
 
     /** @var Generator */
@@ -40,16 +40,17 @@ class UserFixtures extends Fixture
 
     /**
      * UserFixtures constructor.
+     *
      * @param UserPasswordEncoderInterface $passwordEncoder
      * @param UserRepository $userRepository
      * @param ProfileRepository $profileRepository
-     * @param ProfileRoleRepository $profileRoleRepository
+     * @param RoleRepository $profileRoleRepository
      */
     public function __construct(
         UserPasswordEncoderInterface $passwordEncoder,
         UserRepository $userRepository,
         ProfileRepository $profileRepository,
-        ProfileRoleRepository $profileRoleRepository
+        RoleRepository $profileRoleRepository
     ) {
         $this->passwordEncoder = $passwordEncoder;
         $this->userRepository = $userRepository;
@@ -69,7 +70,7 @@ class UserFixtures extends Fixture
         $faker = $this->faker;
 
         for ($i = 0; $i <= 100; $i++) {
-            $user = new User();
+            $user = new UserEntity();
             $user->setUsername($faker->userName);
             $user->setEmail($faker->email);
             $user->setCreatedAt($faker->dateTime("now"));
@@ -85,7 +86,7 @@ class UserFixtures extends Fixture
 
             $this->userRepository->saveNew($user);
 
-            $profile = new Profile();
+            $profile = new ProfileEntity();
             $profile->setBirthdate($faker->dateTimeThisCentury());
             $profile->setCity($faker->city);
 

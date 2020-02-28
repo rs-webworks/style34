@@ -18,10 +18,10 @@ security:
         in_memory: { memory: ~ }
 
         user-provider:
-            id: EryseClient\Server\UserSecurity\Provider\UserProvider
+            id: EryseClient\Server\User\Security\Provider\UserProvider
 
     encoders:
-        EryseClient\Server\User\Entity\User:
+        EryseClient\Server\User\Entity\UserEntity:
             algorithm: auto
             cost: 12
 
@@ -34,7 +34,7 @@ security:
             anonymous: true
             guard:
                 authenticators:
-                    - EryseClient\Server\UserSecurity\Authenticator\UserLoginFormAuthenticator
+                    - EryseClient\Server\User\Security\Authenticator\UserLoginFormAuthenticator
                 provider: user-provider
 
             form_login:

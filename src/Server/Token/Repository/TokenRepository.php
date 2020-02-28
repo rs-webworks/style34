@@ -6,16 +6,17 @@ use DateTime;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
-use EryseClient\Server\Token\Entity\Token;
-use EryseClient\Server\Token\Entity\TokenType;
 use EryseClient\Common\Repository\AbstractRepository;
-use EryseClient\Server\User\Entity\User;
+use EryseClient\Server\Token\Entity\TokenEntity;
+use EryseClient\Server\Token\Type\Entity\TypeEntity;
+use EryseClient\Server\User\Entity\UserEntity;
 use Exception;
 
 /**
  * Class TokenRepository
- * @package EryseClient\Repository\Token
- * @method Token|null findOneBy(array $criteria, array $orderBy = null)
+ *
+ *
+ * @method TokenEntity|null findOneBy(array $criteria, array $orderBy = null)
  */
 class TokenRepository extends AbstractRepository
 {
@@ -26,15 +27,16 @@ class TokenRepository extends AbstractRepository
      */
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Token::class);
+        parent::__construct($registry, TokenEntity::class);
     }
 
     /**
-     * @param TokenType $tokenType
-     * @return Token[]
+     * @param TypeEntity $tokenType
+     *
+     * @return TokenEntity[]
      * @throws Exception
      */
-    public function findExpiredTokens(TokenType $tokenType)
+    public function findExpiredTokens(TypeEntity $tokenType)
     {
         return $this->createQueryBuilder('t')
             ->where('t.type = :tokenType')
@@ -52,7 +54,8 @@ class TokenRepository extends AbstractRepository
     }
 
     /**
-     * @param Token[] $tokens
+     * @param TokenEntity[] $tokens
+     *
      * @throws ORMException
      * @throws OptimisticLockException
      */
@@ -66,12 +69,13 @@ class TokenRepository extends AbstractRepository
     }
 
     /**
-     * @param User $user
-     * @param TokenType $tokenType
+     * @param UserEntity $user
+     * @param TypeEntity $tokenType
+     *
      * @return mixed
      * @throws Exception
      */
-    public function findUserValidTokensOfType(User $user, TokenType $tokenType)
+    public function findUserValidTokensOfType(UserEntity $user, TypeEntity $tokenType)
     {
         return $this->createQueryBuilder('t')
             ->where('t.type = :tokenType')

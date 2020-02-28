@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace EryseClient\Common\Service;
 
-use EryseClient\Server\Token\Entity\Token;
+use EryseClient\Server\Token\Entity\TokenEntity;
 use EryseClient\Common\Utility\TranslatorAwareTrait;
-use EryseClient\Server\User\Entity\User;
+use EryseClient\Server\User\Entity\UserEntity;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
@@ -49,7 +49,7 @@ class MailService extends AbstractService
      * @throws SyntaxError
      * @throws TransportExceptionInterface
      */
-    public function sendActivationMail(User $user, Token $token): void
+    public function sendActivationMail(UserEntity $user, TokenEntity $token): void
     {
         $message = (new Email())->from($this->parameterBag->get('eryseClient.emails.info'))
             ->html(
@@ -79,7 +79,7 @@ class MailService extends AbstractService
      * @throws SyntaxError
      * @throws TransportExceptionInterface
      */
-    public function sendRequestResetPasswordMail(User $user, Token $token)
+    public function sendRequestResetPasswordMail(UserEntity $user, TokenEntity $token)
     {
         $message = (new Email())->from($this->parameterBag->get('eryseClient.emails.info'))
             ->html(

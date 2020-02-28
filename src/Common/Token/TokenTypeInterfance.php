@@ -5,7 +5,7 @@ namespace EryseClient\Common\Token;
 /**
  * Interface TokenType
  *
- * @package EryseClient\Common\Token
+ *
  */
 interface TokenTypeInterfance
 {

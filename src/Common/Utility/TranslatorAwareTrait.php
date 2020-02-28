@@ -6,7 +6,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * Trait TranslatorTrait
- * @package EryseClient\Service\Utility
+ *
+ *
  */
 trait TranslatorAwareTrait
 {
@@ -16,6 +17,7 @@ trait TranslatorAwareTrait
 
     /**
      * @required
+     *
      * @param TranslatorInterface $translator
      */
     public function setTranslator(TranslatorInterface $translator)

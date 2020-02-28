@@ -7,7 +7,7 @@ use EryseClient\Client\Administration\Voter\AdminControllerVoter;
 /**
  * Class DashboardVoter
  *
- * @package EryseClient\Client\Administration\Dashboard\Voter
+ *
  */
 class DashboardVoter extends AdminControllerVoter
 {

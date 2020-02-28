@@ -10,18 +10,22 @@ use EryseClient\Client\Profile\Form\Type\ProfileSearchType;
 use EryseClient\Client\Profile\Form\Type\ProfileType;
 use EryseClient\Client\Profile\Repository\ProfileRepository;
 use EryseClient\Common\Controller\AbstractController;
+use EryseClient\Common\Entity\FlashType;
 use EryseClient\Server\User\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Translation\TranslatorTrait;
 
 /**
  * Class RoleController
  *
- * @package EryseClient\Controller\Administration\User
+ *
  */
 class ProfileController extends AbstractController
 {
+    use TranslatorTrait;
+
     public const ROUTE_LIST = "administration-profiles-list";
     public const ROUTE_EDIT = "administration-profile-edit";
 
@@ -98,7 +102,12 @@ class ProfileController extends AbstractController
         $profileForm = $this->createForm(ProfileType::class, $profile);
         $profileForm->handleRequest($request);
 
-        $profileFacade->saveProfile($profileForm);
+        if ($profileForm->isSubmitted() && $profileForm->isValid()) {
+            $profile = $profileForm->getData();
+            $profileRepository->save($profile);
+
+            $this->addFlash(FlashType::SUCCESS, $this->translator->trans("profile.edit.success", [], "administration"));
+        }
 
         return $this->render(
             'Administration/Profile/Profile/edit.html.twig',

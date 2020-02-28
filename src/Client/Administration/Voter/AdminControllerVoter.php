@@ -2,15 +2,15 @@
 
 namespace EryseClient\Client\Administration\Voter;
 
-use EryseClient\Client\Profile\Entity\Profile;
+use EryseClient\Client\Profile\Entity\ProfileEntity;
 use EryseClient\Common\Voter\ControllerVoter;
-use EryseClient\Server\User\Entity\User;
+use EryseClient\Server\User\Entity\UserEntity;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 /**
  * Class AdminControllerVoter
  *
- * @package EryseClient\Client\Administration\Voter
+ *
  */
 abstract class AdminControllerVoter extends ControllerVoter
 {
@@ -46,7 +46,7 @@ abstract class AdminControllerVoter extends ControllerVoter
     {
         $user = $token->getUser();
 
-        if (!$user instanceof User) {
+        if (!$user instanceof UserEntity) {
             return false;
         }
 
@@ -57,12 +57,12 @@ abstract class AdminControllerVoter extends ControllerVoter
     }
 
     /**
-     * @param User $user
-     * @param Profile $profile
+     * @param UserEntity $user
+     * @param ProfileEntity $profile
      *
      * @return bool
      */
-    protected function canView(User $user, Profile $profile): bool
+    protected function canView(UserEntity $user, ProfileEntity $profile): bool
     {
         if ($this->userRoleService->isRoleAdmin($user)) {
             return true;

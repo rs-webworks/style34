@@ -2,13 +2,11 @@
 
 namespace EryseClient\Client\Profile\Facade;
 
-use Doctrine\ORM\OptimisticLockException;
-use Doctrine\ORM\ORMException;
 use EryseClient\Client\Profile\Repository\ProfileRepository;
+use EryseClient\Client\Profile\Role\Entity\RoleEntity;
+use EryseClient\Client\Profile\Role\Repository\RoleRepository;
+use EryseClient\Client\Profile\Role\Service\RoleService;
 use EryseClient\Client\Profile\Service\ProfileService;
-use EryseClient\Client\ProfileRole\Entity\ProfileRole;
-use EryseClient\Client\ProfileRole\Repository\ProfileRoleRepository;
-use EryseClient\Client\ProfileRole\Service\ProfileRoleService;
 use EryseClient\Common\Controller\ControllerSettings;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\Form\FormInterface;
@@ -16,7 +14,7 @@ use Symfony\Component\Form\FormInterface;
 /**
  * Class ProfileFacade
  *
- * @package EryseClient\Client\Profile\Facade
+ *
  */
 class ProfileFacade
 {
@@ -26,10 +24,10 @@ class ProfileFacade
     /** @var ProfileRepository */
     protected $profileRepository;
 
-    /** @var ProfileRoleService */
+    /** @var RoleService */
     private $profileRoleService;
 
-    /** @var ProfileRoleRepository */
+    /** @var RoleRepository */
     protected $profileRoleRepository;
 
     /** @var PaginatorInterface */
@@ -40,15 +38,15 @@ class ProfileFacade
      *
      * @param ProfileService $profileService
      * @param ProfileRepository $profileRepository
-     * @param ProfileRoleService $profileRoleService
-     * @param ProfileRoleRepository $profileRoleRepository
+     * @param RoleService $profileRoleService
+     * @param RoleRepository $profileRoleRepository
      * @param PaginatorInterface $paginator
      */
     public function __construct(
         ProfileService $profileService,
         ProfileRepository $profileRepository,
-        ProfileRoleService $profileRoleService,
-        ProfileRoleRepository $profileRoleRepository,
+        RoleService $profileRoleService,
+        RoleRepository $profileRoleRepository,
         PaginatorInterface $paginator
     ) {
         $this->profileService = $profileService;
@@ -81,7 +79,7 @@ class ProfileFacade
                 }
 
                 if ($column == "role") {
-                    /** @var ProfileRole $value */
+                    /** @var RoleEntity $value */
                     $qb->andWhere("p.role = :role");
                     $qb->setParameter("role", $value);
                     continue;
@@ -116,19 +114,5 @@ class ProfileFacade
             $page ?? 1,
             ControllerSettings::PAGINATOR_DEFAULT_IPP
         );
-    }
-
-    /**
-     * @param FormInterface $profileForm
-     *
-     * @throws ORMException
-     * @throws OptimisticLockException
-     */
-    public function saveProfile(FormInterface $profileForm)
-    {
-        if ($profileForm->isSubmitted() && $profileForm->isValid()) {
-            $profile = $profileForm->getData();
-            $this->profileRepository->save($profile);
-        }
     }
 }

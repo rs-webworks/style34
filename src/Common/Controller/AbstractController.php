@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * Class AbstractController
  *
- * @package EryseClient\Common\Controller
+ *
  */
 class AbstractController extends SymfonyAbstractController implements ControllerSettings
 {

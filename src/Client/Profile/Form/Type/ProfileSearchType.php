@@ -2,7 +2,7 @@
 
 namespace EryseClient\Client\Profile\Form\Type;
 
-use EryseClient\Client\ProfileRole\Entity\ProfileRole;
+use EryseClient\Client\Profile\Role\Entity\RoleEntity;
 use EryseClient\Server\UserRole\Entity\UserRole;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -11,7 +11,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 /**
  * Class UserSearchType
- * @package EryseClient\Form\Type\Administration\User
+ *
  */
 class ProfileSearchType extends AbstractType
 {
@@ -37,7 +37,7 @@ class ProfileSearchType extends AbstractType
             "role",
             EntityType::class,
             [
-                "class" => ProfileRole::class,
+                "class" => RoleEntity::class,
                 "choice_label" => "name",
                 "choice_name" => "name",
                 "choice_value" => "name",

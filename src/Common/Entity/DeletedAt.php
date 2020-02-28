@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Trait DeletedAt
- * @package EryseClient\Entity
+ *
  */
 trait DeletedAt
 {

@@ -10,9 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * Class ApplicationController
- *
- * @package EryseClient\Controller\Administration\Application
+ * Class DashboardController
  */
 class DashboardController extends AbstractController
 {

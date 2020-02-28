@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Class HomeController
- * @package EryseClient\Controller
+ *
  */
 class HomeController extends AbstractController
 {

@@ -10,7 +10,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 /**
  * Class UserSearchType
- * @package EryseClient\Form\Type\Administration\User
+ *
  */
 class UserSearchType extends AbstractType
 {

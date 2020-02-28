@@ -7,7 +7,7 @@ use Throwable;
 
 /**
  * Class TokenException
- * @package EryseClient\Exception\Profile
+ *
  */
 class TokenException extends Exception implements Throwable
 {

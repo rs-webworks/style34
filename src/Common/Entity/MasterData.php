@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Trait MasterData
- * @package EryseClient\Entity
+ *
  */
 trait MasterData
 {

@@ -2,7 +2,7 @@
 
 namespace EryseClient\Server\User\Form\Type;
 
-use EryseClient\Server\User\Entity\User;
+use EryseClient\Server\User\Entity\UserEntity;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
@@ -13,7 +13,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Class RegistrationForm
- * @package EryseClient\Form
+ *
  */
 class RegistrationType extends AbstractType
 {
@@ -65,7 +65,7 @@ class RegistrationType extends AbstractType
     {
         $resolver->setDefaults(
             [
-                'data_class' => User::class,
+                'data_class' => UserEntity::class,
             ]
         );
     }

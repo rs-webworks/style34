@@ -7,7 +7,7 @@ use DateTime;
 use EryseClient\Client\Token\Entity\Token;
 use EryseClient\Client\Token\Entity\TokenType;
 use EryseClient\Server\Token\Service\TokenService;
-use EryseClient\Server\User\Entity\User;
+use EryseClient\Server\User\Entity\UserEntity;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
@@ -42,7 +42,7 @@ class TokenServiceTest extends WebTestCase
         $tokenHashes = [];
 
         for ($i = 0; $i <= 10; $i++) {
-            $user = new User();
+            $user = new UserEntity();
             $user->setId(1);
             $token = $this->tokenService->getActivationToken($user);
 

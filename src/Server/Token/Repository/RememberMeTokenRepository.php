@@ -3,13 +3,13 @@
 namespace EryseClient\Server\Token\Repository;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
-use EryseClient\Server\Token\Entity\RememberMeToken;
+use EryseClient\Server\Token\Entity\RememberMeTokenEntity;
 use EryseClient\Common\Repository\AbstractRepository;
-use EryseClient\Server\User\Entity\User;
+use EryseClient\Server\User\Entity\UserEntity;
 
 /**
  * Class RememberMeTokenRepository
- * @method RememberMeToken|null findOneBy(array $criteria, array $orderBy = null)
+ * @method RememberMeTokenEntity|null findOneBy(array $criteria, array $orderBy = null)
  */
 class RememberMeTokenRepository extends AbstractRepository
 {
@@ -19,14 +19,15 @@ class RememberMeTokenRepository extends AbstractRepository
      */
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, RememberMeToken::class);
+        parent::__construct($registry, RememberMeTokenEntity::class);
     }
 
     /**
-     * @param User $user
-     * @return RememberMeToken
+     * @param UserEntity $user
+     *
+     * @return RememberMeTokenEntity
      */
-    public function findByUser(User $user): RememberMeToken
+    public function findByUser(UserEntity $user): RememberMeTokenEntity
     {
         return $this->findOneBy(["username" => $user->getUsername()]);
     }

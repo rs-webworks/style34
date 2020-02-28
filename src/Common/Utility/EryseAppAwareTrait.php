@@ -7,7 +7,7 @@ use EryseClient\Client\Application\Service\Application;
 /**
  * Trait EryseAppAwareTrait
  *
- * @package EryseClient\Common\Utility
+ *
  */
 trait EryseAppAwareTrait
 {

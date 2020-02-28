@@ -6,7 +6,7 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
 /**
  * Class ProfileVoter
- * @package EryseClient\Client\Profile\Voter
+ *
  */
 abstract class ProfileVoter extends Voter
 {

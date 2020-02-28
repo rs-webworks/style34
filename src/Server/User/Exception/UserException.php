@@ -7,7 +7,7 @@ use Throwable;
 
 /**
  * Class ProfileException
- * @package EryseClient\Exception\Profile
+ *
  */
 class UserException extends Exception implements Throwable
 {

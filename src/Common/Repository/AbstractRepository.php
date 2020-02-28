@@ -8,7 +8,7 @@ use Doctrine\ORM\ORMException;
 
 /**
  * Class AbstractRepository
- * @package EryseClient\Repository
+ *
  */
 abstract class AbstractRepository extends ServiceEntityRepository
 {

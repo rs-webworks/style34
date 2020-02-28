@@ -16,7 +16,7 @@ use Symfony\Component\Routing\RouteCollectionBuilder;
 
 /**
  * Class Kernel
- * @package EryseClient
+ *
  */
 class Kernel extends BaseKernel
 {

@@ -27,12 +27,12 @@
                         {% if not searchForm.vars.submitted %}
                             {% if displayHidden %}
                                 <a href="{{ url("administration-profiles-list") }}">
-                                    <i class="fa fa-fw fa-user-check"></i>
+                                    <i class="fa fa-fw fa-eye-slash"></i>
                                     {% trans from 'administration' %}profile.list.hide-hidden{% endtrans %}
                                 </a>
                             {% else %}
                                 <a href="{{ url("administration-profiles-list", {"displayHidden": true}) }}">
-                                    <i class="fa fa-fw fa-user-check"></i>
+                                    <i class="fa fa-fw fa-eye"></i>
                                     {% trans from 'administration' %}profile.list.display-hidden{% endtrans %}
                                 </a>
                             {% endif %}

@@ -7,24 +7,22 @@ use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
-use EryseClient\Client\Profile\Entity\Profile;
-use EryseClient\Client\Profile\Repository\ProfileRepository;
-use EryseClient\Client\ProfileSettings\Entity\ProfileSettings;
-use EryseClient\Client\ProfileSettings\Repository\ProfileSettingsRepository;
+use EryseClient\Client\Profile\Settings\Entity\SettingsEntity as ProfileSettingsEntity;
+use EryseClient\Client\Profile\Settings\Repository\SettingsRepository as ProfileSettingsRepository;
 use EryseClient\Common\Repository\AbstractRepository;
-use EryseClient\Server\GoogleAuth\Entity\GoogleAuth;
-use EryseClient\Server\User\Entity\User;
-use EryseClient\Server\UserSettings\Entity\UserSettings;
-use EryseClient\Server\UserSettings\Repository\UserSettingsRepository;
+use EryseClient\Server\GoogleAuth\Entity\GoogleAuthEntity;
+use EryseClient\Server\User\Entity\UserEntity;
+use EryseClient\Server\User\Settings\Entity\SettingsEntity as UserSettingsEntity;
+use EryseClient\Server\User\Settings\Repository\SettingsRepository as UserSettingsRepository;
 use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Class UserRepository
  *
- * @package EryseClient\Repository\Server\User
- * @method User|null findOneBy(array $criteria, array $orderBy = null)
- * @method User|null find($id, $lockMode = null, $lockVersion = null)
+ *
+ * @method UserEntity|null findOneBy(array $criteria, array $orderBy = null)
+ * @method UserEntity|null find($id, $lockMode = null, $lockVersion = null)
  */
 class UserRepository extends AbstractRepository implements UserLoaderInterface
 {
@@ -48,22 +46,22 @@ class UserRepository extends AbstractRepository implements UserLoaderInterface
         UserSettingsRepository $serverSettingsRepository,
         ProfileSettingsRepository $clientSettingsRepository
     ) {
-        parent::__construct($registry, User::class);
+        parent::__construct($registry, UserEntity::class);
         $this->serverSettingsRepository = $serverSettingsRepository;
         $this->clientSettingsRepository = $clientSettingsRepository;
     }
 
     /**
-     * @param User $user
+     * @param UserEntity $user
      *
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function saveNew(User $user): void
+    public function saveNew(UserEntity $user): void
     {
         $this->save($user);
-        $this->serverSettingsRepository->save(new UserSettings($user));
-        $this->clientSettingsRepository->save(new ProfileSettings($user));
+        $this->serverSettingsRepository->save(new UserSettingsEntity($user));
+        $this->clientSettingsRepository->save(new ProfileSettingsEntity($user));
     }
 
     /**
@@ -91,9 +89,9 @@ class UserRepository extends AbstractRepository implements UserLoaderInterface
     /**
      * @param string $username
      *
-     * @return User
+     * @return UserEntity
      */
-    public function findOneByUsername(string $username): User
+    public function findOneByUsername(string $username): UserEntity
     {
         return $this->findOneBy(["username" => $username]);
     }
@@ -131,14 +129,14 @@ class UserRepository extends AbstractRepository implements UserLoaderInterface
     }
 
     /**
-     * @param User $user
+     * @param UserEntity $user
      *
-     * @return GoogleAuth|null
+     * @return GoogleAuthEntity|null
      */
-    public function getGoogleAuthEntity(User $user): ?GoogleAuth
+    public function getGoogleAuthEntity(UserEntity $user): ?GoogleAuthEntity
     {
         $settings = $this->serverSettingsRepository->findByUser($user);
 
-        return new GoogleAuth($user, $settings);
+        return new GoogleAuthEntity($user, $settings);
     }
 }

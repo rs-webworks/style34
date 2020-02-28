@@ -4,7 +4,7 @@ namespace EryseClient\Common\Service;
 
 /**
  * Class AbstractService
- * @package EryseClient\Service
+ *
  */
 abstract class AbstractService
 {

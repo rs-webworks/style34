@@ -5,7 +5,7 @@ namespace EryseClient\Common\Breadcrumb\Entity;
 /**
  * Class Breadcrumb
  *
- * @package EryseClient\Common\Breadcrumb\Entity
+ *
  */
 class BreadcrumbItem
 {

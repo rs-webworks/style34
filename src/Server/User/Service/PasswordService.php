@@ -2,19 +2,19 @@
 
 namespace EryseClient\Server\User\Service;
 
-use EryseClient\Server\Token\Entity\Token;
+use EryseClient\Server\Token\Entity\TokenEntity;
 use EryseClient\Common\Service\AbstractService;
 use EryseClient\Common\Utility\TranslatorAwareTrait;
 use EryseClient\Server\Token\Exception\ExpiredTokenException;
 use EryseClient\Server\Token\Exception\InvalidTokenException;
 use EryseClient\Server\Token\Service\TokenService;
-use EryseClient\Server\User\Entity\User;
+use EryseClient\Server\User\Entity\UserEntity;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
  * Class PasswordService
  *
- * @package EryseClient\Server\User\Service
+ *
  */
 class PasswordService extends AbstractService
 {
@@ -39,26 +39,26 @@ class PasswordService extends AbstractService
     }
 
     /**
-     * @param User $user
+     * @param UserEntity $user
      * @param string $password
      *
      * @return string
      */
-    public function encodePassword(User $user, string $password): string
+    public function encodePassword(UserEntity $user, string $password): string
     {
         return $this->passwordEncoder->encodePassword($user, $password);
     }
 
     /**
      * @param string $newPassword
-     * @param User $user
-     * @param Token|null $token
+     * @param UserEntity $user
+     * @param TokenEntity|null $token
      *
-     * @return User|null
+     * @return UserEntity|null
      * @throws ExpiredTokenException
      * @throws InvalidTokenException
      */
-    public function updatePassword(string $newPassword, User $user, Token $token = null): ?User
+    public function updatePassword(string $newPassword, UserEntity $user, TokenEntity $token = null): ?UserEntity
     {
         if ($token) {
             if ($this->tokenService->isExpired($token)) {

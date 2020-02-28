@@ -2,7 +2,7 @@
 
 namespace EryseClient\Client\Profile\Controller;
 
-use EryseClient\Client\Profile\Dto\ProfileDetail;
+use EryseClient\Client\Profile\Dto\ProfileDetailDto;
 use EryseClient\Client\Profile\Repository\ProfileRepository;
 use EryseClient\Client\Profile\Service\ProfileService;
 use EryseClient\Common\Utility\EryseUserAwareTrait;
@@ -15,7 +15,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 /**
  * Class UserController
  *
- * @package EryseClient\Controller\Profile
+ *
  */
 class ProfileController extends AbstractController
 {
@@ -24,7 +24,7 @@ class ProfileController extends AbstractController
     use EryseUserAwareTrait;
 
     /**
-     * @IsGranted(EryseClient\Server\UserRole\Entity\UserRole::USER)
+     * @IsGranted(EryseClient\Server\User\Role\Entity\RoleEntity::USER)
      * @Route("/profile/view/{username}", name="profile-view")
      * @param ProfileRepository $profileRepository
      * @param ProfileService $profileService
@@ -45,10 +45,9 @@ class ProfileController extends AbstractController
             throw $this->createNotFoundException();
         }
 
-        $detail = new ProfileDetail();
-        $detail
-            ->setProfile($profile)
-            ->setOwnProfile($ownProfile);
+        $detail = new ProfileDetailDto();
+        $detail->profile = $profile;
+        $detail->ownProfile = $ownProfile;
 
         return $this->render("Profile/view.html.twig", [
             "detail" => $detail,

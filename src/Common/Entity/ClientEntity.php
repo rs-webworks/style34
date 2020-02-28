@@ -4,9 +4,9 @@ namespace EryseClient\Common\Entity;
 
 /**
  * Interface ClientEntity
- * @package EryseClient\Common\Entity
+ *
  */
-interface ClientEntity extends OrmEntity
+interface ClientEntity extends Entity
 {
 
 }

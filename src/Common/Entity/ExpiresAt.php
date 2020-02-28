@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Trait ExpiresAt
- * @package EryseClient\Entity
+ *
  */
 trait ExpiresAt
 {

@@ -4,7 +4,7 @@ namespace EryseClient\Common\Controller;
 
 /**
  * Class ControllerSettings
- * @package EryseClient\Controller
+ *
  */
 interface ControllerSettings
 {

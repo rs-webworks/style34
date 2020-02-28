@@ -11,7 +11,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * Class UserDataCollector
  *
- * @package EryseClient\Server\User\DataCollector
+ *
  */
 class EryseDataCollector extends DataCollector
 {

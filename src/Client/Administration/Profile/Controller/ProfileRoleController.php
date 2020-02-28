@@ -3,7 +3,7 @@
 namespace EryseClient\Client\Administration\Profile\Controller;
 
 use EryseClient\Client\Profile\Repository\ProfileRepository;
-use EryseClient\Client\ProfileRole\Repository\ProfileRoleRepository;
+use EryseClient\Client\Profile\Role\Repository\RoleRepository;
 use EryseClient\Common\Controller\ControllerSettings;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,18 +14,18 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * Class RoleController
  *
- * @package EryseClient\Controller\Administration\User
+ *
  */
 class ProfileRoleController extends AbstractController
 {
 
     /**
      * @Route("/administration/profile/roles",name="administration-profile-role-list")
-     * @param ProfileRoleRepository $roleRepository
+     * @param RoleRepository $roleRepository
      *
      * @return Response
      */
-    public function list(ProfileRoleRepository $roleRepository)
+    public function list(RoleRepository $roleRepository)
     {
         $roles = $roleRepository->findAll();
         return $this->render('Administration/Profile/Role/list.html.twig', ["roles" => $roles]);
@@ -35,7 +35,7 @@ class ProfileRoleController extends AbstractController
      * @Route("/administration/profile/roles/profiles/{role}", name="administration-profile-role-users")
      * @param string $role
      * @param Request $request
-     * @param ProfileRoleRepository $roleRepository
+     * @param RoleRepository $roleRepository
      * @param ProfileRepository $profileRepository
      * @param PaginatorInterface $paginator
      *
@@ -44,7 +44,7 @@ class ProfileRoleController extends AbstractController
     public function roleUsers(
         string $role,
         Request $request,
-        ProfileRoleRepository $roleRepository,
+        RoleRepository $roleRepository,
         ProfileRepository $profileRepository,
         PaginatorInterface $paginator
     ) {

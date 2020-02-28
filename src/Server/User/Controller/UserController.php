@@ -4,13 +4,13 @@ namespace EryseClient\Server\User\Controller;
 
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
-use EryseClient\Client\ProfileSettings\Form\Type\SettingsType;
+use EryseClient\Client\Profile\Settings\Form\Type\SettingsType;
+use EryseClient\Common\Utility\LoggerAwareTrait;
 use EryseClient\Common\Utility\TranslatorAwareTrait;
-use EryseClient\Server\User\Entity\User;
+use EryseClient\Server\User\Entity\UserEntity;
 use EryseClient\Server\User\Repository\UserRepository;
 use EryseClient\Server\User\Service\UserService;
-use EryseClient\Server\UserSettings\Repository\UserSettingsRepository;
-use EryseClient\Common\Utility\LoggerAwareTrait;
+use EryseClient\Server\User\Settings\Repository\SettingsRepository;
 use Scheb\TwoFactorBundle\Security\TwoFactor\Provider\Google\GoogleAuthenticatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -24,8 +24,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * Class UserController
  *
- * @package EryseClient\Controller\User
- * @IsGranted(EryseClient\Server\UserRole\Entity\UserRole::INACTIVE)
+ *
+ * @IsGranted(EryseClient\Server\User\Role\Entity\RoleEntity::INACTIVE)
  */
 class UserController extends AbstractController
 {
@@ -68,13 +68,13 @@ class UserController extends AbstractController
     /**
      * @Route("/user/settings", name="user-settings")
      * @param Request $request
-     * @param UserSettingsRepository $serverSettingsRepository
+     * @param SettingsRepository $serverSettingsRepository
      *
      * @return Response
      */
-    public function settings(Request $request, UserSettingsRepository $serverSettingsRepository)
+    public function settings(Request $request, SettingsRepository $serverSettingsRepository)
     {
-        /** @var User $user */
+        /** @var UserEntity $user */
         $user = $this->getUser();
 
         $form = $this->createForm(SettingsType::class);
@@ -101,7 +101,7 @@ class UserController extends AbstractController
      * @param Request $request
      * @param UserService $userService
      * @param UserRepository $userRepository
-     * @param UserSettingsRepository $serverSettingsRepository
+     * @param SettingsRepository $serverSettingsRepository
      *
      * @return Response
      * @throws ORMException
@@ -113,7 +113,7 @@ class UserController extends AbstractController
         Request $request,
         UserService $userService,
         UserRepository $userRepository,
-        UserSettingsRepository $serverSettingsRepository
+        SettingsRepository $serverSettingsRepository
     ) {
         $user = $this->getUser();
         $gAuthEntity = $userRepository->getGoogleAuthEntity($user);
@@ -149,7 +149,7 @@ class UserController extends AbstractController
     /**
      * @Route("/user/settings/disableTwoStepAuth", name="user-settings-disable-two-step-auth")
      * @param UserService $userService
-     * @param UserInterface|User $user
+     * @param UserInterface|UserEntity $user
      *
      * @return RedirectResponse
      * @throws ORMException
@@ -168,7 +168,7 @@ class UserController extends AbstractController
     /**
      * @Route("/user/settings/forgetDevices", name="user-settings-forget-devices")
      * @param UserService $userService
-     * @param UserInterface|User $user
+     * @param UserInterface|UserEntity $user
      *
      * @return RedirectResponse
      * @throws ORMException
@@ -185,7 +185,7 @@ class UserController extends AbstractController
     /**
      * @Route("/user/settings/logoutEverywhere", name="user-settings-logout-everywhere")
      * @param UserService $userService
-     * @param UserInterface|User $user
+     * @param UserInterface|UserEntity $user
      *
      * @return RedirectResponse
      * @throws ORMException

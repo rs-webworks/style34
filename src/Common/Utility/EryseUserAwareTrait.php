@@ -2,19 +2,19 @@
 
 namespace EryseClient\Common\Utility;
 
-use EryseClient\Server\User\Entity\User;
+use EryseClient\Server\User\Entity\UserEntity;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Security;
 
 /**
  * Trait UserAwareTrait
  *
- * @package EryseClient\Common\Utility
+ *
  */
 trait EryseUserAwareTrait
 {
 
-    /** @var User $user */
+    /** @var UserEntity $user */
     protected $user;
 
     /**
@@ -30,9 +30,9 @@ trait EryseUserAwareTrait
             return;
         }
 
-        if (!$user instanceof User) {
+        if (!$user instanceof UserEntity) {
             throw new UnsupportedUserException(
-                "App relies on " . User::class . " but got " . get_class($user) . " instead."
+                "App relies on " . UserEntity::class . " but got " . get_class($user) . " instead."
             );
         }
 

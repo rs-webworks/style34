@@ -9,14 +9,8 @@
             "email": "raito.akehanareru@gmail.com"
         }
     ],
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/raitocz/Tracy-Blue-Screen-Bundle"
-        }
-    ],
     "require": {
-        "php": "^7.3.0",
+        "php": "^7.4.0",
         "ext-ctype": "*",
         "ext-curl": "*",
         "ext-iconv": "*",

@@ -7,9 +7,7 @@ use EryseClient\Common\Utility\LoggerAwareTrait;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
- * Class ApplicationController
- *
- * @package EryseClient\Controller\Administration\Application
+ * Class ClientController
  */
 class ClientController extends AbstractController
 {

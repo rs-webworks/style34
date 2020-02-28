@@ -10,7 +10,7 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 /**
  * Class KernelRequestListener
- * @package EryseClient\EventListener
+ *
  */
 class KernelRequestListener
 {

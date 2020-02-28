@@ -2,9 +2,9 @@
 
 namespace EryseClient\Server\User\Form\Type;
 
-use EryseClient\Client\ProfileRole\Repository\ProfileRoleRepository;
-use EryseClient\Entity\Client\User\Role;
-use EryseClient\Server\User\Entity\User;
+use EryseClient\Client\Profile\Role\Repository\RoleRepository;
+use EryseClient\Server\User\Role\Entity\RoleEntity;
+use EryseClient\Server\User\Entity\UserEntity;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
@@ -15,19 +15,20 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Class UserForm
- * @package EryseClient\Form\User
+ *
  */
 class UserType extends AbstractType
 {
 
-    /** @var ProfileRoleRepository */
+    /** @var RoleRepository */
     private $roleRepository;
 
     /**
      * UserForm constructor.
-     * @param ProfileRoleRepository $roleRepository
+     *
+     * @param RoleRepository $roleRepository
      */
-    public function __construct(ProfileRoleRepository $roleRepository)
+    public function __construct(RoleRepository $roleRepository)
     {
         $this->roleRepository = $roleRepository;
     }
@@ -88,7 +89,7 @@ class UserType extends AbstractType
             EntityType::class,
             [
                 "label" => "user-role",
-                "class" => Role::class,
+                "class" => RoleEntity::class,
                 "choice_label" => "name",
                 "choice_name" => "name",
                 "choice_value" => "name",
@@ -105,7 +106,7 @@ class UserType extends AbstractType
     {
         $resolver->setDefaults(
             [
-                'data_class' => User::class,
+                'data_class' => UserEntity::class,
             ]
         );
     }

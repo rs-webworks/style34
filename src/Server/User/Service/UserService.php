@@ -4,21 +4,21 @@ namespace EryseClient\Server\User\Service;
 
 use DateTime;
 use EryseClient\Client\Profile\Repository\ProfileRepository;
-use EryseClient\Server\Token\Entity\Token;
-use EryseClient\Server\Token\Entity\TokenType;
 use EryseClient\Common\Service\AbstractService;
 use EryseClient\Common\Utility\LoggerAwareTrait;
 use EryseClient\Common\Utility\TranslatorAwareTrait;
+use EryseClient\Server\Token\Entity\TokenEntity;
 use EryseClient\Server\Token\Exception\ExpiredTokenException;
 use EryseClient\Server\Token\Exception\InvalidTokenException;
 use EryseClient\Server\Token\Repository\RememberMeTokenRepository;
 use EryseClient\Server\Token\Repository\TokenRepository;
-use EryseClient\Server\Token\Repository\TokenTypeRepository;
 use EryseClient\Server\Token\Service\TokenService;
-use EryseClient\Server\User\Entity\User;
+use EryseClient\Server\Token\Type\Entity\TypeEntity;
+use EryseClient\Server\Token\Type\Repository\TypeRepository;
+use EryseClient\Server\User\Entity\UserEntity;
 use EryseClient\Server\User\Exception\ActivationException;
 use EryseClient\Server\User\Repository\UserRepository;
-use EryseClient\Server\UserRole\Entity\UserRole;
+use EryseClient\Server\User\Role\Entity\RoleEntity as UserRole;
 use Exception;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -26,7 +26,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * Class UserService
  *
- * @package EryseClient\Service
+ *
  */
 class UserService extends AbstractService
 {
@@ -36,7 +36,7 @@ class UserService extends AbstractService
     /** @var UserRepository */
     protected $userRepository;
 
-    /** @var TokenTypeRepository $tokenTypeRepository */
+    /** @var TypeRepository $tokenTypeRepository */
     private $tokenTypeRepository;
 
     /** @var TokenRepository $tokenRepository */
@@ -60,7 +60,7 @@ class UserService extends AbstractService
     /**
      * UserService constructor.
      *
-     * @param TokenTypeRepository $tokenTypeRepository
+     * @param TypeRepository $tokenTypeRepository
      * @param TokenRepository $tokenRepository
      * @param UserRepository $userRepository
      * @param RememberMeTokenRepository $rememberMeTokenRepository
@@ -70,7 +70,7 @@ class UserService extends AbstractService
      * @param PasswordService $passwordService
      */
     public function __construct(
-        TokenTypeRepository $tokenTypeRepository,
+        TypeRepository $tokenTypeRepository,
         TokenRepository $tokenRepository,
         UserRepository $userRepository,
         RememberMeTokenRepository $rememberMeTokenRepository,
@@ -90,13 +90,13 @@ class UserService extends AbstractService
     }
 
     /**
-     * @param User $user
+     * @param UserEntity $user
      * @param string $lastIp
      *
-     * @return User
+     * @return UserEntity
      * @throws Exception
      */
-    public function prepareNewUser(User $user, string $lastIp = '127.0.0.1'): User
+    public function prepareNewUser(UserEntity $user, string $lastIp = '127.0.0.1'): UserEntity
     {
         // Get default user role
         $user->setRole(UserRole::INACTIVE);
@@ -114,15 +114,15 @@ class UserService extends AbstractService
     }
 
     /**
-     * @param User $user
-     * @param Token|null $token
+     * @param UserEntity $user
+     * @param TokenEntity|null $token
      *
-     * @return User|null
+     * @return UserEntity|null
      * @throws ActivationException
      * @throws ExpiredTokenException
      * @throws InvalidTokenException
      */
-    public function activateUser(User $user, Token $token = null): ?User
+    public function activateUser(UserEntity $user, TokenEntity $token = null): ?UserEntity
     {
         if ($token) {
             if ($this->tokenService->isExpired($token)) {
@@ -160,10 +160,10 @@ class UserService extends AbstractService
         try {
             $users = [];
 
-            /** @var TokenType $tokenType */
+            /** @var TypeEntity $tokenType */
             $tokenType = $this->tokenTypeRepository->findOneBy(
                 [
-                    'name' => TokenType::USER['ACTIVATION'],
+                    'name' => TypeEntity::USER['ACTIVATION'],
                 ]
             );
 
@@ -182,11 +182,11 @@ class UserService extends AbstractService
     }
 
     /**
-     * @param User $user
+     * @param UserEntity $user
      *
      * @return bool
      */
-    public function hasRememberMeToken(User $user): bool
+    public function hasRememberMeToken(UserEntity $user): bool
     {
         $token = $this->rememberMeTokenRepository->findByUser($user);
 
@@ -195,11 +195,11 @@ class UserService extends AbstractService
 
 
     /**
-     * @param User $user
+     * @param UserEntity $user
      *
      * @return UserInterface
      */
-    public function initUser(User $user): UserInterface
+    public function initUser(UserEntity $user): UserInterface
     {
         $profile = $this->profileRepository->findOneByUserId($user->getId());
         $profile->setUser($user);

@@ -4,16 +4,17 @@ namespace EryseClient\Server\User\Entity;
 
 /**
  * Trait FindByUserTrait
- * @package EryseClient\Utility
+ *
  */
 trait FindByUserTrait
 {
 
     /**
-     * @param User $user
+     * @param UserEntity $user
+     *
      * @return mixed
      */
-    public function findByUser(User $user)
+    public function findByUser(UserEntity $user)
     {
         return $this->findOneBy(["userId" => $user->getId()]);
     }
