@@ -4,7 +4,7 @@ namespace EryseClient\Client\Profile\Form\Type;
 
 use EryseClient\Client\Profile\Entity\ProfileEntity;
 use EryseClient\Client\Profile\Role\Entity\RoleEntity;
-use EryseClient\Client\Profile\Validator\EditProfileValidator;
+use EryseClient\Client\Profile\Validator\ProfileValidator;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -40,7 +40,7 @@ class EditProfileType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver) : void
     {
-        $resolver->setDefaults(['data_class' => EditProfileValidator::class]);
+        $resolver->setDefaults(['data_class' => ProfileValidator::class]);
     }
 
 }

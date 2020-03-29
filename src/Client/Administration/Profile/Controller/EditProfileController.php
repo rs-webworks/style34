@@ -10,7 +10,7 @@ use EryseClient\Client\Profile\Exception\ProfileNotFoundException;
 use EryseClient\Client\Profile\Facade\EditProfileFacade;
 use EryseClient\Client\Profile\Form\Type\EditProfileType;
 use EryseClient\Client\Profile\Repository\ProfileRepository;
-use EryseClient\Client\Profile\Validator\EditProfileValidator;
+use EryseClient\Client\Profile\Validator\ProfileValidator;
 use EryseClient\Common\Entity\FlashType;
 use EryseClient\Server\User\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -59,7 +59,7 @@ class EditProfileController extends AbstractAdminController
 
         $profile->setUser($userRepository->find($profile->getUserId()));
 
-        $editProfileValidator = EditProfileValidator::fromProfile($profile);
+        $editProfileValidator = ProfileValidator::fromProfile($profile);
         $profileForm = $this->createForm(EditProfileType::class, $editProfileValidator);
         $profileForm->handleRequest($request);
 

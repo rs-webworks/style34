@@ -3,6 +3,7 @@
 namespace EryseClient\Server\User\Form\Type;
 
 use EryseClient\Server\User\Entity\UserEntity;
+use EryseClient\Server\User\Validator\UserValidator;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
@@ -65,7 +66,7 @@ class RegistrationType extends AbstractType
     {
         $resolver->setDefaults(
             [
-                'data_class' => UserEntity::class,
+                'data_class' => UserValidator::class,
             ]
         );
     }

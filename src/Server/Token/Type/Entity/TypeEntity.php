@@ -2,6 +2,7 @@
 
 namespace EryseClient\Server\Token\Type\Entity;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use EryseClient\Common\Entity\ClientEntity;
 use EryseClient\Common\Entity\MasterData;
@@ -23,8 +24,8 @@ class TypeEntity implements ClientEntity
     use MasterData;
 
     /**
-     * @var TokenInterface[] $tokens
+     * @var TokenInterface[]|Collection $tokens
      * @ORM\OneToMany(targetEntity="EryseClient\Server\Token\Entity\TokenEntity", mappedBy="type")
      */
-    protected array $tokens;
+    protected Collection $tokens;
 }

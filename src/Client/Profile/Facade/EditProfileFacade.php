@@ -6,7 +6,7 @@ use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use EryseClient\Client\Profile\Entity\ProfileEntity;
 use EryseClient\Client\Profile\Repository\ProfileRepository;
-use EryseClient\Client\Profile\Validator\EditProfileValidator;
+use EryseClient\Client\Profile\Validator\ProfileValidator;
 
 /**
  * Class EditProfileFacade
@@ -29,13 +29,13 @@ class EditProfileFacade
     }
 
     /**
-     * @param EditProfileValidator $validator
+     * @param ProfileValidator $validator
      * @param ProfileEntity $profileEntity
      *
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function updateProfile(EditProfileValidator $validator, ProfileEntity $profileEntity) : void
+    public function updateProfile(ProfileValidator $validator, ProfileEntity $profileEntity) : void
     {
         $profileEntity->setRole($validator->role);
         $this->profileRepository->save($profileEntity);

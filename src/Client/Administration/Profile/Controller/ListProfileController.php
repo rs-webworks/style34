@@ -12,7 +12,7 @@ use EryseClient\Client\Profile\Facade\ListProfileFacade;
 use EryseClient\Client\Profile\Form\Type\ProfileSearchType;
 use EryseClient\Client\Profile\Form\Type\EditProfileType;
 use EryseClient\Client\Profile\Repository\ProfileRepository;
-use EryseClient\Client\Profile\Validator\EditProfileValidator;
+use EryseClient\Client\Profile\Validator\ProfileValidator;
 use EryseClient\Common\Entity\FlashType;
 use EryseClient\Server\User\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Request;

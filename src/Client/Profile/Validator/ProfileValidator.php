@@ -8,7 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Class EditProfileValidator
  */
-class EditProfileValidator
+class ProfileValidator
 {
     /**
      * @Assert\Type(type="EryseClient\Client\Profile\Role\Entity\RoleEntity")
@@ -18,9 +18,9 @@ class EditProfileValidator
     /**
      * @param ProfileEntity $profileEntity
      *
-     * @return EditProfileValidator
+     * @return ProfileValidator
      */
-    public static function fromProfile(ProfileEntity $profileEntity) : EditProfileValidator
+    public static function fromProfile(ProfileEntity $profileEntity) : ProfileValidator
     {
         $validator = new self();
         $validator->role = $profileEntity->getRole();
