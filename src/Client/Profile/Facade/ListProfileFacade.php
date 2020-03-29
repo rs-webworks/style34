@@ -15,7 +15,7 @@ use Symfony\Component\Form\FormInterface;
  *
  *
  */
-class ProfileFacade
+class ListProfileFacade
 {
     /** @var ProfileRepository */
     protected ProfileRepository $profileRepository;

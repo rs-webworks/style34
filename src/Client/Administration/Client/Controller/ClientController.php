@@ -2,16 +2,15 @@
 
 namespace EryseClient\Client\Administration\Client\Controller;
 
-use EryseClient\Common\Utility\TranslatorAwareTrait;
+use EryseClient\Client\Administration\Controller\AbstractAdminController;
 use EryseClient\Common\Utility\LoggerAwareTrait;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use EryseClient\Common\Utility\TranslatorAwareTrait;
 
 /**
  * Class ClientController
  */
-class ClientController extends AbstractController
+class ClientController extends AbstractAdminController
 {
     use TranslatorAwareTrait;
     use LoggerAwareTrait;
-
 }

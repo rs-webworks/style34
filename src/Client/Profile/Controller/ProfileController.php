@@ -8,10 +8,11 @@ use EryseClient\Client\Profile\Service\ProfileService;
 use EryseClient\Common\Utility\EryseUserAwareTrait;
 use EryseClient\Common\Utility\LoggerAwareTrait;
 use EryseClient\Common\Utility\TranslatorAwareTrait;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+
 /**
  * Class UserController
  *
@@ -32,8 +33,11 @@ class ProfileController extends AbstractController
      *
      * @return Response
      */
-    public function view(ProfileRepository $profileRepository, ProfileService $profileService, string $username) : Response
-    {
+    public function view(
+        ProfileRepository $profileRepository,
+        ProfileService $profileService,
+        string $username
+    ) : Response {
         $profile = $profileRepository->findOneByUsername($username);
         $ownProfile = false;
 
@@ -50,9 +54,11 @@ class ProfileController extends AbstractController
         $detail->ownProfile = $ownProfile;
 
         return $this->render(
-            'Profile/view.html.twig', [
-            'detail' => $detail,
-        ]);
+            'Profile/view.html.twig',
+            [
+                'detail' => $detail,
+            ]
+        );
     }
 
     /**

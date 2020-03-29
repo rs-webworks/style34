@@ -13,22 +13,22 @@ trait DeletedAt
 {
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     * @var DateTime
+     * @var DateTime|null
      */
-    private DateTime $deletedAt;
+    private ?DateTime $deletedAt;
 
     /**
      * @return DateTime
      */
-    public function getDeletedAt(): ?DateTime
+    public function getDeletedAt() : ?DateTime
     {
         return $this->deletedAt;
     }
 
     /**
-     * @param DateTime $deletedAt
+     * @param DateTime|null $deletedAt
      */
-    public function setDeletedAt(DateTime $deletedAt): void
+    public function setDeletedAt(?DateTime $deletedAt) : void
     {
         $this->deletedAt = $deletedAt;
     }

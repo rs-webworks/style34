@@ -3,6 +3,7 @@
 namespace EryseClient\Server\User\Entity;
 
 use DateTime;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use EryseClient\Client\Profile\Entity\ProfileEntity;
 use EryseClient\Common\Entity\CreatedAt;
@@ -10,6 +11,7 @@ use EryseClient\Common\Entity\DeletedAt;
 use EryseClient\Common\Entity\ServerEntity;
 use EryseClient\Server\User\Device\Entity\DeviceEntity;
 use EryseClient\Server\User\Role\Entity\RoleEntity;
+use Ramsey\Uuid\Uuid;
 use Scheb\TwoFactorBundle\Model\TrustedDeviceInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -30,11 +32,10 @@ class UserEntity implements UserInterface, TrustedDeviceInterface, ServerEntity
 
     /**
      * @ORM\Id
-     * @ORM\Column(type="integer", nullable=false)
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     * @var integer
+     * @ORM\Column(type="string", nullable=false)
+     * @var string
      */
-    protected int $id;
+    protected string $id;
 
     /**
      * @ORM\Column(type="string", unique=true)
@@ -72,10 +73,10 @@ class UserEntity implements UserInterface, TrustedDeviceInterface, ServerEntity
     protected string $plainPassword;
 
     /**
-     * @var DateTime $activatedAt
+     * @var DateTime|null $activatedAt
      * @ORM\Column(type="datetime", nullable=true)
      */
-    protected DateTime $activatedAt;
+    protected ? DateTime $activatedAt;
 
     /**
      * @var string
@@ -108,14 +109,14 @@ class UserEntity implements UserInterface, TrustedDeviceInterface, ServerEntity
     protected int $trustedTokenVersion;
 
     /**
-     * @var DeviceEntity[]
+     * @var DeviceEntity[]|Collection
      * @ORM\OneToMany(
      *     targetEntity="EryseClient\Server\User\Device\Entity\DeviceEntity",
      *     mappedBy="user",
      *     cascade={"persist"}
      * )
      */
-    protected array $devices;
+    protected ? Collection $devices;
 
     /**
      * @var ProfileEntity|null
@@ -123,10 +124,34 @@ class UserEntity implements UserInterface, TrustedDeviceInterface, ServerEntity
     protected ? ProfileEntity $profile;
 
     /**
+     * @ORM\Column(type="string", nullable=true)
+     * @Assert\NotNull(message="profile.state-required")
+     */
+    protected ? string $state;
+
+    /**
+     * @ORM\Column(nullable=true, type="string")
+     */
+    protected ? string $city;
+
+    /**
+     * @var DateTime $birthdate
+     * @ORM\Column(nullable=true, type="datetime")
+     */
+    protected ? DateTime $birthdate;
+
+    /**
+     * @var string|null
+     * @ORM\Column(nullable=true, type="string")
+     */
+    protected ? string $occupation;
+
+    /**
      * User constructor.
      */
     public function __construct()
     {
+        $this->setId(Uuid::uuid4()->toString());
         $this->setRole(RoleEntity::INACTIVE);
         $this->trustedTokenVersion = 0;
     }
@@ -142,17 +167,17 @@ class UserEntity implements UserInterface, TrustedDeviceInterface, ServerEntity
     // ID
     // -----------------------------------------------------------------------------------------------------------------
     /**
-     * @return int
+     * @return string
      */
-    final public function getId() : int
+    final public function getId() : string
     {
         return $this->id;
     }
 
     /**
-     * @param int $id
+     * @param string $id
      */
-    public function setId(int $id) : void
+    public function setId(string $id) : void
     {
         $this->id = $id;
     }
@@ -251,9 +276,9 @@ class UserEntity implements UserInterface, TrustedDeviceInterface, ServerEntity
     }
 
     /**
-     * @param DateTime $activatedAt
+     * @param DateTime|null $activatedAt
      */
-    public function setActivatedAt(DateTime $activatedAt) : void
+    public function setActivatedAt(?DateTime $activatedAt) : void
     {
         $this->activatedAt = $activatedAt;
     }
@@ -399,5 +424,78 @@ class UserEntity implements UserInterface, TrustedDeviceInterface, ServerEntity
     public function setProfile(ProfileEntity $profile) : void
     {
         $this->profile = $profile;
+    }
+
+    // Birthdate
+    // -----------------------------------------------------------------------------------------------------------------
+    /**
+     * @return DateTime
+     */
+    public function getBirthdate() : DateTime
+    {
+        return $this->birthdate;
+    }
+
+    /**
+     * @param DateTime $birthdate
+     */
+    public function setBirthdate(DateTime $birthdate) : void
+    {
+        $this->birthdate = $birthdate;
+    }
+
+    // State
+    // -----------------------------------------------------------------------------------------------------------------
+    /**
+     * @return string|null
+     */
+    public function getState() : ?string
+    {
+        return $this->state;
+    }
+
+    /**
+     * @param string $state
+     */
+    public function setState(string $state) : void
+    {
+        $this->state = $state;
+    }
+
+
+    // City
+    // -----------------------------------------------------------------------------------------------------------------
+    /**
+     * @return mixed
+     */
+    public function getCity()
+    {
+        return $this->city;
+    }
+
+    /**
+     * @param $city
+     */
+    public function setCity($city) : void
+    {
+        $this->city = $city;
+    }
+
+    // Occupation
+    // -----------------------------------------------------------------------------------------------------------------
+    /**
+     * @return string
+     */
+    public function getOccupation() : ?string
+    {
+        return $this->occupation;
+    }
+
+    /**
+     * @param string $occupation
+     */
+    public function setOccupation(?string $occupation) : void
+    {
+        $this->occupation = $occupation;
     }
 }

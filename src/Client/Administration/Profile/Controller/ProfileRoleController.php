@@ -13,12 +13,13 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Class ProfileRoleController
+ * @Route("/administration/profile/role")
  */
 class ProfileRoleController extends AbstractController
 {
 
     /**
-     * @Route("/administration/profile/roles",name="administration-profile-role-list")
+     * @Route("/list",name="administration-profile-role-list")
      * @param RoleRepository $roleRepository
      *
      * @return Response
@@ -30,7 +31,7 @@ class ProfileRoleController extends AbstractController
     }
 
     /**
-     * @Route("/administration/profile/roles/profiles/{role}", name="administration-profile-role-users")
+     * @Route("/profiles/{role}", name="administration-profile-role-users")
      * @param string $role
      * @param Request $request
      * @param RoleRepository $roleRepository

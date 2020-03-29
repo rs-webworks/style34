@@ -2,6 +2,7 @@
 
 namespace EryseClient\Server\User\Entity;
 
+use Doctrine\ORM\EntityNotFoundException;
 use EryseClient\Server\User\Exception\UserException;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -9,7 +10,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * Trait FindByUserTrait
  *
  */
-trait FindByUserTrait
+trait GetByUserTrait
 {
 
     /**
@@ -17,13 +18,20 @@ trait FindByUserTrait
      *
      * @return mixed
      * @throws UserException
+     * @throws EntityNotFoundException
      */
-    public function findByUser(UserInterface $user)
+    public function getByUser(UserInterface $user)
     {
         if (!($user instanceof UserEntity)) {
             throw new UserException('Finding by user is allowed only for UserEntity.');
         }
 
-        return $this->findOneBy(['userId' => $user->getId()]);
+        $result = $this->findOneBy(['userId' => $user->getId()]);
+
+        if (!$result) {
+            throw new EntityNotFoundException('Requested entity does not exists for user.');
+        }
+
+        return $result;
     }
 }

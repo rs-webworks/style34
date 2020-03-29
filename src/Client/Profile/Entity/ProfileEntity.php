@@ -22,10 +22,10 @@ class ProfileEntity implements ClientEntity
     use Identifier;
 
     /**
-     * @var int
-     * @ORM\Column(type="integer", unique=true)
+     * @var string
+     * @ORM\Column(type="string", unique=true)
      */
-    protected int $userId;
+    protected string $userId;
 
     /**
      * @var UserEntity
@@ -39,43 +39,20 @@ class ProfileEntity implements ClientEntity
      */
     protected RoleEntity $role;
 
-    /**
-     * @ORM\Column(type="string", nullable=true)
-     * @Assert\NotNull(message="profile.state-required")
-     */
-    protected ? string $state;
-
-    /**
-     * @ORM\Column(nullable=true, type="string")
-     */
-    protected ? string $city;
-
-    /**
-     * @var DateTime $birthdate
-     * @ORM\Column(nullable=true, type="datetime")
-     */
-    protected ? DateTime $birthdate;
-
-    /**
-     * @var string|null
-     * @ORM\Column(nullable=true, type="string")
-     */
-    protected ? string $occupation;
-
     // User
     // -----------------------------------------------------------------------------------------------------------------
     /**
-     * @return int
+     * @return string
      */
-    public function getUserId() : int
+    public function getUserId() : string
     {
         return $this->userId;
     }
 
     /**
-     * @param int $userId
+     * @param string $userId
      */
-    public function setUserId(int $userId) : void
+    public function setUserId(string $userId) : void
     {
         $this->userId = $userId;
     }
@@ -97,61 +74,6 @@ class ProfileEntity implements ClientEntity
     }
 
 
-    // Birthdate
-    // -----------------------------------------------------------------------------------------------------------------
-    /**
-     * @return DateTime
-     */
-    public function getBirthdate() : DateTime
-    {
-        return $this->birthdate;
-    }
-
-    /**
-     * @param DateTime $birthdate
-     */
-    public function setBirthdate(DateTime $birthdate) : void
-    {
-        $this->birthdate = $birthdate;
-    }
-
-    // State
-    // -----------------------------------------------------------------------------------------------------------------
-    /**
-     * @return string|null
-     */
-    public function getState() : ?string
-    {
-        return $this->state;
-    }
-
-    /**
-     * @param string $state
-     */
-    public function setState(string $state) : void
-    {
-        $this->state = $state;
-    }
-
-
-    // City
-    // -----------------------------------------------------------------------------------------------------------------
-    /**
-     * @return mixed
-     */
-    public function getCity()
-    {
-        return $this->city;
-    }
-
-    /**
-     * @param $city
-     */
-    public function setCity($city) : void
-    {
-        $this->city = $city;
-    }
-
     // ProfileRole
     // -----------------------------------------------------------------------------------------------------------------
     /**
@@ -168,28 +90,6 @@ class ProfileEntity implements ClientEntity
     public function setRole(RoleEntity $role) : void
     {
         $this->role = $role;
-    }
-
-    // Occupation
-    // -----------------------------------------------------------------------------------------------------------------
-    /**
-     * @return string
-     */
-    public function getOccupation() : ?string
-    {
-        return $this->occupation;
-    }
-
-    /**
-     * @param string $occupation
-     *
-     * @return ProfileEntity
-     */
-    public function setOccupation(?string $occupation) : ProfileEntity
-    {
-        $this->occupation = $occupation;
-
-        return $this;
     }
 
 }
