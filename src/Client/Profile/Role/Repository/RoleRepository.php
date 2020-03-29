@@ -3,6 +3,7 @@
 namespace EryseClient\Client\Profile\Role\Repository;
 
 use Doctrine\Persistence\ManagerRegistry;
+use EryseClient\Client\Exception\ResourceNotFoundException;
 use EryseClient\Client\Profile\Role\Entity\RoleEntity;
 use EryseClient\Common\Repository\AbstractRepository;
 
@@ -30,11 +31,28 @@ class RoleRepository extends AbstractRepository
     /**
      * @param string $name
      *
-     * @return RoleEntity
+     * @return RoleEntity|null
      */
-    public function findOneByName(string $name): RoleEntity
+    public function findOneByName(string $name) : ?RoleEntity
     {
         return $this->findOneBy(['name' => $name]);
+    }
+
+    /**
+     * @param string $name
+     *
+     * @return RoleEntity
+     * @throws ResourceNotFoundException
+     */
+    public function getOneByName(string $name) : RoleEntity
+    {
+        $result = $this->findOneByName($name);
+
+        if ($result === null) {
+            throw new ResourceNotFoundException('Missing Role: ' . $name);
+        }
+
+        return $result;
     }
 
     /**
@@ -42,7 +60,7 @@ class RoleRepository extends AbstractRepository
      *
      * @return array
      */
-    public function findByName(array $listOfNames): array
+    public function findByName(array $listOfNames) : array
     {
         return $this->findBy(['name' => $listOfNames]);
     }

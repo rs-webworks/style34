@@ -1,0 +1,30 @@
+{% extends '_layout/layout-frontend.html.twig' %}
+
+{% block title %}{% trans from 'user' %}edit{% endtrans %}{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+
+        <h2>{{ app.user.getUsername() }}</h2>
+        <hr>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="{{ url('home-index') }}">{{ eryse.client.name }}</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="{{ url('user-view-self') }}">{{ app.user.getUsername() }}</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">
+                    {% trans from 'user' %}view{% endtrans %}
+                </li>
+            </ol>
+        </nav>
+
+        <p>page to review User stuff (profiles, membership, global info)</p>
+
+    </div>
+
+
+{% endblock %}

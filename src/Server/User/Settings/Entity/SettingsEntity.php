@@ -18,10 +18,10 @@ class SettingsEntity implements ServerEntity
     use Identifier;
 
     /**
-     * @var int
-     * @ORM\Column(type="integer", nullable=false)
+     * @var string
+     * @ORM\Column(type="string", nullable=false)
      */
-    protected int $userId;
+    protected string $userId;
 
     /**
      * @var bool $name
@@ -30,10 +30,10 @@ class SettingsEntity implements ServerEntity
     protected bool $twoStepAuthEnabled;
 
     /**
-     * @var string $gAuthSecret
+     * @var string|null $gAuthSecret
      * @ORM\Column(type="string", nullable=true)
      */
-    protected string $gAuthSecret;
+    protected ?string $gAuthSecret;
 
     /**
      * ServerSettings constructor.
@@ -47,17 +47,17 @@ class SettingsEntity implements ServerEntity
     }
 
     /**
-     * @return int
+     * @return string
      */
-    public function getUserId(): int
+    public function getUserId(): string
     {
         return $this->userId;
     }
 
     /**
-     * @param int $userId
+     * @param string $userId
      */
-    public function setUserId(int $userId): void
+    public function setUserId(string $userId): void
     {
         $this->userId = $userId;
     }
@@ -79,9 +79,9 @@ class SettingsEntity implements ServerEntity
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getGAuthSecret(): string
+    public function getGAuthSecret(): ?string
     {
         return $this->gAuthSecret;
     }
@@ -89,7 +89,7 @@ class SettingsEntity implements ServerEntity
     /**
      * @param string|null $gAuthSecret
      */
-    public function setGAuthSecret(?string $gAuthSecret): void
+    public function setGAuthSecret(?string $gAuthSecret = null): void
     {
         $this->gAuthSecret = $gAuthSecret;
     }

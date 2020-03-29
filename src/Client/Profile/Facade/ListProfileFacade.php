@@ -63,7 +63,7 @@ class ListProfileFacade
         ?string $role = null,
         ?bool $displayHidden = false
     ) {
-        $qb = $this->profileRepository->createQueryBuilder('p')->orderBy('p.id');
+        $qb = $this->profileRepository->createQueryBuilder('p')->orderBy('p.createdAt');
 
         if ($searchForm->isSubmitted() && $searchForm->isValid()) {
             foreach ($searchForm->getData() as $column => $value) {
@@ -80,7 +80,7 @@ class ListProfileFacade
 
                 if ($column === 'id') {
                     $qb->andWhere('p.id = :val');
-                    $qb->setParameter('val', (int) $value);
+                    $qb->setParameter('val', (string) $value);
                     continue;
                 }
 

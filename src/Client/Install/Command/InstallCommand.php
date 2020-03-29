@@ -379,13 +379,15 @@ class InstallCommand extends Command
             $user->setLastIp('127.0.0.1');
             $user->setRegisteredAs(serialize([$user->getUsername(), $user->getEmail()]));
 
-            $this->userRepository->saveNew($user);
-
             $profile = new ProfileEntity();
             $profile->setUserId($user->getId());
             $profile->setRole($this->profileRoleRepository->findOneByName($profileRole));
+            $profile->setCreatedAt(new DateTime());
 
-            $this->profileRepository->save($profile);
+            $user->setProfile($profile);
+
+            $this->userRepository->saveAndCreateSettings($user);
+            $this->profileRepository->saveAndCreateSettings($profile);
 
             /** @noinspection DisconnectedForeachInstructionInspection */
             $this->io->progressAdvance(1);

@@ -58,11 +58,10 @@ class UserRepository extends AbstractRepository implements UserLoaderInterface
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function saveNew(UserEntity $user) : void
+    public function saveAndCreateSettings(UserEntity $user) : void
     {
         $this->save($user);
         $this->serverSettingsRepository->save(new UserSettingsEntity($user));
-        $this->clientSettingsRepository->save(new ProfileSettingsEntity($user));
     }
 
     /**

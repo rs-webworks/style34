@@ -3,13 +3,13 @@
 namespace EryseClient\Client\Profile\Settings\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use EryseClient\Client\Profile\Entity\ProfileEntity;
 use EryseClient\Common\Entity\ClientEntity;
 use EryseClient\Common\Entity\Identifier;
-use EryseClient\Server\User\Entity\UserEntity;
 
 /**
  * Class Settings
- * @ORM\Table(name="user_settings")
+ * @ORM\Table(name="profile_settings")
  * @ORM\Entity(repositoryClass="EryseClient\Client\Profile\Settings\Repository\SettingsRepository")
  */
 class SettingsEntity implements ClientEntity
@@ -17,34 +17,36 @@ class SettingsEntity implements ClientEntity
     use Identifier;
 
     /**
-     * @var int
-     * @ORM\Column(type="integer", nullable=false)
-     */
-    protected int $userId;
-
-    /**
-     * ClientSettings constructor.
+     * TODO: Join both profile & user settings to be connected entity, not via id
      *
-     * @param UserEntity|null $user
+     * @var string
+     * @ORM\Column(type="string", nullable=false)
      */
-    public function __construct(UserEntity $user = null)
+    protected string $profileId;
+
+    /**
+     * SettingsEntity constructor.
+     *
+     * @param ProfileEntity|null $profile
+     */
+    public function __construct(ProfileEntity $profile = null)
     {
-        $this->setUserId($user->getId());
+        $this->setProfileId($profile->getId());
     }
 
     /**
-     * @return int
+     * @return string
      */
-    public function getUserId(): int
+    public function getProfileId() : string
     {
-        return $this->userId;
+        return $this->profileId;
     }
 
     /**
-     * @param int $userId
+     * @param string $profileId
      */
-    public function setUserId(int $userId): void
+    public function setProfileId(string $profileId) : void
     {
-        $this->userId = $userId;
+        $this->profileId = $profileId;
     }
 }

@@ -78,6 +78,7 @@
                     <tr>
                         <th>{% trans from 'global' %}id{% endtrans %}</th>
                         <th>{% trans from 'administration' %}profile.list.user.username{% endtrans %}</th>
+                        <th>{% trans from 'administration' %}profile.createdAt{% endtrans %}</th>
                         <th>{% trans from 'administration' %}profile-role{% endtrans %}</th>
                         <th class="text-right">{% trans from 'administration' %}profile-actions{% endtrans %}</th>
                     </tr>
@@ -91,8 +92,9 @@
                     {% endif %}
                     {% for profile in profiles %}
                         <tr>
-                            <td>{{ profile.getId() }}</td>
+                            <td>{{ profile.id }}</td>
                             <td>{{ userRepository.find(profile.userId).username }}</td>
+                            <td>{{ profile.createdAt|ago }}</td>
                             <td>
                                 <strong style="color: {{ profile.role.color }};">
                                     [{{ profile.role.name|trans({}, "global") }}]

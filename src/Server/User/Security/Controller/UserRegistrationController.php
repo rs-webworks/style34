@@ -70,7 +70,7 @@ class UserRegistrationController extends AbstractController
                 // Prepare user & token
                 $thisIp = $request->getClientIp();
                 $user = $userService->prepareNewUser($user, $thisIp);
-                $userRepository->saveNew($user);
+                $userRepository->saveAndCreateSettings($user);
 
                 $token = $tokenService->getActivationToken($user);
 

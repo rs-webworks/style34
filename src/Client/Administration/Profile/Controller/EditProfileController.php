@@ -31,7 +31,7 @@ class EditProfileController extends AbstractAdminController
 
     /**
      * @Route("/edit/{id}", name="administration-profile-edit")
-     * @param int $id
+     * @param string $id
      * @param Request $request
      * @param ProfileRepository $profileRepository
      * @param UserRepository $userRepository
@@ -44,7 +44,7 @@ class EditProfileController extends AbstractAdminController
      * @throws ProfileNotFoundException
      */
     public function edit(
-        int $id,
+        string $id,
         Request $request,
         ProfileRepository $profileRepository,
         UserRepository $userRepository,

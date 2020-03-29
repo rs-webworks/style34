@@ -24,8 +24,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * Class UserController
  *
- *
  * @IsGranted(EryseClient\Server\User\Role\Entity\RoleEntity::INACTIVE)
+ * @Route("/user")
  */
 class UserController extends AbstractController
 {
@@ -33,40 +33,27 @@ class UserController extends AbstractController
     use LoggerAwareTrait;
 
     /**
-     * @Route("/user/edit/{id}/{username}", name="user-edit")
+     * @Route("", name="user-view-self")
+     * @return Response
+     */
+    public function viewSelf() : Response
+    {
+        return $this->render('User/view.html.twig');
+    }
+
+    /**
+     * @Route("/edit/{id}/{username}", name="user-edit")
      * @param null $username
+     *
+     * @return Response
      */
-    public function edit($username = null) : void
+    public function edit($username = null) : Response
     {
+        return $this->render('User/edit.html.twig');
     }
 
     /**
-     * @Route("/user/list", name="user-list")
-     */
-    public function list() : void
-    {
-    }
-
-    /**
-     * @Route("/user", name="user-view-self")
-     * @param $id
-     * @param UserRepository $userRepository
-     */
-    public function viewSelf($id, UserRepository $userRepository) : void
-    {
-    }
-
-    /**
-     * @Route("/user/{id}/{username}", name="user-view", )
-     * @param $id
-     * @param UserRepository $userRepository
-     */
-    public function view($id, UserRepository $userRepository) : void
-    {
-    }
-
-    /**
-     * @Route("/user/settings", name="user-settings")
+     * @Route("/settings", name="user-settings")
      * @param Request $request
      * @param SettingsRepository $serverSettingsRepository
      *
@@ -95,7 +82,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/user/settings/enable-two-step-auth", name="user-settings-enable-two-step-auth")
+     * @Route("/settings/enable-two-step-auth", name="user-settings-enable-two-step-auth")
      * @param GoogleAuthenticatorInterface $authService
      * @param SessionInterface $session
      * @param Request $request
@@ -114,7 +101,7 @@ class UserController extends AbstractController
         UserService $userService,
         UserRepository $userRepository,
         SettingsRepository $serverSettingsRepository
-    ): Response {
+    ) : Response {
         $user = $this->getUser();
         $gAuthEntity = $userRepository->getGoogleAuthEntity($user);
         $activationCode = $request->get('activation-code');
@@ -147,13 +134,13 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/user/settings/disableTwoStepAuth", name="user-settings-disable-two-step-auth")
+     * @Route("/settings/disableTwoStepAuth", name="user-settings-disable-two-step-auth")
      * @param UserService $userService
      * @param UserInterface|UserEntity $user
      *
      * @return RedirectResponse
      */
-    public function disableTwoStepAuth(UserService $userService, UserInterface $user): RedirectResponse
+    public function disableTwoStepAuth(UserService $userService, UserInterface $user) : RedirectResponse
     {
         // TODO: Require user to either enter password again or add email token for this, security reasons
         $userService->disableTwoStepAuth($user);
@@ -164,7 +151,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/user/settings/forgetDevices", name="user-settings-forget-devices")
+     * @Route("/settings/forgetDevices", name="user-settings-forget-devices")
      * @param UserService $userService
      * @param UserInterface|UserEntity $user
      *
@@ -179,7 +166,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/user/settings/logoutEverywhere", name="user-settings-logout-everywhere")
+     * @Route("/settings/logoutEverywhere", name="user-settings-logout-everywhere")
      * @param UserService $userService
      * @param UserInterface|UserEntity $user
      *
@@ -195,7 +182,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/user/settings/delete-user", name="user-delete")
+     * @Route("/settings/delete-user", name="user-delete")
      */
     public function delete() : Response
     {

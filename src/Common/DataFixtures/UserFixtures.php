@@ -3,9 +3,9 @@
 namespace EryseClient\Common\DataFixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Persistence\ObjectManager;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
+use Doctrine\Persistence\ObjectManager;
 use EryseClient\Client\Profile\Entity\ProfileEntity;
 use EryseClient\Client\Profile\Repository\ProfileRepository;
 use EryseClient\Client\Profile\Role\Entity\RoleEntity as ProfileRole;
@@ -62,45 +62,46 @@ class UserFixtures extends Fixture
 
     /**
      * @param ObjectManager $manager
+     *
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function load(ObjectManager $manager): void
+    public function load(ObjectManager $manager) : void
     {
         $faker = $this->faker;
 
         for ($i = 0; $i <= 100; $i++) {
+            // Create user
             $user = new UserEntity();
             $user->setUsername($faker->userName);
             $user->setEmail($faker->email);
             $user->setCreatedAt($faker->dateTime('now'));
             $user->setPassword($this->passwordEncoder->encodePassword($user, $faker->password));
+            $user->setLastIp($faker->ipv4);
+            $user->setRegisteredAs(serialize([$user->getUsername(), $user->getEmail()]));
+            $user->setBirthdate($faker->dateTimeThisCentury());
+            $user->setCity($faker->city);
+            $user->setOccupation($faker->jobTitle);
+            $user->setState($faker->state);
 
             $roles = [UserRole::INACTIVE, UserRole::VERIFIED];
             $randomRole = array_rand($roles, 1);
 
             $user->setRole($roles[$randomRole]);
 
-            $user->setLastIp($faker->ipv4);
-            $user->setRegisteredAs(serialize([$user->getUsername(), $user->getEmail()]));
+            $this->userRepository->saveAndCreateSettings($user);
 
-            $this->userRepository->saveNew($user);
-
+            // Create user profile for current installation
             $profile = new ProfileEntity();
-            $profile->setBirthdate($faker->dateTimeThisCentury());
-            $profile->setCity($faker->city);
+            $profile->setUserId($user->getId());
+            $profile->setCreatedAt($faker->dateTime('now'));
 
             $roles = [ProfileRole::INACTIVE, ProfileRole::BANNED, ProfileRole::DELETED, ProfileRole::MEMBER];
             $randomRole = array_rand($roles, 1);
-
-            $role = $this->profileRoleRepository->findOneByName($roles[$randomRole]);
-
+            $role = $this->profileRoleRepository->getOneByName($roles[$randomRole]);
             $profile->setRole($role);
-            $profile->setOccupation($faker->jobTitle);
-            $profile->setState($faker->state);
-            $profile->setUserId($user->getId());
 
-            $this->profileRepository->save($profile);
+            $this->profileRepository->saveAndCreateSettings($profile);
         }
     }
 }

@@ -6,7 +6,9 @@ use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use EryseClient\Client\Profile\Role\Entity\RoleEntity;
 use EryseClient\Common\Entity\ClientEntity;
+use EryseClient\Common\Entity\CreatedAt;
 use EryseClient\Common\Entity\Identifier;
+use EryseClient\Common\Entity\Uuid;
 use EryseClient\Server\User\Entity\UserEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -19,7 +21,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 class ProfileEntity implements ClientEntity
 {
 
-    use Identifier;
+    use Uuid;
+    use CreatedAt;
 
     /**
      * @var string
@@ -38,6 +41,14 @@ class ProfileEntity implements ClientEntity
      *     fetch="EAGER")
      */
     protected RoleEntity $role;
+
+    /**
+     * User constructor.
+     */
+    public function __construct()
+    {
+        $this->setId(\Ramsey\Uuid\Uuid::uuid4()->toString());
+    }
 
     // User
     // -----------------------------------------------------------------------------------------------------------------

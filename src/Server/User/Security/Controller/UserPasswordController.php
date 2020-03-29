@@ -35,6 +35,7 @@ use Twig\Error\SyntaxError;
 
 /**
  * Class UserPasswordController
+ * @Route("/user/security")
  */
 class UserPasswordController extends AbstractController
 {
@@ -44,7 +45,7 @@ class UserPasswordController extends AbstractController
     protected const SESSION_RESET_TOKEN = 'reset-password-token';
 
     /**
-     * @Route("/user/password/request-reset", name="user-password-request-reset")
+     * @Route("/password/request-reset", name="user-password-request-reset")
      * @param Request $request
      * @param UserRepository $userRepository
      * @param TokenService $tokenService
@@ -113,7 +114,7 @@ class UserPasswordController extends AbstractController
 
     /**
      * @IsGranted(EryseClient\Server\User\Role\Entity\RoleEntity::USER)
-     * @Route("/user/password/reset", name="user-password-reset")
+     * @Route("/password/reset", name="user-password-reset")
      */
     public function resetPasswordViaUser() : Response
     {
@@ -125,7 +126,7 @@ class UserPasswordController extends AbstractController
     }
 
     /**
-     * @Route("/user/password/reset/{tokenHash}", name="user-password-reset-token")
+     * @Route("/password/reset/{tokenHash}", name="user-password-reset-token")
      *
      * @param TokenService $tokenService
      * @param TokenRepository $tokenRepository
@@ -157,7 +158,7 @@ class UserPasswordController extends AbstractController
     }
 
     /**
-     * @Route("/user/password/reset/set-new-password", name="user-password-set-new")
+     * @Route("/password/reset/set-new-password", name="user-password-set-new")
      * @param Request $request
      *
      * @param ValidatorInterface $validator

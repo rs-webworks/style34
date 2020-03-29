@@ -121,7 +121,7 @@ class UserEntity implements UserInterface, TrustedDeviceInterface, ServerEntity
     /**
      * @var ProfileEntity|null
      */
-    protected ? ProfileEntity $profile;
+    protected ? ProfileEntity $profile = null;
 
     /**
      * @ORM\Column(type="string", nullable=true)
