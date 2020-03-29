@@ -2,7 +2,7 @@
 
 namespace EryseClient\Server\User\Settings\Repository;
 
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ManagerRegistry;
 use EryseClient\Common\Repository\AbstractRepository;
 use EryseClient\Server\User\Entity\FindByUserTrait;
 use EryseClient\Server\User\Entity\UserEntity;

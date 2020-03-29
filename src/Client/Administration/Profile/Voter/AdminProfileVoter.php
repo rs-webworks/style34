@@ -56,6 +56,8 @@ class AdminProfileVoter extends CrudVoter
             case self::EDIT:
                 return $this->canEdit($user, $userProfile);
         }
+
+        return false;
     }
 
     /**

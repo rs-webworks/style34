@@ -2,7 +2,7 @@
 
 namespace EryseClient\Client\Profile\Role\Repository;
 
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ManagerRegistry;
 use EryseClient\Client\Profile\Role\Entity\RoleEntity;
 use EryseClient\Common\Repository\AbstractRepository;
 

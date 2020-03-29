@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\DataCollector\DataCollector;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Throwable;
 
 /**
  * Class UserDataCollector
@@ -36,9 +37,9 @@ class EryseDataCollector extends DataCollector
     /**
      * @param Request $request
      * @param Response $response
-     * @param \Throwable|null $exception
+     * @param Throwable|null $exception
      */
-    public function collect(Request $request, Response $response, \Throwable $exception = null)
+    public function collect(Request $request, Response $response, Throwable $exception = null)
     {
         $this->data = [
             "user" => $this->user,

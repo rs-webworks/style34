@@ -2,7 +2,7 @@
 
 namespace EryseClient\Server\Token\Repository;
 
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ManagerRegistry;
 use EryseClient\Server\Token\Entity\RememberMeTokenEntity;
 use EryseClient\Common\Repository\AbstractRepository;
 use EryseClient\Server\User\Entity\UserEntity;

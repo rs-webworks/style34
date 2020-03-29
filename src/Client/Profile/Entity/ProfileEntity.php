@@ -23,52 +23,51 @@ class ProfileEntity implements ClientEntity
 
     /**
      * @var int
-     * @ORM\Column(type="integer", nullable=false, unique=true)
+     * @ORM\Column(type="integer", unique=true)
      */
-    protected $userId;
+    protected int $userId;
 
     /**
      * @var UserEntity
      */
-    protected $user;
+    protected UserEntity $user;
 
     /**
      * @var RoleEntity
      * @ORM\ManyToOne(targetEntity="EryseClient\Client\Profile\Role\Entity\RoleEntity", inversedBy="profiles",
      *     fetch="EAGER")
      */
-    protected $role;
+    protected RoleEntity $role;
 
     /**
      * @ORM\Column(type="string", nullable=true)
      * @Assert\NotNull(message="profile.state-required")
      */
-    protected $state;
+    protected ? string $state;
 
     /**
      * @ORM\Column(nullable=true, type="string")
      */
-    protected $city;
+    protected ? string $city;
 
     /**
      * @var DateTime $birthdate
      * @ORM\Column(nullable=true, type="datetime")
      */
-    protected $birthdate;
+    protected ? DateTime $birthdate;
 
     /**
      * @var string|null
      * @ORM\Column(nullable=true, type="string")
      */
-    protected $occupation;
-
+    protected ? string $occupation;
 
     // User
     // -----------------------------------------------------------------------------------------------------------------
     /**
      * @return int
      */
-    public function getUserId(): int
+    public function getUserId() : int
     {
         return $this->userId;
     }
@@ -76,7 +75,7 @@ class ProfileEntity implements ClientEntity
     /**
      * @param int $userId
      */
-    public function setUserId(int $userId): void
+    public function setUserId(int $userId) : void
     {
         $this->userId = $userId;
     }
@@ -84,7 +83,7 @@ class ProfileEntity implements ClientEntity
     /**
      * @return UserEntity|null
      */
-    public function getUser(): ?UserEntity
+    public function getUser() : ?UserEntity
     {
         return $this->user;
     }
@@ -92,7 +91,7 @@ class ProfileEntity implements ClientEntity
     /**
      * @param UserEntity $user
      */
-    public function setUser(UserEntity $user): void
+    public function setUser(UserEntity $user) : void
     {
         $this->user = $user;
     }
@@ -103,7 +102,7 @@ class ProfileEntity implements ClientEntity
     /**
      * @return DateTime
      */
-    public function getBirthdate(): DateTime
+    public function getBirthdate() : DateTime
     {
         return $this->birthdate;
     }
@@ -111,7 +110,7 @@ class ProfileEntity implements ClientEntity
     /**
      * @param DateTime $birthdate
      */
-    public function setBirthdate(DateTime $birthdate): void
+    public function setBirthdate(DateTime $birthdate) : void
     {
         $this->birthdate = $birthdate;
     }
@@ -121,7 +120,7 @@ class ProfileEntity implements ClientEntity
     /**
      * @return string|null
      */
-    public function getState(): ?string
+    public function getState() : ?string
     {
         return $this->state;
     }
@@ -129,7 +128,7 @@ class ProfileEntity implements ClientEntity
     /**
      * @param string $state
      */
-    public function setState(string $state): void
+    public function setState(string $state) : void
     {
         $this->state = $state;
     }
@@ -148,7 +147,7 @@ class ProfileEntity implements ClientEntity
     /**
      * @param $city
      */
-    public function setCity($city): void
+    public function setCity($city) : void
     {
         $this->city = $city;
     }
@@ -158,7 +157,7 @@ class ProfileEntity implements ClientEntity
     /**
      * @return RoleEntity
      */
-    public function getRole(): RoleEntity
+    public function getRole() : RoleEntity
     {
         return $this->role;
     }
@@ -166,7 +165,7 @@ class ProfileEntity implements ClientEntity
     /**
      * @param RoleEntity $role
      */
-    public function setRole(RoleEntity $role): void
+    public function setRole(RoleEntity $role) : void
     {
         $this->role = $role;
     }
@@ -176,7 +175,7 @@ class ProfileEntity implements ClientEntity
     /**
      * @return string
      */
-    public function getOccupation(): ?string
+    public function getOccupation() : ?string
     {
         return $this->occupation;
     }
@@ -186,7 +185,7 @@ class ProfileEntity implements ClientEntity
      *
      * @return ProfileEntity
      */
-    public function setOccupation(?string $occupation): ProfileEntity
+    public function setOccupation(?string $occupation) : ProfileEntity
     {
         $this->occupation = $occupation;
 

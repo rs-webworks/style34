@@ -11,7 +11,8 @@ RUN apt-get -y --no-install-recommends install \
     libzip-dev \
     libxml2-dev \
     libonig-dev \
-    libxslt-dev
+    libxslt-dev \
+    libpq-dev
 
 RUN docker-php-ext-install \
     zip \
@@ -19,6 +20,7 @@ RUN docker-php-ext-install \
     mbstring \
     pdo \
     pdo_mysql \
+    pdo_pgsql \
     xsl
 
 # Install other soft

@@ -2,6 +2,7 @@
 
 namespace EryseClient\Client\Profile\Role\Entity;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use EryseClient\Client\Profile\Entity\ProfileEntity;
 use EryseClient\Common\Entity\ClientEntity;
@@ -32,25 +33,25 @@ class RoleEntity implements ClientEntity
      * @ORM\Column(type="string", unique=true)
      * @Assert\NotBlank(message="profile.role.name-required")
      */
-    protected $name;
+    protected string $name;
 
     /**
      * @var string $color
      * @ORM\Column(type="string")
      * @Assert\NotBlank(message="profile.role.color-required")
      */
-    protected $color;
+    protected string $color;
 
     /**
-     * @var ProfileEntity[]
+     * @var ProfileEntity[]|Collection
      * @ORM\OneToMany(targetEntity="EryseClient\Client\Profile\Entity\ProfileEntity", mappedBy="role")
      */
-    protected $profiles;
+    protected Collection $profiles;
 
     /**
      * @return string
      */
-    public function getName(): string
+    public function getName() : string
     {
         return $this->name;
     }
@@ -58,7 +59,7 @@ class RoleEntity implements ClientEntity
     /**
      * @param string $name
      */
-    public function setName(string $name): void
+    public function setName(string $name) : void
     {
         $this->name = $name;
     }
@@ -66,7 +67,7 @@ class RoleEntity implements ClientEntity
     /**
      * @return string
      */
-    public function getColor(): string
+    public function getColor() : string
     {
         return $this->color;
     }
@@ -74,26 +75,25 @@ class RoleEntity implements ClientEntity
     /**
      * @param string $color
      */
-    public function setColor(string $color): void
+    public function setColor(string $color) : void
     {
         $this->color = $color;
     }
 
     /**
-     * @return ProfileEntity[]
+     * @return ProfileEntity[]|Collection
      */
-    public function getProfiles(): array
+    public function getProfiles() : array
     {
         return $this->profiles;
     }
 
     /**
-     * @param ProfileEntity[] $profiles
+     * @param ProfileEntity[]|Collection $profiles
      */
-    public function setProfiles(array $profiles): void
+    public function setProfiles(array $profiles) : void
     {
         $this->profiles = $profiles;
     }
-
 
 }

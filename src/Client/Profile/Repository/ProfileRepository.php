@@ -2,7 +2,7 @@
 
 namespace EryseClient\Client\Profile\Repository;
 
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ManagerRegistry;
 use EryseClient\Client\Profile\Entity\ProfileEntity;
 use EryseClient\Common\Repository\AbstractRepository;
 use EryseClient\Server\User\Repository\UserRepository;
@@ -19,7 +19,7 @@ class ProfileRepository extends AbstractRepository
     /**
      * @var UserRepository
      */
-    private $userRepository;
+    private UserRepository $userRepository;
 
     /**
      * ProfileRepository constructor

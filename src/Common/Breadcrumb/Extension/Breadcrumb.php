@@ -12,8 +12,6 @@ use Twig\TwigFunction;
 
 /**
  * Class Breadcrumb
- *
- *
  */
 class Breadcrumb extends AbstractExtension
 {
@@ -25,7 +23,10 @@ class Breadcrumb extends AbstractExtension
     {
         return [
             new TwigFunction(
-                "renderBreadcrumbs", [$this, "renderBreadcrumbs"], ["needs_environment" => true, 'is_safe' => ['html']]
+                "renderBreadcrumbs",
+                [$this, "renderBreadcrumbs"],
+                ["needs_environment" => true,
+                 'is_safe' => ['html']]
             )
         ];
     }
