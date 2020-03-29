@@ -2,18 +2,18 @@
 
 namespace EryseClient\Server\Token\Type\Repository;
 
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface;
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ManagerRegistry;
 use EryseClient\Common\Repository\AbstractRepository;
+use EryseClient\Common\Token\TokenTypeInterface;
 use EryseClient\Server\Token\Type\Entity\TypeEntity;
 
 /**
  * Class TokenTypeRepository
  *
  *
- * @method TypeEntity|null findOneBy(array $criteria, array $orderBy = null)
+ * @method TypeEntity|TokenTypeInterface|null findOneBy(array $criteria, array $orderBy = null)
  */
-class TypeRepository extends AbstractRepository implements ServiceEntityRepositoryInterface
+class TypeRepository extends AbstractRepository
 {
     /**
      * TokenRepository constructor.

@@ -2,7 +2,6 @@
 
 namespace EryseClient\Common\Service;
 
-use BrowscapPHP\Browscap;
 use EryseClient\Common\Utility\LoggerAwareTrait;
 use Scheb\TwoFactorBundle\Security\TwoFactor\Trusted\TrustedDeviceManagerInterface;
 
@@ -14,19 +13,6 @@ use Scheb\TwoFactorBundle\Security\TwoFactor\Trusted\TrustedDeviceManagerInterfa
 final class TrustedDeviceService extends AbstractService implements TrustedDeviceManagerInterface
 {
     use LoggerAwareTrait;
-
-    /** @var Browscap */
-    private $browscap;
-
-    /**
-     * TrustedDeviceService constructor.
-     *
-     * @param Browscap $browscap
-     */
-    public function __construct(Browscap $browscap)
-    {
-        $this->browscap = $browscap;
-    }
 
     /**
      * @param mixed $user

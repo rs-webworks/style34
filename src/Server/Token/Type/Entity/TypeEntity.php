@@ -15,7 +15,7 @@ use EryseClient\Common\Token\TokenInterface;
  */
 class TypeEntity implements ClientEntity
 {
-    const USER = [
+    public const USER = [
         'ACTIVATION' => 'profile.activation',
         'REQUEST_RESET_PASSWORD' => 'profile.request-reset-password'
     ];
@@ -26,5 +26,5 @@ class TypeEntity implements ClientEntity
      * @var TokenInterface[] $tokens
      * @ORM\OneToMany(targetEntity="EryseClient\Server\Token\Entity\TokenEntity", mappedBy="type")
      */
-    protected $tokens;
+    protected array $tokens;
 }

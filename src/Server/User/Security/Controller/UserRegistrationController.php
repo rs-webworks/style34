@@ -81,7 +81,7 @@ class UserRegistrationController extends AbstractController
                 // Flash & redirect
                 $this->addFlash('success', $this->translator->trans('registration-success', [], 'profile'));
 
-                return $this->redirectToRoute("user-registration-success");
+                return $this->redirectToRoute('user-registration-success');
             } catch (Exception $ex) {
                 $this->addFlash('danger', $this->translator->trans('registration-failed', [], 'profile'));
                 $this->logger->error(
@@ -144,6 +144,6 @@ class UserRegistrationController extends AbstractController
      */
     public function success(): Response
     {
-        return $this->render("User/Security/success.html.twig");
+        return $this->render('User/Security/success.html.twig');
     }
 }

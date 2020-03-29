@@ -2,12 +2,10 @@
 
 namespace EryseClient\Common\Exception;
 
-use Throwable;
-
 /**
  * Class Exception
  *
  */
-class Exception extends \Exception implements Throwable
+class Exception extends \Exception
 {
 }

@@ -7,7 +7,7 @@ namespace EryseClient\Common\Token;
  *
  *
  */
-interface TokenTypeInterfance
+interface TokenTypeInterface
 {
     /**
      * @return string

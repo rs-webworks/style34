@@ -13,14 +13,14 @@ trait TranslatorAwareTrait
 {
 
     /** @var TranslatorInterface $translator */
-    protected $translator;
+    protected TranslatorInterface $translator;
 
     /**
      * @required
      *
      * @param TranslatorInterface $translator
      */
-    public function setTranslator(TranslatorInterface $translator)
+    public function setTranslator(TranslatorInterface $translator) : void
     {
         $this->translator = $translator;
     }

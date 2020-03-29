@@ -31,10 +31,10 @@ class Application extends AbstractService
      */
     public function __construct(ParameterBagInterface $parameterBag)
     {
-        $this->name = $parameterBag->get("eryse")["client"]["name"];
-        $this->emailAdmin = $parameterBag->get("eryse")["client"]["emails"]["admin"];
-        $this->emailInfo = $parameterBag->get("eryse")["client"]["emails"]["info"];
-        $this->membershipPrice = $parameterBag->get("eryse")["client"]["membership"]["price"];
+        $this->name = $parameterBag->get('eryse')['client']['name'];
+        $this->emailAdmin = $parameterBag->get('eryse')['client']['emails']['admin'];
+        $this->emailInfo = $parameterBag->get('eryse')['client']['emails']['info'];
+        $this->membershipPrice = $parameterBag->get('eryse')['client']['membership']['price'];
     }
 
     /**

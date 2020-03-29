@@ -19,13 +19,14 @@ class Breadcrumb extends AbstractExtension
     /**
      * @return array|TwigFunction[]
      */
-    public function getFunctions()
+    public function getFunctions(): array
     {
         return [
             new TwigFunction(
-                "renderBreadcrumbs",
-                [$this, "renderBreadcrumbs"],
-                ["needs_environment" => true,
+                'renderBreadcrumbs',
+                [$this, 'renderBreadcrumbs'],
+                [
+                    'needs_environment' => true,
                  'is_safe' => ['html']]
             )
         ];
@@ -40,9 +41,9 @@ class Breadcrumb extends AbstractExtension
      * @throws RuntimeError
      * @throws SyntaxError
      */
-    public function renderBreadcrumbs(Environment $environment, BreadcrumbEntity $breadcrumb)
+    public function renderBreadcrumbs(Environment $environment, BreadcrumbEntity $breadcrumb): string
     {
         dump($breadcrumb);
-        return $environment->render("_extension/Breadcrumb.html.twig", ["breadcrumbs" => $breadcrumb]);
+        return $environment->render('_extension/Breadcrumb.html.twig', ['breadcrumbs' => $breadcrumb]);
     }
 }

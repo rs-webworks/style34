@@ -12,9 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * Class RoleController
- *
- *
+ * Class ProfileRoleController
  */
 class ProfileRoleController extends AbstractController
 {
@@ -25,10 +23,10 @@ class ProfileRoleController extends AbstractController
      *
      * @return Response
      */
-    public function list(RoleRepository $roleRepository)
+    public function list(RoleRepository $roleRepository) : Response
     {
         $roles = $roleRepository->findAll();
-        return $this->render('Administration/Profile/Role/list.html.twig', ["roles" => $roles]);
+        return $this->render('Administration/Profile/Role/list.html.twig', ['roles' => $roles]);
     }
 
     /**
@@ -47,22 +45,22 @@ class ProfileRoleController extends AbstractController
         RoleRepository $roleRepository,
         ProfileRepository $profileRepository,
         PaginatorInterface $paginator
-    ) {
-        $role = $roleRepository->findOneBy(["name" => $role]);
-        $qb = $profileRepository->createQueryBuilder('p')->where('p.role = :role')->orderBy("p.id")->setParameter(
+    ) : Response {
+        $roleEntity = $roleRepository->findOneBy(['name' => $role]);
+        $qb = $profileRepository->createQueryBuilder('p')->where('p.role = :role')->orderBy('p.id')->setParameter(
             'role',
-            $role
+            $roleEntity
         );
 
         $profiles = $paginator->paginate(
             $qb,
-            $request->query->get("page") ? (int) $request->query->get("page") : 1,
+            $request->query->get('page') ? (int) $request->query->get('page') : 1,
             ControllerSettings::PAGINATOR_DEFAULT_IPP
         );
 
         return $this->render(
             'Administration/Profile/Role/profiles.html.twig',
-            ["profiles" => $profiles, "role" => $role]
+            ['profiles' => $profiles, 'role' => $roleEntity]
         );
     }
 }

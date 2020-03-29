@@ -32,13 +32,13 @@ class ProfileController extends AbstractController
      *
      * @return Response
      */
-    public function view(ProfileRepository $profileRepository, ProfileService $profileService, string $username)
+    public function view(ProfileRepository $profileRepository, ProfileService $profileService, string $username) : Response
     {
         $profile = $profileRepository->findOneByUsername($username);
         $ownProfile = false;
 
         if ($this->user) {
-            $ownProfile = $this->user->getProfile()->getId() == $profile->getId();
+            $ownProfile = $this->user->getProfile()->getId() === $profile->getId();
         }
 
         if (!$profileService->isDisplayable($profile)) {
@@ -49,24 +49,25 @@ class ProfileController extends AbstractController
         $detail->profile = $profile;
         $detail->ownProfile = $ownProfile;
 
-        return $this->render("Profile/view.html.twig", [
-            "detail" => $detail,
+        return $this->render(
+            'Profile/view.html.twig', [
+            'detail' => $detail,
         ]);
     }
 
     /**
      * @Route("/profile/list", name="profile-list")
      */
-    public function list()
+    public function list() : Response
     {
-        return $this->render("Profile/list.html.twig");
+        return $this->render('Profile/list.html.twig');
     }
 
     /**
      * @Route("/profile/membership", name="profile-membership")
      */
-    public function membership()
+    public function membership() : Response
     {
-        return $this->render("Profile/membership.html.twig");
+        return $this->render('Profile/membership.html.twig');
     }
 }

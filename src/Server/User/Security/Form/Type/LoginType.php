@@ -15,8 +15,8 @@ use Symfony\Component\Form\FormBuilderInterface;
  */
 class LoginType extends AbstractType
 {
-    public const METHOD = "POST";
-    public const PREFIX = "login";
+    public const METHOD = 'POST';
+    public const PREFIX = 'login';
     public const USER_AUTH = 'userAuth';
     public const USER_PASSWORD = 'userPassword';
     public const REMEMBER_ME = 'rememberMe';
@@ -26,7 +26,7 @@ class LoginType extends AbstractType
      * @param FormBuilderInterface $builder
      * @param array $options
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->setMethod(self::METHOD);
 
@@ -34,8 +34,8 @@ class LoginType extends AbstractType
             self::USER_AUTH,
             TextType::class,
             [
-                "label" => 'username-or-mail',
-                "translation_domain" => 'security',
+                'label' => 'username-or-mail',
+                'translation_domain' => 'security',
             ]
         );
 

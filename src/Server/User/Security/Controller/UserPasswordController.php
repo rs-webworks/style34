@@ -35,15 +35,13 @@ use Twig\Error\SyntaxError;
 
 /**
  * Class UserPasswordController
- *
- *
  */
 class UserPasswordController extends AbstractController
 {
     use TranslatorAwareTrait;
     use LoggerAwareTrait;
 
-    protected const SESSION_RESET_TOKEN = "reset-password-token";
+    protected const SESSION_RESET_TOKEN = 'reset-password-token';
 
     /**
      * @Route("/user/password/request-reset", name="user-password-request-reset")
@@ -69,7 +67,7 @@ class UserPasswordController extends AbstractController
         MailService $mailService,
         TokenRepository $tokenRepository,
         TypeRepository $tokenTypeRepository
-    ): Response {
+    ) : Response {
         $email = $request->get('email');
 
         if ($email) {
@@ -86,7 +84,7 @@ class UserPasswordController extends AbstractController
                 );
                 $this->logger->notice('controller.user.security.requestResetPassword: unknown-mail', [$email]);
 
-                return $this->redirectToRoute('user-request-reset-password');
+                return $this->redirectToRoute('user-password-request-reset');
             }
 
             // Check if there is already pending request
@@ -96,7 +94,7 @@ class UserPasswordController extends AbstractController
                     $this->translator->trans('request-reset-password-already-pending', [], 'profile')
                 );
 
-                return $this->redirectToRoute('user-request-reset-password');
+                return $this->redirectToRoute('user-password-request-reset');
             }
 
             // Generate reset token
@@ -113,12 +111,11 @@ class UserPasswordController extends AbstractController
         return $this->render('User/Security/request-reset-password.html.twig');
     }
 
-
     /**
      * @IsGranted(EryseClient\Server\User\Role\Entity\RoleEntity::USER)
      * @Route("/user/password/reset", name="user-password-reset")
      */
-    public function resetPasswordViaUser()
+    public function resetPasswordViaUser() : Response
     {
         if (!$this->getUser()) {
             throw $this->createAccessDeniedException();
@@ -130,7 +127,6 @@ class UserPasswordController extends AbstractController
     /**
      * @Route("/user/password/reset/{tokenHash}", name="user-password-reset-token")
      *
-     * @param UserRepository $userRepository
      * @param TokenService $tokenService
      * @param TokenRepository $tokenRepository
      * @param Session $session
@@ -139,7 +135,6 @@ class UserPasswordController extends AbstractController
      * @return RedirectResponse|Response
      */
     public function resetPasswordViaToken(
-        UserRepository $userRepository,
         TokenService $tokenService,
         TokenRepository $tokenRepository,
         Session $session,
@@ -148,12 +143,12 @@ class UserPasswordController extends AbstractController
         $token = $tokenRepository->findOneBy(['hash' => $tokenHash]);
 
         try {
-            $tokenService->verifyToken($token, TypeEntity::USER["REQUEST_RESET_PASSWORD"]);
+            $tokenService->verifyToken($token, TypeEntity::USER['REQUEST_RESET_PASSWORD']);
         } catch (TokenException $exception) {
-            $this->logger->info("Token verification failed", [$exception]);
+            $this->logger->info('Token verification failed', [$exception]);
             $this->addFlash(FlashType::DANGER, $this->translator->trans('reset-password-invalid-token', [], 'profile'));
 
-            return $this->redirectToRoute('user-request-reset-password');
+            return $this->redirectToRoute('user-password-request-reset');
         }
 
         $session->set(self::SESSION_RESET_TOKEN, $token);
@@ -184,15 +179,16 @@ class UserPasswordController extends AbstractController
         Session $session
     ) {
         if (!$request->isMethod('post')) {
-            return $this->redirectToRoute('user-request-reset-password');
+            return $this->redirectToRoute('user-password-request-reset');
         }
+        $user = null;
 
         try {
             /** @var TokenEntity $token */
             $token = $session->get(self::SESSION_RESET_TOKEN);
 
             if (!$token) {
-                throw new TokenException();
+                throw new TokenException('token: ' . $token->getHash());
             }
 
             $user = $userRepository->find($token->getUser());
@@ -235,7 +231,7 @@ class UserPasswordController extends AbstractController
         UserInterface $user,
         string $newPassword,
         string $verify
-    ): void {
+    ) : void {
         if ($newPassword !== $verify) {
             throw new ResetPasswordException(
                 $this->translator->trans('reset-password-new-password-mismatch', [], 'profile')
@@ -249,7 +245,7 @@ class UserPasswordController extends AbstractController
                 $this->addFlash('danger', $error->getMessage());
             }
 
-            throw new ResetPasswordException();
+            throw new ResetPasswordException('Password validation failed');
         }
     }
 }

@@ -3,7 +3,7 @@
 namespace EryseClient\Common\DataFixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use EryseClient\Client\Profile\Entity\ProfileEntity;
@@ -24,19 +24,19 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class UserFixtures extends Fixture
 {
     /** @var UserPasswordEncoderInterface */
-    private $passwordEncoder;
+    private UserPasswordEncoderInterface $passwordEncoder;
 
     /** @var UserRepository */
-    private $userRepository;
+    private UserRepository $userRepository;
 
     /** @var ProfileRepository */
-    private $profileRepository;
+    private ProfileRepository $profileRepository;
 
     /** @var RoleRepository */
-    private $profileRoleRepository;
+    private RoleRepository $profileRoleRepository;
 
     /** @var Generator */
-    private $faker;
+    private Generator $faker;
 
     /**
      * UserFixtures constructor.
@@ -73,7 +73,7 @@ class UserFixtures extends Fixture
             $user = new UserEntity();
             $user->setUsername($faker->userName);
             $user->setEmail($faker->email);
-            $user->setCreatedAt($faker->dateTime("now"));
+            $user->setCreatedAt($faker->dateTime('now'));
             $user->setPassword($this->passwordEncoder->encodePassword($user, $faker->password));
 
             $roles = [UserRole::INACTIVE, UserRole::VERIFIED];

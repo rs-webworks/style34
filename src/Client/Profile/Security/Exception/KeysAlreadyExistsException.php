@@ -2,12 +2,10 @@
 
 namespace EryseClient\Client\Profile\Security\Exception;
 
-use Throwable;
-
 /**
  * Class KeysAlreadyExists
  *
  */
-class KeysAlreadyExistsException extends SecurityException implements Throwable
+class KeysAlreadyExistsException extends SecurityException
 {
 }

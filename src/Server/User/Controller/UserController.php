@@ -2,12 +2,12 @@
 
 namespace EryseClient\Server\User\Controller;
 
-use Doctrine\ORM\OptimisticLockException;
-use Doctrine\ORM\ORMException;
+use Doctrine\ORM\EntityNotFoundException;
 use EryseClient\Client\Profile\Settings\Form\Type\SettingsType;
 use EryseClient\Common\Utility\LoggerAwareTrait;
 use EryseClient\Common\Utility\TranslatorAwareTrait;
 use EryseClient\Server\User\Entity\UserEntity;
+use EryseClient\Server\User\Exception\UserException;
 use EryseClient\Server\User\Repository\UserRepository;
 use EryseClient\Server\User\Service\UserService;
 use EryseClient\Server\User\Settings\Repository\SettingsRepository;
@@ -36,14 +36,14 @@ class UserController extends AbstractController
      * @Route("/user/edit/{id}/{username}", name="user-edit")
      * @param null $username
      */
-    public function edit($username = null)
+    public function edit($username = null) : void
     {
     }
 
     /**
      * @Route("/user/list", name="user-list")
      */
-    public function list()
+    public function list() : void
     {
     }
 
@@ -52,7 +52,7 @@ class UserController extends AbstractController
      * @param $id
      * @param UserRepository $userRepository
      */
-    public function viewSelf($id, UserRepository $userRepository)
+    public function viewSelf($id, UserRepository $userRepository) : void
     {
     }
 
@@ -61,7 +61,7 @@ class UserController extends AbstractController
      * @param $id
      * @param UserRepository $userRepository
      */
-    public function view($id, UserRepository $userRepository)
+    public function view($id, UserRepository $userRepository) : void
     {
     }
 
@@ -72,7 +72,7 @@ class UserController extends AbstractController
      *
      * @return Response
      */
-    public function settings(Request $request, SettingsRepository $serverSettingsRepository)
+    public function settings(Request $request, SettingsRepository $serverSettingsRepository) : Response
     {
         /** @var UserEntity $user */
         $user = $this->getUser();
@@ -89,7 +89,7 @@ class UserController extends AbstractController
             [
                 'form' => $form->createView(),
                 'user' => $user,
-                'settings' => $serverSettingsRepository->findOneBy(["userId" => $user->getId()])
+                'settings' => $serverSettingsRepository->findOneBy(['userId' => $user->getId()])
             ]
         );
     }
@@ -104,8 +104,8 @@ class UserController extends AbstractController
      * @param SettingsRepository $serverSettingsRepository
      *
      * @return Response
-     * @throws ORMException
-     * @throws OptimisticLockException
+     * @throws UserException
+     * @throws EntityNotFoundException
      */
     public function enableTwoStepAuth(
         GoogleAuthenticatorInterface $authService,
@@ -114,7 +114,7 @@ class UserController extends AbstractController
         UserService $userService,
         UserRepository $userRepository,
         SettingsRepository $serverSettingsRepository
-    ) {
+    ): Response {
         $user = $this->getUser();
         $gAuthEntity = $userRepository->getGoogleAuthEntity($user);
         $activationCode = $request->get('activation-code');
@@ -126,15 +126,15 @@ class UserController extends AbstractController
             $serverSettings->setGAuthSecret($secret);
 
             // If activation code matches generated secret check
-            if ($activationCode == $authService->checkCode($gAuthEntity, $activationCode)) {
+            if ($activationCode === $authService->checkCode($gAuthEntity, $activationCode)) {
                 $userService->enableTwoStepAuth($user, $secret);
 
                 $this->addFlash('success', $this->translator->trans('two-step-auth-enabled', [], 'profile'));
 
                 return $this->redirectToRoute('user-settings');
-            } else {
-                $this->addFlash('danger', $this->translator->trans('two-step-auth-failed', [], 'profile'));
             }
+
+            $this->addFlash('danger', $this->translator->trans('two-step-auth-failed', [], 'profile'));
         }
 
         $secret = $authService->generateSecret();
@@ -152,10 +152,8 @@ class UserController extends AbstractController
      * @param UserInterface|UserEntity $user
      *
      * @return RedirectResponse
-     * @throws ORMException
-     * @throws OptimisticLockException
      */
-    public function disableTwoStepAuth(UserService $userService, UserInterface $user)
+    public function disableTwoStepAuth(UserService $userService, UserInterface $user): RedirectResponse
     {
         // TODO: Require user to either enter password again or add email token for this, security reasons
         $userService->disableTwoStepAuth($user);
@@ -171,10 +169,8 @@ class UserController extends AbstractController
      * @param UserInterface|UserEntity $user
      *
      * @return RedirectResponse
-     * @throws ORMException
-     * @throws OptimisticLockException
      */
-    public function forgetDevices(UserService $userService, UserInterface $user)
+    public function forgetDevices(UserService $userService, UserInterface $user) : RedirectResponse
     {
         $userService->forgetDevices($user);
         $this->addFlash('success', $this->translator->trans('two-step-auth-devices-forgotten', [], 'user'));
@@ -188,10 +184,8 @@ class UserController extends AbstractController
      * @param UserInterface|UserEntity $user
      *
      * @return RedirectResponse
-     * @throws ORMException
-     * @throws OptimisticLockException
      */
-    public function logoutEverywhere(UserService $userService, UserInterface $user)
+    public function logoutEverywhere(UserService $userService, UserInterface $user) : RedirectResponse
     {
         // TODO: This is not working yet
         $userService->logoutEverywhere($user);
@@ -203,7 +197,7 @@ class UserController extends AbstractController
     /**
      * @Route("/user/settings/delete-user", name="user-delete")
      */
-    public function delete()
+    public function delete() : Response
     {
         return $this->render('User/delete.html.twig');
     }

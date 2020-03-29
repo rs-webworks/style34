@@ -40,7 +40,7 @@ class ProfileRepository extends AbstractRepository
      */
     public function findOneByUserId(int $userId): ProfileEntity
     {
-        return $this->findOneBy(["userId" => $userId]);
+        return $this->findOneBy(['userId' => $userId]);
     }
 
     /**

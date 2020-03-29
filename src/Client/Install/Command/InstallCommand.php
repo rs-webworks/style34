@@ -24,7 +24,6 @@ use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Contracts\Cache\CacheInterface;
 
 /**
  * Class InstallCommand.
@@ -37,36 +36,32 @@ class InstallCommand extends Command
     use LoggerAwareTrait;
 
     /** @var SymfonyStyle $io */
-    private $io;
+    private SymfonyStyle $io;
 
     /** @var OutputInterface $output */
-    private $output;
-
-    /** @var CacheInterface $cache */
-    private $cacheInterface;
+    private OutputInterface $output;
 
     /** @var UserPasswordEncoderInterface $passwordEncoder */
-    private $passwordEncoder;
+    private UserPasswordEncoderInterface $passwordEncoder;
 
     /** @var UserService */
-    private $userService;
+    private UserService $userService;
 
     /** @var UserRepository */
-    private $userRepository;
+    private UserRepository $userRepository;
 
     /** @var TypeRepository */
-    private $tokenTypeRepository;
+    private TypeRepository $tokenTypeRepository;
 
     /** @var RoleRepository */
-    private $profileRoleRepository;
+    private RoleRepository $profileRoleRepository;
 
     /** @var ProfileRepository */
-    private $profileRepository;
+    private ProfileRepository $profileRepository;
 
     /**
      * InstallBaseCommand constructor
      *
-     * @param CacheInterface $cache
      * @param UserPasswordEncoderInterface $passwordEncoder
      * @param UserRepository $userRepository
      * @param TypeRepository $tokenTypeRepository
@@ -74,14 +69,12 @@ class InstallCommand extends Command
      * @param ProfileRepository $profileRepository
      */
     public function __construct(
-        CacheInterface $cache,
         UserPasswordEncoderInterface $passwordEncoder,
         UserRepository $userRepository,
         TypeRepository $tokenTypeRepository,
         RoleRepository $profileRoleRepository,
         ProfileRepository $profileRepository
     ) {
-        $this->cacheInterface = $cache;
         $this->passwordEncoder = $passwordEncoder;
         $this->userRepository = $userRepository;
         $this->tokenTypeRepository = $tokenTypeRepository;
@@ -196,14 +189,14 @@ class InstallCommand extends Command
                 [
                     '--full-database' => true,
                     '--force' => true,
-                    "--em" => "eryseClient",
+                    '--em' => 'eryseClient',
                 ]
             ),
             new ArrayInput(
                 [
                     '--full-database' => true,
                     '--force' => true,
-                    "--em" => "eryseServer",
+                    '--em' => 'eryseServer',
                 ]
             ),
         ];
@@ -212,6 +205,7 @@ class InstallCommand extends Command
 
         foreach ($arguments as $args) {
             $command->run($args, new NullOutput());
+            /** @noinspection DisconnectedForeachInstructionInspection */
             $this->io->progressAdvance(1);
         }
 
@@ -229,16 +223,16 @@ class InstallCommand extends Command
             ->find('doctrine:database:create');
 
         $options = [
-            "command" => "doctrine:database:create",
-            "--connection" => "eryseClient",
+            'command' => 'doctrine:database:create',
+            '--connection' => 'eryseClient',
         ];
 
         $arguments = new ArrayInput($options);
         $command->run($arguments, new NullOutput());
 
         $options = [
-            "command" => "doctrine:database:create",
-            "--connection" => "eryseServer",
+            'command' => 'doctrine:database:create',
+            '--connection' => 'eryseServer',
         ];
 
         $arguments = new ArrayInput($options);
@@ -259,16 +253,16 @@ class InstallCommand extends Command
             ->find('doctrine:database:drop');
 
         $options = [
-            "command" => "doctrine:database:drop",
-            "--connection" => "eryseClient",
+            'command' => 'doctrine:database:drop',
+            '--connection' => 'eryseClient',
         ];
 
         $arguments = new ArrayInput($options);
         $command->run($arguments, new NullOutput());
 
         $options = [
-            "command" => "doctrine:database:drop",
-            "--connection" => "eryseServer",
+            'command' => 'doctrine:database:drop',
+            '--connection' => 'eryseServer',
         ];
 
         $arguments = new ArrayInput($options);
@@ -285,18 +279,18 @@ class InstallCommand extends Command
     {
         $arguments = [
             [
-                "command" => "doctrine:migrations:migrate",
-                "--quiet" => true,
-                "--no-interaction" => true,
-                "--em" => "eryseClient",
-                "--configuration" => "./bin/migrations_client.yaml",
+                'command' => 'doctrine:migrations:migrate',
+                '--quiet' => true,
+                '--no-interaction' => true,
+                '--em' => 'eryseClient',
+                '--configuration' => './bin/migrations_client.yaml',
             ],
             [
-                "command" => "doctrine:migrations:migrate",
-                "--quiet" => true,
-                "--no-interaction" => true,
-                "--em" => "eryseServer",
-                "--configuration" => "./bin/migrations_server.yaml",
+                'command' => 'doctrine:migrations:migrate',
+                '--quiet' => true,
+                '--no-interaction' => true,
+                '--em' => 'eryseServer',
+                '--configuration' => './bin/migrations_server.yaml',
             ],
         ];
 
@@ -310,6 +304,7 @@ class InstallCommand extends Command
             $arguments->setInteractive(false);
 
             $command->run($arguments, new NullOutput());
+            /** @noinspection DisconnectedForeachInstructionInspection */
             $this->io->progressAdvance(1);
         }
 
@@ -341,6 +336,7 @@ class InstallCommand extends Command
 
             $this->profileRoleRepository->save($r);
 
+            /** @noinspection DisconnectedForeachInstructionInspection */
             $this->io->progressAdvance(1);
         }
 
@@ -391,6 +387,7 @@ class InstallCommand extends Command
 
             $this->profileRepository->save($profile);
 
+            /** @noinspection DisconnectedForeachInstructionInspection */
             $this->io->progressAdvance(1);
         }
 
@@ -416,6 +413,7 @@ class InstallCommand extends Command
             $tt->setName($name);
 
             $this->tokenTypeRepository->save($tt);
+            /** @noinspection DisconnectedForeachInstructionInspection */
             $this->io->progressAdvance(1);
         }
 

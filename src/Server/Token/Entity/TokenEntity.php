@@ -8,8 +8,7 @@ use EryseClient\Common\Entity\CreatedAt;
 use EryseClient\Common\Entity\ExpiresAt;
 use EryseClient\Common\Entity\Identifier;
 use EryseClient\Common\Token\TokenInterface;
-use EryseClient\Common\Token\TokenTypeInterfance;
-use EryseClient\Server\Token\Type\Entity\TypeEntity;
+use EryseClient\Common\Token\TokenTypeInterface;
 use EryseClient\Server\User\Entity\UserEntity;
 
 /**
@@ -28,25 +27,25 @@ class TokenEntity implements ClientEntity, TokenInterface
      * @var string $hash
      * @ORM\Column(type="string")
      */
-    protected $hash;
+    protected string $hash;
 
     /**
-     * @var TokenTypeInterfance $type
+     * @var TokenTypeInterface $type
      * @ORM\ManyToOne(targetEntity="EryseClient\Server\Token\Type\Entity\TypeEntity", inversedBy="tokens")
      */
-    protected $type;
+    protected TokenTypeInterface $type;
 
     /**
      * @var UserEntity
      * @ORM\ManyToOne(targetEntity="EryseClient\Server\User\Entity\UserEntity")
      */
-    protected $user;
+    protected UserEntity $user;
 
     /**
      * @var bool
      * @ORM\Column(type="boolean")
      */
-    protected $invalid = false;
+    protected bool $invalid = false;
 
     /**
      * @return string
@@ -65,17 +64,17 @@ class TokenEntity implements ClientEntity, TokenInterface
     }
 
     /**
-     * @return TokenTypeInterfance
+     * @return TokenTypeInterface
      */
-    public function getType(): TokenTypeInterfance
+    public function getType(): TokenTypeInterface
     {
         return $this->type;
     }
 
     /**
-     * @param TypeEntity $type
+     * @param TokenTypeInterface $type
      */
-    public function setType(TypeEntity $type): void
+    public function setType(TokenTypeInterface $type): void
     {
         $this->type = $type;
     }

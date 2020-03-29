@@ -37,7 +37,7 @@ class UserSecurityController extends AbstractController
         $loginForm = $this->createForm(
             LoginType::class,
             null,
-            ["action" => $this->generateUrl(UserLoginFormAuthenticator::ROUTE)]
+            ['action' => $this->generateUrl(UserLoginFormAuthenticator::ROUTE)]
         );
 
         return $this->render(
@@ -58,7 +58,7 @@ class UserSecurityController extends AbstractController
         $loginForm = $this->createForm(
             LoginType::class,
             null,
-            ["attr" => ["id" => "login"], "action" => $this->generateUrl(UserLoginFormAuthenticator::ROUTE)]
+            ['attr' => ['id' => 'login'], 'action' => $this->generateUrl(UserLoginFormAuthenticator::ROUTE)]
         );
 
         return $this->render('_partial/login-form.html.twig', ['loginForm' => $loginForm->createView()]);

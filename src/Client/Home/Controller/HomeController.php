@@ -18,7 +18,7 @@ class HomeController extends AbstractController
     /**
      * @Route("/", name="home-index")
      */
-    public function index()
+    public function index() : Response
     {
         return $this->render('Home/index.html.twig');
     }
@@ -27,7 +27,7 @@ class HomeController extends AbstractController
      * @Route("/dev", name="dev")
      * @return Response
      */
-    public function dev()
+    public function dev() : Response
     {
         return $this->render('dev.html.twig');
     }

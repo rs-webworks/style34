@@ -2,7 +2,7 @@
 
 namespace EryseClient\Server\User\Form\Type;
 
-use EryseClient\Server\UserRole\Entity\UserRole;
+use EryseClient\Server\User\Role\Entity\RoleEntity;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -18,7 +18,7 @@ class UserSearchType extends AbstractType
      * @param FormBuilderInterface $builder
      * @param array $options
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->setMethod('GET');
 
@@ -26,9 +26,9 @@ class UserSearchType extends AbstractType
             'username',
             TextType::class,
             [
-                "required" => false,
-                "label" => 'user-username',
-                "translation_domain" => 'administration'
+                'required' => false,
+                'label' => 'user-username',
+                'translation_domain' => 'administration'
             ]
         );
 
@@ -36,24 +36,24 @@ class UserSearchType extends AbstractType
             'email',
             TextType::class,
             [
-                "required" => false,
-                "label" => 'user-email',
-                "translation_domain" => 'administration'
+                'required' => false,
+                'label' => 'user-email',
+                'translation_domain' => 'administration'
             ]
         );
 
         $builder->add(
-            "roleEntity",
+            'roleEntity',
             EntityType::class,
             [
-                "class" => UserRole::class,
-                "choice_label" => "name",
-                "choice_name" => "name",
-                "choice_value" => "name",
-                "required" => false,
-                "empty_data" => null,
-                "label" => "user-role",
-                "translation_domain" => "administration"
+                'class' => RoleEntity::class,
+                'choice_label' => 'name',
+                'choice_name' => 'name',
+                'choice_value' => 'name',
+                'required' => false,
+                'empty_data' => null,
+                'label' => 'user-role',
+                'translation_domain' => 'administration'
             ]
         );
     }

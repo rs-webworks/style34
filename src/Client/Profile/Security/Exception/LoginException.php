@@ -2,12 +2,10 @@
 
 namespace EryseClient\Client\Profile\Security\Exception;
 
-use Throwable;
-
 /**
  * Class LoginException
  *
  */
-class LoginException extends SecurityException implements Throwable
+class LoginException extends SecurityException
 {
 }

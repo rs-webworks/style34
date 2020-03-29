@@ -3,12 +3,11 @@
 namespace EryseClient\Server\User\Exception;
 
 use EryseClient\Common\Exception\Exception;
-use Throwable;
 
 /**
  * Class ProfileException
  *
  */
-class UserException extends Exception implements Throwable
+class UserException extends Exception
 {
 }

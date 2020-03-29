@@ -18,7 +18,7 @@ abstract class AbstractRepository extends ServiceEntityRepository
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function save(...$entities)
+    public function save(...$entities) : void
     {
         $em = $this->getEntityManager();
 

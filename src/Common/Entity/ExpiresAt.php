@@ -15,7 +15,7 @@ trait ExpiresAt
      * @ORM\Column(type="datetime", nullable=false)
      * @var DateTime
      */
-    private $expiresAt;
+    private DateTime $expiresAt;
 
     /**
      * @return DateTime

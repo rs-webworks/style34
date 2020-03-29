@@ -3,12 +3,11 @@
 namespace EryseClient\Client\Profile\Security\Exception;
 
 use EryseClient\Common\Exception\Exception;
-use Throwable;
 
 /**
  * Class SecurityException
 
  */
-class SecurityException extends Exception implements Throwable
+class SecurityException extends Exception
 {
 }

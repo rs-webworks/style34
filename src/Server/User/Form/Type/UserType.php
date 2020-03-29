@@ -2,7 +2,6 @@
 
 namespace EryseClient\Server\User\Form\Type;
 
-use EryseClient\Client\Profile\Role\Repository\RoleRepository;
 use EryseClient\Server\User\Role\Entity\RoleEntity;
 use EryseClient\Server\User\Entity\UserEntity;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -19,32 +18,18 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class UserType extends AbstractType
 {
-
-    /** @var RoleRepository */
-    private $roleRepository;
-
-    /**
-     * UserForm constructor.
-     *
-     * @param RoleRepository $roleRepository
-     */
-    public function __construct(RoleRepository $roleRepository)
-    {
-        $this->roleRepository = $roleRepository;
-    }
-
     /**
      * @param FormBuilderInterface $builder
      * @param array $options
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add(
             'id',
             TextType::class,
             [
-                "label" => 'id',
-                "translation_domain" => 'global'
+                'label' => 'id',
+                'translation_domain' => 'global'
             ]
         );
 
@@ -52,8 +37,8 @@ class UserType extends AbstractType
             'username',
             TextType::class,
             [
-                "label" => 'user-username',
-                "translation_domain" => 'administration'
+                'label' => 'user-username',
+                'translation_domain' => 'administration'
             ]
         );
 
@@ -61,8 +46,8 @@ class UserType extends AbstractType
             'email',
             EmailType::class,
             [
-                "label" => 'user-email',
-                "translation_domain" => 'administration'
+                'label' => 'user-email',
+                'translation_domain' => 'administration'
             ]
         );
 
@@ -70,8 +55,8 @@ class UserType extends AbstractType
             'createdAt',
             DateTimeType::class,
             [
-                "label" => "created-at",
-                "translation_domain" => 'administration'
+                'label' => 'created-at',
+                'translation_domain' => 'administration'
             ]
         );
 
@@ -79,8 +64,8 @@ class UserType extends AbstractType
             'activatedAt',
             DateTimeType::class,
             [
-                "label" => "activated-at",
-                "translation_domain" => 'administration',
+                'label' => 'activated-at',
+                'translation_domain' => 'administration',
             ]
         );
 
@@ -88,13 +73,13 @@ class UserType extends AbstractType
             'roleEntity',
             EntityType::class,
             [
-                "label" => "user-role",
-                "class" => RoleEntity::class,
-                "choice_label" => "name",
-                "choice_name" => "name",
-                "choice_value" => "name",
-                "choice_translation_domain" => "global",
-                "translation_domain" => 'administration',
+                'label' => 'user-role',
+                'class' => RoleEntity::class,
+                'choice_label' => 'name',
+                'choice_name' => 'name',
+                'choice_value' => 'name',
+                'choice_translation_domain' => 'global',
+                'translation_domain' => 'administration',
             ]
         );
     }
@@ -102,7 +87,7 @@ class UserType extends AbstractType
     /**
      * @param OptionsResolver $resolver
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults(
             [

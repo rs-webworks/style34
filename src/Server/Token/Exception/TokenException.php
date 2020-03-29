@@ -3,12 +3,11 @@
 namespace EryseClient\Server\Token\Exception;
 
 use EryseClient\Common\Exception\Exception;
-use Throwable;
 
 /**
  * Class TokenException
  *
  */
-class TokenException extends Exception implements Throwable
+class TokenException extends Exception
 {
 }

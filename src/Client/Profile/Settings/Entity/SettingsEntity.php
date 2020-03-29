@@ -20,7 +20,7 @@ class SettingsEntity implements ClientEntity
      * @var int
      * @ORM\Column(type="integer", nullable=false)
      */
-    protected $userId;
+    protected int $userId;
 
     /**
      * ClientSettings constructor.

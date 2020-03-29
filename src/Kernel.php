@@ -1,4 +1,6 @@
-<?php /** @noinspection PhpIncludeInspection */
+<?php /** @noinspection PhpDeprecationInspection */
+
+/** @noinspection PhpIncludeInspection */
 declare(strict_types=1);
 
 namespace EryseClient;
@@ -22,12 +24,12 @@ class Kernel extends BaseKernel
 {
     use MicroKernelTrait;
 
-    const CONFIG_EXTS = '.{php,xml,yaml,yml}';
+    public const CONFIG_EXTS = '.{php,xml,yaml,yml}';
 
     /**
      * @return string
      */
-    public function getCacheDir()
+    public function getCacheDir(): string
     {
         return $this->getProjectDir() . '/var/cache/' . $this->environment;
     }
@@ -35,7 +37,7 @@ class Kernel extends BaseKernel
     /**
      * @return string
      */
-    public function getLogDir()
+    public function getLogDir(): string
     {
         return $this->getProjectDir() . '/var/log';
     }
@@ -58,7 +60,7 @@ class Kernel extends BaseKernel
      * @param LoaderInterface $loader
      * @throws Exception
      */
-    protected function configureContainer(ContainerBuilder $container, LoaderInterface $loader)
+    protected function configureContainer(ContainerBuilder $container, LoaderInterface $loader) : void
     {
         $container->addResource(new FileResource($this->getProjectDir() . '/config/bundles.php'));
         $container->setParameter('container.dumper.inline_class_loader', true);
@@ -74,7 +76,7 @@ class Kernel extends BaseKernel
      * @param RouteCollectionBuilder $routes
      * @throws LoaderLoadException
      */
-    protected function configureRoutes(RouteCollectionBuilder $routes)
+    protected function configureRoutes(RouteCollectionBuilder $routes) : void
     {
         $confDir = $this->getProjectDir() . '/config';
 

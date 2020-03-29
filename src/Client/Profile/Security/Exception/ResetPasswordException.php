@@ -2,12 +2,10 @@
 
 namespace EryseClient\Client\Profile\Security\Exception;
 
-use Throwable;
-
 /**
  * Class ResetPasswordException
  *
  */
-class ResetPasswordException extends SecurityException implements Throwable
+class ResetPasswordException extends SecurityException
 {
 }

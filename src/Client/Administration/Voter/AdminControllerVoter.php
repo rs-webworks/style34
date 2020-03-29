@@ -14,7 +14,7 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
  */
 abstract class AdminControllerVoter extends ControllerVoter
 {
-    const TARGETS = [];
+    public const TARGETS = [];
 
     /**
      * @param string $attribute
@@ -24,11 +24,11 @@ abstract class AdminControllerVoter extends ControllerVoter
      */
     protected function supports(string $attribute, $subject)
     {
-        if (!in_array($attribute, self::ACTIONS)) {
+        if (!in_array($attribute, self::ACTIONS, true)) {
             return false;
         }
 
-        if (!in_array($subject, static::TARGETS)) {
+        if (!in_array($subject, static::TARGETS, true)) {
             return false;
         }
 

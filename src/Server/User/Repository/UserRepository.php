@@ -2,16 +2,18 @@
 
 namespace EryseClient\Server\User\Repository;
 
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\EntityNotFoundException;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
+use Doctrine\Persistence\ManagerRegistry;
 use EryseClient\Client\Profile\Settings\Entity\SettingsEntity as ProfileSettingsEntity;
 use EryseClient\Client\Profile\Settings\Repository\SettingsRepository as ProfileSettingsRepository;
 use EryseClient\Common\Repository\AbstractRepository;
 use EryseClient\Server\GoogleAuth\Entity\GoogleAuthEntity;
 use EryseClient\Server\User\Entity\UserEntity;
+use EryseClient\Server\User\Exception\UserException;
 use EryseClient\Server\User\Settings\Entity\SettingsEntity as UserSettingsEntity;
 use EryseClient\Server\User\Settings\Repository\SettingsRepository as UserSettingsRepository;
 use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
@@ -28,11 +30,10 @@ class UserRepository extends AbstractRepository implements UserLoaderInterface
 {
 
     /** @var UserSettingsRepository */
-    private $serverSettingsRepository;
+    private UserSettingsRepository $serverSettingsRepository;
 
     /** @var ProfileSettingsRepository */
-    private $clientSettingsRepository;
-
+    private ProfileSettingsRepository $clientSettingsRepository;
 
     /**
      * UserRepository constructor.
@@ -57,7 +58,7 @@ class UserRepository extends AbstractRepository implements UserLoaderInterface
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function saveNew(UserEntity $user): void
+    public function saveNew(UserEntity $user) : void
     {
         $this->save($user);
         $this->serverSettingsRepository->save(new UserSettingsEntity($user));
@@ -65,7 +66,7 @@ class UserRepository extends AbstractRepository implements UserLoaderInterface
     }
 
     /**
-     * This metod just implements interface, in order to obtain fully loaded user with all its entities call
+     * This method just implements interface, in order to obtain fully loaded user with all its entities call
      * loadUserById
      *
      * @param string $username
@@ -78,12 +79,10 @@ class UserRepository extends AbstractRepository implements UserLoaderInterface
      */
     public function loadUserByUsername($username)
     {
-        return $this->createQueryBuilder('u')
-            ->where('u.username = :username OR u.email = :email')
-            ->setParameter('username', $username)
-            ->setParameter('email', $username)
-            ->getQuery()
-            ->getSingleResult();
+        return $this->createQueryBuilder('u')->where('u.username = :username OR u.email = :email')->setParameter(
+            'username',
+            $username
+        )->setParameter('email', $username)->getQuery()->getSingleResult();
     }
 
     /**
@@ -91,9 +90,9 @@ class UserRepository extends AbstractRepository implements UserLoaderInterface
      *
      * @return UserEntity
      */
-    public function findOneByUsername(string $username): UserEntity
+    public function findOneByUsername(string $username) : UserEntity
     {
-        return $this->findOneBy(["username" => $username]);
+        return $this->findOneBy(['username' => $username]);
     }
 
     /**
@@ -101,16 +100,12 @@ class UserRepository extends AbstractRepository implements UserLoaderInterface
      *
      * @return array|null
      */
-    public function findByRole(string $role): ?array
+    public function findByRole(string $role) : ?array
     {
         $qb = $this->_em->createQueryBuilder();
-        $qb->select('u')
-            ->from($this->_entityName, 'u')
-            ->where('u.role = :role')
-            ->setParameter('role', $role);
+        $qb->select('u')->from($this->_entityName, 'u')->where('u.role = :role')->setParameter('role', $role);
 
-        return $qb->getQuery()
-            ->getResult();
+        return $qb->getQuery()->getResult();
     }
 
     /**
@@ -119,7 +114,7 @@ class UserRepository extends AbstractRepository implements UserLoaderInterface
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function removeUsers(array $users): void
+    public function removeUsers(array $users) : void
     {
         foreach ($users as $user) {
             $this->_em->remove($user);
@@ -129,12 +124,18 @@ class UserRepository extends AbstractRepository implements UserLoaderInterface
     }
 
     /**
-     * @param UserEntity $user
+     * @param UserInterface $user
      *
      * @return GoogleAuthEntity|null
+     * @throws UserException
+     * @throws EntityNotFoundException
      */
-    public function getGoogleAuthEntity(UserEntity $user): ?GoogleAuthEntity
+    public function getGoogleAuthEntity(UserInterface $user) : ?GoogleAuthEntity
     {
+        if (!($user instanceof UserEntity)) {
+            throw new UserException('GoogleAuth is provided only for UserEntity');
+        }
+
         $settings = $this->serverSettingsRepository->findByUser($user);
 
         return new GoogleAuthEntity($user, $settings);

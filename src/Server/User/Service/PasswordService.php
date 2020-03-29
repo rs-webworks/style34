@@ -21,10 +21,10 @@ class PasswordService extends AbstractService
     use TranslatorAwareTrait;
 
     /** @var TokenService */
-    protected $tokenService;
+    protected TokenService $tokenService;
 
     /** @var UserPasswordEncoderInterface $passwordEncoder */
-    protected $passwordEncoder;
+    protected UserPasswordEncoderInterface $passwordEncoder;
 
     /**
      * PasswordService constructor.

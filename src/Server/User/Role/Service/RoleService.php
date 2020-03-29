@@ -23,7 +23,7 @@ class RoleService extends AbstractService
      */
     public function isRoleBlocked(string $role): bool
     {
-        return in_array($role, self::BLOCKED_ROLES);
+        return in_array($role, self::BLOCKED_ROLES, true);
     }
 
     /**
@@ -33,7 +33,7 @@ class RoleService extends AbstractService
      */
     public function isRoleAdmin(UserEntity $user): bool
     {
-        return $user->getRole() == RoleEntity::ADMIN;
+        return $user->getRole() === RoleEntity::ADMIN;
     }
 }
 

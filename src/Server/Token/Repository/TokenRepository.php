@@ -3,7 +3,7 @@
 namespace EryseClient\Server\Token\Repository;
 
 use DateTime;
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use EryseClient\Common\Repository\AbstractRepository;
@@ -36,7 +36,7 @@ class TokenRepository extends AbstractRepository
      * @return TokenEntity[]
      * @throws Exception
      */
-    public function findExpiredTokens(TypeEntity $tokenType)
+    public function findExpiredTokens(TypeEntity $tokenType) : array
     {
         return $this->createQueryBuilder('t')
             ->where('t.type = :tokenType')
@@ -59,7 +59,7 @@ class TokenRepository extends AbstractRepository
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function invalidateTokens(array $tokens)
+    public function invalidateTokens(array $tokens) : void
     {
         foreach ($tokens as $token) {
             $token->setInvalid(true);

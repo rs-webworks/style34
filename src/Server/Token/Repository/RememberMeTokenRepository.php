@@ -29,6 +29,6 @@ class RememberMeTokenRepository extends AbstractRepository
      */
     public function findByUser(UserEntity $user): RememberMeTokenEntity
     {
-        return $this->findOneBy(["username" => $user->getUsername()]);
+        return $this->findOneBy(['username' => $user->getUsername()]);
     }
 }

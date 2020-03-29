@@ -4,20 +4,18 @@ namespace EryseClient\Server\Connection\Entity;
 
 use EryseClient\Common\Entity\Identifier;
 use EryseClient\Common\Entity\ServerEntity;
-use Doctrine\ORM\Mapping\Annotation as ORM;
 
 /**
- * Class Connection
- *
+ * Class ConnectionEntity
  */
 class ConnectionEntity implements ServerEntity
 {
 
     use Identifier;
 
-    private $clientId;
+    private int $clientId;
 
-    private $profileId;
+    private int $profileId;
 
-    private $userId;
+    private int $userId;
 }

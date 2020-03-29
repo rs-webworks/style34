@@ -16,12 +16,12 @@ use Throwable;
  */
 class EryseDataCollector extends DataCollector
 {
-    private const COLLECTOR_NAME = "eryse.app";
+    private const COLLECTOR_NAME = 'eryse.app';
 
     /**
      * @var UserInterface
      */
-    private $user;
+    private ?UserInterface $user;
 
     /**
      * UserDataCollector constructor.
@@ -39,17 +39,17 @@ class EryseDataCollector extends DataCollector
      * @param Response $response
      * @param Throwable|null $exception
      */
-    public function collect(Request $request, Response $response, Throwable $exception = null)
+    public function collect(Request $request, Response $response, Throwable $exception = null): void
     {
         $this->data = [
-            "user" => $this->user,
+            'user' => $this->user,
         ];
     }
 
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return self::COLLECTOR_NAME;
     }
@@ -57,7 +57,7 @@ class EryseDataCollector extends DataCollector
     /**
      *
      */
-    public function reset()
+    public function reset(): void
     {
         $this->data = [];
     }
@@ -67,7 +67,7 @@ class EryseDataCollector extends DataCollector
      */
     public function getUser(): ?UserInterface
     {
-        return $this->data["user"];
+        return $this->data['user'];
     }
 
 }

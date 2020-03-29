@@ -5,14 +5,14 @@ namespace EryseClient\Server\User\Settings\Repository;
 use Doctrine\Persistence\ManagerRegistry;
 use EryseClient\Common\Repository\AbstractRepository;
 use EryseClient\Server\User\Entity\FindByUserTrait;
-use EryseClient\Server\User\Entity\UserEntity;
 use EryseClient\Server\User\Settings\Entity\SettingsEntity;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Class ServiceSettingsRepository
  * @method SettingsEntity|null findOneBy(array $criteria, array $orderBy = null)
  * @method SettingsEntity|null find($id, $lockMode = null, $lockVersion = null)
- * @method SettingsEntity|null findByUser(UserEntity $user)
+ * @method SettingsEntity|null findByUser(UserInterface $user)
  */
 class SettingsRepository extends AbstractRepository
 {

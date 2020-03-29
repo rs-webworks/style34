@@ -18,16 +18,14 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorTrait;
 
 /**
- * Class RoleController
- *
- *
+ * Class ProfileController
  */
 class ProfileController extends AbstractController
 {
     use TranslatorTrait;
 
-    public const ROUTE_LIST = "administration-profiles-list";
-    public const ROUTE_EDIT = "administration-profile-edit";
+    public const ROUTE_LIST = 'administration-profiles-list';
+    public const ROUTE_EDIT = 'administration-profile-edit';
 
     /**
      * @Route("/administration/profiles",name="administration-profiles-list")
@@ -41,10 +39,10 @@ class ProfileController extends AbstractController
         Request $request,
         ProfileFacade $profileFacade,
         UserRepository $userRepository
-    ) {
+    ) : Response {
         $this->denyAccessUnlessGranted(AdminProfileVoter::VIEW);
         $bcs = $this->getAdminControllerBreadcrumb()->addNewItem(
-            $this->translator->trans("breadcrumb.profile.list", [], "administration"),
+            $this->translator->trans('breadcrumb.profile.list', [], 'administration'),
             self::ROUTE_LIST
         );
 
@@ -54,18 +52,18 @@ class ProfileController extends AbstractController
         $profiles = $profileFacade->getProfilesPaginated(
             $searchForm,
             $this->getPageParam($request),
-            $request->get("role"),
-            (bool) $request->get("displayHidden")
+            $request->get('role'),
+            (bool)$request->get('displayHidden')
         );
 
         return $this->render(
             'Administration/Profile/Profile/list.html.twig',
             [
-                "profiles" => $profiles,
-                "userRepository" => $userRepository,
-                "searchForm" => $searchForm->createView(),
-                "bcs" => $bcs,
-                "displayHidden" => (bool) $request->get("displayHidden")
+                'profiles' => $profiles,
+                'userRepository' => $userRepository,
+                'searchForm' => $searchForm->createView(),
+                'bcs' => $bcs,
+                'displayHidden' => (bool)$request->get('displayHidden')
             ]
         );
     }
@@ -76,7 +74,6 @@ class ProfileController extends AbstractController
      * @param Request $request
      * @param ProfileRepository $profileRepository
      * @param UserRepository $userRepository
-     * @param ProfileFacade $profileFacade
      *
      * @return Response
      * @throws ORMException
@@ -86,16 +83,15 @@ class ProfileController extends AbstractController
         int $id,
         Request $request,
         ProfileRepository $profileRepository,
-        UserRepository $userRepository,
-        ProfileFacade $profileFacade
-    ) {
+        UserRepository $userRepository
+    ) : Response {
         $this->denyAccessUnlessGranted(AdminProfileVoter::EDIT);
 
         $profile = $profileRepository->find($id);
         $profile->setUser($userRepository->find($profile->getUserId()));
 
         $bcs = $this->getAdminControllerBreadcrumb()->addNewItem(
-            $this->translator->trans("breadcrumb.profile.list", [], "administration"),
+            $this->translator->trans('breadcrumb.profile.list', [], 'administration'),
             self::ROUTE_LIST
         )->addNewItem($profile->getUser()->getUsername());
 
@@ -106,16 +102,16 @@ class ProfileController extends AbstractController
             $profile = $profileForm->getData();
             $profileRepository->save($profile);
 
-            $this->addFlash(FlashType::SUCCESS, $this->translator->trans("profile.edit.success", [], "administration"));
+            $this->addFlash(FlashType::SUCCESS, $this->translator->trans('profile.edit.success', [], 'administration'));
         }
 
         return $this->render(
             'Administration/Profile/Profile/edit.html.twig',
             [
-                "profile" => $profile,
-                "bcs" => $bcs,
-                "profileUser" => $profile->getUser(),
-                "profileForm" => $profileForm->createView()
+                'profile' => $profile,
+                'bcs' => $bcs,
+                'profileUser' => $profile->getUser(),
+                'profileForm' => $profileForm->createView()
             ]
         );
     }

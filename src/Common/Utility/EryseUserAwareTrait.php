@@ -15,14 +15,14 @@ trait EryseUserAwareTrait
 {
 
     /** @var UserEntity $user */
-    protected $user;
+    protected UserEntity $user;
 
     /**
      * @required
      *
      * @param Security $security
      */
-    public function setUser(Security $security)
+    public function setUser(Security $security) : void
     {
         $user = $security->getUser();
 
@@ -32,7 +32,7 @@ trait EryseUserAwareTrait
 
         if (!$user instanceof UserEntity) {
             throw new UnsupportedUserException(
-                "App relies on " . UserEntity::class . " but got " . get_class($user) . " instead."
+                'App relies on ' . UserEntity::class . ' but got ' . get_class($user) . ' instead.'
             );
         }
 

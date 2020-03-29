@@ -2,12 +2,10 @@
 
 namespace EryseClient\Client\Profile\Security\Exception;
 
-use Throwable;
-
 /**
  * Class InvalidKeyTypeException
  *
  */
-class InvalidKeyTypeException extends SecurityException implements Throwable
+class InvalidKeyTypeException extends SecurityException
 {
 }

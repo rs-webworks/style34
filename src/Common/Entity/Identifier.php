@@ -15,7 +15,7 @@ trait Identifier
      * @ORM\GeneratedValue(strategy="IDENTITY")
      * @var integer
      */
-    protected $id;
+    protected int $id;
 
     /**
      * @return int

@@ -24,10 +24,10 @@ use Exception;
 class TokenService extends AbstractService
 {
     /** @var TypeRepository $tokenTypeRepository */
-    private $tokenTypeRepository;
+    private TypeRepository $tokenTypeRepository;
 
     /** @var TokenRepository $tokenRepository */
-    private $tokenRepository;
+    private TokenRepository $tokenRepository;
 
     /**
      * TokenService constructor.
@@ -65,6 +65,8 @@ class TokenService extends AbstractService
     }
 
     /**
+     * @param TokenEntity $token
+     *
      * @return TokenEntity
      */
     public function invalidate(TokenEntity $token): TokenEntity
@@ -165,19 +167,19 @@ class TokenService extends AbstractService
     public function verifyToken(TokenEntity $token, string $tokenType): void
     {
         if (!$token) {
-            throw new TokenException(); //todo: add exception for missing token
+            throw new TokenException('token: '. $token->getHash()); //todo: add exception for missing token
         }
 
         if ($token->getType() !== $tokenType) {
-            throw new TokenException(); //todo: add exception for incorrect token type
+            throw new TokenException('token: '. $token->getHash()); //todo: add exception for incorrect token type
         }
 
         if (!$this->isValid($token)) {
-            throw new InvalidTokenException();
+            throw new InvalidTokenException('token: '. $token->getHash());
         }
 
         if ($this->isExpired($token)) {
-            throw new ExpiredTokenException();
+            throw new ExpiredTokenException('token: '. $token->getHash());
         }
     }
 }

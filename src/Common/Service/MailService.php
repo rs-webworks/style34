@@ -25,16 +25,20 @@ class MailService extends AbstractService
     use TranslatorAwareTrait;
 
     /** @var MailerInterface $mailer */
-    protected $mailer;
+    protected MailerInterface $mailer;
 
     /** @var Response $renderer */
     protected $renderer;
 
     /** @var ParameterBagInterface */
-    private $parameterBag;
+    private ParameterBagInterface $parameterBag;
 
     /**
      * MailService constructor.
+     *
+     * @param MailerInterface $mailer
+     * @param Environment $renderer
+     * @param ParameterBagInterface $parameterBag
      */
     public function __construct(MailerInterface $mailer, Environment $renderer, ParameterBagInterface $parameterBag)
     {
@@ -44,6 +48,9 @@ class MailService extends AbstractService
     }
 
     /**
+     * @param UserEntity $user
+     * @param TokenEntity $token
+     *
      * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError
@@ -74,12 +81,15 @@ class MailService extends AbstractService
     }
 
     /**
+     * @param UserEntity $user
+     * @param TokenEntity $token
+     *
      * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError
      * @throws TransportExceptionInterface
      */
-    public function sendRequestResetPasswordMail(UserEntity $user, TokenEntity $token)
+    public function sendRequestResetPasswordMail(UserEntity $user, TokenEntity $token) : void
     {
         $message = (new Email())->from($this->parameterBag->get('eryseClient.emails.info'))
             ->html(

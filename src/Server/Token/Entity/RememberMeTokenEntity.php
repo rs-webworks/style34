@@ -19,29 +19,29 @@ class RememberMeTokenEntity implements ClientEntity
      * @ORM\Id()
      * @ORM\Column(type="string", length=88, unique=true, nullable=false, options={"fixed" = true})
      */
-    protected $series;
+    protected string $series;
 
     /**
      * @var string
      * @ORM\Column(type="string", length=88, nullable=false, options={"fixed" = true})
      */
-    protected $value;
+    protected string $value;
 
     /**
      * @var DateTime
      * @ORM\Column(type="datetime", nullable=false, name="lastused")
      */
-    protected $lastUsed;
+    protected DateTime $lastUsed;
 
     /**
      * @var string
      * @ORM\Column(type="string", length=100, nullable=false)
      */
-    protected $class;
+    protected string $class;
 
     /**
      * @var string
      * @ORM\Column(type="string", length=200, nullable=false)
      */
-    protected $username;
+    protected string $username;
 }

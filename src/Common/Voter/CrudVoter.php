@@ -13,10 +13,10 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
  */
 abstract class CrudVoter extends Voter
 {
-    public const VIEW = "view";
-    public const CREATE = "create";
-    public const EDIT = "edit";
-    public const DELETE = "delete";
+    public const VIEW = 'view';
+    public const CREATE = 'create';
+    public const EDIT = 'edit';
+    public const DELETE = 'delete';
 
     public const ACTIONS = [
         self::VIEW,
@@ -26,10 +26,10 @@ abstract class CrudVoter extends Voter
     ];
 
     /** @var UserRoleService */
-    protected $userRoleService;
+    protected UserRoleService $userRoleService;
 
     /** @var ProfileRoleService */
-    protected $profileRoleService;
+    protected ProfileRoleService $profileRoleService;
 
     /**
      * CrudVoter constructor.

@@ -15,7 +15,7 @@ trait DeletedAt
      * @ORM\Column(type="datetime", nullable=true)
      * @var DateTime
      */
-    private $deletedAt;
+    private DateTime $deletedAt;
 
     /**
      * @return DateTime

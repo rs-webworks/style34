@@ -21,7 +21,7 @@ class DashboardController extends AbstractController
      * @Route("/administration", name="administration-dashboard")
      * @return Response
      */
-    public function dashboard()
+    public function dashboard(): Response
     {
         $this->denyAccessUnlessGranted(DashboardVoter::VIEW, DashboardVoter::DASHBOARD);
         return $this->render('Administration/Dashboard/dashboard.html.twig');

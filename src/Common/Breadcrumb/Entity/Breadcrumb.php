@@ -9,11 +9,11 @@ namespace EryseClient\Common\Breadcrumb\Entity;
  */
 class Breadcrumb
 {
-    public const ROUTE = "route";
-    public const NAME = "name";
+    public const ROUTE = 'route';
+    public const NAME = 'name';
 
     /** @var BreadcrumbItem[] */
-    protected $items;
+    protected array $items;
 
     /**
      * @param BreadcrumbItem $breadcrumbItem

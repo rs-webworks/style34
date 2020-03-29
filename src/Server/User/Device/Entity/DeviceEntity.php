@@ -25,19 +25,19 @@ class DeviceEntity implements ServerEntity
      * @ORM\Column(type="string", unique=true)
      * @Assert\NotBlank(message="profile.role.name-required")
      */
-    protected $name;
+    protected string $name;
 
     /**
      * @var string $cookieName
      * @ORM\Column(type="string", unique=true)
      */
-    protected $cookieName;
+    protected string $cookieName;
 
     /**
      * @var UserEntity $user
      * @ORM\ManyToOne(targetEntity="EryseClient\Server\User\Entity\UserEntity", inversedBy="devices")
      */
-    protected $user;
+    protected UserEntity $user;
 
     /**
      * @return string

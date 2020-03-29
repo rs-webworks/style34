@@ -2,12 +2,10 @@
 
 namespace EryseClient\Client\Profile\Security\Exception;
 
-use Throwable;
-
 /**
  * Class LoginException
  *
  */
-class TwoStepAuthSetException extends SecurityException implements Throwable
+class TwoStepAuthSetException extends SecurityException
 {
 }

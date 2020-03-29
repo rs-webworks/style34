@@ -22,26 +22,27 @@ class ProfileType extends AbstractType
      * @param FormBuilderInterface $builder
      * @param array $options
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $builder->add("role", EntityType::class, [
-            "class" => RoleEntity::class,
-            "choice_label" => "name",
-            "choice_translation_domain" => "administration"
+        $builder->add(
+            'role', EntityType::class, [
+            'class' => RoleEntity::class,
+            'choice_label' => 'name',
+            'choice_translation_domain' => 'administration'
         ]);
-        $builder->add("state", TextType::class);
-        $builder->add("city", TextType::class);
-        $builder->add("occupation", TextType::class);
+        $builder->add('state', TextType::class);
+        $builder->add('city', TextType::class);
+        $builder->add('occupation', TextType::class);
 
-        $builder->add("save", SubmitType::class);
+        $builder->add('save', SubmitType::class);
     }
 
     /**
      * @param OptionsResolver $resolver
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setDefaults(["data_class" => ProfileEntity::class]);
+        $resolver->setDefaults(['data_class' => ProfileEntity::class]);
     }
 
 }

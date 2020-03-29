@@ -11,9 +11,9 @@ use EryseClient\Client\Administration\Voter\AdminControllerVoter;
  */
 class DashboardVoter extends AdminControllerVoter
 {
-    const DASHBOARD = "dashboard";
+    public const DASHBOARD = 'dashboard';
 
-    const TARGETS = [
+    public const TARGETS = [
         self::DASHBOARD
     ];
 }

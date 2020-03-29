@@ -7,7 +7,6 @@ use EryseClient\Client\Profile\Role\Service\RoleService;
 use EryseClient\Common\Service\AbstractService;
 use EryseClient\Common\Utility\EryseUserAwareTrait;
 use EryseClient\Server\User\Role\Service\RoleService as UserRoleService;
-use Symfony\Component\Security\Core\Security;
 
 /**
  * Class ProfileService
@@ -17,28 +16,22 @@ class ProfileService extends AbstractService
     use EryseUserAwareTrait;
 
     /** @var UserRoleService */
-    private $userRoleService;
-
-    /** @var Security */
-    private $security;
+    private UserRoleService $userRoleService;
 
     /** @var RoleService */
-    private $profileService;
+    private RoleService $profileService;
 
     /**
      * ProfileService constructor.
      *
      * @param UserRoleService $userRoleService
      * @param RoleService $profileRoleService
-     * @param Security $security
      */
     public function __construct(
         UserRoleService $userRoleService,
-        RoleService $profileRoleService,
-        Security $security
+        RoleService $profileRoleService
     ) {
         $this->userRoleService = $userRoleService;
-        $this->security = $security;
         $this->profileService = $profileRoleService;
     }
 

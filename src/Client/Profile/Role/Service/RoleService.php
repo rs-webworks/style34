@@ -30,7 +30,7 @@ class RoleService extends AbstractService
      */
     public function isRoleBlocked(string $role): bool
     {
-        return in_array($role, self::BLOCKED_ROLES);
+        return in_array($role, self::BLOCKED_ROLES, true);
     }
 
     /**
@@ -48,7 +48,7 @@ class RoleService extends AbstractService
      */
     public function isRoleAdmin(ProfileEntity $profile): bool
     {
-        return $profile->getRole()->getName() == RoleEntity::ADMIN;
+        return $profile->getRole()->getName() === RoleEntity::ADMIN;
     }
 
     /**
@@ -58,7 +58,7 @@ class RoleService extends AbstractService
      */
     public function isRoleModerator(ProfileEntity $profile): bool
     {
-        return $profile->getRole()->getName() == RoleEntity::MODERATOR;
+        return $profile->getRole()->getName() === RoleEntity::MODERATOR;
     }
 
 }

@@ -2,18 +2,15 @@
 
 namespace EryseClient\Server\User\Security\Authenticator;
 
-use EryseClient\Client\Profile\Repository\ProfileRepository;
 use EryseClient\Client\Profile\Security\Exception\LoginException;
 use EryseClient\Common\Utility\TranslatorAwareTrait;
 use EryseClient\Server\User\Entity\UserEntity;
-use EryseClient\Server\User\Repository\UserRepository;
 use EryseClient\Server\User\Security\Form\Type\LoginType;
 use EryseClient\Server\User\Role\Service\RoleService;
 use Exception;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -33,50 +30,33 @@ class UserLoginFormAuthenticator extends AbstractFormLoginAuthenticator
     use TargetPathTrait;
     use TranslatorAwareTrait;
 
-    public const ROUTE = "user-security-login";
-
-    /** @var UserRepository $userRepository */
-    private $userRepository;
+    public const ROUTE = 'user-security-login';
 
     /** @var RouterInterface */
-    private $router;
+    private RouterInterface $router;
 
     /** @var UserPasswordEncoderInterface */
-    private $passwordEncoder;
-
-    /** @var SessionInterface */
-    private $session;
+    private UserPasswordEncoderInterface $passwordEncoder;
 
     /** @var RoleService */
-    private $userRoleService;
+    private RoleService $userRoleService;
 
-    /** @var ProfileRepository */
-    private $profileRepository;
 
     /**
      * LoginFormAuthenticator constructor.
      *
      * @param RoleService $userRoleService
-     * @param ProfileRepository $profileRepository
      * @param RouterInterface $router
      * @param UserPasswordEncoderInterface $passwordEncoder
-     * @param UserRepository $userRepository
-     * @param SessionInterface $session
      */
     public function __construct(
         RoleService $userRoleService,
-        ProfileRepository $profileRepository,
         RouterInterface $router,
-        UserPasswordEncoderInterface $passwordEncoder,
-        UserRepository $userRepository,
-        SessionInterface $session
+        UserPasswordEncoderInterface $passwordEncoder
     ) {
         $this->router = $router;
         $this->passwordEncoder = $passwordEncoder;
-        $this->userRepository = $userRepository;
-        $this->session = $session;
         $this->userRoleService = $userRoleService;
-        $this->profileRepository = $profileRepository;
     }
 
     /**
@@ -84,7 +64,7 @@ class UserLoginFormAuthenticator extends AbstractFormLoginAuthenticator
      *
      * @return bool
      */
-    public function supports(Request $request)
+    public function supports(Request $request): bool
     {
         return $request->attributes->get('_route') === self::ROUTE && $request->isMethod(LoginType::METHOD);
     }
@@ -94,7 +74,7 @@ class UserLoginFormAuthenticator extends AbstractFormLoginAuthenticator
      *
      * @return array
      */
-    public function getCredentials(Request $request)
+    public function getCredentials(Request $request): array
     {
         $params = $request->request->get(LoginType::PREFIX);
 
@@ -137,7 +117,7 @@ class UserLoginFormAuthenticator extends AbstractFormLoginAuthenticator
      *
      * @return bool
      */
-    public function checkCredentials($credentials, UserInterface $user)
+    public function checkCredentials($credentials, UserInterface $user): bool
     {
         return $this->passwordEncoder->isPasswordValid($user, $credentials[LoginType::USER_PASSWORD]);
     }
@@ -163,7 +143,7 @@ class UserLoginFormAuthenticator extends AbstractFormLoginAuthenticator
     /**
      * @return string
      */
-    protected function getLoginUrl()
+    protected function getLoginUrl(): string
     {
         return $this->router->generate(self::ROUTE);
     }

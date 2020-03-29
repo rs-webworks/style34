@@ -15,7 +15,7 @@ trait CreatedAt
      * @ORM\Column(type="datetime", nullable=false)
      * @var DateTime
      */
-    private $createdAt;
+    private DateTime $createdAt;
 
     /**
      * @return DateTime

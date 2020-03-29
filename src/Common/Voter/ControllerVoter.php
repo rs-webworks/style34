@@ -13,17 +13,17 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
  */
 abstract class ControllerVoter extends Voter
 {
-    public const VIEW = "view";
+    public const VIEW = 'view';
 
     public const ACTIONS = [
         self::VIEW
     ];
 
     /** @var UserRoleService */
-    protected $userRoleService;
+    protected UserRoleService $userRoleService;
 
     /** @var ProfileRoleService */
-    protected $profileRoleService;
+    protected ProfileRoleService $profileRoleService;
 
     /**
      * CrudVoter constructor.

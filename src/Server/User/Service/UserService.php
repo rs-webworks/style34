@@ -34,28 +34,28 @@ class UserService extends AbstractService
     use TranslatorAwareTrait;
 
     /** @var UserRepository */
-    protected $userRepository;
+    protected UserRepository $userRepository;
 
     /** @var TypeRepository $tokenTypeRepository */
-    private $tokenTypeRepository;
+    private TypeRepository $tokenTypeRepository;
 
     /** @var TokenRepository $tokenRepository */
-    private $tokenRepository;
+    private TokenRepository $tokenRepository;
 
     /** @var RememberMeTokenRepository */
-    private $rememberMeTokenRepository;
+    private RememberMeTokenRepository $rememberMeTokenRepository;
 
     /** @var ParameterBagInterface */
-    private $parameterBag;
+    private ParameterBagInterface $parameterBag;
 
     /** @var ProfileRepository */
-    private $profileRepository;
+    private ProfileRepository $profileRepository;
 
     /** @var TokenService */
-    private $tokenService;
+    private TokenService $tokenService;
 
     /** @var PasswordService  */
-    private $passwordService;
+    private PasswordService $passwordService;
 
     /**
      * UserService constructor.
@@ -144,7 +144,7 @@ class UserService extends AbstractService
         throw new ActivationException(
             $this->translator->trans(
                 'contact-support',
-                ['contact-mail' => $this->parameterBag->get("eryseClient.emails.admin")],
+                ['contact-mail' => $this->parameterBag->get('eryseClient.emails.admin')],
                 'global'
             )
         );

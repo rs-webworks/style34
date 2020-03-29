@@ -21,19 +21,19 @@ class SettingsEntity implements ServerEntity
      * @var int
      * @ORM\Column(type="integer", nullable=false)
      */
-    protected $userId;
+    protected int $userId;
 
     /**
      * @var bool $name
      * @ORM\Column(type="boolean")
      */
-    protected $twoStepAuthEnabled;
+    protected bool $twoStepAuthEnabled;
 
     /**
      * @var string $gAuthSecret
      * @ORM\Column(type="string", nullable=true)
      */
-    protected $gAuthSecret;
+    protected string $gAuthSecret;
 
     /**
      * ServerSettings constructor.

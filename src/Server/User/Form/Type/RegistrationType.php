@@ -22,22 +22,22 @@ class RegistrationType extends AbstractType
      * @param FormBuilderInterface $builder
      * @param array $options
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add(
             'username',
             TextType::class,
             [
-                "label" => 'username',
-                "translation_domain" => 'profile'
+                'label' => 'username',
+                'translation_domain' => 'profile'
             ]
         );
         $builder->add(
             'email',
             EmailType::class,
             [
-                "label" => 'email',
-                "translation_domain" => 'profile'
+                'label' => 'email',
+                'translation_domain' => 'profile'
             ]
         );
         $builder->add(
@@ -47,12 +47,12 @@ class RegistrationType extends AbstractType
                 'type' => PasswordType::class,
                 'invalid_message' => 'password-mismatch',
                 'first_options' => [
-                    "label" => 'password',
-                    "translation_domain" => 'profile'
+                    'label' => 'password',
+                    'translation_domain' => 'profile'
                 ],
                 'second_options' => [
-                    "label" => 'password-again',
-                    "translation_domain" => 'profile'
+                    'label' => 'password-again',
+                    'translation_domain' => 'profile'
                 ]
             ]
         );
@@ -61,7 +61,7 @@ class RegistrationType extends AbstractType
     /**
      * @param OptionsResolver $resolver
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults(
             [

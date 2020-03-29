@@ -28,7 +28,7 @@ class AbstractController extends SymfonyAbstractController implements Controller
      */
     protected function getPageParam(Request $request): ?int
     {
-        return $request->query->get("page") ? (int) $request->query->get("page") : 1;
+        return $request->query->get('page') ? (int) $request->query->get('page') : 1;
     }
 
     /**
@@ -53,7 +53,7 @@ class AbstractController extends SymfonyAbstractController implements Controller
         $breadcrumb = $this->getControllerBreadcrumb();
 
         $breadcrumb->addItem(
-            new BreadcrumbItem($this->translator->trans("dashboard", [], "administration"), "administration-dashboard")
+            new BreadcrumbItem($this->translator->trans('dashboard', [], 'administration'), 'administration-dashboard')
         );
 
         return $breadcrumb;

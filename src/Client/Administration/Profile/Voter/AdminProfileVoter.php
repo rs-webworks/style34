@@ -20,9 +20,9 @@ class AdminProfileVoter extends CrudVoter
      *
      * @return bool
      */
-    protected function supports(string $attribute, $subject)
+    protected function supports(string $attribute, $subject): bool
     {
-        if (!in_array($attribute, self::ACTIONS)) {
+        if (!in_array($attribute, self::ACTIONS, true)) {
             return false;
         }
 
@@ -40,7 +40,7 @@ class AdminProfileVoter extends CrudVoter
      *
      * @return bool
      */
-    protected function voteOnAttribute(string $attribute, $subject, TokenInterface $token)
+    protected function voteOnAttribute(string $attribute, $subject, TokenInterface $token): bool
     {
         $user = $token->getUser();
 

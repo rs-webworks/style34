@@ -34,7 +34,7 @@ class RoleRepository extends AbstractRepository
      */
     public function findOneByName(string $name): RoleEntity
     {
-        return $this->findOneBy(["name" => $name]);
+        return $this->findOneBy(['name' => $name]);
     }
 
     /**
@@ -44,6 +44,6 @@ class RoleRepository extends AbstractRepository
      */
     public function findByName(array $listOfNames): array
     {
-        return $this->findBy(["name" => $listOfNames]);
+        return $this->findBy(['name' => $listOfNames]);
     }
 }

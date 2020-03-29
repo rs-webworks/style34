@@ -19,12 +19,12 @@ class UserProvider implements UserProviderInterface
     /**
      * @var UserRepository
      */
-    private $userRepository;
+    private UserRepository $userRepository;
 
     /**
      * @var UserService
      */
-    private $userService;
+    private UserService $userService;
 
     /**
      * UserProvider constructor.
@@ -44,7 +44,7 @@ class UserProvider implements UserProviderInterface
      * @return UserInterface
      * @throws Exception
      */
-    public function loadUserByUsername($username)
+    public function loadUserByUsername($username): UserInterface
     {
         return $this->userService->initUser($this->userRepository->loadUserByUsername($username));
     }
@@ -67,7 +67,7 @@ class UserProvider implements UserProviderInterface
      * @param string $class
      * @return bool
      */
-    public function supportsClass($class)
+    public function supportsClass($class): bool
     {
         return UserEntity::class === $class;
     }

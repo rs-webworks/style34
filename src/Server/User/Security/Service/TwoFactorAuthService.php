@@ -5,6 +5,7 @@ namespace EryseClient\Server\User\Security\Service;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use EryseClient\Server\User\Entity\UserEntity;
+use EryseClient\Server\User\Exception\UserException;
 use EryseClient\Server\User\Repository\UserRepository;
 use EryseClient\Server\User\Settings\Repository\SettingsRepository;
 
@@ -16,10 +17,10 @@ use EryseClient\Server\User\Settings\Repository\SettingsRepository;
 class TwoFactorAuthService
 {
     /** @var SettingsRepository */
-    protected $serverSettingsRepository;
+    protected SettingsRepository $serverSettingsRepository;
 
     /** @var UserRepository */
-    protected $userRepository;
+    protected UserRepository $userRepository;
 
     /**
      * TwoFactorAuthService constructor.
@@ -39,6 +40,7 @@ class TwoFactorAuthService
      *
      * @throws ORMException
      * @throws OptimisticLockException
+     * @throws UserException
      */
     public function enableTwoStepAuth(UserEntity $user, string $secret): void
     {
@@ -54,6 +56,7 @@ class TwoFactorAuthService
      *
      * @throws ORMException
      * @throws OptimisticLockException
+     * @throws UserException
      */
     public function disableTwoStepAuth(UserEntity $user): void
     {

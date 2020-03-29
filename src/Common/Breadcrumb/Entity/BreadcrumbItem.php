@@ -10,10 +10,10 @@ namespace EryseClient\Common\Breadcrumb\Entity;
 class BreadcrumbItem
 {
     /** @var string */
-    protected $route;
+    protected ?string $route;
 
     /** @var string */
-    protected $name;
+    protected string $name;
 
     /**
      * BreadcrumbItem constructor.

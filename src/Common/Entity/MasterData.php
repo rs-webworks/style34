@@ -16,7 +16,7 @@ trait MasterData
      * @var string
      * @ORM\Column(type="string")
      */
-    private $name;
+    private string $name;
 
     /**
      * @return string

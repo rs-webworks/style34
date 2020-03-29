@@ -14,10 +14,10 @@ use Scheb\TwoFactorBundle\Model\Google\TwoFactorInterface;
 class GoogleAuthEntity implements TwoFactorInterface, ServerEntity
 {
     /** @var UserEntity */
-    protected $user;
+    protected UserEntity $user;
 
     /** @var SettingsEntity */
-    private $serverSettings;
+    private SettingsEntity $serverSettings;
 
     /**
      * GoogleAuth constructor.

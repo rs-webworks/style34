@@ -13,7 +13,7 @@ trait EryseAppAwareTrait
 {
 
     /** @var Application */
-    protected $clientApp;
+    protected Application $clientApp;
 
     /**
      * @required

@@ -34,7 +34,7 @@ class UserEntity implements UserInterface, TrustedDeviceInterface, ServerEntity
      * @ORM\GeneratedValue(strategy="IDENTITY")
      * @var integer
      */
-    protected $id;
+    protected int $id;
 
     /**
      * @ORM\Column(type="string", unique=true)
@@ -48,19 +48,19 @@ class UserEntity implements UserInterface, TrustedDeviceInterface, ServerEntity
      *     message="user.username-invalid"
      * )
      */
-    protected $username;
+    protected string $username;
 
     /**
      * @ORM\Column(type="string", unique=true)
      * @Assert\Email(message="user.email-invalid")
      * @Assert\NotBlank(message="user.email-required")
      */
-    protected $email;
+    protected string $email;
 
     /**
      * @ORM\Column(type="string")
      */
-    protected $password;
+    protected string $password;
 
     /**
      * @Assert\NotBlank(message="user.password-required")
@@ -69,43 +69,43 @@ class UserEntity implements UserInterface, TrustedDeviceInterface, ServerEntity
      *     maxMessage="user.password-max.length"
      * )
      */
-    protected $plainPassword;
+    protected string $plainPassword;
 
     /**
      * @var DateTime $activatedAt
      * @ORM\Column(type="datetime", nullable=true)
      */
-    protected $activatedAt;
+    protected DateTime $activatedAt;
 
     /**
      * @var string
      * @ORM\Column(type="string")
      */
-    protected $role;
+    protected string $role;
 
     /**
      * @var RoleEntity
      */
-    protected $roleEntity;
+    protected RoleEntity $roleEntity;
 
     /**
      * @var string $lastIp
      * @ORM\Column(type="string", nullable=false)
      * @Assert\Ip(message="user.ip-expected")
      */
-    protected $lastIp;
+    protected string $lastIp;
 
     /**
      * @var string $registeredAs
      * @ORM\Column(type="string", nullable=false)
      */
-    protected $registeredAs;
+    protected string $registeredAs;
 
     /**
      * @var integer
      * @ORM\Column(type="integer", nullable=false)
      */
-    protected $trustedTokenVersion;
+    protected int $trustedTokenVersion;
 
     /**
      * @var DeviceEntity[]
@@ -115,12 +115,12 @@ class UserEntity implements UserInterface, TrustedDeviceInterface, ServerEntity
      *     cascade={"persist"}
      * )
      */
-    protected $devices;
+    protected array $devices;
 
     /**
-     * @var ?Profile
+     * @var ProfileEntity|null
      */
-    protected $profile;
+    protected ? ProfileEntity $profile;
 
     /**
      * User constructor.
@@ -134,7 +134,7 @@ class UserEntity implements UserInterface, TrustedDeviceInterface, ServerEntity
     /**
      *
      */
-    public function eraseCredentials(): void
+    public function eraseCredentials() : void
     {
         // TODO: Implement eraseCredentials() method.
     }
@@ -144,7 +144,7 @@ class UserEntity implements UserInterface, TrustedDeviceInterface, ServerEntity
     /**
      * @return int
      */
-    final public function getId(): int
+    final public function getId() : int
     {
         return $this->id;
     }
@@ -152,7 +152,7 @@ class UserEntity implements UserInterface, TrustedDeviceInterface, ServerEntity
     /**
      * @param int $id
      */
-    public function setId(int $id): void
+    public function setId(int $id) : void
     {
         $this->id = $id;
     }
@@ -163,7 +163,7 @@ class UserEntity implements UserInterface, TrustedDeviceInterface, ServerEntity
     /**
      * @return string|null
      */
-    public function getUsername(): ?string
+    public function getUsername() : ?string
     {
         return $this->username;
     }
@@ -171,7 +171,7 @@ class UserEntity implements UserInterface, TrustedDeviceInterface, ServerEntity
     /**
      * @param string $username
      */
-    public function setUsername(string $username): void
+    public function setUsername(string $username) : void
     {
         $this->username = $username;
     }
@@ -182,7 +182,7 @@ class UserEntity implements UserInterface, TrustedDeviceInterface, ServerEntity
     /**
      * @return string|null
      */
-    public function getEmail(): ?string
+    public function getEmail() : ?string
     {
         return $this->email;
     }
@@ -190,7 +190,7 @@ class UserEntity implements UserInterface, TrustedDeviceInterface, ServerEntity
     /**
      * @param string $email
      */
-    public function setEmail(string $email): void
+    public function setEmail(string $email) : void
     {
         $this->email = $email;
     }
@@ -201,7 +201,7 @@ class UserEntity implements UserInterface, TrustedDeviceInterface, ServerEntity
     /**
      * @return string|null
      */
-    public function getPassword(): ?string
+    public function getPassword() : ?string
     {
         return $this->password;
     }
@@ -209,7 +209,7 @@ class UserEntity implements UserInterface, TrustedDeviceInterface, ServerEntity
     /**
      * @param string $password
      */
-    public function setPassword(string $password): void
+    public function setPassword(string $password) : void
     {
         $this->password = $password;
     }
@@ -217,7 +217,7 @@ class UserEntity implements UserInterface, TrustedDeviceInterface, ServerEntity
     /**
      * @return string|null
      */
-    public function getPlainPassword(): ?string
+    public function getPlainPassword() : ?string
     {
         return $this->plainPassword;
     }
@@ -225,7 +225,7 @@ class UserEntity implements UserInterface, TrustedDeviceInterface, ServerEntity
     /**
      * @param string $plainPassword
      */
-    public function setPlainPassword(string $plainPassword): void
+    public function setPlainPassword(string $plainPassword) : void
     {
         $this->plainPassword = $plainPassword;
     }
@@ -233,7 +233,7 @@ class UserEntity implements UserInterface, TrustedDeviceInterface, ServerEntity
     /**
      * @return string|null
      */
-    public function getSalt(): ?string
+    public function getSalt() : ?string
     {
         // TODO: Implement getSalt() method.
         return null;
@@ -245,7 +245,7 @@ class UserEntity implements UserInterface, TrustedDeviceInterface, ServerEntity
     /**
      * @return DateTime|null
      */
-    public function getActivatedAt(): ?DateTime
+    public function getActivatedAt() : ?DateTime
     {
         return $this->activatedAt;
     }
@@ -253,7 +253,7 @@ class UserEntity implements UserInterface, TrustedDeviceInterface, ServerEntity
     /**
      * @param DateTime $activatedAt
      */
-    public function setActivatedAt(DateTime $activatedAt): void
+    public function setActivatedAt(DateTime $activatedAt) : void
     {
         $this->activatedAt = $activatedAt;
     }
@@ -263,7 +263,7 @@ class UserEntity implements UserInterface, TrustedDeviceInterface, ServerEntity
     /**
      * @return string
      */
-    public function getRole(): string
+    public function getRole() : string
     {
         return $this->role;
     }
@@ -271,16 +271,17 @@ class UserEntity implements UserInterface, TrustedDeviceInterface, ServerEntity
     /**
      * @param string $role
      */
-    public function setRole(string $role): void
+    public function setRole(string $role) : void
     {
         $this->role = $role;
     }
 
     /**
      * This is used internally in Symfony security
+     *
      * @return array
      */
-    public function getRoles()
+    public function getRoles() : array
     {
         return [$this->getRole()];
     }
@@ -288,7 +289,7 @@ class UserEntity implements UserInterface, TrustedDeviceInterface, ServerEntity
     /**
      * @return RoleEntity
      */
-    public function getRoleEntity(): RoleEntity
+    public function getRoleEntity() : RoleEntity
     {
         return $this->roleEntity;
     }
@@ -298,7 +299,7 @@ class UserEntity implements UserInterface, TrustedDeviceInterface, ServerEntity
     /**
      * @return string
      */
-    public function getLastIp(): string
+    public function getLastIp() : string
     {
         return $this->lastIp;
     }
@@ -306,7 +307,7 @@ class UserEntity implements UserInterface, TrustedDeviceInterface, ServerEntity
     /**
      * @param string $lastIp
      */
-    public function setLastIp(string $lastIp): void
+    public function setLastIp(string $lastIp) : void
     {
         $this->lastIp = $lastIp;
     }
@@ -317,7 +318,7 @@ class UserEntity implements UserInterface, TrustedDeviceInterface, ServerEntity
     /**
      * @return string
      */
-    public function getRegisteredAs(): string
+    public function getRegisteredAs() : string
     {
         return $this->registeredAs;
     }
@@ -325,7 +326,7 @@ class UserEntity implements UserInterface, TrustedDeviceInterface, ServerEntity
     /**
      * @param string $registeredAs
      */
-    public function setRegisteredAs(string $registeredAs): void
+    public function setRegisteredAs(string $registeredAs) : void
     {
         $this->registeredAs = $registeredAs;
     }
@@ -335,7 +336,7 @@ class UserEntity implements UserInterface, TrustedDeviceInterface, ServerEntity
     /**
      * @return array
      */
-    public function getDevices(): array
+    public function getDevices() : array
     {
         return $this->devices;
     }
@@ -343,7 +344,7 @@ class UserEntity implements UserInterface, TrustedDeviceInterface, ServerEntity
     /**
      * @param array $devices
      */
-    public function setDevices(array $devices): void
+    public function setDevices(array $devices) : void
     {
         $this->devices = $devices;
     }
@@ -351,25 +352,25 @@ class UserEntity implements UserInterface, TrustedDeviceInterface, ServerEntity
     /**
      * @param DeviceEntity $device
      */
-    public function addDevice(DeviceEntity $device): void
+    public function addDevice(DeviceEntity $device) : void
     {
-        if (!in_array($device, $this->devices)) {
-            array_push($this->devices, $device);
+        if (!in_array($device, $this->devices, true)) {
+            $this->devices[] = $device;
         }
     }
 
     /**
      * @param DeviceEntity $device
      */
-    public function removeDevice(DeviceEntity $device): void
+    public function removeDevice(DeviceEntity $device) : void
     {
-        unset($this->devices[array_search($device, $this->devices)]);
+        unset($this->devices[array_search($device, $this->devices, true)]);
     }
 
     /**
      * @return int
      */
-    public function getTrustedTokenVersion(): int
+    public function getTrustedTokenVersion() : int
     {
         return $this->trustedTokenVersion;
     }
@@ -377,7 +378,7 @@ class UserEntity implements UserInterface, TrustedDeviceInterface, ServerEntity
     /**
      * @param int $version
      */
-    public function setTrustedTokenVersion(int $version): void
+    public function setTrustedTokenVersion(int $version) : void
     {
         $this->trustedTokenVersion = $version;
     }
@@ -387,7 +388,7 @@ class UserEntity implements UserInterface, TrustedDeviceInterface, ServerEntity
     /**
      * @return ProfileEntity|null
      */
-    public function getProfile(): ?ProfileEntity
+    public function getProfile() : ?ProfileEntity
     {
         return $this->profile;
     }
@@ -395,7 +396,7 @@ class UserEntity implements UserInterface, TrustedDeviceInterface, ServerEntity
     /**
      * @param ProfileEntity $profile
      */
-    public function setProfile(ProfileEntity $profile): void
+    public function setProfile(ProfileEntity $profile) : void
     {
         $this->profile = $profile;
     }
