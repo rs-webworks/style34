@@ -91,30 +91,6 @@ class UserService extends AbstractService
 
     /**
      * @param UserEntity $user
-     * @param string $lastIp
-     *
-     * @return UserEntity
-     * @throws Exception
-     */
-    public function prepareNewUser(UserEntity $user, string $lastIp = '127.0.0.1'): UserEntity
-    {
-        // Get default user role
-        $user->setRole(UserRole::INACTIVE);
-
-        // Encode password
-        $password = $this->passwordService->encodePassword($user, $user->getPlainPassword());
-        $user->setPassword($password);
-
-        // Set defaults
-        $user->setCreatedAt(new DateTime());
-        $user->setLastIp($lastIp);
-        $user->setRegisteredAs(serialize([$user->getUsername(), $user->getEmail()]));
-
-        return $user;
-    }
-
-    /**
-     * @param UserEntity $user
      * @param TokenEntity|null $token
      *
      * @return UserEntity|null
@@ -152,10 +128,9 @@ class UserService extends AbstractService
 
 
     /**
-     * TODO: Move this to rabbitMq probably?
      * @return array|null
      */
-    public function getExpiredRegistrations(): ?array
+    public function findExpiredRegistrations(): ?array
     {
         try {
             $users = [];

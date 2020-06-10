@@ -6,8 +6,10 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ObjectManager;
+use EryseClient\Client\Exception\ResourceNotFoundException;
 use EryseClient\Client\Profile\Entity\ProfileEntity;
 use EryseClient\Client\Profile\Repository\ProfileRepository;
+use EryseClient\Client\Profile\Role\Entity\RoleEntity;
 use EryseClient\Client\Profile\Role\Entity\RoleEntity as ProfileRole;
 use EryseClient\Client\Profile\Role\Repository\RoleRepository;
 use EryseClient\Server\User\Entity\UserEntity;
@@ -65,6 +67,7 @@ class UserFixtures extends Fixture
      *
      * @throws ORMException
      * @throws OptimisticLockException
+     * @throws ResourceNotFoundException
      */
     public function load(ObjectManager $manager) : void
     {
@@ -97,6 +100,7 @@ class UserFixtures extends Fixture
             $profile->setCreatedAt($faker->dateTime('now'));
 
             $roles = [ProfileRole::INACTIVE, ProfileRole::BANNED, ProfileRole::DELETED, ProfileRole::MEMBER];
+
             $randomRole = array_rand($roles, 1);
             $role = $this->profileRoleRepository->getOneByName($roles[$randomRole]);
             $profile->setRole($role);

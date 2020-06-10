@@ -15,7 +15,6 @@ use Ramsey\Uuid\Uuid;
 use Scheb\TwoFactorBundle\Model\TrustedDeviceInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class User
@@ -39,22 +38,13 @@ class UserEntity implements UserInterface, TrustedDeviceInterface, ServerEntity
 
     /**
      * @ORM\Column(type="string", unique=true)
-     * @Assert\NotBlank(message="user.username-required")
-     * @Assert\Length(min=3, max=20,
-     *      minMessage="user.username-min-length",
-     *      maxMessage="user.username-max-length",
-     * )
-     * @Assert\Regex(
-     *     pattern="/^[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*$/",
-     *     message="user.username-invalid"
-     * )
+     * @var string
      */
     protected string $username;
 
     /**
      * @ORM\Column(type="string", unique=true)
-     * @Assert\Email(message="user.email-invalid")
-     * @Assert\NotBlank(message="user.email-required")
+     * @var string
      */
     protected string $email;
 
@@ -64,11 +54,9 @@ class UserEntity implements UserInterface, TrustedDeviceInterface, ServerEntity
     protected string $password;
 
     /**
-     * @Assert\NotBlank(message="user.password-required")
-     * @Assert\Length(min=6, max=4096,
-     *     minMessage="user.password-min-length",
-     *     maxMessage="user.password-max.length"
-     * )
+     * TODO: Remove? Is in Validator
+     *
+     * @var string
      */
     protected string $plainPassword;
 
@@ -92,7 +80,6 @@ class UserEntity implements UserInterface, TrustedDeviceInterface, ServerEntity
     /**
      * @var string $lastIp
      * @ORM\Column(type="string", nullable=false)
-     * @Assert\Ip(message="user.ip-expected")
      */
     protected string $lastIp;
 
@@ -125,7 +112,6 @@ class UserEntity implements UserInterface, TrustedDeviceInterface, ServerEntity
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Assert\NotNull(message="profile.state-required")
      */
     protected ? string $state;
 

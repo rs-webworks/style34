@@ -67,6 +67,7 @@ class RegistrationType extends AbstractType
         $resolver->setDefaults(
             [
                 'data_class' => UserValidator::class,
+                'validation_groups' => UserValidator::GROUP_REGISTRATION
             ]
         );
     }

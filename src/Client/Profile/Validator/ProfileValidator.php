@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class ProfileValidator
 {
     /**
-     * @Assert\Type(type="EryseClient\Client\Profile\Role\Entity\RoleEntity")
+     * @Assert\Type("EryseClient\Client\Profile\Role\Entity\RoleEntity")
      */
     public $role;
 

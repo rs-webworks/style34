@@ -32,24 +32,18 @@ class UserRepository extends AbstractRepository implements UserLoaderInterface
     /** @var UserSettingsRepository */
     private UserSettingsRepository $serverSettingsRepository;
 
-    /** @var ProfileSettingsRepository */
-    private ProfileSettingsRepository $clientSettingsRepository;
-
     /**
      * UserRepository constructor.
      *
      * @param ManagerRegistry $registry
      * @param UserSettingsRepository $serverSettingsRepository
-     * @param ProfileSettingsRepository $clientSettingsRepository
      */
     public function __construct(
         ManagerRegistry $registry,
-        UserSettingsRepository $serverSettingsRepository,
-        ProfileSettingsRepository $clientSettingsRepository
+        UserSettingsRepository $serverSettingsRepository
     ) {
         parent::__construct($registry, UserEntity::class);
         $this->serverSettingsRepository = $serverSettingsRepository;
-        $this->clientSettingsRepository = $clientSettingsRepository;
     }
 
     /**

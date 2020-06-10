@@ -64,7 +64,7 @@ class EditProfileController extends AbstractAdminController
         $profileForm->handleRequest($request);
 
         if ($profileForm->isSubmitted() && $profileForm->isValid()) {
-            $editProfileFacade->updateProfile($editProfileValidator, $profile);
+            $editProfileFacade->updateProfileFromValidator($editProfileValidator, $profile);
 
             $this->addFlash(FlashType::SUCCESS, $this->translator->trans('profile.edit.success', [], 'administration'));
         }

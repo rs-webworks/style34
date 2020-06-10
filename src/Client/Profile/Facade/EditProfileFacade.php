@@ -35,7 +35,7 @@ class EditProfileFacade
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function updateProfile(ProfileValidator $validator, ProfileEntity $profileEntity) : void
+    public function updateProfileFromValidator(ProfileValidator $validator, ProfileEntity $profileEntity) : void
     {
         $profileEntity->setRole($validator->role);
         $this->profileRepository->save($profileEntity);

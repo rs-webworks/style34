@@ -61,7 +61,7 @@ class MailService extends AbstractService
         $message = (new Email())->from($this->parameterBag->get('eryseClient.emails.info'))
             ->html(
                 $this->renderer->render(
-                    '_emails/user-activation.html.twig',
+                    '_email/user-activation.html.twig',
                     [
                         'user' => $user,
                         'token' => $token,
@@ -94,7 +94,7 @@ class MailService extends AbstractService
         $message = (new Email())->from($this->parameterBag->get('eryseClient.emails.info'))
             ->html(
                 $this->renderer->render(
-                    '_emails/user-request-reset-password.twig',
+                    '_email/user-request-reset-password.twig',
                     [
                         'user' => $user,
                         'token' => $token,

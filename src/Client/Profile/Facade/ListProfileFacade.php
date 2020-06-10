@@ -63,7 +63,7 @@ class ListProfileFacade
         ?string $role = null,
         ?bool $displayHidden = false
     ) {
-        $qb = $this->profileRepository->createQueryBuilder('p')->orderBy('p.createdAt');
+        $qb = $this->profileRepository->createQueryBuilder('p')->orderBy('p.createdAt', 'DESC');
 
         if ($searchForm->isSubmitted() && $searchForm->isValid()) {
             foreach ($searchForm->getData() as $column => $value) {
